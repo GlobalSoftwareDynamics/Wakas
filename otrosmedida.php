@@ -115,7 +115,7 @@ if(isset($_SESSION['login'])){
             </div>
             <div>
                 <div>
-                    <label for="descripcion">Descripci&oacute;n</label>
+                    <label for="descripcion">Descripci&oacute;n:</label>
                 </div>
                 <div>
                     <input id="descripcion" type="text" name="desc">
