@@ -1,0 +1,83 @@
+/*Clase Container para Formulario*/
+.containerform {
+    border: 1px solid #7b7b7b;
+    border-radius: 25px;
+    width: 700px;
+    padding-top: 5px;
+    -webkit-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+}
+
+.containerformcontrol {
+
+}
+
+/*Controles de Formulario*/
+.textinput-lg {
+    display: inline-block;
+    height: 34px;
+    width: 500px;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.textinput-md {
+    display: inline-block;
+    height: 34px;
+    width: 300px;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.textinput-sm {
+    display: inline-block;
+    height: 34px;
+    width: 200px;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.ddselect {
+    display: inline-block;
+    height: 34px;
+    width: 200px;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.formlabels {
+    font-size: 15px;
+    padding: 10px;
+    text-align: left;
+}
+
+.boton {
+    margin: 10px;
+    position: relative;
+    margin-left: 45%;
+}
