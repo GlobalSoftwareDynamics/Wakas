@@ -98,11 +98,11 @@ if(isset($_SESSION['login'])){
                 <label>Descripci&oacute;n
                     <input type="text" name="desc">
                 </label><br/>
-                <label>Tiempo Est&aacute;ndar<br>
+                <label>Tiempo Est&aacute;ndar
                     <input type="text" name="tiempo">
                 </label><br/>
                 <input class="btn btn-success"type="submit" name="guardar" value="Agregar">
-            </form><br>
+            </form>
             <form action="menuagregarotros.php">
                 <input class="btn btn-default" type="submit" value="Regresar">
             </form>
@@ -110,6 +110,7 @@ if(isset($_SESSION['login'])){
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        
     </body>
 
 </html>
