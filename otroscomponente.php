@@ -85,9 +85,9 @@ if(isset($_SESSION['login'])){
         <form action="otroscomponente.php" method="post">
             <label>Componente
                 <input type="text" name="idcomponente">
-            </label><br><br>
+            </label><br>
             <input class="btn btn-default"type="submit" name="guardar" value="Agregar">
-        </form><br>
+        </form>
         <form action="menuagregarotros.php">
             <input class="btn btn-success" type="submit" value="Regresar">
         </form>
