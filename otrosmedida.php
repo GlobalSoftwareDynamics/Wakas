@@ -100,7 +100,7 @@ if(isset($_SESSION['login'])){
             </label><br>
             <label>Descripci&oacute;n
                 <input type="text" name="desc">
-            </label><br/><br>
+            </label><br/>
             <input class="btn btn-success"type="submit" name="guardar" value="Agregar">
         </form><br>
         <form action="menuagregarotros.php">
