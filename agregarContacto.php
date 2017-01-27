@@ -72,7 +72,7 @@ if(isset($_SESSION['login'])){
                                     <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
                                     <li><a href="gestionInsumos.php">Insumos</a></li>
                                     <li><a href="gestionOperarios.php">Empleados</a></li>
-                                    <li><a href="gestionProcedimientos.php">Procedimientos</a></li>
+                                    <li><a href="gestionProcesos.php">Procesos</a></li>
                                     <li><a href="gestionRepuestos.php">Repuestos</a></li>
                                     <li><a href="menuagregarotros.php">Otros</a></li>
                                 </ul>
