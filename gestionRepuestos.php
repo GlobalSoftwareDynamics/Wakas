@@ -110,8 +110,6 @@ if(isset($_GET['eliminarRepuesto'])) {
 if(isset($_POST['guardarrep'])){
     $agregar = "INSERT INTO repuestos(idRepuestos, descripcion, idUnidadMedida) VALUES ('".$_POST['idRep']."','".$_POST['descrep']."','".$_POST['unimed']."')";
     $agregar1 = mysql_query($agregar);
-    $agregar2 = "INSERT INTO RepuestosMaquina(idRepuestos, idMaquina) VALUES ('".$_POST['idRep']."','".$_POST['idmaq']."')";
-    $agregar3 = mysql_query($agregar2);
 }
 if(isset($_POST['actualizarrep'])){
     $actualziar="UPDATE repuestos SET descripcion = '".$_POST['descrep']."' WHERE idRepuestos = '".$_POST['idRep']."'";
@@ -142,7 +140,7 @@ if(isset($_POST['buscarrep'])){
                                     <td>".$fila['idRepuestos']."</td>
                                     <td>".$fila['descripcion']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarrepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
+                                    <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
                                     <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
                                     <td><a href='gestionRepuestos.php?eliminarRepuesto=".$fila['idRepuestos']."'>Eliminar</a></td>
                                 </tr>
@@ -188,7 +186,7 @@ if(isset($_POST['buscarrep'])){
                                     <td>".$fila['idRepuestos']."</td>
                                     <td>".$fila['descripcion']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarrepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
+                                    <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
                                     <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
                                     <td><a href='gestionRepuestos.php?eliminarRepuesto=".$fila['idRepuestos']."'>Eliminar</a></td>
                                 </tr>
