@@ -89,7 +89,7 @@ if(isset($_SESSION['login'])){
             }
         }
 
-        if(isset($_POST['add'])){
+        if(isset($_POST['add'])&&($_POST['add']=='Agregar')){
             $insertar = mysql_query("INSERT INTO tallamedida (idProducto, idTalla, idMedida, valor) VALUES ('".$_POST['idProd']."', '".$_POST['selecttalla']."', '".$_POST['selectmedida']."','".$_POST['valormedida']."')",$con);
             if(!$insertar){
                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
@@ -301,95 +301,95 @@ if(isset($_SESSION['login'])){
         </table>
     </section>
 
-    <section class="container">
-        <form action="#" method="post">
-            <div class="form-group">
-                <div>
-                    <label for="selectmedida">Medida:</label>
-                </div>
-                <div>
-                    <?php
-                    $result = selectTable("medida");
-                    echo "<select name='selectmedida' id='selectmedida'>";
-                    echo "<option>Seleccionar</option>";
-                    while($fila = mysql_fetch_array($result)){
-                        echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
-                    }
-                    echo "</select>";
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <label for="valormedida">Valor Medida</label>
-                </div>
-                <div>
-                    <input type="text" name="valormedida" size="1" id="valormedida">
-                </div>
-            </div>
-                <input type="hidden" value="<?php echo $_POST['idProd'] ?>" name="idProd">
-            <div class="form-group">
-                <div>
-                    <label for="selecttalla">Talla</label>
-                </div>
-                <div>
-                    <?php
-                    $result = selectTable("talla");
-                    echo "<select name='selecttalla' id='selecttalla'>";
-                    while($fila = mysql_fetch_array($result)){
-                        echo "<option value=".$fila['idTalla'].">".$fila['idTalla']."</option>";
-                    }
-                    echo "</select>";
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-default" type="submit" value="Agregar" name="add">
-            </div>
-        </form>
-    </section>
-
-    <hr>
-
-    <section>
-        <form action="#" method="post">
-            <div class="form-group">
-                <div>
-                    <label for="selectmedida">Medida:</label>
-                </div>
-                <div>
-                    <?php
-                    $result = selectTable("medida");
-                    echo "<select name='selectmedida' id='selectmedida'>";
-                    while($fila = mysql_fetch_array($result)){
-                        echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
-                    }
-                    echo "</select>";
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <label for="tolerancia">Tolerancia:</label>
-                </div>
-                <div>
-                    <input type="text" name="tolerancia" size="1" id="tolerancia">
-                </div>
-            </div>
-            <input type="hidden" value="<?php echo $_POST['idProd'] ?>" name="idProd"><br>
-            <div class="form-group">
-                <div>
-                    <label for="observacion">Observaci&oacute;n:</label>
-                </div>
-                <div>
-                    <textarea name="observacion" cols="30" rows="3" id="observacion"></textarea>
-                </div>
-            </div>
-            <div class="form-group">
-                <input class="btn btn-default" type="submit" value="Agregar" name="tolobs">
-            </div>
-        </form>
-    </section>
+    <?php
+        if(isset($_POST["add"])&&!isset($_POST["addtolerancias"])){
+            echo "<section class='container'>
+                    <form action=\"#\" method=\"post\">
+                        <div class=\"form-group\">
+                            <div>
+                                <label for=\"selectmedida\">Medida:</label>
+                            </div>
+                            <div>";
+            $result = selectTable("medida");
+            echo "<select name='selectmedida' id='selectmedida'>";
+            echo "<option>Seleccionar</option>";
+            while($fila = mysql_fetch_array($result)){
+                echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
+            }
+            echo "</select>";
+            echo "</div>
+                        </div>
+                        <div class=\"form-group\">
+                            <div>
+                                <label for=\"valormedida\">Valor Medida</label>
+                            </div>
+                            <div>
+                                <input type=\"text\" name=\"valormedida\" size=\"1\" id=\"valormedida\">
+                            </div>
+                        </div>
+                            <input type=\"hidden\" value='".$_POST['idProd']."'name=\"idProd\">
+                        <div class=\"form-group\">
+                            <div>
+                                <label for=\"selecttalla\">Talla</label>
+                            </div>
+                            <div>";
+            $result = selectTable("talla");
+            echo "<select name='selecttalla' id='selecttalla'>";
+            echo "<option>Seleccionar</option>";
+            while($fila = mysql_fetch_array($result)){
+                echo "<option value=".$fila['idTalla'].">".$fila['idTalla']."</option>";
+            }
+            echo "</select>";
+            echo "</div>
+                            </div>
+                            <div class=\"form-group\">
+                                <input class=\"btn btn-default\" type=\"submit\" value=\"Agregar\" name=\"add\">
+                                <input class='btn btn-default' type='submit' value='Gestionar Tolerancias' name='addtolerancias'>
+                            </div>
+                        </form>
+                    </section>";
+        }else{
+            echo "<section class=\"container\">
+                    <form action=\"#\" method=\"post\">
+                        <div class=\"form-group\">
+                            <div>
+                                <label for=\"selectmedida\">Medida:</label>
+                            </div>
+                            <div>";
+                                $result = selectTable("medida");
+                                echo "<select name='selectmedida' id='selectmedida'>";
+                                    echo "<option>Seleccionar</option>";
+                                    while($fila = mysql_fetch_array($result)){
+                                        echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
+                                    }
+                                echo "</select>";
+                            echo "</div>
+                            </div>
+                            <div class=\"form-group\">
+                                <div>
+                                    <label for=\"tolerancia\">Tolerancia:</label>
+                                </div>
+                                <div>
+                                    <input type=\"text\" name=\"tolerancia\" size=\"1\" id=\"tolerancia\">
+                                </div>
+                            </div>
+                            <input type=\"hidden\" value='".$_POST['idProd']."' name=\"idProd\"><br>
+                            <div class=\"form-group\">
+                                <div>
+                                    <label for=\"observacion\">Observaci&oacute;n:</label>
+                                </div>
+                                <div>
+                                    <textarea name=\"observacion\" cols=\"30\" rows=\"3\" id=\"observacion\"></textarea>
+                                </div>
+                            </div>
+                            <div class=\"form-group\">
+                                <input class=\"btn btn-default\" type=\"submit\" value=\"Agregar\" name=\"tolobs\">
+                                <input class='btn btn-default' type='submit' value='Gestionar Medidas' name='add'>
+                            </div>
+                        </form>
+                    </section>";
+        }
+    ?>
 
     <hr>
 

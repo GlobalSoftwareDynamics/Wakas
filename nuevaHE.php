@@ -194,7 +194,7 @@ if(isset($_SESSION['login'])){
                     <textarea name="observGen" id="observGen" cols="30" rows="3"></textarea>
                 </div>
             </div>
-            <div>
+            <div class="form-group">
                 <div>
                     <label for="descrGen">Descripci&oacute;n General:</label>
                 </div>
@@ -204,6 +204,7 @@ if(isset($_SESSION['login'])){
             </div>
             <div class="form-group">
                 <input type="hidden" value="1" name="creacion">
+                <input type="hidden" value="add" name="add">
                 <input class="btn btn-success" type="submit" value="Siguiente">
             </div>
         </form>
