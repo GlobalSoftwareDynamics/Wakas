@@ -160,7 +160,6 @@ if(isset($_SESSION['login'])){
                         <option>Seleccionar</option>
                     </select>
                 </div>
-                </div>
                 <div>
                     <div>
                         <label for='col'>Seleccione Color:</label>
