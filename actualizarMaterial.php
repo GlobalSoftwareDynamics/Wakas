@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,45 +75,46 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="gestionMateriales.php" method="post">
+        <section class="container">
+            <form action="gestionMateriales.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Actualizar Material</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idmate">idMaterial:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idmate" class="formlabels col-sm-12">idMaterial:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             echo "
-                                <input id='idmate' type='text' name='idMat' value='".$_GET['idMaterial']."' readonly>
+                                <input class='textinput-5' id='idmate' type='text' name='idMat' value='".$_GET['idMaterial']."' readonly>
                             ";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="descmat">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="descmat" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $valor=selectTableWhere("Material","idMaterial","'".$_GET['idMaterial']."'");
                             while($fila=mysql_fetch_array($valor)){
                                 echo "
-                                     <input id='descmat' type='text' name='descmat' value='".$fila['material']."'>
+                                     <input class='textinput-8' id='descmat' type='text' name='descmat' value='".$fila['material']."'>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="unime">Unidad de Medida:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="unime" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div>
-                        <select id="unime" name="unimed">
-                            <option>Seleccionar Unidad</option>
+                    <div class="col-sm-7">
+                        <select id="unime" class="ddselect-5" name="unimed">
+                            <option>Seleccionar</option>
                             <?php
                                 $valor=selectTable('UnidadMedida');
                                 while($fila=mysql_fetch_array($valor)){
@@ -125,9 +126,16 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class='btn btn-success' type="submit" name="actualizarmat" value="Guardar Cambios">
-                    <input formaction="gestionMateriales.php" class='btn btn-default' type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="actualizarmat" value="Guardar Cambios">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionMateriales.php" class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
