@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,16 +75,15 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
+        <?php
+        if(isset($_POST['asignar'])){
+            $agregar2="INSERT INTO MaterialProveedor(idMaterial, idProveedor, costo) VALUES ('".$_POST['idMat']."','".$_POST['idProv']."','".$_POST['costo']."')";
+            $agregar3=mysql_query($agregar2);
+        }
+        ?>
 
-            <?php
-                if(isset($_POST['asignar'])){
-                    $agregar2="INSERT INTO MaterialProveedor(idMaterial, idProveedor, costo) VALUES ('".$_POST['idMat']."','".$_POST['idProv']."','".$_POST['costo']."')";
-                    $agregar3=mysql_query($agregar2);
-                }
-            ?>
-
-            <form action="asignarproveedormat.php" method="post">
+        <section class="container">
+            <form action="asignarproveedormat.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <?php
                     if(isset($_GET['idMaterial'])){
                         echo "
@@ -100,12 +99,13 @@ if(isset($_SESSION['login'])){
                 <div>
                     <h3>Asignar Proveedor de Material</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idproveedor">Seleccionar Proveedor:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idproveedor" class="formlabels col-sm-12">Seleccionar Proveedor:</label>
                     </div>
-                    <div>
-                        <select id="idproveedor" name="idProv">
+                    <div class="col-sm-7">
+                        <select id="idproveedor" name="idProv" class="ddselect-10">
                             <?php
                                 $result=selectTable('Proveedor');
                                 while ($fila=mysql_fetch_array($result)){
@@ -117,18 +117,27 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="costomat">Precio de Venta:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="costomat" class="formlabels col-sm-12">Precio de Venta:</label>
                     </div>
-                    <div>
-                        <input id="costomat" type="text" name="costo">
+                    <div class="col-sm-7">
+                        <input id="costomat" type="text" name="costo" class="textinput-3">
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="asignar" value="Asignar Proveedor">
-                    <input formaction="gestionProveedores.php" class="btn btn-default" type="submit" value="Ir a Proveedores">
-                    <input formaction="gestionMateriales.php" class="btn btn-default" type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="12">
+                        <div class="col-sm-4">
+                            <input class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" name="asignar" value="Asignar Proveedor">
+                        </div>
+                        <div class="col-sm-4">
+                            <input formaction="gestionProveedores.php" class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" value="Ir a Proveedores">
+                        </div>
+                        <div class="col-sm-4">
+                            <input formaction="gestionMateriales.php" class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
