@@ -76,7 +76,7 @@ if(isset($_SESSION['login'])){
         </header>
 
         <section class="container">
-            <form action="agregarContacto.php" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+            <form action="agregarContacto.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nuevo Cliente</h3>
                 </div>
@@ -93,7 +93,7 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input class='textinput-5' id='idcliente' type='text' name= 'idCli' value='CLIE".$aux."' readonly>";
+                            echo "<input class='textinput-3' id='idcliente' type='text' name= 'idCli' value='CLIE".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
@@ -102,7 +102,7 @@ if(isset($_SESSION['login'])){
                         <label for="nombre" class="formlabels col-sm-12">Nombre de Cliente:</label>
                     </div>
                     <div class="col-sm-7">
-                        <input id="nombre" type="text" name="nombrecli" class="textinput-12">
+                        <input id="nombre" type="text" name="nombrecli" class="textinput-10">
                     </div>
                 </div>
                 <hr>

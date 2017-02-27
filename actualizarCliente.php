@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,41 +75,49 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="gestionClientes.php" method="post">
+        <section class="container">
+            <form action="gestionClientes.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Actualizar Cliente</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idcliente">idCliente:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idcliente" class="formlabels col-sm-12">idCliente:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             echo "
-                                <input id='idcliente' type='text' name='idCli' value=".$_GET['idCliente']." readonly>
+                                <input class='textinput-3' id='idcliente' type='text' name='idCli' value=".$_GET['idCliente']." readonly>
                             ";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="nombre">Nombre de Cliente:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="nombre" class="formlabels col-sm-12">Nombre de Cliente:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result=selectTableWhere("Cliente", "idCliente","'".$_GET['idCliente']."'");
                             while ($fila=mysql_fetch_array($result)){
                                 echo "
-                                    <input id='nombre' type='text' name='nombrecli' value='".$fila['nombre']."'>
+                                    <input class='textinput-10' id='nombre' type='text' name='nombrecli' value='".$fila['nombre']."'>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <input class='btn btn-success' type="submit" name="actualizarcli" value="Guardar Cambios">
-                    <input formaction="gestionClientes.php" class='btn btn-default' type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="actualizarcli" value="Guardar Cambios">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionClientes.php" class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
