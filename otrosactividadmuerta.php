@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -84,16 +84,16 @@ if(isset($_SESSION['login'])){
 
         ?>
 
-        <section class="containerform">
-            <form action="otrosactividadmuerta.php" method="post">
+        <section class="container">
+            <form action="otrosactividadmuerta.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nueva Actividad Muerta</h3>
-                </div><br>
-                <div>
-                    <div>
-                        <label for="idactividadmuerta">id Actividad Muerta:</label>
+                </div><hr>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="idactividadmuerta" class="formlabels col-sm-12">id Actividad Muerta:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-6">
                         <?php
                             $aux = 0;
                             $result = selectTable("ActividadMuerta");
@@ -101,29 +101,36 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input id='idactividadmuerta' type='text' name= 'idactmuerta' value='".$aux."' readonly>";
+                            echo "<input class='textinput-3' id='idactividadmuerta' type='text' name= 'idactmuerta' value='".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="descripcion">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="descripcion" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
-                        <input id="descripcion" type="text" name="desc">
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="tiempo">Tiempo Est&aacute;ndar:</label>
-                    </div>
-                    <div>
-                        <input id="tiempo" type="text" name="tiempo">
+                    <div class="col-sm-6">
+                        <input id="descripcion" type="text" name="desc" class="textinput-12">
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success"type="submit" name="guardar" value="Agregar">
-                    <input formaction="menuagregarotros.php" class="btn btn-default" type="submit" value="Regresar">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="tiempo" class="formlabels col-sm-12">Tiempo Est&aacute;ndar:</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="textinput-3" id="tiempo" type="text" name="tiempo">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success boton col-sm-6 col-sm-offset-3"type="submit" name="guardar" value="Agregar">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="menuagregarotros.php" class=" btn btn-success boton col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

@@ -45,7 +45,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -97,33 +97,34 @@ if(isset($_SESSION['login'])){
             }
         ?>
 
-        <section class="container containerform">
-            <div>
-                <h3>Ingreso de Datos de Contacto</h3>
-            </div><br>
-            <form action="vercontactos.php" method="post" class="container-fluid">
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
-                        <label for="nombre" class="formlabels">Nombres:</label>
+        <section class="container">
+            <form action="vercontactos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+                <div>
+                    <h3>Ingreso de Datos de Contacto</h3>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="nombre" class="formlabels col-sm-12">Nombres:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <input type="text" name="nombre" id="nombre" class="textinput-md">
+                    <div class="col-sm-9">
+                        <input type="text" name="nombre" id="nombre" class="textinput-6">
                     </div>
                 </div>
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="col-sm-3">
                         <label for="apellido" class="formlabels col-sm-12">Apellidos:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <input type="text" name="apellido" class="textinput-md" id="apellido">
+                    <div class="col-sm-9">
+                        <input type="text" name="apellido" class="textinput-6" id="apellido">
                     </div>
                 </div>
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
-                        <label for="pais" class="formlabels">País:</label>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="pais" class="formlabels col-sm-12">País:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <select name="pais" id="pais" onChange="getCiudad(this.value);" class="ddselect">
+                    <div class="col-sm-9">
+                        <select name="pais" id="pais" onChange="getCiudad(this.value);" class="ddselect-5">
                             <option>Pais</option>
                             <?php
                             while($fila=mysql_fetch_array($pais)){
@@ -135,30 +136,30 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="col-sm-3">
                         <label for="listaciudad" class="formlabels col-sm-12">Ciudad:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <select name="ciudad" id="listaciudad" class="ddselect">
+                    <div class="col-sm-9">
+                        <select name="ciudad" id="listaciudad" class="ddselect-5">
                             <option>Ciudad</option>
                         </select>
                     </div>
                 </div>
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="col-sm-3">
                         <label for="direccion" class="formlabels col-sm-12">Dirección:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <input type="text" id="direccion" name="direccion" class="textinput-lg">
+                    <div class="col-sm-9">
+                        <input type="text" id="direccion" name="direccion" class="textinput-12">
                     </div>
                 </div>
-                <div class="containerformcontrol col-sm-12">
-                    <div class="col-sm-2">
+                <div class="form-group">
+                    <div class="col-sm-3">
                         <label for="tele" class="formlabels col-sm-12">Teléfono:</label>
                     </div>
-                    <div class="col-sm-10">
-                        <input type="text"  id="tele" name="tel" class="textinput-sm">
+                    <div class="col-sm-9">
+                        <input type="text"  id="tele" name="tel" class="textinput-4">
                     </div>
                 </div>
                 <?php
@@ -179,8 +180,11 @@ if(isset($_SESSION['login'])){
                     echo "<input type='hidden' name= 'idDir' value='DIR".$aux."' readonly>";
                 ?>
                 <input type="hidden" name="cliente" value="<?php echo $_POST['idCli'] ?>">
-                <div class="col-sm-12">
-                    <input type="submit" name="guardar" value="Guardar" class="btn btn btn-primary boton">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="submit" name="guardar" value="Guardar" class="btn btn-success col-sm-4 col-sm-offset-4">
+                    </div>
                 </div>
             </form>
         </section>

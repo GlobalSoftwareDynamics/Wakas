@@ -31,7 +31,7 @@ if(isset($_SESSION['login'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                    <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -83,22 +83,30 @@ if(isset($_SESSION['login'])){
         }
     ?>
 
-    <section class="containerform">
-        <form action="otroscomponente.php" method="post">
+    <section class="container">
+        <form action="otroscomponente.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
             <div>
                 <h3>Nuevo Componente</h3>
             </div>
-            <div>
-                <div>
-                    <label for="idcomp">Componente:</label>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="idcomp" class="formlabels1 col-sm-8 col-sm-offset-2">Componente:</label>
                 </div>
-                <div>
-                    <input id="idcomp" type="text" name="idcomponente">
+                <div class="col-sm-12">
+                    <input id="idcomp" type="text" name="idcomponente" class="textinput-8 col-sm-offset-2" style="margin-left: 16.66666667%;">
                 </div>
             </div>
-            <div>
-                <input class="btn btn-default"type="submit" name="guardar" value="Agregar">
-                <input formaction="menuagregarotros.php" class="btn btn-success" type="submit" value="Regresar">
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input formaction="menuagregarotros.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                    </div>
+                </div>
             </div>
         </form>
     </section>

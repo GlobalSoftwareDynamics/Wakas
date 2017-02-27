@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -84,30 +84,38 @@ if(isset($_SESSION['login'])){
 
         ?>
 
-        <section class="containerform">
-            <form action="otrostipoproducto.php" method="post">
+        <section class="container">
+            <form action="otrostipoproducto.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nuevo Tipo de Producto</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idtipo">Tipo de Producto:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="formlabels col-sm-12" for="idtipo">Tipo de Producto:</label>
                     </div>
-                    <div>
-                        <input id="idtipo" type="text" name="idtipoprod">
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="tamano">Tama&ntilde;o de Lote:</label>
-                    </div>
-                    <div>
-                        <input id="tamano" type="text" name="tamanolote">
+                    <div class="col-sm-6">
+                        <input id="idtipo" class="textinput-8" type="text" name="idtipoprod">
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-default" type="submit" name="guardar" value="Agregar">
-                    <input formaction="menuagregarotros.php" class="btn btn-success" type="submit" value="Regresar">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label class="formlabels col-sm-12" for="tamano">Tama&ntilde;o de Lote:</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <input id="tamano" class="textinput-4" type="text" name="tamanolote">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="menuagregarotros.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

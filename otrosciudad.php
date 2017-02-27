@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -77,30 +77,47 @@ if(isset($_SESSION['login'])){
 
         <?php
             if(isset($_POST['guardar'])){
-                $agregar="INSERT INTO ciudad(idCiudad, idPais) VALUES ('".$_POST['idciudad']."','".$_POST['idpais']."')";
+                $agregar="INSERT INTO ciudad(idCiudad, idPais, nombre) VALUES ('".$_POST['idciudad']."','".$_POST['idpais']."','".$_POST['nombre'].")";
                 $agregar1=mysql_query($agregar);
             }
         ?>
 
-        <section class="containerform">
-            <form action="otrosciudad.php" method="post">
+        <section class="container">
+            <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nueva Ciudad</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idciu">Nombre de la Ciudad:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="idciu" class="formlabels col-sm-12">id Ciudad:</label>
                     </div>
-                    <div>
-                        <input id="idciu" type="text" name="idciudad">
+                    <div class="col-sm-6">
+                        <?php
+                        $aux = 0;
+                        $result = selectTable("Ciudad");
+                        while($fila = mysql_fetch_array($result)){
+                            $aux++;
+                        }
+                        $aux++;
+                        echo "<input class='textinput-3' id='idciu' type='text' name= 'idciudad' value='".$aux."' readonly>";
+                        ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="pais">Seleccione Pa&iacute;s:</label>
+                <div class="form-group">
+                    <div  class="col-sm-6">
+                        <label for="nom" class="formlabels col-sm-12">Nombre de la Ciudad:</label>
                     </div>
-                    <div>
-                        <select id="pais" name="idpais">
+                    <div class="col-sm-6">
+                        <input id="nom" class="textinput-8" type="text" name="nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="pais" class="formlabels col-sm-12">Seleccione Pa&iacute;s:</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <select id="pais" name="idpais" class="ddselect-8">
                             <option>Seleccionar País</option>
                             <?php
                             $result=selectTable("Pais");
@@ -113,9 +130,16 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-default" type="submit" name="guardar" value="Agregar">
-                    <input formaction="menuagregarotros.php" class="btn btn-success" type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="menuagregarotros.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

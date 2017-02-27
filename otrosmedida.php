@@ -31,7 +31,7 @@ if(isset($_SESSION['login'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                    <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -83,25 +83,26 @@ if(isset($_SESSION['login'])){
         }
     ?>
 
-    <section class="containerform">
-        <form action="otrosmedida.php" method="post">
+    <section class="container">
+        <form class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" action="otrosmedida.php" method="post">
             <div>
                 <h3>Nueva Medida</h3>
             </div>
-            <div>
-                <div>
-                    <label for="idmedida">idMedida:</label>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label class="formlabels col-sm-12" for="idmedida">idMedida:</label>
                 </div>
-                <div>
-                    <input id="idmedida" type="text" name="idmedida">
+                <div class="col-sm-6">
+                    <input class="textinput-3" id="idmedida" type="text" name="idmedida">
                 </div>
             </div>
-            <div>
-                <div>
-                    <label for="unimedida">Unidad de Medida:</label>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label class="formlabels col-sm-12" for="unimedida">Unidad de Medida:</label>
                 </div>
-                <div>
-                    <select id="unimedida" name="unimed">
+                <div class="col-sm-6">
+                    <select class="ddselect-6" id="unimedida" name="unimed">
                         <?php
                         $result=selectTable("UnidadMedida");
                         while ($fila=mysql_fetch_array($result)){
@@ -113,17 +114,24 @@ if(isset($_SESSION['login'])){
                     </select>
                 </div>
             </div>
-            <div>
-                <div>
-                    <label for="descripcion">Descripci&oacute;n:</label>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label class="formlabels col-sm-12" for="descripcion">Descripci&oacute;n:</label>
                 </div>
-                <div>
-                    <input id="descripcion" type="text" name="desc">
+                <div class="col-sm-6">
+                    <input class="textinput-12" id="descripcion" type="text" name="desc">
                 </div>
             </div>
-            <div>
-                <input class="btn btn-success"type="submit" name="guardar" value="Agregar">
-                <input formaction="menuagregarotros.php" class="btn btn-default" type="submit" value="Regresar">
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <input class="btn btn-success boton col-sm-6 col-sm-offset-3"type="submit" name="guardar" value="Agregar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input formaction="menuagregarotros.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                    </div>
+                </div>
             </div>
         </form>
     </section>

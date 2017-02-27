@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,16 +75,17 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="agregarContacto.php" method="post">
+        <section class="container">
+            <form action="agregarContacto.php" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
                 <div>
                     <h3>Nuevo Cliente</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idcliente">idCliente:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idcliente" class="formlabels col-sm-12">idCliente:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $aux = 0;
                             $result = selectTable("Cliente");
@@ -92,21 +93,28 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input id='idcliente' type='text' name= 'idCli' value='CLIE".$aux."' readonly>";
+                            echo "<input class='textinput-5' id='idcliente' type='text' name= 'idCli' value='CLIE".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <labelf for="nombre">Nombre de Cliente:</labelf>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="nombre" class="formlabels col-sm-12">Nombre de Cliente:</label>
                     </div>
-                    <div>
-                        <input id="nombre" type="text" name="nombrecli">
+                    <div class="col-sm-7">
+                        <input id="nombre" type="text" name="nombrecli" class="textinput-12">
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="guardarcli" value="Siguiente">
-                    <input formaction="gestionClientes.php" class="btn btn-default" type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardarcli" value="Siguiente">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionClientes.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
