@@ -1,11 +1,29 @@
-/*Navbar*/
+/*Navbar, login, mainAdmin*/
 #brand {
     font-family: Chiller;
     font-size: 30px;
 }
 
+#brandlogin {
+    font-family: Chiller;
+    font-size: 50px;
+}
+
+#subbrand {
+    font-family: "Freestyle Script";
+    font-size: 30px;
+}
+
 .alfa {
-    font-size: 20px;
+    font-size: 22px;
+}
+
+.alfalogin {
+    font-size: 42px;
+}
+
+.imagenlogo {
+    margin-top: 15px;
 }
 
 /*Clase Container para Formulario*/
