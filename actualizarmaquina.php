@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,59 +75,67 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-     	<section class="containerform">
-            <form action="gestionMaquinas.php" method="post">
+     	<section class="container">
+            <form action="gestionMaquinas.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Actualizar Máquina</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idmaquina">IdM&aacute;quina:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idmaquina" class="formlabels col-sm-12">IdM&aacute;quina:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result2=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
                             while ($fila2=mysql_fetch_array($result2)){
                                 echo "
-                                    <input id='idmaquina' type='text' value='".$fila2['idMaquina']."' name='idMaq' readonly>
+                                    <input class='textinput-4' id='idmaquina' type='text' value='".$fila2['idMaquina']."' name='idMaq' readonly>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="desmaq">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="desmaq" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result3=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
                             while ($fila3=mysql_fetch_array($result3)){
                                 echo "
-                                    <input id='desmaq' type='text' value='".$fila3['descripcion']."' name='descmaq'>
+                                    <input class='textinput-8' id='desmaq' type='text' value='".$fila3['descripcion']."' name='descmaq'>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="costomaq">Costo Fijo:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="costomaq" class="formlabels col-sm-12">Costo Fijo:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result4=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
                             while ($fila4=mysql_fetch_array($result4)){
                                 echo "
-                                    <input id='costomaq' type='text' value='".$fila4['costoFijo']."' name='costo'>
+                                    <input class='textinput-3' id='costomaq' type='text' value='".$fila4['costoFijo']."' name='costo'>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <input class='btn btn-success' type="submit" name="actualizarmaq" value="Guardar Cambios">
-                    <input formaction="gestionMaquinas.php" class='btn btn-default' type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="actualizarmaq" value="Guardar Cambios">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionMaquinas.php" class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

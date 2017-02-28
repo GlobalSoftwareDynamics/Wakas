@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,16 +75,17 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="gestionMaquinas.php" method="post">
+        <section class="container">
+            <form action="gestionMaquinas.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                    <h3>Nueva Máquina</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idmaquina">IdM&aacute;quina:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idmaquina" class="formlabels col-sm-12">IdM&aacute;quina:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $aux = 0;
                             $result = selectTable("Maquina");
@@ -92,29 +93,36 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input id='idmaquina' type='text' name= 'idMaq' value='MAQUINA".$aux."' readonly>";
+                            echo "<input class='textinput-4' id='idmaquina' type='text' name= 'idMaq' value='MAQUINA".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="nombremaq">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="nombremaq" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
-                        <input id="nombremaq" type="text" name="descmaq">
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="costomaq">Costo Fijo:</label>
-                    </div>
-                    <div>
-                        <input id="costomaq" type="text" name="costo">
+                    <div class="col-sm-7">
+                        <input class="textinput-8" id="nombremaq" type="text" name="descmaq">
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="guardarmaq" value="Guardar M&aacute;quina">
-                    <input formaction="gestionMaquinas.php" class="btn btn-default" type="submit" value="Regresar">
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="costomaq" class="formlabels col-sm-12">Costo Fijo:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <input id="costomaq" type="text" name="costo" class="textinput-3">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardarmaq" value="Guardar M&aacute;quina">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionMaquinas.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
