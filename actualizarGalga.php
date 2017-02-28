@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,47 +75,48 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="gestionGalgas.php" method="post">
+        <section class="container">
+            <form action="gestionGalgas.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Actualizar Galga</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idgalga">IdGalga:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idgalga" class="formlabels col-sm-12">IdGalga:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result2=selectTableWhere("Galgas","idGalgas","'".$_GET['idGalgas']."'");
                             while ($fila2=mysql_fetch_array($result2)){
                                 echo "
-                                    <input id='idgalga' type='text' value='".$fila2['idGalgas']."' name='idGal' readonly>
+                                    <input class='textinput-4' id='idgalga' type='text' value='".$fila2['idGalgas']."' name='idGal' readonly>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="desgalga">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="desgalga" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $result3=selectTableWhere("Galgas","idGalgas","'".$_GET['idGalgas']."'");
                             while ($fila3=mysql_fetch_array($result3)){
                                 echo "
-                                    <input id='descgalga' type='text' value='".$fila3['Descripcion']."' name='descgal'>
+                                    <input id='descgalga' type='text' class='textinput-6' value='".$fila3['Descripcion']."' name='descgal'>
                                 ";
                             }
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="unimedi">Unidad de Medida:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="unimedi" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div>
-                        <select name="unimed">
+                    <div class="col-sm-7">
+                        <select id="unimedi" name="unimed" class="ddselect-5">
                             <option>Seleccionar</option>
                             <?php
                                 $result=selectTable('UnidadMedida');
@@ -128,12 +129,12 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="idmaquina">Máquina:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idmaquina" class="formlabels col-sm-12">Máquina:</label>
                     </div>
-                    <div>
-                        <select name="idmaq">
+                    <div class="col-sm-7">
+                        <select name="idmaq" id="idmaquina" class="ddselect-8">
                             <option>Seleccionar</option>
                             <?php
                                 $result1=selectTable('Maquina');
@@ -146,9 +147,15 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="actualizargal" value="Guardar Cambios">
-                    <input formaction="gestionGalgas.php" class="btn btn-primary" type="submit" value="Regresar">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="actualizargal" value="Guardar Cambios">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionGalgas.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

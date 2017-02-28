@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,16 +75,17 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
       	
-        <section class="containerform">
-            <form action="gestionGalgas.php" method="post">
+        <section class="container">
+            <form action="gestionGalgas.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nueva Galga</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idgalga">IdGalga:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="idgalga" class="formlabels col-sm-12">IdGalga:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-7">
                         <?php
                             $aux = 0;
                             $result = selectTable("Galgas");
@@ -92,24 +93,24 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input id='idgalga' type='text' name= 'idGal' value='GALGA".$aux."' readonly>";
+                            echo "<input class='textinput-4' id='idgalga' type='text' name= 'idGal' value='GALGA".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="desc">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="desc" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
-                        <input id="desc" type="text" name="descgal">
+                    <div class="col-sm-7">
+                        <input id="desc" type="text" name="descgal" class="textinput-6">
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="unimedida">Unidad de Medida:</label>
+                <div class="form-group">
+                    <div  class="col-sm-5">
+                        <label for="unimedida" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div>
-                        <select id="unimedida" name="unimed">
+                    <div class="col-sm-7">
+                        <select id="unimedida" name="unimed" class="ddselect-5">
                             <option>Seleccionar</option>
                             <?php
                                 $result=selectTable('UnidadMedida');
@@ -122,12 +123,12 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="maquina">Máquina:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="maquina" class="formlabels col-sm-12">Máquina:</label>
                     </div>
-                    <div>
-                        <select id="maquina" name="idmaq">
+                    <div class="col-sm-7">
+                        <select id="maquina" name="idmaq" class="ddselect-8">
                             <option>Seleccionar</option>
                             <?php
                                 $result1=selectTable('Maquina');
@@ -140,9 +141,16 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="guardargal" value="Guardar Galga">
-                    <input formaction="gestionGalgas.php" class="btn btn-default" type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardargal" value="Guardar Galga">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionGalgas.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
