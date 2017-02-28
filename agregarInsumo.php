@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -75,16 +75,17 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section class="containerform">
-            <form action="gestionInsumos.php" method="post">
+        <section class="container">
+            <form action="gestionInsumos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nuevo Insumo</h3>
                 </div>
-                <div>
-                    <div>
-                        <label for="idinsumo">IdInsumo:</label>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="idinsumo" class="formlabels col-sm-12">IdInsumo:</label>
                     </div>
-                    <div>
+                    <div class="col-sm-9">
                         <?php
                             $aux = 0;
                             $result = selectTable("Insumos");
@@ -92,24 +93,24 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input id='idinsumo' type='text' name= 'idIns' value='INSUMO".$aux."' readonly>";
+                            echo "<input class='textinput-4' id='idinsumo' type='text' name= 'idIns' value='INSUMO".$aux."' readonly>";
                         ?>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="desc">Descripci&oacute;n:</label>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="desc" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div>
-                        <input id="desc" type="text" name="descins">
+                    <div class="col-sm-9">
+                        <input id="desc" type="text" name="descins" class="textinput-12">
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="uni">Unidad de Medida:</label>
+                <div class="form-group">
+                    <div class="col-sm-3">
+                        <label for="uni" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div>
-                        <select id="uni" name="unimed">
+                    <div class="col-sm-9">
+                        <select id="uni" name="unimed" class="ddselect-5">
                             <option>Seleccionar</option>
                             <?php
                                 $result=selectTable('UnidadMedida');
@@ -122,9 +123,16 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-success" type="submit" name="guardarins" value="Guardar Insumo">
-                    <input formaction="gestionInsumos.php" class="btn btn-default" type="submit" value="Regresar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardarins" value="Guardar Insumo">
+                        </div>
+                        <div class="col-sm-6">
+                            <input formaction="gestionInsumos.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>
