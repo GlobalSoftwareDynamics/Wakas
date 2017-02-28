@@ -14,6 +14,7 @@ if(isset($_SESSION['login'])){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
     
     </head>
 
@@ -28,7 +29,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -73,19 +74,41 @@ if(isset($_SESSION['login'])){
             </nav>
         </header>
 
-        <section>
-            <form>
-                <button class="btn btn-primary" type="submit" formaction="otroscolor.php">Agregar Color</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosunidadmedida.php">Agregar Unidad de Medida</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosincoterm.php">Agregar Incoterm</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosmetodopago.php">Agregar Metodo de Pago</button>
-                <button class="btn btn-primary" type="submit" formaction="otrospais.php">Agregar Pais</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosciudad.php">Agregar Ciudad</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosvia.php">Agregar Via de Envío</button>
-                <button class="btn btn-primary" type="submit" formaction="otrostipoproducto.php">Agregar Tipo de Producto</button>
-                <button class="btn btn-primary" type="submit" formaction="otroscomponente.php">Agregar Componente</button>
-                <button class="btn btn-primary" type="submit" formaction="otrosmedida.php">Agregar Medidas</button>
-				<button class="btn btn-primary" type="submit" formaction="otrosactividadmuerta.php">Agregar Actividad Muerta</button>
+        <section class="container">
+            <form class="form-horizontal">
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otroscolor.php">Agregar Color</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosunidadmedida.php">Agregar Unidad de Medida</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosincoterm.php">Agregar Incoterm</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosmetodopago.php">Agregar Metodo de Pago</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrospais.php">Agregar Pais</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosciudad.php">Agregar Ciudad</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosvia.php">Agregar Via de Envío</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrostipoproducto.php">Agregar Tipo de Producto</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otroscomponente.php">Agregar Componente</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosmedida.php">Agregar Medidas</button>
+                </div>
+                <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-4 col-sm-offset-4 boton" type="submit" formaction="otrosactividadmuerta.php">Agregar Actividad Muerta</button>
+                </div>
             </form>
         </section>
 
