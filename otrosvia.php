@@ -86,7 +86,7 @@ if(isset($_SESSION['login'])){
                 }else{
                     echo "<br>";
                     echo "<div class='alert alert-success' role='alert'>";
-                    echo 	"<p> <strong>Color Agregado Exitosamente</strong></p>";
+                    echo 	"<p> <strong>Vía Agregada Exitosamente</strong></p>";
                     echo " </div>";
                 }
             }
