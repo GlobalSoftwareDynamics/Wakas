@@ -79,6 +79,15 @@ if(isset($_SESSION['login'])){
         if(isset($_POST['asignar'])){
             $agregar2="INSERT INTO MaterialProveedor(idMaterial, idProveedor, costo) VALUES ('".$_POST['idMat']."','".$_POST['idProv']."','".$_POST['costo']."')";
             $agregar3=mysql_query($agregar2);
+            if ( !empty( $error = mysql_error() ) )
+            {
+                echo 'Mysql error '. $error ."<br />\n";
+            }else{
+                echo "<br>";
+                echo "<div class='alert alert-success' role='alert'>";
+                echo 	"<p> <strong>Proveedor Asignado Exitosamente</strong></p>";
+                echo " </div>";
+            }
         }
         ?>
 
