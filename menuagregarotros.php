@@ -14,6 +14,7 @@ if(isset($_SESSION['login'])){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
     
     </head>

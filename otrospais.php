@@ -79,6 +79,15 @@ if(isset($_SESSION['login'])){
             if(isset($_POST['guardar'])){
                 $agregar="INSERT INTO pais(idPais, pais) VALUES ('".$_POST['idpais']."','".$_POST['pais']."')";
                 $agregar1=mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Unidad de Medida Agregada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
         ?>
 
@@ -89,10 +98,10 @@ if(isset($_SESSION['login'])){
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label class="formlabels col-sm-12" for="idpa">idPa&iacute;s:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <?php
                             $aux = 0;
                             $result = selectTable("Pais");
@@ -105,10 +114,10 @@ if(isset($_SESSION['login'])){
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label class="formlabels col-sm-12" for="nombrepais">Nombre:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input class="textinput-8" id="nombrepais" type="text" name="pais">
                     </div>
                 </div>

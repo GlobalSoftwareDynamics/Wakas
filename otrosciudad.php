@@ -79,6 +79,15 @@ if(isset($_SESSION['login'])){
             if(isset($_POST['guardar'])){
                 $agregar="INSERT INTO ciudad(idCiudad, idPais, nombre) VALUES ('".$_POST['idciudad']."','".$_POST['idpais']."','".$_POST['nombre'].")";
                 $agregar1=mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Unidad de Medida Agregada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
         ?>
 
@@ -89,10 +98,10 @@ if(isset($_SESSION['login'])){
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label for="idciu" class="formlabels col-sm-12">id Ciudad:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <?php
                         $aux = 0;
                         $result = selectTable("Ciudad");
@@ -105,18 +114,18 @@ if(isset($_SESSION['login'])){
                     </div>
                 </div>
                 <div class="form-group">
-                    <div  class="col-sm-6">
+                    <div  class="col-sm-5">
                         <label for="nom" class="formlabels col-sm-12">Nombre de la Ciudad:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input id="nom" class="textinput-8" type="text" name="nombre">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label for="pais" class="formlabels col-sm-12">Seleccione Pa&iacute;s:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <select id="pais" name="idpais" class="ddselect-8">
                             <option>Seleccionar País</option>
                             <?php

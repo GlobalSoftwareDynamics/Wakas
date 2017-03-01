@@ -80,6 +80,15 @@ if(isset($_SESSION['login'])){
             if(isset($_POST['guardar'])){
                 $agregar="INSERT INTO tipoproducto(idTipoProducto, tamanoLote) VALUES ('".$_POST['idtipoprod']."','".$_POST['tamanolote']."')";
                 $agregar1=mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Color Agregado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
         ?>
@@ -91,18 +100,18 @@ if(isset($_SESSION['login'])){
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label class="formlabels col-sm-12" for="idtipo">Tipo de Producto:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input id="idtipo" class="textinput-8" type="text" name="idtipoprod">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label class="formlabels col-sm-12" for="tamano">Tama&ntilde;o de Lote:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input id="tamano" class="textinput-4" type="text" name="tamanolote">
                     </div>
                 </div>

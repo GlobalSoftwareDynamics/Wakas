@@ -80,6 +80,15 @@ if(isset($_SESSION['login'])){
         if(isset($_POST['guardar'])){
             $agregar="INSERT INTO medida(idMedida, idUnidadMedida, descripcion) VALUES ('".$_POST['idmedida']."','".$_POST['unimed']."','".$_POST['desc']."')";
             $agregar1=mysql_query($agregar);
+            if ( !empty( $error = mysql_error() ) )
+            {
+                echo 'Mysql error '. $error ."<br />\n";
+            }else{
+                echo "<br>";
+                echo "<div class='alert alert-success' role='alert'>";
+                echo 	"<p> <strong>Unidad de Medida Agregada Exitosamente</strong></p>";
+                echo " </div>";
+            }
         }
     ?>
 
@@ -90,18 +99,18 @@ if(isset($_SESSION['login'])){
             </div>
             <hr>
             <div class="form-group">
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <label class="formlabels col-sm-12" for="idmedida">idMedida:</label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <input class="textinput-3" id="idmedida" type="text" name="idmedida">
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <label class="formlabels col-sm-12" for="unimedida">Unidad de Medida:</label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <select class="ddselect-6" id="unimedida" name="unimed">
                         <?php
                         $result=selectTable("UnidadMedida");
@@ -115,10 +124,10 @@ if(isset($_SESSION['login'])){
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <label class="formlabels col-sm-12" for="descripcion">Descripci&oacute;n:</label>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <input class="textinput-12" id="descripcion" type="text" name="desc">
                 </div>
             </div>

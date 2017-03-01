@@ -80,6 +80,15 @@ if(isset($_SESSION['login'])){
             if(isset($_POST['guardar'])){
                 $agregar="INSERT INTO actividadmuerta(idactividadmuerta, descripcion, tiempoEstandar) VALUES ('".$_POST['idactmuerta']."','".$_POST['desc']."','".$_POST['tiempo']."')";
                 $agregar1=mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Unidad de Medida Agregada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
         ?>
@@ -90,10 +99,10 @@ if(isset($_SESSION['login'])){
                     <h3>Nueva Actividad Muerta</h3>
                 </div><hr>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label for="idactividadmuerta" class="formlabels col-sm-12">id Actividad Muerta:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <?php
                             $aux = 0;
                             $result = selectTable("ActividadMuerta");
@@ -106,18 +115,18 @@ if(isset($_SESSION['login'])){
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label for="descripcion" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input id="descripcion" type="text" name="desc" class="textinput-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <label for="tiempo" class="formlabels col-sm-12">Tiempo Est&aacute;ndar:</label>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-7">
                         <input class="textinput-3" id="tiempo" type="text" name="tiempo">
                     </div>
                 </div>

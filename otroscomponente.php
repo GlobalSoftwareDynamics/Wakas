@@ -80,21 +80,30 @@ if(isset($_SESSION['login'])){
         if(isset($_POST['guardar'])){
             $agregar="INSERT INTO componentesprenda(idComponente) VALUES ('".$_POST['idcomponente']."')";
             $agregar1=mysql_query($agregar);
+            if ( !empty( $error = mysql_error() ) )
+            {
+                echo 'Mysql error '. $error ."<br />\n";
+            }else{
+                echo "<br>";
+                echo "<div class='alert alert-success' role='alert'>";
+                echo 	"<p> <strong>Unidad de Medida Agregada Exitosamente</strong></p>";
+                echo " </div>";
+            }
         }
     ?>
 
     <section class="container">
-        <form action="otroscomponente.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+        <form action="otroscomponente.php" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
             <div>
                 <h3>Nuevo Componente</h3>
             </div>
             <hr>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="idcomp" class="formlabels1 col-sm-8 col-sm-offset-2">Componente:</label>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <label for="idcomp" class="formlabels1">Componente:</label>
                 </div>
-                <div class="col-sm-12">
-                    <input id="idcomp" type="text" name="idcomponente" class="textinput-8 col-sm-offset-2" style="margin-left: 16.66666667%;">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <input id="idcomp" type="text" name="idcomponente" class="textinput-12">
                 </div>
             </div>
             <hr>
