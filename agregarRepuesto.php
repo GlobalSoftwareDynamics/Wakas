@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+            <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
