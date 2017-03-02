@@ -7,7 +7,6 @@ conexion();
 if(isset($_SESSION['login'])){
 ?>
 <html lang="es">
-
 <head>
 
     <meta charset="utf-8">
@@ -77,87 +76,79 @@ if(isset($_SESSION['login'])){
 </nav>
 
     <section class="container">
-        <form action="gestionOperarios.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+        <form action="asignarRepuestos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+            <?php
+            if(isset($_GET['idRepuestos'])){
+                echo "
+                         <input type='hidden' name='idRep' value=".$_GET['idRepuestos']." readonly>
+                    ";
+            }
+            if(isset($_POST['asignar'])){
+                echo "
+                         <input type='hidden' name='idRep' value=".$_POST['idRep']." readonly>
+                    ";
+            }
+            ?>
             <div>
-                <h3>Agregar Colaborador</h3>
+                <h3>Asignar Repuestos</h3>
             </div>
             <hr>
             <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="idEmp" class="formlabels col-sm-12">DNI:</label>
+                <div class="col-sm-8 col-sm-offset-2">
+                    <label for="idMaq" class="formlabels1 col-sm-12">Seleccionar M&aacute;quina:</label>
                 </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-4" name="idEmp" id="idEmp">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="nombres" class="formlabels col-sm-12">Nombres:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-6" name="nombres" id="nombres">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="apellidos" class="formlabels col-sm-12">Apellidos:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-8" name="apellidos" id="apellidos">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="tipouser" class="formlabels col-sm-12">Tipo de Usuario:</label>
-                </div>
-                <div class="col-sm-7">
-                    <select name="tipouser" class="ddselect-5" id="tipouser">
+                <div class="col-sm-8 col-sm-offset-2">
+                    <select id="idMaq" name="idMaq" class="ddselect-12">
                         <option>Seleccionar</option>
                         <?php
-                        $result=selectTable('TipoUsuario');
-                        while($fila=mysql_fetch_array($result)){
+                        $result=selectTable('Maquina');
+                        while ($fila=mysql_fetch_array($result)){
                             echo "
-                            <option value='".$fila['idTipoUsuario']."'>".$fila['Descripcion']."</option>
-                        ";
+                                <option value='".$fila['idMaquina']."'>".$fila['descripcion']."</option>
+                            ";
                         }
                         ?>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="usuario" class="formlabels col-sm-12">Usuario:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="usuario" id="usuario">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="pass" class="formlabels col-sm-12">Contrase&ntilde;a:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="pass" id="pass">
-                </div>
-            </div>
             <hr>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardaremp" value="Guardar">
+                    <div class="col-sm-4">
+                        <input class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" name="asignar" value="Asignar M&aacute;quina">
                     </div>
-                    <div class="col-sm-6">
-                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar" formaction="gestionOperarios.php">
+                    <div class="col-sm-4">
+                        <input formaction="gestionMaquinas.php" class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" value="Ir a M&aacute;quinas">
+                    </div>
+                    <div class="col-sm-4">
+                        <input formaction="gestionRepuestos.php" class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" value="Regresar">
                     </div>
                 </div>
             </div>
         </form>
+
+        <?php
+        if(isset($_POST['asignar'])){
+            $agregar2="INSERT INTO RepuestosMaquina(idRepuestos, idMaquina) VALUES ('".$_POST['idRep']."','".$_POST['idMaq']."')";
+            $agregar3=mysql_query($agregar2);
+            if ( !empty( $error = mysql_error() ) )
+            {
+                echo 'Mysql error '. $error ."<br />\n";
+            }else{
+                echo "<br>";
+                echo "<div class='alert alert-success' role='alert'>";
+                echo 	"<p> <strong>Asignación completada</strong></p>";
+                echo " </div>";
+            }
+        }
+        ?>
     </section>
 
-</body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+</body>
 
 </html>
 

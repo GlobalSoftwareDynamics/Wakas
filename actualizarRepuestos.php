@@ -3,7 +3,6 @@
 session_start();
 require('funciones.php');
 conexion();
-
 if(isset($_SESSION['login'])){
 ?>
 <html lang="es">
@@ -14,7 +13,6 @@ if(isset($_SESSION['login'])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Waka-s Textiles Finos S.A.</title>
-
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -77,87 +75,73 @@ if(isset($_SESSION['login'])){
 </nav>
 
     <section class="container">
-        <form action="gestionOperarios.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+        <form action="gestionRepuestos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
             <div>
-                <h3>Agregar Colaborador</h3>
-            </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="idEmp" class="formlabels col-sm-12">DNI:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-4" name="idEmp" id="idEmp">
-                </div>
+                <h3>Actualizar Repuesto</h3>
             </div>
             <div class="form-group">
                 <div class="col-sm-5">
-                    <label for="nombres" class="formlabels col-sm-12">Nombres:</label>
+                    <label for="idRep" class="formlabels col-sm-12">IdRepuesto:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-6" name="nombres" id="nombres">
+                    <?php
+                    echo "
+                        <input class='textinput-3' type='text' name='idRep' id='idRep' value='".$_GET['idRepuestos']."' readonly>
+                    ";
+                    ?>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-5">
-                    <label for="apellidos" class="formlabels col-sm-12">Apellidos:</label>
+                    <label for="descrep" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-8" name="apellidos" id="apellidos">
+                    <?php
+                    $valor=selectTableWhere("Repuestos","idRepuestos","'".$_GET['idRepuestos']."'");
+                    while($fila=mysql_fetch_array($valor)){
+                        echo "
+                            <input class='textinput-8' type='text' name='descrep' id='descrep' value='".$fila['descripcion']."'>
+                        ";
+                    }
+                    ?>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-5">
-                    <label for="tipouser" class="formlabels col-sm-12">Tipo de Usuario:</label>
+                    <label for="unimed" class="formlabels col-sm-12">Unidad de Medida:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select name="tipouser" class="ddselect-5" id="tipouser">
+                    <select name="unimed" id="unimed" class="ddselect-5">
                         <option>Seleccionar</option>
                         <?php
-                        $result=selectTable('TipoUsuario');
-                        while($fila=mysql_fetch_array($result)){
+                        $valor=selectTable('UnidadMedida');
+                        while($fila=mysql_fetch_array($valor)){
                             echo "
-                            <option value='".$fila['idTipoUsuario']."'>".$fila['Descripcion']."</option>
-                        ";
+                                    <option>" . $fila['idUnidadMedida'] . "</option>
+                                ";
                         }
                         ?>
                     </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="usuario" class="formlabels col-sm-12">Usuario:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="usuario" id="usuario">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="pass" class="formlabels col-sm-12">Contrase&ntilde;a:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="pass" id="pass">
                 </div>
             </div>
             <hr>
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="col-sm-6">
-                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardaremp" value="Guardar">
+                        <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="actualizarrep" value="Guardar Cambios">
                     </div>
                     <div class="col-sm-6">
-                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar" formaction="gestionOperarios.php">
+                        <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" value="Regresar" formaction="gestionRepuestos.php">
                     </div>
                 </div>
             </div>
         </form>
     </section>
 
-</body>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+
+</body>
 
 </html>
 

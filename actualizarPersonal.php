@@ -83,7 +83,7 @@ if(isset($_SESSION['login'])){
         <hr>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="idEmp" class="formlabels col-sm-12">DNI</label>
+                <label for="idEmp" class="formlabels col-sm-12">DNI:</label>
             </div>
             <div class="col-sm-7">
                 <?php
@@ -95,7 +95,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="nombres" class="formlabels col-sm-12">Nombres</label>
+                <label for="nombres" class="formlabels col-sm-12">Nombres:</label>
             </div>
             <div class="col-sm-7">
                 <?php
@@ -110,7 +110,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="apellidos" class="formlabels col-sm-12">Apellidos</label>
+                <label for="apellidos" class="formlabels col-sm-12">Apellidos:</label>
             </div>
             <div class="col-sm-7">
                 <?php
@@ -125,7 +125,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="tipouser" class="formlabels col-sm-12">Tipo de Usuario</label>
+                <label for="tipouser" class="formlabels col-sm-12">Tipo de Usuario:</label>
             </div>
             <div class="col-sm-7">
                 <select name="tipouser" id="tipouser" class="ddselect-5">
@@ -143,7 +143,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="usuario" class="formlabels col-sm-12">Usuario</label>
+                <label for="usuario" class="formlabels col-sm-12">Usuario:</label>
             </div>
             <div class="col-sm-7">
                 <?php
@@ -158,7 +158,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="pass" class="formlabels col-sm-12">Contrase&ntilde;a</label>
+                <label for="pass" class="formlabels col-sm-12">Contrase&ntilde;a:</label>
             </div>
             <div class="col-sm-7">
                 <?php
