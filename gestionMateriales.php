@@ -16,6 +16,7 @@ if(isset($_SESSION['login'])){
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="css/Tablas.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
 
     </head>
 
@@ -30,7 +31,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -76,32 +77,41 @@ if(isset($_SESSION['login'])){
         </header>
 
 		<section class="container">
-			<form action="gestionMateriales.php" method="post">
-				<div>
-                    <div>
-                        <label for="buscarmat">Buscar Material:</label>
-                    </div>
-                    <div>
-                        <select id="buscarmat" name="filtroMaterial">
-                            <option>Seleccionar Material</option>
-                            <?php
+			<div class="col-sm-12">
+                <form action="gestionMateriales.php" method="post" class="form-horizontal jumbotron col-sm-12">
+                    <div class="form-group col-sm-6">
+                        <div class="col-sm-5">
+                            <label for="buscarmat" class="formlabels col-sm-12">Buscar Material:</label>
+                        </div>
+                        <div class="col-sm-7">
+                            <select id="buscarmat" name="filtroMaterial" class="ddselect-12">
+                                <option>Seleccionar Material</option>
+                                <?php
                                 $datos=selectTable("Material");
                                 while($opcion=mysql_fetch_array($datos)){
                                     echo "
                                         <option>".$opcion['material']."</option>
                                     ";
                                 }
-                            ?>
-                        </select>
+                                ?>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <input class="btn btn-primary" type="submit" name="buscarmat" value="Buscar">
-                    <input class="btn btn-success" type="submit" value="Eliminar Filtro">
-                </div>
-			</form>
-		</section>
+                    <div class="form-group col-sm-6">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <input class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" name="buscarmat" value="Buscar">
+                            </div>
+                            <div class="col-sm-6">
+                                <input class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" value="Eliminar Filtro">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
+		</section>
+        <hr>
 		<?php
 
             if(isset($_GET['eliminarMaterial'])) {
@@ -109,11 +119,29 @@ if(isset($_SESSION['login'])){
                 $resutlt2 = mysql_query($eliminar1);
                 $eliminar = "DELETE FROM material WHERE idMaterial = '".$_GET['eliminarMaterial']."'";
                 $resutlt1 = mysql_query($eliminar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Material Eliminado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_POST['guardarmat'])){
                 $agregar = "INSERT INTO material(idMaterial, idUnidadMedida, material) VALUES ('".$_POST['idMat']."','".$_POST['unimed']."','".$_POST['descmat']."')";
                 $agregar1 = mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Material Agregado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_POST['actualizarmat'])){
@@ -121,12 +149,21 @@ if(isset($_SESSION['login'])){
                 $actualziar1=mysql_query($actualziar);
                 $actualziar2="UPDATE material SET material = '".$_POST['descmat']."' WHERE idMaterial = '".$_POST['idMat']."'";
                 $actualziar3=mysql_query($actualziar2);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Material Actualizado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_POST['buscarmat'])){
                 echo "
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idMaterial</th>
@@ -156,9 +193,10 @@ if(isset($_SESSION['login'])){
                             </tbody>
                         </table>
                     </div>
+                    <hr>
                     <div class='container'>
-                         <form>
-                              <button class='btn btn-success' formaction='agregarMaterial.php'>Agregar Material</button>
+                         <form class='form-horizontal col-sm-12'>
+                              <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarMaterial.php'>Agregar Material</button>
                          </form>
                     </div>
                 ";
@@ -167,7 +205,7 @@ if(isset($_SESSION['login'])){
                 unset($_POST['filtroMaterial']);
                 echo "
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idMaterial</th>
@@ -197,10 +235,11 @@ if(isset($_SESSION['login'])){
                          </tbody>
                        </table>
                     </div>
+                    <hr>
                     <div class='container'>
-                        <form>
-                            <button class='btn btn-success' formaction='agregarMaterial.php'>Agregar Material</button>
-                        </form>
+                         <form class='form-horizontal col-sm-12'>
+                              <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarMaterial.php'>Agregar Material</button>
+                         </form>
                     </div>
                 ";
             }
