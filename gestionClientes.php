@@ -160,15 +160,15 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="col-sm-7">
                         <select id="buscar" name="filtroCliente" class="ddselect-12">
-				<option>Seleccionar</option>
-				<?php
+                            <option>Seleccionar</option>
+                            <?php
                                 $datos=selectTable("Cliente");
                                 while($opcion=mysql_fetch_array($datos)){
                                     echo "
                                         <option>".$opcion['nombre']."</option>
                                     ";
                                 }
-                            	?>
+                            ?>
                         </select>
                     </div>
                 </div>
