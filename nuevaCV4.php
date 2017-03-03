@@ -31,7 +31,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -88,62 +88,67 @@ if(isset($_SESSION['login'])){
             }
         ?>
         <section class="container">
-            <div>
-                <h3>Paso 4: Asignación de Precios</h3>
-            </div>
-            <form action="nuevaCV4.php" method="post">
-                <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
-                <div>
+            <div class="col-sm-6">
+                <form action="nuevaCV4.php" method="post" class="form-horizontal jumbotron col-sm-12">
                     <div>
-                        <label for="selproducto">Producto:</label>
+                        <h3>Paso 4: Asignación de Precios</h3>
                     </div>
-                    <div>
-                        <select name="producto" id="selproducto">
-                            <option>Seleccionar</option>
+                    <hr>
+                    <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <label for="selproducto" class="formlabels1 col-sm-12">Producto:</label>
+                        </div>
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <select name="producto" id="selproducto" class="ddselect-12">
+                                <option>Seleccionar</option>
                                 <?php
-                                    $result="SELECT DISTINCT idProducto FROM ConfirmacionVentaProducto WHERE idContrato ='".$_POST['contrato']."'";
-                                    $query=mysql_query($result);
-                                    while($fila=mysql_fetch_array($query)){
-                                        echo "
+                                $result="SELECT DISTINCT idProducto FROM ConfirmacionVentaProducto WHERE idContrato ='".$_POST['contrato']."'";
+                                $query=mysql_query($result);
+                                while($fila=mysql_fetch_array($query)){
+                                    echo "
                                             <option>".$fila['idProducto']."</option>
                                         ";
-                                    }
+                                }
                                 ?>
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="precioprod">Precio:</label>
+                    <div class="form-group">
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <label for="precioprod" class="formlabels1 col-sm-12">Precio:</label>
+                        </div>
+                        <div class="col-sm-8 col-sm-offset-2">
+                            <input id="precioprod" type="text" name="precio" class="textinput-12">
+                        </div>
                     </div>
-                    <div>
-                        <input type="text" name="precio">
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="col-sm-6">
+                                <input type="submit" name="agregar" class="btn btn-success col-sm-10 col-sm-offset-1" value="Agregar Precio">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="submit" class="btn btn-success col-sm-10 col-sm-offset-1" formaction="CVFinal.php" name="finalizar" value="Finalizar">
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div>
-                    <input type="submit" name="agregar" class="btn btn-default" value="Agregar Precio">
-                </div>
-            </form>
-            <form action="CVFinal.php" method="post">
-                <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
-                <input type="submit" class="btn btn-default" name="finalizar" value="Finalizar">
-            </form>
-        </section>
-
-        <section class="container">
-            <table>
-                <thead>
+                </form>
+            </div>
+            <div class="col-sm-6 jumbotron">
+                <table class="table table-hover">
+                    <thead>
                     <tr>
                         <th>idProducto</th>
                         <th>Precio</th>
                         <th></th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <?php
-                        $result1=selectTableWhere('Precio','idContrato',"'".$_POST['contrato']."'");
-                        while ($fila1=mysql_fetch_array($result1)){
-                            echo "
+                    $result1=selectTableWhere('Precio','idContrato',"'".$_POST['contrato']."'");
+                    while ($fila1=mysql_fetch_array($result1)){
+                        echo "
                                 <tr>
                                     <td>".$fila1['idProducto']."</td>
                                     <td>".$fila1['precio']."</td>
@@ -156,10 +161,11 @@ if(isset($_SESSION['login'])){
                                     </td>
                                 </tr>
                             ";
-                        }
+                    }
                     ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
     </body>

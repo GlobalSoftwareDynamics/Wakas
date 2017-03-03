@@ -30,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -86,32 +86,33 @@ if(isset($_SESSION['login'])){
             <div>
                 <h3>Paso 3: Confirmación de Productos Seleccionados</h3>
             </div>
-            <table class="table table-hover table-condensed">
-                <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Talla</th>
-                    <th>Material</th>
-                    <th>Color</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $result=selectTableWhere('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'");
-                        while($fila=mysql_fetch_array($result)){
-                            echo "
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Talla</th>
+                        <th>Material</th>
+                        <th>Color</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $result=selectTableWhere('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'");
+                    while($fila=mysql_fetch_array($result)){
+                        echo "
                                 <tr>
                                     <td>".$fila['idProducto']."</td>
                                     <td>".$fila['idTalla']."</td>        
                             ";
-                            $result1=selectTableWhere('Material','idMaterial',"'".$fila['idMaterial']."'");
-                            while ($fila2=mysql_fetch_array($result1)){
-                                echo "
+                        $result1=selectTableWhere('Material','idMaterial',"'".$fila['idMaterial']."'");
+                        while ($fila2=mysql_fetch_array($result1)){
+                            echo "
                                     <td>".$fila2['material']."</td>
                                 ";
-                            }
-                            echo "
+                        }
+                        echo "
                                     <td>".$fila['idColor']."</td>
                                     <td>
                                         <form action='nuevaCV3.php' method='post'>
@@ -125,20 +126,24 @@ if(isset($_SESSION['login'])){
                                     </td>
                                  </tr>
                             ";
-                        }
+                    }
                     ?>
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <section>
+        <section class="container">
             <form action="nuevaCV4.php" method="post">
                 <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
-                <input type="submit" class="btn btn-default" name="siguiente" value="Continuar">
-            </form>
-            <form action="nuevaCV2.php" method="post">
-                <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
-                <input type="submit" class="btn btn-default" name="regresar" value="Regresar">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <input type="submit" class="btn btn-success col-sm-4 col-sm-offset-4" name="siguiente" value="Continuar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" class="btn btn-success col-sm-4 col-sm-offset-4" formaction="nuevaCV2.php" name="regresar" value="Regresar">
+                    </div>
+                </div>
             </form>
         </section>
 

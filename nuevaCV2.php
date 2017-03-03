@@ -56,7 +56,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -122,17 +122,18 @@ if(isset($_SESSION['login'])){
         ?>
 
         <section class='container'>
-            <div>
-                <h3>Paso 2: Selección de Productos</h3>
-            </div>
-            <form action='nuevaCV2.php' method='post'>
-                <input type='hidden' name='contrato' value="<?php echo $_POST['contrato']; ?>" readonly>
+            <form action='nuevaCV2.php' method='post' class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
-                    <div>
-                        <label for='produc'>Seleccione Producto:</label>
+                    <h3>Paso 2: Selección de Productos</h3>
+                </div>
+                <hr>
+                <input type='hidden' name='contrato' value="<?php echo $_POST['contrato']; ?>" readonly>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='produc' class="formlabels col-sm-12">Seleccione Producto:</label>
                     </div>
-                    <div>
-                        <select id='produc' onChange='getmaterial(this.value);gettalla(this.value);' name='producto'>
+                    <div class="col-sm-7">
+                        <select id='produc' class="ddselect-6" onChange='getmaterial(this.value);gettalla(this.value);' name='producto'>
                             <option>Seleccionar</option>
                                 <?php
                                     while($fila4 = mysql_fetch_array($prod0)){
@@ -144,28 +145,30 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for='codigocli'>Ingrese C&oacute;digo del Cliente:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='codigocli' class="formlabels col-sm-12">Ingrese C&oacute;digo del Cliente:</label>
                     </div>
-                    <div>
-                        <input id='codigocli' type='text' name='yourcode'>
+                    <div class="col-sm-7">
+                        <input id='codigocli' class="textinput-6" type='text' name='yourcode'>
                     </div>
                 </div>
-                <div>
-                    <label for='mat'>Seleccione Material:</label>
-                </div>
-                <div>
-                    <select id='mat' name='material'>
-                        <option>Seleccionar</option>
-                    </select>
-                </div>
-                <div>
-                    <div>
-                        <label for='col'>Seleccione Color:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='mat' class="formlabels col-sm-12">Seleccione Material:</label>
                     </div>
-                    <div>
-                        <select id='col' name='color'>
+                    <div class="col-sm-7">
+                        <select id='mat' class="ddselect-10" name='material'>
+                            <option>Seleccionar</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='col' class="formlabels col-sm-12">Seleccione Color:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <select id='col' class="ddselect-6" name='color'>
                             <option>Seleccionar</option>
                             <?php
                                 $prod2 = selectTable("Color");
@@ -178,32 +181,34 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for='tall'>Seleccione Talla:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='tall' class="formlabels col-sm-12">Seleccione Talla:</label>
                     </div>
-                    <div>
-                        <select id='tall' name='talla'>
-                            <option>Seleccionar</option>
+                    <div class="col-sm-7">
+                        <select id='tall' class="ddselect-3" name='talla'>
+                            <option>Selec.</option>
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for='cant'>Cantidad:</label>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for='cant' class="formlabels col-sm-12">Cantidad:</label>
                     </div>
-                    <div>
-                        <input id='cant' type='text' name='cantidad'>
+                    <div class="col-sm-7">
+                        <input id='cant' class="textinput-3" type='text' name='cantidad'>
                     </div>
                 </div>
+                <hr>
                 <div class='form-group'>
-                    <input class='btn btn-success'type='submit' name='agregar' value='Agregar'>
-                </div>
-            </form>
-            <form action='nuevaCV3.php' method='post'>
-                <div>
-                    <input type='hidden' name='contrato' value="<?php echo $_POST['contrato']; ?>">
-                    <input class='btn btn-default'type='submit'type='submit' name='continuar' value='Continuar'>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3'type='submit' name='agregar' value='Agregar'>
+                        </div>
+                        <div class="col-sm-6">
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3'type='submit'type='submit' formaction="nuevaCV3.php" name='continuar' value='Continuar'>
+                        </div>
+                    </div>
                 </div>
             </form>
         </section>

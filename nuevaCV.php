@@ -39,7 +39,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -85,20 +85,17 @@ if(isset($_SESSION['login'])){
         </header>
 
         <section class="container">
-            <h2>Nueva Confirmaci&oacute;n de Venta</h2>
-        </section>
-
-        <section class="container">
-            <div>
-                <h3>Paso 1: Datos de Envío</h3>
-            </div>
-            <form action="nuevaCV2.php" method="post">
+            <form action="nuevaCV2.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
-                    <div>
-                        <label for="selcliente">Cliente:</label>
+                    <h3>Paso 1: Datos de Envío</h3>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="selcliente" class="formlabels col-sm-12">Cliente:</label>
                     </div>
-                    <div>
-                        <select id="selcliente" name="cliente">
+                    <div class="col-sm-8">
+                        <select id="selcliente" name="cliente" class="ddselect-10">
                             <option>Seleccionar</option>
                             <?php
                                 $result=selectTable("Contacto");
@@ -111,20 +108,20 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="datepicker">Fecha:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="datepicker" class="formlabels col-sm-12">Fecha:</label>
                     </div>
-                    <div>
-                        <input type="text" id="datepicker" name="date">
+                    <div class="col-sm-8">
+                        <input type="text" class="textinput-4" id="datepicker" name="date">
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="inco">Incoterm:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="inco" class="formlabels col-sm-12">Incoterm:</label>
                     </div>
-                    <div>
-                        <select id="inco" name="incoterm">
+                    <div class="col-sm-8">
+                        <select id="inco" class="ddselect-4" name="incoterm">
                             <option>Seleccionar</option>
                             <?php
                                 $result1=selectTable("Incoterms");
@@ -137,12 +134,12 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="metodo">Método de Pago:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="metodo" class="formlabels col-sm-12">Método de Pago:</label>
                     </div>
-                    <div>
-                        <select id="metodo" name="payment">
+                    <div class="col-sm-8">
+                        <select id="metodo" class="ddselect-8" name="payment">
                             <option>Seleccionar</option>
                             <?php
                                 $result2=selectTable("MetodoPago");
@@ -155,36 +152,36 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="ourship">Código de Contrato:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="ourship" class="formlabels col-sm-12">Código de Contrato:</label>
                     </div>
-                    <div>
-                        <input id="ourship" type="text" name="contrato">
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <label for="refe">Código de Referencia:</label>
-                    </div>
-                    <div>
-                        <input id="refe" type="text" name="referencia">
+                    <div class="col-sm-8">
+                        <input id="ourship" type="text" name="contrato" class="textinput-6">
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="datepicker2">Fecha de Envío:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="refe" class="formlabels col-sm-12">Código de Referencia:</label>
                     </div>
-                    <div>
-                        <input type="text" id="datepicker2" name="shipdate">
+                    <div class="col-sm-8">
+                        <input id="refe" class="textinput-6" type="text" name="referencia">
                     </div>
                 </div>
-                <div>
-                    <div>
-                        <label for="viaenvio">Vía:</label>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="datepicker2" class="formlabels col-sm-12">Fecha de Envío:</label>
                     </div>
-                    <div>
-                        <select id="viaenvio" name="via">
+                    <div class="col-sm-8">
+                        <input type="text" class="textinput-4" id="datepicker2" name="shipdate">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="viaenvio" class="formlabels col-sm-12">Vía:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select id="viaenvio" class="ddselect-4" name="via">
                             <option>Seleccionar</option>
                             <?php
                                 $result3=selectTable("Via");
@@ -197,8 +194,11 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
-                <div>
-                    <input class="btn btn-default" type="submit" name="guardar" value="Continuar">
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Continuar">
+                    </div>
                 </div>
             </form>
         </section>
