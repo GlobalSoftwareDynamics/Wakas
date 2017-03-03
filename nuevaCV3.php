@@ -86,6 +86,7 @@ if(isset($_SESSION['login'])){
             <div>
                 <h3>Paso 3: Confirmación de Productos Seleccionados</h3>
             </div>
+            <hr>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -132,7 +133,7 @@ if(isset($_SESSION['login'])){
                 </table>
             </div>
         </section>
-
+        <hr>
         <section class="container">
             <form action="nuevaCV4.php" method="post">
                 <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
