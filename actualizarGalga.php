@@ -147,6 +147,7 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
+		<hr>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <div class="col-sm-6">
