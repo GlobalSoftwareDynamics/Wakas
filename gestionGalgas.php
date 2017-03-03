@@ -7,6 +7,7 @@ conexion();
 if(isset($_SESSION['login'])){
 ?>
 <html lang="es">
+
     <head>
 
     	<meta charset="utf-8">
@@ -30,7 +31,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -97,7 +98,7 @@ if(isset($_SESSION['login'])){
         ?>
 
         <section class="container">
-            <table class='table table-hover table-condensed'>
+            <table class='table table-hover'>
                 <thead>
                     <tr>
                         <th>idGalga</th>
@@ -134,11 +135,17 @@ if(isset($_SESSION['login'])){
                 </tbody>
             </table>
         </section>
-
+        <hr>
         <div class='container'>
             <form method="post">
-                <input formaction="agregarGalga.php" class="btn btn-success" type="submit" value="Agregar Galga">
-                <input formaction="gestionMaquinas.php" class="btn btn-default" type="submit" value="Regresar a M&aacute;quinas">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <input formaction="agregarGalga.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Agregar Galga">
+                    </div>
+                    <div class="col-sm-6">
+                        <input formaction="gestionMaquinas.php" class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" value="Regresar a M&aacute;quinas">
+                    </div>
+                </div>
             </form>
         </div>
 

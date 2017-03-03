@@ -29,7 +29,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -80,11 +80,29 @@ if(isset($_SESSION['login'])){
             $resutlt2 = mysql_query($eliminar1);
             $eliminar = "DELETE FROM maquina WHERE idMaquina = '".$_GET['eliminarMaquina']."'";
             $resutlt1 = mysql_query($eliminar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Máquina Eliminada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_POST['guardarmaq'])){
             $agregar = "INSERT INTO maquina(idMaquina, descripcion, costoFijo) VALUES ('".$_POST['idMaq']."','".$_POST['descmaq']."','".$_POST['costo']."')";
             $agregar1 = mysql_query($agregar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Máquina Agregada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_POST['actualizarmaq'])){
@@ -92,16 +110,34 @@ if(isset($_SESSION['login'])){
             $actualziar3=mysql_query($actualziar2);
             $actualziar4="UPDATE maquina SET costoFijo = '".$_POST['costo']."' WHERE idMaquina = '".$_POST['idMaq']."'";
             $actualziar5=mysql_query($actualziar4);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Máquina Actualizada Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_GET['eliminarRepuestos'])) {
                 $eliminar1 = "DELETE FROM RepuestosMaquina WHERE idMaquina = '".$_GET['eliminarRepuestos']."'";
                 $resutlt2 = mysql_query($eliminar1);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Repuesto Eliminado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
         ?>
 
         <section class="container">
-			<table class="table table-hover table-condensed">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>idM&aacute;quina</th>
@@ -130,10 +166,17 @@ if(isset($_SESSION['login'])){
 					?>
 				</tbody>
 			</table>
+            <hr>
 			<div class='container'>
                 <form>
-                    <button class="btn btn-success" formaction="agregarMaquina.php">Agregar M&aacute;quina</button>
-                    <button class='btn btn-default' formaction="gestionGalgas.php">Gestionar Galgas</button>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <button class="btn btn-success col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar M&aacute;quina</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Gestionar Galgas</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </section>
