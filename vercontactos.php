@@ -29,7 +29,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@ if(isset($_SESSION['login'])){
                                     <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
                                     <li><a href="gestionInsumos.php">Insumos</a></li>
                                     <li><a href="gestionOperarios.php">Empleados</a></li>
-                                    <li><a href="gestionProcedimientos.php">Procedimientos</a></li>
+                                    <li><a href="gestionProcesos.php">Procesos</a></li>
                                     <li><a href="gestionRepuestos.php">Repuestos</a></li>
                                     <li><a href="menuagregarotros.php">Otros</a></li>
                                 </ul>
@@ -97,13 +97,14 @@ if(isset($_SESSION['login'])){
                 $result0=selectTableWhere("Cliente", "idCliente", "'".$_POST['cliente']."'");
                 while($fila0=mysql_fetch_array($result0)){
                     echo "
-                            <h5>Contactos para ".$fila0['nombre']."</h5>
+                            <h4>Contactos para ".$fila0['nombre']."</h4>
                             ";
                 }
                 echo "
                     </div>
+                    <hr>
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idContacto</th>
@@ -160,11 +161,16 @@ if(isset($_SESSION['login'])){
                          </tbody>
                        </table>
                     </div>
+                    <hr>
                     <div class='container'>
-                        <form action='agregarContacto.php' method='post'>
+                        <form action='agregarContacto.php' method='post' class='form-horizontal col-sm-12'>
                             <input type='hidden' name='idCli' value='".$_POST['cliente']."'>
-                            <input class='btn btn-default'type='submit' name='agregarcontacto' value='Agregar Contacto'>
-                            <button class='btn btn-success' formaction='gestionClientes.php'>Regresar</button>
+                            <div class='col-sm-6'>
+                                <input class='btn btn-success col-sm-6 col-sm-offset-3'type='submit' name='agregarcontacto' value='Agregar Contacto'>
+                            </div>
+                            <div class='col-sm-6'>
+                                <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='gestionClientes.php'>Regresar</button>
+                            </div>
                         </form>
                     </div>
                 ";
@@ -174,13 +180,14 @@ if(isset($_SESSION['login'])){
                 $result0=selectTableWhere("Cliente", "idCliente", "'".$_GET['idCliente']."'");
                 while($fila0=mysql_fetch_array($result0)){
                     echo "
-                            <h5>Contactos para ".$fila0['nombre']."</h5>
+                            <h4>Contactos para ".$fila0['nombre']."</h4>
                             ";
                 }
                 echo "
                     </div>
+                    <hr>
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idContacto</th>
@@ -237,12 +244,16 @@ if(isset($_SESSION['login'])){
                          </tbody>
                        </table>
                     </div>
-                        
+                    <hr>    
                     <div class='container'>
-                        <form action='agregarContacto.php' method='post'>
+                        <form action='agregarContacto.php' method='post' class='form-horizontal col-sm-12'>
                             <input type='hidden' name='idCli' value='".$_GET['idCliente']."'>
-                            <input class='btn btn-default' type='submit' value='Agregar Contacto'>
-                            <button class='btn btn-success' formaction='gestionClientes.php'>Regresar</button>
+                            <div class='col-sm-6'>
+                                <input class='btn btn-success col-sm-6 col-sm-offset-3'type='submit' name='agregarcontacto' value='Agregar Contacto'>
+                            </div>
+                            <div class='col-sm-6'>
+                                <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='gestionClientes.php'>Regresar</button>
+                            </div>
                         </form>
                     </div>
                 ";

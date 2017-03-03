@@ -16,6 +16,7 @@ if(isset($_SESSION['login'])){
         <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/bootstrap-theme.min.css" rel="stylesheet">
         <link href="css/Tablas.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
 
     </head>
     <body>
@@ -29,7 +30,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -84,54 +85,81 @@ if(isset($_SESSION['login'])){
                 $agregartelcon1=mysql_query($agregartelcon);
                 $agregartelcon2="INSERT INTO contactotelefono(idContacto, numTelefono) VALUES ('".$_POST['idCon']."','".$_POST['tel']."')";
                 $agregartelcon3=mysql_query($agregartelcon2);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Cliente Agregado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
             if(isset($_GET['eliminarCliente'])) {
                 $eliminar = "DELETE FROM cliente WHERE idCliente = '".$_GET['eliminarCliente']."'";
                 $resutlt1 = mysql_query($eliminar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Cliente Eliminado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
 
-        if(isset($_GET['eliminarContacto'])) {
-            $contar=selectTable('Telefono');
-            $num=mysql_num_rows($contar);
-            if($num>1){
-                $result5=selectTableWhere("contactotelefono","idContacto","'".$_GET['eliminarContacto']."'");
-                while($fila5=mysql_fetch_array($result5)){
-                    $numero=$fila5['numTelefono'];
-                    $eliminar2 = "DELETE FROM contactotelefono WHERE idContacto = '".$_GET['eliminarContacto']."'";
-                    $resutlt2 = mysql_query($eliminar2);
-                    $eliminar3 = "DELETE FROM telefono WHERE numTelefono = '$numero'";
-                    $resutlt3 = mysql_query($eliminar3);
+            if(isset($_GET['eliminarContacto'])) {
+                $contar=selectTable('Telefono');
+                $num=mysql_num_rows($contar);
+                if($num>1){
+                    $result5=selectTableWhere("contactotelefono","idContacto","'".$_GET['eliminarContacto']."'");
+                    while($fila5=mysql_fetch_array($result5)){
+                        $numero=$fila5['numTelefono'];
+                        $eliminar2 = "DELETE FROM contactotelefono WHERE idContacto = '".$_GET['eliminarContacto']."'";
+                        $resutlt2 = mysql_query($eliminar2);
+                        $eliminar3 = "DELETE FROM telefono WHERE numTelefono = '$numero'";
+                        $resutlt3 = mysql_query($eliminar3);
+                    }
+                    $result6=selectTableWhere("contacto","idContacto","'".$_GET['eliminarContacto']."'");
+                    while ($fila6=mysql_fetch_array($result6)){
+                        $iddireccion=$fila6['idDireccion'];
+                        $eliminar4 = "DELETE FROM direccion WHERE idDireccion = '$iddireccion'";
+                        $resutlt4 = mysql_query($eliminar4);
+                    }
+                    $eliminar = "DELETE FROM Contacto WHERE idContacto = '".$_GET['eliminarContacto']."'";
+                    $resutlt1 = mysql_query($eliminar);
+                }else{
+                    echo "
+                        <span>El &uacute;ltimo contacto no se puede eliminar.</span>
+                    ";
                 }
-                $result6=selectTableWhere("contacto","idContacto","'".$_GET['eliminarContacto']."'");
-                while ($fila6=mysql_fetch_array($result6)){
-                    $iddireccion=$fila6['idDireccion'];
-                    $eliminar4 = "DELETE FROM direccion WHERE idDireccion = '$iddireccion'";
-                    $resutlt4 = mysql_query($eliminar4);
-                }
-                $eliminar = "DELETE FROM Contacto WHERE idContacto = '".$_GET['eliminarContacto']."'";
-                $resutlt1 = mysql_query($eliminar);
-            }else{
-                echo "
-                    <span>El &uacute;ltimo contacto no se puede eliminar.</span>
-                ";
             }
-        }
 
             if(isset($_POST['actualizarcli'])){
                 $actualziar="UPDATE cliente SET nombre = '".$_POST['nombrecli']."' WHERE idCliente = '".$_POST['idCli']."'";
                 $actualziar1=mysql_query($actualziar);
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }else{
+                    echo "<br>";
+                    echo "<div class='alert alert-success' role='alert'>";
+                    echo 	"<p> <strong>Cliente Actualizado Exitosamente</strong></p>";
+                    echo " </div>";
+                }
             }
         ?>
 
         <section class="container">
-            <form action="gestionClientes.php" method="post">
-                <div>
-                    <div>
-                        <label for="buscar">Buscar Cliente</label>
+            <form action="gestionClientes.php" method="post" class="form-horizontal jumbotron col-sm-12">
+                <div class="form-group col-sm-6">
+                    <div class="col-sm-5">
+                        <label for="buscar" class="formlabels col-sm-12">Buscar Cliente:</label>
                     </div>
-                    <div>
-                        <select id="buscar" name="filtroCliente">
+                    <div class="col-sm-7">
+                        <select id="buscar" name="filtroCliente" class="ddselect-12">
                             <?php
                                 $datos=selectTable("Cliente");
                                 while($opcion=mysql_fetch_array($datos)){
@@ -142,19 +170,23 @@ if(isset($_SESSION['login'])){
                             ?>
                         </select>
                     </div>
-                    <div>
-                        <input class="btn btn-primary" type="submit" name="buscarclien" value="Buscar">
-                        <input formaction="gestionClientes.php" class="btn btn-success" type="submit" value="Eliminar Filtro">
+                </div>
+                <div class="form-group col-sm-6">
+                    <div class="col-sm-6">
+                        <input class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" name="buscarclien" value="Buscar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input formaction="gestionClientes.php" class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" value="Eliminar Filtro">
                     </div>
                 </div>
             </form>
         </section>
-
+        <hr>
         <?php
             if(isset($_POST['buscarclien'])){
                 echo "
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idCliente</th>
@@ -182,10 +214,11 @@ if(isset($_SESSION['login'])){
                             </tbody>
                         </table>
                     </div> 
+                    <hr>
                     <div class='container'>
-                        <form>
+                        <form class='form-horizontal col-sm-12'>
                             <div>
-                                <button class='btn btn-success' formaction='agregarCliente.php'>Agregar Cliente</button>
+                                <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarCliente.php'>Agregar Cliente</button>
                             </div>
                         </form>
                     </div>
@@ -195,7 +228,7 @@ if(isset($_SESSION['login'])){
             unset($_POST['filtroCliente']);
             echo "
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idCliente</th>
@@ -223,10 +256,11 @@ if(isset($_SESSION['login'])){
                          </tbody>
                        </table>
                     </div>
+                    <hr>
                     <div class='container'>
-                        <form>
+                        <form class='form-horizontal col-sm-12'>
                             <div>
-                                <button class='btn btn-success' formaction='agregarCliente.php'>Agregar Cliente</button>
+                                <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarCliente.php'>Agregar Cliente</button>
                             </div>
                         </form>
                     </div>
