@@ -356,11 +356,22 @@ if(isset($_SESSION['login'])){
                                 <label for=\"selectmedida\">Medida:</label>
                             </div>
                             <div>";
-                                $result = selectTable("medida");
+                                $aux = "A";
+                                $aux2 = "B";
+                                settype($aux,"string");
+                                settype($aux2,"string");
+                                $result = mysql_query("SELECT * FROM tallamedida WHERE idProducto = '".$_POST['idProd']."' ORDER BY idMedida");
                                 echo "<select name='selectmedida' id='selectmedida'>";
                                     echo "<option>Seleccionar</option>";
                                     while($fila = mysql_fetch_array($result)){
-                                        echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
+                                        $aux = $fila['idMedida'];
+                                        if($aux != $aux2){
+                                            $aux2 = $fila['idMedida'];
+                                            $result2 = selectTableWhere("medida","idMedida","'".$fila['idMedida']."'");
+                                            while($fila2 = mysql_fetch_array($result2)){
+                                                echo "<option value=".$fila2['idMedida'].">".$fila2['descripcion']."</option>";
+                                            }
+                                        }
                                     }
                                 echo "</select>";
                             echo "</div>

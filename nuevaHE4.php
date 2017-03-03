@@ -1,22 +1,52 @@
 <!DOCTYPE html>
+
+<html>
+
 <?php
 session_start();
 require('funciones.php');
-conexion();
+$con=mysql_connect("localhost","root","");
+if($con){
+    $bd=mysql_select_db("wakas",$con);
+    if(!$bd) echo "No existe la bd";
+}else{
+    echo "No existe la conexi&oacute;n";
+}
 
 if(isset($_SESSION['login'])){
 ?>
-<html>
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gestion Procedimientos</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <title>Waka-s Textiles Finos S.A.</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <script>
+        function getSubproceso(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_subproceso.php",
+                data:'idProceso='+val,
+                success: function(data){
+                    $("#selectsubproceso").html(data);
+                    $.ajax({
+                        type: "POST",
+                        url: "get_tablasubproceso.php",
+                        data:'idSubproceso='+val2,
+                        success: function (data) {
+                            $("#tablaSubproceso").html(data);
+                        }
+                    })
+                }
+            });
+        }
+
+    </script>
 </head>
 
 <body>
+
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -70,70 +100,60 @@ if(isset($_SESSION['login'])){
     </div>
 </nav>
 
+<!-- Insert de datos -->
+
+
+
+<!-- Seleecionar Subproceso -->
+
 <section class="container">
-<?php
-if(isset($_POST['guardarproc'])){
-    $agregar = "INSERT INTO Proceso(idProceso, descripcion) VALUES ('".$_POST['idProc']."','".$_POST['desc']."')";
-    $agregar1 = mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }else{
-        echo "<br>";
-        echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Proceso añadido exitosamente</strong></p>";
-        echo " </div>";
-    }
-}
-if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Proceso.*/
-}
-?>
-</section>
-
-<section>
-    <div class='container'>
-        <table class='table table-hover table-condensed'>
-            <thead>
-                <tr>
-                    <th>idProceso</th>
-                    <th>Descripción</th>
-                    <th>Ver Subprocesos</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            $result=selectTable('Proceso');
-            while ($fila=mysql_fetch_array($result)){
-                echo "<tr>";
-                    echo "<td>".$fila['idProceso']."</td>";
-                    echo "<td>".$fila['descripcion']."</td>";
-                    echo "  <td>
-                                <form method='post'>
-                                    <input class='btn btn-default' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
-                                    <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
-                                </form>
-                            </td>";
-                    echo "<td><a href='#'>Editar</a></td>";
-                echo "</tr>";
-            }
-            ?>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<hr>
-
-<section>
-        <div class='container'>
-            <form action="agregarProceso.php">
-                <div>
-                    <input class='btn btn-success' type="submit" name="agregar" value="Agregar Proceso">
-                </div>
-            </form>
+    <form action="#" method="post">
+        <div class="form-group">
+            <div>
+                <label for="selectproceso">Seleccionar Proceso</label>
+            </div>
+            <div>
+                <?php
+                $result = selectTable("proceso");
+                echo "<select name='selectproceso' id='selectproceso' onChange=\"getSubproceso(this.value);\">";
+                echo "<option>Seleccionar</option>";
+                while($fila = mysql_fetch_array($result)){
+                    $aux = $fila['idProceso'];
+                    echo "<option value=".$fila['idProceso'].">".$fila['descripcion']."</option>";
+                }
+                echo "</select>";
+                ?>
+            </div>
         </div>
+        <div class="form-group">
+            <div>
+                <label for="selectsubproceso">Seleccionar Subproceso</label>
+            </div>
+            <div>
+                <select name="selectsubproceso" id="selectsubproceso">
+                    <option>Seleccionar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <input class="btn btn-default" type="submit" value="Agregar" name="agregarsubproceso">
+            <input class="btn btn-default" type="submit" value="Siguiente" name="siguiente" formaction="nuevaHE5.php">
+        </div>
+    </form>
+</section>
+
+<!-- Tabla para Visualizar -->
+
+<section class="container">
+    <table id="tablaSubproceso">
+
+    </table>
+</section>
+
+<!-- Tabla para Agregar -->
+
+<section class="container">
+
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -141,9 +161,10 @@ if(isset($_GET['eliminarProceso'])) {
 
 </body>
 
-</html>
-<?php
+    <?php
 }else{
     echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
 }
 ?>
+
+</html>

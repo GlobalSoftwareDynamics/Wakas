@@ -17,6 +17,7 @@ if(isset($_SESSION['login'])){
 </head>
 
 <body>
+
 <nav class="navbar navbar-inverse">
     <div class="container">
         <div class="navbar-header">
@@ -70,55 +71,61 @@ if(isset($_SESSION['login'])){
     </div>
 </nav>
 
-<section class="container">
+<!-- Insert/Eliminación de datos de agregarCaracteristica.php-->
+
 <?php
-if(isset($_POST['guardarproc'])){
-    $agregar = "INSERT INTO Proceso(idProceso, descripcion) VALUES ('".$_POST['idProc']."','".$_POST['desc']."')";
+if(isset($_POST['insertar'])){
+    $agregar = "INSERT INTO SubProcesoCaracteristica (idSubprocesoCaracteristica, idProcedimiento, idCaracteristica) VALUES ('".$_POST['idSubprocesoCaracteristica']."','".$_POST['idProcedimiento']."','".$_POST['selectcaracteristica']."')";
     $agregar1 = mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }else{
-        echo "<br>";
-        echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Proceso añadido exitosamente</strong></p>";
-        echo " </div>";
-    }
 }
-if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Proceso.*/
+if(isset($_POST['eliminar'])){
+    $eliminar = "DELETE FROM SubProcesoCaracteristica WHERE idProcedimiento = '".$_POST['idProcedimiento']."' AND idCaracteristica = '".$_POST['caracteristica']."'";
+    $eliminar1 = mysql_query($eliminar);
 }
 ?>
-</section>
 
-<section>
-    <div class='container'>
-        <table class='table table-hover table-condensed'>
-            <thead>
-                <tr>
-                    <th>idProceso</th>
-                    <th>Descripción</th>
-                    <th>Ver Subprocesos</th>
-                    <th>Editar</th>
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-            $result=selectTable('Proceso');
-            while ($fila=mysql_fetch_array($result)){
-                echo "<tr>";
-                    echo "<td>".$fila['idProceso']."</td>";
-                    echo "<td>".$fila['descripcion']."</td>";
-                    echo "  <td>
-                                <form method='post'>
-                                    <input class='btn btn-default' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
-                                    <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
-                                </form>
-                            </td>";
-                    echo "<td><a href='#'>Editar</a></td>";
-                echo "</tr>";
+<!-- Tabla de Características-->
+
+<section class="container">
+    <div>
+        <h3>Caracter&iacute;sticas de <?php
+            $result=selectTableWhere('SubProceso','idProcedimiento',"'".$_POST['idProcedimiento']."'");
+            while($fila = mysql_fetch_array($result)){
+                echo $fila['descripcion'];
             }
             ?>
+        </h3>
+    </div>
+    <div>
+        <table class='table table-hover table-condensed'>
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Caracter&iacute;stica</th>
+                <th>Eliminar</th>
+            </tr>
+            </thead>
+            <tbody>
+                <?php
+                $aux = 1;
+                $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".$_POST['idProcedimiento']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
+                //$result=selectTableWhere('SubProcesoCaracteristica','idProcedimiento',"'".$_POST['idProcedimiento']."'");
+                while ($fila=mysql_fetch_array($result)){
+                    echo "<tr>";
+                        echo "<td>".$aux."</td>";
+                        $aux++;
+                        $result2=selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
+                        while($fila2=mysql_fetch_array($result2)){
+                            echo "<td>".$fila2['descripcion']."</td>";
+                        }
+                        echo "<td><form method='post' action='#'>
+                                    <input type='submit' class='btn btn-danger' name='eliminar' value='Eliminar'>
+                                    <input type='hidden' name='idProcedimiento' value='".$_POST['idProcedimiento']."'>
+                                    <input type='hidden' name='caracteristica' value='".$fila['idCaracteristica']."'>
+                              </form></td>";
+                    echo "</tr>";
+                }
+                ?>
             </tbody>
         </table>
     </div>
@@ -126,14 +133,15 @@ if(isset($_GET['eliminarProceso'])) {
 
 <hr>
 
-<section>
-        <div class='container'>
-            <form action="agregarProceso.php">
-                <div>
-                    <input class='btn btn-success' type="submit" name="agregar" value="Agregar Proceso">
-                </div>
-            </form>
-        </div>
+<section class='container'>
+    <div>
+        <form action="agregarCaracteristica.php" method="post">
+            <div>
+                <input type="hidden" name="idProcedimiento" value="<?php echo $_POST['idProcedimiento']?>">
+                <input class='btn btn-success' type="submit" name="agregar" value="Agregar Caracter&iacute;stica">
+            </div>
+        </form>
+    </div>
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

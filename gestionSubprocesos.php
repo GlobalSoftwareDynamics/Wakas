@@ -72,8 +72,8 @@ if(isset($_SESSION['login'])){
 
 <section class="container">
 <?php
-if(isset($_POST['guardarproc'])){
-    $agregar = "INSERT INTO Proceso(idProceso, descripcion) VALUES ('".$_POST['idProc']."','".$_POST['desc']."')";
+if(isset($_POST['guardarsubproc'])){
+    $agregar = "INSERT INTO Subproceso(idProcedimiento, idProceso, descripcion) VALUES ('".$_POST['idSubProc']."','".$_POST['idProc']."','".$_POST['desc']."')";
     $agregar1 = mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -81,41 +81,57 @@ if(isset($_POST['guardarproc'])){
     }else{
         echo "<br>";
         echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Proceso añadido exitosamente</strong></p>";
+        echo 	"<p> <strong>Subproceso añadido exitosamente</strong></p>";
         echo " </div>";
     }
 }
 if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Proceso.*/
+    /*Código para eliminar en cascada todo lo relacionado al Subproceso.*/
 }
 ?>
 </section>
-
 <section>
     <div class='container'>
+        <h3>Subprocesos de
+            <?php
+            $result=selectTableWhere('Proceso','idProceso',"'".$_POST['idProceso']."'");
+            while($fila=mysql_fetch_array($result)){
+                echo $fila['descripcion'];
+            }
+            ?>
+        </h3>
         <table class='table table-hover table-condensed'>
             <thead>
-                <tr>
-                    <th>idProceso</th>
-                    <th>Descripción</th>
-                    <th>Ver Subprocesos</th>
-                    <th>Editar</th>
-                </tr>
+            <tr>
+                <!--<th>idProceso</th>
+                <th>idSubproceso</th>-->
+                <th>Descripción</th>
+                <th>Asignar M&aacute;quina</th>
+                <th>Editar</th>
+                <th>Ver Caracter&iacute;sticas</th>
+            </tr>
             </thead>
             <tbody>
             <?php
-            $result=selectTable('Proceso');
+            $result=selectTableWhere('SubProceso','idProceso',"'".$_POST['idProceso']."'");
             while ($fila=mysql_fetch_array($result)){
                 echo "<tr>";
-                    echo "<td>".$fila['idProceso']."</td>";
+                    //echo "<td>".$_POST['idProceso']."</td>";
+                    //echo "<td>".$fila['idProcedimiento']."</td>";
                     echo "<td>".$fila['descripcion']."</td>";
                     echo "  <td>
                                 <form method='post'>
-                                    <input class='btn btn-default' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
+                                    <input class='btn btn-default' type='submit' formaction='#' value='Asignar'>
                                     <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
-                                </form>
+                                </form>                                                                     
                             </td>";
                     echo "<td><a href='#'>Editar</a></td>";
+                    echo "  <td>
+                                <form method='post'>
+                                    <input class='btn btn-default' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
+                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
+                                </form>
+                            </td>";
                 echo "</tr>";
             }
             ?>
@@ -127,13 +143,14 @@ if(isset($_GET['eliminarProceso'])) {
 <hr>
 
 <section>
-        <div class='container'>
-            <form action="agregarProceso.php">
-                <div>
-                    <input class='btn btn-success' type="submit" name="agregar" value="Agregar Proceso">
-                </div>
-            </form>
-        </div>
+    <div class='container'>
+        <form action="agregarSubProceso.php" method="post">
+            <div>
+                <input class='btn btn-success' type="submit" name="agregar" value="Agregar Subproceso">
+                <input type='hidden' name='idProceso' value="<?php echo $_POST['idProceso']?>">
+            </div>
+        </form>
+    </div>
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

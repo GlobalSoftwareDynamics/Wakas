@@ -210,7 +210,7 @@ if(isset($_SESSION['login'])){
 
     <section class="container">
         <form action="nuevaHE4.php" method="post">
-            <input type="hidden" name="idProductoSel" value="<?php echo $_POST['idProd']?>">
+            <input type="hidden" name="idProd" value="<?php echo $_POST['idProd']?>">
             <div class="form-group">
                 <input class="btn btn-success" type="submit" name="Siguiente" value="Siguiente">
             </div>

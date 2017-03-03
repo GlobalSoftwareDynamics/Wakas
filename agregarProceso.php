@@ -113,8 +113,8 @@ if(isset($_SESSION['login'])){
                     </div>
                 </div>
                 <div class="form-group">
-                    <input formaction="gestionProcesos.php" class="btn btn-success" type="submit" name="guardarproc" value="Terminar">
-                    <input formaction="agregarProcedimiento.php" class="btn btn-success" type="submit" name="insertar" value="Añadir SubProcesos">
+                    <input formaction="gestionProcesos.php" class="btn btn-success" type="submit" name="guardarproc" value="Añadir">
+                    <input formaction="gestionProcesos.php" class="btn btn-danger" type="submit" name="cancelar" value="Cancelar">
                 </div>
             </form>
         </section>
