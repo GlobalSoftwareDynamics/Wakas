@@ -30,18 +30,9 @@ if(isset($_SESSION['login'])){
                 data:'idProceso='+val,
                 success: function(data){
                     $("#selectsubproceso").html(data);
-                    $.ajax({
-                        type: "POST",
-                        url: "get_tablasubproceso.php",
-                        data:'idSubproceso='+val2,
-                        success: function (data) {
-                            $("#tablaSubproceso").html(data);
-                        }
-                    })
                 }
             });
         }
-
     </script>
 </head>
 
@@ -107,6 +98,7 @@ if(isset($_SESSION['login'])){
 <!-- Seleecionar Subproceso -->
 
 <section class="container">
+    <h3>Selección de Procesos y Subprocesos para <?php echo $_POST['idProd']?></h3>
     <form action="#" method="post">
         <div class="form-group">
             <div>
@@ -115,7 +107,7 @@ if(isset($_SESSION['login'])){
             <div>
                 <?php
                 $result = selectTable("proceso");
-                echo "<select name='selectproceso' id='selectproceso' onChange=\"getSubproceso(this.value);\">";
+                echo "<select name='selectproceso' id='selectproceso' onChange=\"getSubproceso(this.value,selectsubproceso.value);\">";
                 echo "<option>Seleccionar</option>";
                 while($fila = mysql_fetch_array($result)){
                     $aux = $fila['idProceso'];
@@ -136,24 +128,11 @@ if(isset($_SESSION['login'])){
             </div>
         </div>
         <div class="form-group">
-            <input class="btn btn-default" type="submit" value="Agregar" name="agregarsubproceso">
-            <input class="btn btn-default" type="submit" value="Siguiente" name="siguiente" formaction="nuevaHE5.php">
+            <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+            <input class="btn btn-default" type="submit" value="Finalizar" name="finalizar">
+            <input class="btn btn-default" type="submit" value="Agregar Valores de Subproceso" name="siguiente" formaction="nuevaHE5.php">
         </div>
     </form>
-</section>
-
-<!-- Tabla para Visualizar -->
-
-<section class="container">
-    <table id="tablaSubproceso">
-
-    </table>
-</section>
-
-<!-- Tabla para Agregar -->
-
-<section class="container">
-
 </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

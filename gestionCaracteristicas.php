@@ -75,7 +75,11 @@ if(isset($_SESSION['login'])){
 
 <?php
 if(isset($_POST['insertar'])){
-    $agregar = "INSERT INTO SubProcesoCaracteristica (idSubprocesoCaracteristica, idProcedimiento, idCaracteristica) VALUES ('".$_POST['idSubprocesoCaracteristica']."','".$_POST['idProcedimiento']."','".$_POST['selectcaracteristica']."')";
+    $result = mysql_query("SELECT * FROM Caracteristica WHERE idCaracteristica = '".$_POST['selectcaracteristica']."'");
+    while($fila = mysql_fetch_array($result)){
+        $tipo = $fila['tipo'];
+    }
+    $agregar = "INSERT INTO SubProcesoCaracteristica (idSubprocesoCaracteristica, idProcedimiento, idCaracteristica, tipo) VALUES ('".$_POST['idSubprocesoCaracteristica']."','".$_POST['idProcedimiento']."','".$_POST['selectcaracteristica']."','".$tipo."')";
     $agregar1 = mysql_query($agregar);
 }
 if(isset($_POST['eliminar'])){
