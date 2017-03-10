@@ -1,0 +1,49 @@
+/* Encabezado formatos */
+
+#descripcionbrand {
+    margin-top: 10px;
+    padding-left: 0px;
+    margin-left: 2%;
+}
+
+.titulo {
+    text-align: center;
+    font-weight: bold;
+}
+
+.desctitulo {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h3 {
+    font-weight: bold;
+}
+
+/*Ficha de Proveedor*/
+
+#tabla {
+    padding-top: 20px;
+    padding-top: 20px;
+}
+
+/*Confirmación de venta*/
+
+.container-fluid {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+section div p {
+    text-align: justify;
+}
+
+#theadborder th{
+    border: 1px solid;
+    border-bottom: 1px solid;
+    border-top: 1px solid;
+}
+
+#total {
+    font-weight: bold;
+}
