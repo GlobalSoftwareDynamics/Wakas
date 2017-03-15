@@ -1,26 +1,30 @@
 <!DOCTYPE html>
+
+<html>
+
 <?php
 session_start();
 require('funciones.php');
-conexion();
+$con=mysql_connect("localhost","root","");
+if($con){
+    $bd=mysql_select_db("wakas",$con);
+    if(!$bd) echo "No existe la bd";
+}else{
+    echo "No existe la conexi&oacute;n";
+}
 
 if(isset($_SESSION['login'])){
-?>
-<html lang="es">
-<head>
+    ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Waka-s Textiles Finos S.A.</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+    </head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Waka-s Textiles Finos S.A.</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="css/Formularios.css" rel="stylesheet">
+    <body>
 
-</head>
-
-<body>
-<header>
     <nav class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
@@ -73,78 +77,84 @@ if(isset($_SESSION['login'])){
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-</header>
 
-<?php
-if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO Caracteristica VALUES ('".$_POST['idCaracteristica']."','".$_POST['descripcion']."','".$_POST['selecttipo']."')";
-    $agregar1=mysql_query($agregar);
-}
-?>
+    <section class="container">
+    <?php
+    $target_dir = "Fotografias/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-<section class="containerform">
-    <form action="#" method="post">
-        <div>
-            <h3>Nueva Caracter&iacute;stica</h3>
-        </div>
-        <div>
-            <div>
-                <label for="idCaracteristica">idCaracteristica:</label>
-            </div>
-            <div>
-                <?php
-                $aux = 0;
-                $result = selectTable("Caracteristica");
-                while($fila = mysql_fetch_array($result)){
-                    $aux++;
-                }
-                $aux++;
-                echo "<input id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
-                ?>
-            </div>
-        </div>
-        <div>
-            <div>
-                <label for="Descripcion">Descripcion:</label>
-            </div>
-            <div>
-                <input id="Descripcion" type="text" name="descripcion">
-            </div>
-        </div>
-        <div>
-            <div>
-                <label for="selecttipo">Tipo:</label>
-            </div>
-            <div>
-                <select name="selecttipo" id="selecttipo">
-                    <option value="componente">Componente</option>
-                    <option value="maquina">Maquina</option>
-                    <option value="insumo">Insumo</option>
-                    <option value="idinsumo">ID Insumo</option>
-                    <option value="material">Material</option>
-                    <option value="galga">Galga</option>
-                    <option value="fotografia">Fotograf&iacute;a</option>
-                    <option value="color">Color</option>
-                    <option value="fotografiaproducto">Fotografía de Producto</option>
-                    <option value="otro">Otro</option>
-                </select>
-            </div>
-        </div>
-        <div>
-            <input class="btn btn-success"type="submit" name="guardar" value="Agregar">
-            <input formaction="menuagregarotros.php" class="btn btn-default" type="submit" value="Regresar">
-        </div>
+    if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "Seleccionada una imagen - " . $check["mime"] . ".";
+            echo "<br>";
+            $uploadOk = 1;
+        } else {
+            echo "El documento seleccionado es sospechoso.";
+            $uploadOk = 0;
+        }
+    }
+
+    if (file_exists($target_file)) {
+        echo "Lo lamentamos, su fotografía ya ha sido agregada previamente.";
+        $uploadOk = 0;
+    }
+
+    /*if ($_FILES["fileToUpload"]["size"] > 1000000) {
+        echo "La fotografía que está intentando subir es demasiado grande, intente reducir su tamaño.";
+        $uploadOk = 0;
+    }*/
+
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+        echo "Lo lamentamos, solo se permiten los formatos de imagen jpg, png, jpeg y gif.";
+        $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+        echo "Su fotografía no fue subida.";
+
+    } else {
+        $i = 0;
+        $dir = 'Fotografias/';
+        if ($handle = opendir($dir)) {
+            while (($file = readdir($handle)) !== false){
+                if (!in_array($file, array('.', '..')) && !is_dir($dir.$file))
+                    $i++;
+            }
+        }
+        $temp = explode(".", $_FILES["fileToUpload"]["name"]);
+        $newfilename = $_POST['idProd'] . "-" . $i . '-etiq.' . end($temp);
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newfilename)) {
+            echo "La fotografía ". basename( $_FILES["fileToUpload"]["name"]). "  fue registrada exitosamente.";
+        } else {
+            echo "Lo lamentamos, hubo un error subiendo su fotografía.";
+        }
+    }
+    ?>
+    <form method="post" action="nuevaHE5.php">
+        <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+        <input type="hidden" name="selectproceso" value="<?php echo $_POST['selectproceso']; ?>">
+        <input type="hidden" name="selectsubproceso" value="<?php echo $_POST['selectsubproceso']; ?>">
+        <input type="submit" class="btn btn-default" value="Volver">
     </form>
-</section>
+    </section>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 
-</html>
-<?php
+    <?php
 }else{
     echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
 }
 ?>
+
+</html>
+
+
+
+
