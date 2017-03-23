@@ -78,88 +78,39 @@ if(isset($_SESSION['login'])){
         </div>
     </nav>
 
+    <!-- Seleecionar Subproceso -->
     <section class="container">
-    <?php
-    $target_dir = "Fotografias/";
-    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    $uploadOk = 1;
-    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+        <h3>Agregar Fotografía de Producto (Máximo 1)</h3>
+        <?php
+        echo "<form action=\"uploadfotoproducto.php\" method=\"post\" enctype=\"multipart/form-data\">";
+        echo "<input type='hidden' name='idProd' value='".$_POST['idProd']."'>";
+        echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+        echo "<input type='submit' value='Upload Image' name='submit'>";
+        echo "</form>";
+        ?>
+        <br>
+    </section>
 
-    /*if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
-        if($check !== false) {
-            echo "Seleccionada una imagen - " . $check["mime"] . ".";
-            echo "<br>";
-            $uploadOk = 1;
-        } else {
-            echo "El documento seleccionado es sospechoso.";
-            $uploadOk = 0;
-        }
-    }*/
+    <hr>
 
-    if (file_exists($target_file)) {
-        echo "Lo lamentamos, su fotografía ya ha sido agregada previamente.";
-        $uploadOk = 0;
-    }
+    <section class="container">
+        <h3>Agregar Fotografía de Etiquetado y Embolsado (Máximo 4)</h3>
+        <?php
+                    echo "<form action=\"upload.php\" method=\"post\" enctype=\"multipart/form-data\">";
+                    echo "<input type='hidden' name='idProd' value='".$_POST['idProd']."'>";
+                    echo "<input type='file' name='fileToUpload' id='fileToUpload'>";
+                    echo "<input type='submit' value='Upload Image' name='submit'>";
+                    echo "</form>";
+        ?>
+        <br>
+    </section>
 
-    /*if ($_FILES["fileToUpload"]["size"] > 1000000) {
-        echo "La fotografía que está intentando subir es demasiado grande, intente reducir su tamaño.";
-        $uploadOk = 0;
-    }*/
+<hr>
 
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg"
-        && $imageFileType != "gif" ) {
-        echo "Lo lamentamos, solo se permiten los formatos de imagen jpg, png, jpeg y gif.";
-        $uploadOk = 0;
-    }
-
-    if ($uploadOk == 0) {
-        echo "Su fotografía no fue subida.";
-
-    } else {
-        $i = 0;
-        $aux=0;
-        $dir = 'Fotografias/';
-        /*if ($handle = opendir($dir)) {
-            while (($file = readdir($handle)) !== false){
-                if (!in_array($file, array('.', '..')) && !is_dir($dir.$file))
-                    $i++;
-            }
-        }*/
-        for($j=0;$j<3;$j++) {
-            $file = null;
-            $filenamejpg = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.jpg';
-            $filenamejpeg = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.jpeg';
-            $filenamegif = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.gif';
-            $filenamepng = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.png';
-            if (file_exists($filenamejpg)) {
-                $file = $filenamejpg;
-                $aux++;
-            } elseif (file_exists($filenamejpeg)) {
-                $file = $filenamejpeg;
-                $aux++;
-            } elseif (file_exists($filenamegif)) {
-                $file = $filenamegif;
-                $aux++;
-            } elseif (file_exists($filenamepng)) {
-                $file = $filenamepng;
-                $aux++;
-            }
-        }
-        $temp = explode(".", $_FILES["fileToUpload"]["name"]);
-        /*$newfilename = $_POST['idProd'] . "-" . $i . '-etiq'.$aux.'.' . end($temp);*/
-        $newfilename = $_POST['idProd'].'-etiq'.$aux.'.' . end($temp);
-        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newfilename)) {
-            echo "La fotografía ". basename( $_FILES["fileToUpload"]["name"]). "  fue registrada exitosamente.";
-        } else {
-            echo "Lo lamentamos, hubo un error subiendo su fotografía.";
-        }
-
-    }
-    ?>
-    <form method="post" action="nuevaHE6.php">
+    <section class="container">
+    <form method="post" action="HEFinal.php">
         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-        <input type="submit" class="btn btn-default" value="Volver">
+        <input type="submit" value="Finalizar" name="Finalizar" class="btn btn-success">
     </form>
     </section>
 

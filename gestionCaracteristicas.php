@@ -99,6 +99,9 @@ if(isset($_POST['eliminar'])){
             }
             ?>
         </h3>
+        <div class="alert alert-warning" role="alert">
+            <strong>Recuerde!</strong> La Característica #1 debe ser siempre "Componente" para cualquier combinación de Proceso/Subproceso.
+        </div>
     </div>
     <div>
         <table class='table table-hover table-condensed'>

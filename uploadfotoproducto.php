@@ -134,10 +134,8 @@ if(isset($_SESSION['login'])){
             }
         }
         ?>
-        <form method="post" action="nuevaHE5.php">
+        <form method="post" action="nuevaHE6.php">
             <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-            <input type="hidden" name="selectproceso" value="<?php echo $_POST['selectproceso']; ?>">
-            <input type="hidden" name="selectsubproceso" value="<?php echo $_POST['selectsubproceso']; ?>">
             <input type="submit" class="btn btn-default" value="Volver">
         </form>
     </section>

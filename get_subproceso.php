@@ -6,9 +6,13 @@ if(!empty($_POST["idProceso"])) {
     echo "<option>Seleccionar</option>";
     $subproceso =mysql_query("SELECT * FROM subproceso WHERE idProceso = '" . $_POST["idProceso"] . "'");
     while($result=mysql_fetch_array($subproceso)){
-        echo "
+        if($result['tipo']==='1'){
+            echo "
             <option value=".$result["idProcedimiento"].">".$result["descripcion"]."</option>
        ";
+        }else{
+        }
+
     }
 }
 ?>

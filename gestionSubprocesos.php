@@ -85,9 +85,6 @@ if(isset($_POST['guardarsubproc'])){
         echo " </div>";
     }
 }
-if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Subproceso.*/
-}
 ?>
 </section>
 <section>
@@ -107,7 +104,6 @@ if(isset($_GET['eliminarProceso'])) {
                 <th>idSubproceso</th>-->
                 <th>Descripción</th>
                 <th>Asignar M&aacute;quina</th>
-                <th>Editar</th>
                 <th>Ver Caracter&iacute;sticas</th>
             </tr>
             </thead>
@@ -119,19 +115,23 @@ if(isset($_GET['eliminarProceso'])) {
                     //echo "<td>".$_POST['idProceso']."</td>";
                     //echo "<td>".$fila['idProcedimiento']."</td>";
                     echo "<td>".$fila['descripcion']."</td>";
-                    echo "  <td>
+                    if(($fila['idProcedimiento'] === 'PROCEDIMIENTO1')||($fila['idProcedimiento'] === 'PROCEDIMIENTO2')||($fila['idProcedimiento'] === 'PROCEDIMIENTO6')||($fila['idProcedimiento'] === 'PROCEDIMIENTO30')||($fila['idProcedimiento'] === 'PROCEDIMIENTO26')||($fila['idProcedimiento'] === 'PROCEDIMIENTO32')){
+                        echo "  <td>
                                 <form method='post'>
                                     <input class='btn btn-default' type='submit' formaction='#' value='Asignar'>
                                     <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
                                 </form>                                                                     
                             </td>";
-                    echo "<td><a href='#'>Editar</a></td>";
-                    echo "  <td>
+                        echo "  <td>
                                 <form method='post'>
                                     <input class='btn btn-default' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
                                 </form>
                             </td>";
+                    } else {
+                        echo "<td> - </td><td> - </td>";
+                    }
+
                 echo "</tr>";
             }
             ?>

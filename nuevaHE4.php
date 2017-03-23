@@ -110,8 +110,12 @@ if(isset($_SESSION['login'])){
                 echo "<select name='selectproceso' id='selectproceso' onChange=\"getSubproceso(this.value,selectsubproceso.value);\">";
                 echo "<option>Seleccionar</option>";
                 while($fila = mysql_fetch_array($result)){
-                    $aux = $fila['idProceso'];
-                    echo "<option value=".$fila['idProceso'].">".$fila['descripcion']."</option>";
+                    if($fila['tipo']==='1'){
+                        $aux = $fila['idProceso'];
+                        echo "<option value=".$fila['idProceso'].">".$fila['descripcion']."</option>";
+                    }else{
+
+                    }
                 }
                 echo "</select>";
                 ?>
@@ -129,7 +133,7 @@ if(isset($_SESSION['login'])){
         </div>
         <div class="form-group">
             <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-            <input class="btn btn-default" type="submit" value="Finalizar" name="finalizar">
+            <input class="btn btn-default" type="submit" value="Finalizar" name="finalizar" formaction="nuevaHE6.php">
             <input class="btn btn-default" type="submit" value="Agregar Valores de Subproceso" name="siguiente" formaction="nuevaHE5.php">
         </div>
     </form>

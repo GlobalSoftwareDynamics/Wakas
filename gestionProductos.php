@@ -88,7 +88,7 @@ if(isset($_SESSION['login'])){
                     echo "
                                 <tr>
                                     <td style='vertical-align:topvertical-align:center; text-align:center'>".$fila ['idProducto']."</td>
-                                    <td style='text-align:right'><button class='btn btn-primary' formaction='HEFinal.php' name='idProductoSel' value='".$fila['idProducto']."'>Ver Detalle</button></td>
+                                    <td style='text-align:right'><button class='btn btn-primary' formaction='HEFinal.php' name='idProd' value='".$fila['idProducto']."'>Ver Detalle</button></td>
                                 </tr>
                             ";
                 }
