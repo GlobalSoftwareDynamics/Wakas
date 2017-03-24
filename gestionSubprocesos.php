@@ -148,6 +148,7 @@ if(isset($_POST['guardarsubproc'])){
     <div class='container'>
         <form action="agregarSubProceso.php" method="post">
             <div>
+                <input type="submit" formaction="gestionProcesos.php" value="Volver" name="volver" class="btn btn-default">
                 <input class='btn btn-success' type="submit" name="agregar" value="Agregar Subproceso">
                 <input type='hidden' name='idProceso' value="<?php echo $_POST['idProceso']?>">
             </div>
