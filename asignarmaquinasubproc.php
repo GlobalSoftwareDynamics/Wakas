@@ -2,7 +2,13 @@
 <?php
 session_start();
 require('funciones.php');
-conexion();
+$con=mysql_connect("localhost","root","");
+if($con){
+    $bd=mysql_select_db("wakas",$con);
+    if(!$bd) echo "No existe la bd";
+}else{
+    echo "No existe la conexi&oacute;n";
+}
 
 if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
@@ -14,7 +20,18 @@ mysql_query("SET NAMES 'utf8'");
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestion Procedimientos</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-
+    <script>
+        function getGalga(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_galga2.php",
+                data:'idMaquina='+val,
+                success: function(data){
+                    $("#galga").html(data);
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -71,69 +88,58 @@ mysql_query("SET NAMES 'utf8'");
     </div>
 </nav>
 
-<section class="container">
 <?php
-if(isset($_POST['guardarsubproc'])){
-    $agregar = "INSERT INTO Subproceso(idProcedimiento, idProceso, descripcion) VALUES ('".$_POST['idSubProc']."','".$_POST['idProc']."','".$_POST['desc']."')";
-    $agregar1 = mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
+if(isset($_POST['Asignar'])){
+    if(isset($_POST['galga'])){
+        $insertar = mysql_query("INSERT INTO MaquinaSubProceso (idMaquina,idGalgas,idProcedimiento) VALUES ('".$_POST['selectmaquina']."','".$_POST['galga']."','".$_POST['idProcedimiento']."')",$con);
+        if(!$insertar){
+            echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
+        }else{
+            echo '<div class="alert alert-success" role="alert">
+                <strong>Asignación exitosa</strong>
+            </div>';
+        }
     }else{
-        echo "<br>";
-        echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Subproceso añadido exitosamente</strong></p>";
-        echo " </div>";
+        $insertar = mysql_query("INSERT INTO MaquinaSubProceso (idMaquina,idGalgas,idProcedimiento) VALUES ('".$_POST['selectmaquina']."',null,'".$_POST['idProcedimiento']."')",$con);
+        if(!$insertar){
+            echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
+        }else{
+            echo '<div class="alert alert-success" role="alert">
+                <strong>Asignación exitosa</strong>
+            </div>';
+        }
     }
 }
 ?>
-</section>
-<section>
-    <div class='container'>
-        <h3>Subprocesos de
-            <?php
-            $result=selectTableWhere('Proceso','idProceso',"'".$_POST['idProceso']."'");
-            while($fila=mysql_fetch_array($result)){
-                echo $fila['descripcion'];
-            }
-            ?>
-        </h3>
-        <table class='table table-hover table-condensed'>
+
+<section class="container">
+    <?php
+    $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$_POST['idProcedimiento']."'");
+    while($fila = mysql_fetch_array($result)){
+        echo "<h3>Asignar Máquina a Subproceso de ".$fila['descripcion']."</h3>";
+    }
+    ?>
+    <div>
+        <table class="table">
             <thead>
-            <tr>
-                <!--<th>idProceso</th>
-                <th>idSubproceso</th>-->
-                <th>Descripción</th>
-                <th>Asignar M&aacute;quina</th>
-                <th>Ver Caracter&iacute;sticas</th>
-            </tr>
+                <tr>
+                    <th>Maquina</th>
+                    <th>Galga</th>
+                </tr>
             </thead>
             <tbody>
             <?php
-            $result=selectTableWhere('SubProceso','idProceso',"'".$_POST['idProceso']."'");
-            while ($fila=mysql_fetch_array($result)){
+            $result = mysql_query("SELECT * FROM MaquinaSubProceso WHERE idProcedimiento = '".$_POST['idProcedimiento']."'");
+            while($fila = mysql_fetch_array($result)){
                 echo "<tr>";
-                    //echo "<td>".$_POST['idProceso']."</td>";
-                    //echo "<td>".$fila['idProcedimiento']."</td>";
-                    echo "<td>".$fila['descripcion']."</td>";
-                    if(($fila['idProcedimiento'] === 'PROCEDIMIENTO1')||($fila['idProcedimiento'] === 'PROCEDIMIENTO2')||($fila['idProcedimiento'] === 'PROCEDIMIENTO6')||($fila['idProcedimiento'] === 'PROCEDIMIENTO30')||($fila['idProcedimiento'] === 'PROCEDIMIENTO26')||($fila['idProcedimiento'] === 'PROCEDIMIENTO32')){
-                        echo "  <td>
-                                <form method='post'>
-                                    <input class='btn btn-default' type='submit' formaction='asignarmaquinasubproc.php' value='Asignar'>
-                                    <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
-                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
-                                </form>                                                                     
-                            </td>";
-                        echo "  <td>
-                                <form method='post'>
-                                    <input class='btn btn-default' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
-                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
-                                </form>
-                            </td>";
-                    } else {
-                        echo "<td> - </td><td> - </td>";
+                    $result2 = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$fila['idMaquina']."'");
+                    while($fila2 = mysql_fetch_array($result2)){
+                        echo "<td>".$fila2['descripcion']."</td>";
                     }
-
+                    $result2 = mysql_query("SELECT * FROM Galgas WHERE idGalgas = '".$fila['idGalgas']."'");
+                    while($fila2 = mysql_fetch_array($result2)){
+                        echo "<td>".$fila2['Descripcion']."</td>";
+                    }
                 echo "</tr>";
             }
             ?>
@@ -142,15 +148,26 @@ if(isset($_POST['guardarsubproc'])){
     </div>
 </section>
 
-<hr>
+<section class="container">
+        <div>
+        <form method="post" action="#">
+            <label for="selectmaquina">Seleccionar Máquina</label>
+            <select name="selectmaquina" id="selectmaquina" onchange="getGalga(this.value)">
+                <option>Seleccionar</option>
+                <?php
+                $result = mysql_query("SELECT DISTINCT * FROM Maquina");
+                while($fila = mysql_fetch_array($result)){
+                    echo "<option value='".$fila['idMaquina']."'>".$fila['descripcion']."</option>";
+                }
+                ?>
+            </select>
 
-<section>
-    <div class='container'>
-        <form action="agregarSubProceso.php" method="post">
-            <div>
-                <input class='btn btn-success' type="submit" name="agregar" value="Agregar Subproceso">
-                <input type='hidden' name='idProceso' value="<?php echo $_POST['idProceso']?>">
+            <div id="galga">
             </div>
+            <input type="hidden" name="idProceso" value="<?php echo $_POST['idProceso']?>">
+            <input type="hidden" name="idProcedimiento" value="<?php echo $_POST['idProcedimiento']?>">
+            <input type="submit" value="Volver" class="btn btn-default" formaction="gestionSubprocesos.php">
+            <input type="submit" value="Asignar" class="btn btn-success" name="Asignar">
         </form>
     </div>
 </section>
