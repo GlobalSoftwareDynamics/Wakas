@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 
@@ -195,6 +196,13 @@ if(isset($_SESSION['login'])){
                     ?>
             </tbody>
         </table>
+    </section>
+    <hr>
+    <section class="container">
+        <form action="fichaProveedorpdf.php" method="post" class="form-horizontal col-sm-12">
+            <input type="hidden" name="idproveedor" value="<?php echo $_GET['idProveedor']?>" readonly>
+            <input class="btn btn-default col-sm-4 col-sm-offset-4" type="submit" name="pdf" value="Descargar PDF">
+        </form>
     </section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

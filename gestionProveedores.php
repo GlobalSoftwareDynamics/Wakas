@@ -4,6 +4,7 @@ require('funciones.php');
 session_start();
 conexion();
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 
@@ -134,7 +135,6 @@ if(isset($_GET['eliminarRelacionMat'])) {
             <th>Direcci&oacute;n</th>
             <th></th>
             <th></th>
-            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -150,7 +150,6 @@ if(isset($_GET['eliminarRelacionMat'])) {
             echo "
                                     <td><a href='fichaProveedor.php?idProveedor=".$fila['idProveedor']."'>Ver Ficha</a></td>
                                     <td><a href='actualizarProveedor.php?idProveedor=".$fila['idProveedor']."'>Modificar</a></td>
-                                    <td><a href='gestionProveedores.php?eliminarProveedor=".$fila['idProveedor']."'>Eliminar</a></td>
                                 </tr>
                             ";
         }

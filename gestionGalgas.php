@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 
@@ -30,7 +31,7 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -117,7 +118,6 @@ if(isset($_SESSION['login'])){
                         <th>Unidad de Medida</th>
                         <th>M&aacute;quina</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,7 +138,6 @@ if(isset($_SESSION['login'])){
                         }
                         echo "
                                     <td><a href='actualizarGalga.php?idGalgas=".$fila['idGalgas']."'>Modificar</a></td>
-                                    <td><a href='gestionGalgas.php?eliminarGalga=".$fila['idGalgas']."'>Eliminar</a></td>
                                 </tr>
                         ";
                     }

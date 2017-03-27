@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<?php
+session_start();
+require('funciones.php');
+$con=mysql_connect("localhost","root","");
+if($con){
+    $bd=mysql_select_db("wakas",$con);
+    if(!$bd) echo "No existe la bd";
+}else{
+    echo "No existe la conexi&oacute;n";
+}
+
+if(isset($_SESSION['login'])){
+    ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Waka-s Textiles Finos S.A.</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
+    </head>
+
+    <body>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
+                                <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                                <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
+                                <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionMateriales.php">Materiales</a></li>
+                                <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
+                                <li><a href="gestionInsumos.php">Insumos</a></li>
+                                <li><a href="gestionOperarios.php">Empleados</a></li>
+                                <li><a href="gestionProcesos.php">Procesos</a></li>
+                                <li><a href="gestionRepuestos.php">Repuestos</a></li>
+                                <li><a href="menuagregarotros.php">Otros</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionClientes.php">Clientes</a></li>
+                                <li><a href="gestionProveedores.php">Proveedores</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    </header>
+
+    <section class="container">
+    <?php
+    $target_dir = "Fotografias/";
+    $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+
+    /*if(isset($_POST["submit"])) {
+        $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+        if($check !== false) {
+            echo "Seleccionada una imagen - " . $check["mime"] . ".";
+            echo "<br>";
+            $uploadOk = 1;
+        } else {
+            echo "El documento seleccionado es sospechoso.";
+            $uploadOk = 0;
+        }
+    }*/
+
+    if (file_exists($target_file)) {
+        echo "Lo lamentamos, su fotografía ya ha sido agregada previamente.";
+        $uploadOk = 0;
+    }
+
+    /*if ($_FILES["fileToUpload"]["size"] > 1000000) {
+        echo "La fotografía que está intentando subir es demasiado grande, intente reducir su tamaño.";
+        $uploadOk = 0;
+    }*/
+
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg"
+        && $imageFileType != "gif" ) {
+        echo "Lo lamentamos, solo se permiten los formatos de imagen jpg, png, jpeg y gif.";
+        $uploadOk = 0;
+    }
+
+    if ($uploadOk == 0) {
+        echo "Su fotografía no fue subida.";
+
+    } else {
+        $i = 0;
+        $aux=0;
+        $dir = 'Fotografias/';
+        /*if ($handle = opendir($dir)) {
+            while (($file = readdir($handle)) !== false){
+                if (!in_array($file, array('.', '..')) && !is_dir($dir.$file))
+                    $i++;
+            }
+        }*/
+        for($j=0;$j<3;$j++) {
+            $file = null;
+            $filenamejpg = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.jpg';
+            $filenamejpeg = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.jpeg';
+            $filenamegif = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.gif';
+            $filenamepng = 'Fotografias/' . $_POST['idProd'] . '-etiq' . $j . '.png';
+            if (file_exists($filenamejpg)) {
+                $file = $filenamejpg;
+                $aux++;
+            } elseif (file_exists($filenamejpeg)) {
+                $file = $filenamejpeg;
+                $aux++;
+            } elseif (file_exists($filenamegif)) {
+                $file = $filenamegif;
+                $aux++;
+            } elseif (file_exists($filenamepng)) {
+                $file = $filenamepng;
+                $aux++;
+            }
+        }
+        $temp = explode(".", $_FILES["fileToUpload"]["name"]);
+        /*$newfilename = $_POST['idProd'] . "-" . $i . '-etiq'.$aux.'.' . end($temp);*/
+        $newfilename = $_POST['idProd'].'-etiq'.$aux.'.' . end($temp);
+        if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newfilename)) {
+            echo "La fotografía ". basename( $_FILES["fileToUpload"]["name"]). "  fue registrada exitosamente.";
+        } else {
+            echo "Lo lamentamos, hubo un error subiendo su fotografía.";
+        }
+
+    }
+    ?>
+        <hr>
+    <form method="post" action="nuevaHE6.php" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+        <div class="col-sm-12">
+            <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+            <input type="submit" class="btn btn-default col-sm-8 col-sm-offset-2" value="Volver">
+        </div>
+    </form>
+    </section>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    </body>
+
+    <?php
+}else{
+    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+}
+?>
+
+</html>
+
+
+
+

@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -92,7 +93,8 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                             $aux++;
-                            echo "<input class='textinput-3' id='idcliente' type='text' name= 'idCli' value='CLIE".$aux."' readonly>";
+                            $id="CLIE".$aux;
+                            echo "<input class='textinput-3' id='idcliente' type='text' name= 'idCli' value='".$id."'>";
                         ?>
                     </div>
                 </div>

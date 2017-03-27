@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -106,14 +107,12 @@ if(isset($_SESSION['login'])){
                         <table class='table table-hover'>
                             <thead>
                                 <tr>
-                                    <th>idContacto</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Direccion</th>
                                     <th>Ciudad</th>
                                     <th>Pa&iacute;s</th>
                                     <th>Tel&eacute;fono</th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody> 
@@ -122,7 +121,6 @@ if(isset($_SESSION['login'])){
                 while($fila = mysql_fetch_array($result)) {
                     echo "
                                  <tr>
-                                    <td>".$fila['idContacto']."</td>
                                     <td>".$fila['nombre']."</td>
                                     <td>".$fila['apellido']."</td>
                 ";
@@ -152,7 +150,6 @@ if(isset($_SESSION['login'])){
                         ";
                     }
                     echo "
-                                    <td><a href='gestionClientes.php?eliminarContacto=".$fila['idContacto']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }
@@ -189,14 +186,12 @@ if(isset($_SESSION['login'])){
                         <table class='table table-hover'>
                             <thead>
                                 <tr>
-                                    <th>idContacto</th>
                                     <th>Nombre</th>
                                     <th>Apellidos</th>
                                     <th>Direccion</th>
                                     <th>Ciudad</th>
                                     <th>Pa&iacute;s</th>
                                     <th>Tel&eacute;fono</th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody> 
@@ -205,7 +200,6 @@ if(isset($_SESSION['login'])){
                 while($fila = mysql_fetch_array($result)) {
                     echo "
                                  <tr>
-                                    <td>".$fila['idContacto']."</td>
                                     <td>".$fila['nombre']."</td>
                                     <td>".$fila['apellido']."</td>
                 ";
@@ -235,7 +229,6 @@ if(isset($_SESSION['login'])){
                         ";
                     }
                     echo "
-                                    <td><a href='gestionClientes.php?eliminarContacto=".$fila['idContacto']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }

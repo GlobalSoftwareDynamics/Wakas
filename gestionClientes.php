@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -152,17 +153,7 @@ if(isset($_SESSION['login'])){
                         <label for="buscar" class="formlabels col-sm-12">Buscar Cliente:</label>
                     </div>
                     <div class="col-sm-7">
-                        <select id="buscar" name="filtroCliente" class="ddselect-12">
-                            <option>Seleccionar</option>
-                            <?php
-                                $datos=selectTable("Cliente");
-                                while($opcion=mysql_fetch_array($datos)){
-                                    echo "
-                                        <option>".$opcion['nombre']."</option>
-                                    ";
-                                }
-                            ?>
-                        </select>
+                        <input type="text" id="buscar" name="filtroCliente" class="textinput-12">
                     </div>
                 </div>
                 <div class="form-group col-sm-6">
@@ -187,12 +178,11 @@ if(isset($_SESSION['login'])){
                                     <th>Nombre</th>
                                     <th>Contactos</th>
                                     <th></th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
                 ";
-            $result = selectTableWhere('Cliente','nombre',"'".$_POST['filtroCliente']."'");
+            $result = selectTableWhereLikeSingle('Cliente','nombre',"'".$_POST['filtroCliente']."'");
             while($fila=mysql_fetch_array($result)){
                 echo "
                                 <tr>
@@ -200,7 +190,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['nombre']."</td>
                                     <td><a href='vercontactos.php?idCliente=".$fila['idCliente']."'>Ver</a></td>
                                     <td><a href='actualizarCliente.php?idCliente=".$fila['idCliente']."'>Modificar</a></td>
-                                    <td><a href='gestionClientes.php?eliminarCliente=".$fila['idCliente']."'>Eliminar</a></td>
                                 </tr>
                     ";
             }
@@ -229,7 +218,6 @@ if(isset($_SESSION['login'])){
                                     <th>Nombre</th>
                                     <th>Contactos</th>
                                     <th></th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
@@ -242,7 +230,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['nombre']."</td>
                                     <td><a href='vercontactos.php?idCliente=".$fila['idCliente']."'>Ver</a></td>
                                     <td><a href='actualizarCliente.php?idCliente=".$fila['idCliente']."'>Modificar</a></td>
-                                    <td><a href='gestionClientes.php?eliminarCliente=".$fila['idCliente']."'>Eliminar</a></td>
                                 </tr>
                     ";
             }

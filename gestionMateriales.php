@@ -6,6 +6,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 	<head>
@@ -83,17 +84,7 @@ if(isset($_SESSION['login'])){
                             <label for="buscarmat" class="formlabels col-sm-12">Buscar Material:</label>
                         </div>
                         <div class="col-sm-7">
-                            <select id="buscarmat" name="filtroMaterial" class="ddselect-12">
-                                <option>Seleccionar Material</option>
-                                <?php
-                                $datos=selectTable("Material");
-                                while($opcion=mysql_fetch_array($datos)){
-                                    echo "
-                                        <option>".$opcion['material']."</option>
-                                    ";
-                                }
-                                ?>
-                            </select>
+                            <input type="text" id="buscarmat" name="filtroMaterial" class="textinput-12">
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
@@ -154,12 +145,11 @@ if(isset($_SESSION['login'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
                 ";
-                $result = selectTableWhere('Material','material',"'".$_POST['filtroMaterial']."'");
+                $result = selectTableWhereLikeSingle('Material','material',"'".$_POST['filtroMaterial']."'");
                 while($fila=mysql_fetch_array($result)){
                     echo "
                                 <tr>
@@ -168,7 +158,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarproveedormat.php?idMaterial=".$fila['idMaterial']."'>Asignar Proveedores</a></td>
                                     <td><a href='actualizarMaterial.php?idMaterial=".$fila['idMaterial']."'>Modificar</a></td>
-                                    <td><a href='gestionMateriales.php?eliminarMaterial=".$fila['idMaterial']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }
@@ -196,7 +185,6 @@ if(isset($_SESSION['login'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
@@ -210,7 +198,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarproveedormat.php?idMaterial=".$fila['idMaterial']."'>Asignar Proveedores</a></td>
                                     <td><a href='actualizarMaterial.php?idMaterial=".$fila['idMaterial']."'>Modificar</a></td>
-                                    <td><a href='gestionMateriales.php?eliminarMaterial=".$fila['idMaterial']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }

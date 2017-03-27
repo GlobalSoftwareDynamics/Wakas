@@ -4,6 +4,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+    mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 	<head>
@@ -124,7 +125,6 @@ if(isset($_SESSION['login'])){
 						<th>Costo Fijo</th>
                         <th></th>
 						<th></th>
-						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -138,7 +138,6 @@ if(isset($_SESSION['login'])){
 										<td>".$fila['costoFijo']."</td>
 										<td><a href='verrepuestos.php?idMaquina=".$fila['idMaquina']."'>Repuestos</a></td>
 										<td><a href='actualizarmaquina.php?idMaquina=".$fila['idMaquina']."'>Modificar</a></td>
-										<td><a href='gestionMaquinas.php?eliminarMaquina=".$fila['idMaquina']."'>Eliminar</a></td>
 								</tr>
 							";
 						}

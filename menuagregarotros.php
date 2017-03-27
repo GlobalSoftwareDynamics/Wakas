@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -18,7 +19,7 @@ if(isset($_SESSION['login'])){
     
     </head>
 
-	<body background="image/fondogris.jpg" data-direction="ltr">
+	<body>
 	    <header>
             <nav class="navbar navbar-inverse">
                 <div class="container">

@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 <head>
@@ -79,17 +80,7 @@ if(isset($_SESSION['login'])){
                 <label for="filtroRepuesto" class="formlabels col-sm-12">Buscar Repuesto:</label>
             </div>
             <div class="col-sm-7">
-                <select name="filtroRepuesto" id="filtroRepuesto" class="ddselect-12">
-                    <option>Seleccionar</option>
-                    <?php
-                    $datos=selectTable("Repuestos");
-                    while($opcion=mysql_fetch_array($datos)){
-                        echo "
-                        <option>".$opcion['descripcion']."</option>
-                      ";
-                    }
-                    ?>
-                </select>
+                <input type="text" name="filtroRepuesto" id="filtroRepuesto" class="textinput-12">
             </div>
         </div>
         <div class="form-group col-sm-6">
@@ -146,12 +137,11 @@ if(isset($_POST['buscarrep'])){
                                 <th>Unidad de Medida</th>
                                 <th></th>
                                 <th></th>
-                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
             ";
-    $result = selectTableWhere('Repuestos','descripcion',"'".$_POST['filtroRepuesto']."'");
+    $result = selectTableWhereLikeSingle('Repuestos','descripcion',"'".$_POST['filtroRepuesto']."'");
     while($fila=mysql_fetch_array($result)){
         echo "
                                 <tr>
@@ -160,7 +150,6 @@ if(isset($_POST['buscarrep'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
                                     <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
-                                    <td><a href='gestionRepuestos.php?eliminarRepuesto=".$fila['idRepuestos']."'>Eliminar</a></td>
                                 </tr>
                     ";
     }
@@ -192,7 +181,6 @@ if(isset($_POST['buscarrep'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -206,7 +194,6 @@ if(isset($_POST['buscarrep'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
                                     <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
-                                    <td><a href='gestionRepuestos.php?eliminarRepuesto=".$fila['idRepuestos']."'>Eliminar</a></td>
                                 </tr>
                     ";
     }
@@ -214,9 +201,7 @@ if(isset($_POST['buscarrep'])){
                      </tbody>
                    </table>
                 </section>
-                
             		<hr>
-            		
                 <section class='container'>
                     <form class='form-horizontal col-sm-12'>
                	 	    <div class='form-group'>

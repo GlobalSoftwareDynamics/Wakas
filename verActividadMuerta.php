@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 <head>
@@ -107,7 +108,7 @@ if(isset($_SESSION['login'])){
 </section>
 <hr>
 <section class="container">
-            <table class="table table-bordered">
+            <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>Empleado</th>
