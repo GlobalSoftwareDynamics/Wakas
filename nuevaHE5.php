@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="es">
 
 <?php
 session_start();
@@ -14,6 +14,7 @@ if($con){
 }
 
 if(isset($_SESSION['login'])){
+    mysql_query("SET NAMES 'utf8'");
     ?>
     <head>
         <meta charset="UTF-8">
@@ -21,6 +22,8 @@ if(isset($_SESSION['login'])){
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
+        <link href="css/Tablas.css" rel="stylesheet">
 
         <script>
             function getMaterial(val) {
@@ -70,59 +73,60 @@ if(isset($_SESSION['login'])){
     </head>
 
     <body>
-
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
+                                <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                                <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
+                                <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionMateriales.php">Materiales</a></li>
+                                <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
+                                <li><a href="gestionInsumos.php">Insumos</a></li>
+                                <li><a href="gestionOperarios.php">Empleados</a></li>
+                                <li><a href="gestionProcesos.php">Procesos</a></li>
+                                <li><a href="gestionRepuestos.php">Repuestos</a></li>
+                                <li><a href="menuagregarotros.php">Otros</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionClientes.php">Clientes</a></li>
+                                <li><a href="gestionProveedores.php">Proveedores</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                            <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                            <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                            <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionMateriales.php">Materiales</a></li>
-                            <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
-                            <li><a href="gestionInsumos.php">Insumos</a></li>
-                            <li><a href="gestionOperarios.php">Empleados</a></li>
-                            <li><a href="gestionProcesos.php">Procesos</a></li>
-                            <li><a href="gestionRepuestos.php">Repuestos</a></li>
-                            <li><a href="menuagregarotros.php">Otros</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionClientes.php">Clientes</a></li>
-                            <li><a href="gestionProveedores.php">Proveedores</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Insert de datos -->
 
@@ -342,12 +346,12 @@ if(isset($_SESSION['login'])){
     <section class="container">
         <!-- Contenido Real -->
         <div>
-        <form method="post" action="#">
+        <form method="post" action="#" class="form-horizontal col-sm-12">
             <input type="hidden" name="idProd" value="<?php echo $_POST['idProd']; ?>">
             <input type="hidden" name="selectproceso" value="<?php echo $_POST['selectproceso']; ?>">
             <input type="hidden" name="selectsubproceso" value="<?php echo $_POST['selectsubproceso']; ?>">
             <div class="form-group">
-            <table border="1">
+            <table class="table table-bordered">
             <?php
                 $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".$_POST['selectsubproceso']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
                 echo "
@@ -373,22 +377,38 @@ if(isset($_SESSION['login'])){
                             while($fila2 = mysql_fetch_array($result2)){
                                 echo "<td>";
                                 if($fila['tipo']==="componente"){
-                                    echo "<select name=\"selectcomponente\" id=\"selectcomponente\" onChange='getMaterial(this.value)'>";
-                                    echo "<option>Seleccionar</option>";
-                                    $result3 = selectTableWhere("productocomponentesprenda","idProducto","'".$_POST['idProd']."'");
-                                    while($fila3 = mysql_fetch_array($result3)){
-                                        $result4 = selectTableWhere("componentesprenda","idComponente","'".$fila3['idComponente']."'");
-                                        while($fila4 = mysql_fetch_array($result4)){
-                                            echo "<option value='".$fila3['idComponenteEspecifico']."'>".$fila4['descripcion']."</option>";
+                                    if($_POST['selectsubproceso']==='PROCEDIMIENTO26'){
+                                        echo "<select name='selectcomponente' id='selectcomponente' onChange='getMaterial(this.value)' class='ddselect-12'>";
+                                        echo "<option>Seleccionar</option>";
+                                        $result3 = selectTableWhere("productocomponentesprenda","idProducto","'".$_POST['idProd']."'");
+                                        while($fila3 = mysql_fetch_array($result3)){
+                                            $result4 = selectTableWhere("componentesprenda","idComponente","'".$fila3['idComponente']."'");
+                                            while($fila4 = mysql_fetch_array($result4)){
+                                                if($fila4['descripcion']==='Prenda'){
+                                                    echo "<option value='".$fila3['idComponenteEspecifico']."'>".$fila4['descripcion']."</option>";
+                                                }
+                                            }
                                         }
+                                        echo "</select>";
+                                        echo "</td>";
+                                    }else{
+                                        echo "<select name='selectcomponente' id='selectcomponente' onChange='getMaterial(this.value)' class='ddselect-12'>";
+                                        echo "<option>Seleccionar</option>";
+                                        $result3 = selectTableWhere("productocomponentesprenda","idProducto","'".$_POST['idProd']."'");
+                                        while($fila3 = mysql_fetch_array($result3)){
+                                            $result4 = selectTableWhere("componentesprenda","idComponente","'".$fila3['idComponente']."'");
+                                            while($fila4 = mysql_fetch_array($result4)){
+                                                echo "<option value='".$fila3['idComponenteEspecifico']."'>".$fila4['descripcion']."</option>";
+                                            }
+                                        }
+                                        echo "</select>";
+                                        echo "</td>";
                                     }
-                                    echo "</select>";
-                                    echo "</td>";
                                 } elseif ($fila['tipo']==="material"){
                                     echo "<p id='material'></p>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='maquina'){
-                                    echo "<select name=\"selectmaquina\" id=\"selectmaquina\" onChange='getGalga(this.value)'>";
+                                    echo "<select name='selectmaquina' id='selectmaquina' onChange='getGalga(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTableWhere("maquinasubproceso","idProcedimiento","'".$_POST['selectsubproceso']."'");
                                     while($fila3 = mysql_fetch_array($result3)){
@@ -400,12 +420,12 @@ if(isset($_SESSION['login'])){
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='galga'){
-                                    echo "<select name=\"galga[]\" multiple='multiple' id=\"galga\">
+                                    echo "<select name='galga[]' multiple='multiple' id='galga' class='ddselect-12'>
                                                 <option value='-'>Seleccionar</option>
                                           </select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='insumo') {
-                                    echo "<select name=\"selectinsumo\" id=\"selectinsumo\"  onchange='getInsumo(this.value)'>";
+                                    echo "<select name='selectinsumo' id='selectinsumo'  onchange='getInsumo(this.value)' class='ddselect-12'>";
                                         echo "<option>Seleccionar</option>";
                                         $result3 = selectTable("Insumos");
                                         while ($fila3 = mysql_fetch_array($result3)) {
@@ -414,7 +434,7 @@ if(isset($_SESSION['login'])){
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='insumo1') {
-                                    echo "<select name=\"selectinsumo1\" id=\"selectinsumo1\"  onchange='getInsumo(this.value)'>";
+                                    echo "<select name='selectinsumo1' id='selectinsumo1'  onchange='getInsumo(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTable("Insumos");
                                     while ($fila3 = mysql_fetch_array($result3)) {
@@ -423,7 +443,7 @@ if(isset($_SESSION['login'])){
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='insumo2') {
-                                    echo "<select name=\"selectinsumo2\" id=\"selectinsumo2\"  onchange='getInsumo(this.value)'>";
+                                    echo "<select name='selectinsumo2' id='selectinsumo2'  onchange='getInsumo(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTable("Insumos");
                                     while ($fila3 = mysql_fetch_array($result3)) {
@@ -434,8 +454,8 @@ if(isset($_SESSION['login'])){
                                 } elseif($fila['tipo']==='idinsumo') {
                                     echo "<p id='idinsumo'></p>";
                                     echo "</td>";
-                                } elseif ($fila['tipo']==='procedimiento'){
-                                    echo "<select name=\"selectprocedimiento\" id=\"selectprocedimiento\"  onchange='getProcedimiento(this.value)'>";
+                                } elseif ($fila['tipo']==='ProcedimientoTiempos'){
+                                    echo "<select name='selectprocedimiento' id='selectprocedimiento'  onchange='getProcedimiento(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTable("SubProceso");
                                     while ($fila3 = mysql_fetch_array($result3)) {
@@ -447,7 +467,7 @@ if(isset($_SESSION['login'])){
                                     echo "<p id='idProcedimiento'></p>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='maquinatiempo'){
-                                    echo "<select name=\"selectmaquinatiempo\" id=\"selectmaquinatiempo\">";
+                                    echo "<select name='selectmaquinatiempo' id='selectmaquinatiempo' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTable("Maquina");
                                     while ($fila3 = mysql_fetch_array($result3)) {
@@ -457,7 +477,7 @@ if(isset($_SESSION['login'])){
                                     echo "</td>";
                                 } else {
                                     $otros = true;
-                                    echo "<input type='text' name='".$fila2['idCaracteristica']."'>";
+                                    echo "<input type='text' name='".$fila2['idCaracteristica']."' class='textinput-12'>";
                                     echo "</td>";
                                 }
                             }
@@ -467,9 +487,16 @@ if(isset($_SESSION['login'])){
             ?>
             </table>
             </div>
+            <hr>
             <div class="form-group">
-                <input type="submit" name="Agregar" value="Agregar" class="btn btn-default">
-                <input type="submit" name="Volver" value="Volver" class="btn btn-danger" formaction="nuevaHE4.php">
+                <div class="col-sm-12">
+                    <div class="col-sm-6">
+                        <input type="submit" name="Agregar" value="Agregar" class="btn btn-default col-sm-8 col-sm-offset-2">
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" name="Volver" value="Volver" class="btn btn-default col-sm-8 col-sm-offset-2" formaction="nuevaHE4.php">
+                    </div>
+                </div>
             </div>
         </form>
         </div>

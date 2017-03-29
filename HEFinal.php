@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="es">
 
 <?php
 session_start();
@@ -8,6 +8,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <head>
     <meta charset="UTF-8">
@@ -16,65 +17,68 @@ if(isset($_SESSION['login'])){
     <title>Hoja de Especificaci&oacuten</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/navbar-fixed-side.css" rel="stylesheet" />
+    <link href="css/Formatos.css" rel="stylesheet">
+    <link href="css/Tablas.css" rel="stylesheet">
 </head>
 
-<body >
-<nav class="navbar navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="mainAdmin.php">Waka-s</a>
+<body>
+<header><nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
+                            <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
+                            <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="gestionMateriales.php">Materiales</a></li>
+                            <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
+                            <li><a href="gestionInsumos.php">Insumos</a></li>
+                            <li><a href="gestionOperarios.php">Empleados</a></li>
+                            <li><a href="gestionProcesos.php">Procesos</a></li>
+                            <li><a href="gestionRepuestos.php">Repuestos</a></li>
+                            <li><a href="menuagregarotros.php">Otros</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="gestionClientes.php">Clientes</a></li>
+                            <li><a href="gestionProveedores.php">Proveedores</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.nav-collapse -->
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                        <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                        <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                        <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                        <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gestionMateriales.php">Materiales</a></li>
-                        <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
-                        <li><a href="gestionInsumos.php">Insumos</a></li>
-                        <li><a href="gestionOperarios.php">Empleados</a></li>
-                        <li><a href="gestionProcesos.php">Procesos</a></li>
-                        <li><a href="gestionRepuestos.php">Repuestos</a></li>
-                        <li><a href="menuagregarotros.php">Otros</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="gestionClientes.php">Clientes</a></li>
-                        <li><a href="gestionProveedores.php">Proveedores</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
+    </nav>
+</header>
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-lg-2">
+        <div class="col-sm-3 col-lg-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -89,48 +93,147 @@ if(isset($_SESSION['login'])){
                 <div class="collapse navbar-collapse">
                     <form method="post">
                         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-                        <input type="submit" class="btn-link" formaction="HEFinal.php" value="Sección General">
-                        <input type="submit" class="btn-link" formaction="HEFinalTejido.php" value="Sección Tejido">
-                        <input type="submit" class="btn-link" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
-                        <input type="submit" class="btn-link" formaction="HEFinalConfeccion.php" value="Sección Confección">
-                        <input type="submit" class="btn-link" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
-                        <input type="submit" class="btn-link" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinal.php" value="Sección General">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinalTejido.php" value="Sección Tejido">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinalConfeccion.php" value="Sección Confección">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn-link" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
+                        </div>
                     </form>
                 </div>
             </nav>
         </div>
-        <div class="col-sm-9 col-lg-10">
+
+        <div class="col-sm-9 col-lg-9">
             <!-- your page content -->
-            <div>
-                <img src="image/logowakas.jpg"/>
-                <label>Waka-s Textiles Finos SAC</label>
-                <label>Urb. Francisco Mostajo G-25</label>
-                <label>04002 Arequipa - Peru</label>
-            </div>
-
-            <div>
-                <h2>Hoja de Especificaci&oacuten</h2>
-                <p><?php echo $_POST['idProd'];?></p>
-            </div>
-
-            <hr>
-
-            <div  class="container">
-                <div>
-                    <p>ID Producto <?php echo $_POST['idProd'];?></p>
-                    <p>ID Provisional <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idProvisional']?></p>
-                    <p>Tipo <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idTipoProducto']?></p>
-                    <p>Género <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idgenero']?></p>
-                    <p>ID Cliente <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idCliente']?></p>
-                    <p>Fecha de Creación <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['fechaCreacion']?></p>
-                    <p>Creado por <?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['creador']?></p>
-                    <p>Versión <?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['version']?></p>
-                    <p>Fecha de Modificación <?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['fechaModificacion']?></p>
-                    <p>Modificado Por <?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idEmpleado']?></></p>
+            <section class="container-fluid">
+                <div class="col-sm-2">
+                    <div>
+                        <img width="110" height="110" src="image/logowakas.jpg"/>
+                    </div>
                 </div>
-
+                <div class="col-sm-5" id="descripcionbrand">
+                    <div>
+                        <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                    </div>
+                    <div>
+                        <span>Urb. Francisco Mostajo G-25</span>
+                    </div>
+                    <div>
+                        <span>04002 Arequipa - Peru</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="titulo">
+                        <h3>Ficha de Repuestos</h3>
+                    </div>
+                    <div>
+                        <h4 class='desctitulo'>MOD <?php echo $_POST['idProd']; ?></h4>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            <div class="container col-sm-6">
                 <div>
-                    <table class="table table-striped">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>ID Producto:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php echo $_POST['idProd'];?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>ID Provisional:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idProvisional']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Tipo:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idTipoProducto']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Género:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idgenero']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>ID Cliente:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idCliente']?></span>
+                        </div>
+                    </div>
+                    <div class="container col-sm-12 seperadorhe">
+
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Fecha de Creación:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['fechaCreacion']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Creado por:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['creador']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Versión:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['version']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Fecha de Modificación:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['fechaModificacion']?></span>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <label>Modificado Por:</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <span><?php $result = selectTableWhere("ModificacionHE","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idEmpleado']?></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="container col-sm-12">
+                    <br>
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>Observaciones Generales</th>
@@ -144,8 +247,8 @@ if(isset($_SESSION['login'])){
                     </table>
                 </div>
             </div>
-            <div  class="container">
-                <table class="table table-striped">
+            <div class="container col-sm-6">
+                <table class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Descripción General</th>
@@ -180,27 +283,27 @@ if(isset($_SESSION['login'])){
                 </table>
             </div>
 
-            <br/>
-
             <section>
-                <div class=container>
+                <div class="container col-sm-12">
                     <div class="row">
-                        <table class="table table-bordered" border="1">
+                        <table class="table table-hover">
                             <thead>
                             <tr>
-                                <th>Medidas</th>
+                                <th colspan="2">Medidas</th>
+                                <th colspan="9"></th>
                             </tr>
                             <tr>
-                                <th></th>
-                                <th>XXS</th>
-                                <th>XS</th>
-                                <th>S</th>
-                                <th>M</th>
-                                <th>L</th>
-                                <th>XL</th>
-                                <th>XXL</th>
-                                <th>TU</th>
-                                <th>T +/-</th>
+                                <td colspan="2"></td>
+                                <td>XXS</td>
+                                <td>XS</td>
+                                <td>S</td>
+                                <td>M</td>
+                                <td>L</td>
+                                <td>XL</td>
+                                <td>XXL</td>
+                                <td>TU</td>
+                                <td>Unidad de Medida</td>
+                                <td>T +/-</td>
                             </tr>
                             </thead>
                             <tbody>
@@ -219,6 +322,11 @@ if(isset($_SESSION['login'])){
                                         if ($medidasusadas[($contador - 2)] == $fila['idMedida']) {
                                         } else {
                                             echo "<tr>";
+                                            $med="SELECT * FROM medida WHERE idMedida ='".$fila['idMedida']."'";
+                                            $quer=mysql_query($med);
+                                            while($fl=mysql_fetch_array($quer)){
+                                                echo "<th>".$fl['descripcion']."</th>";
+                                            }
                                             echo "<th>" . $fila['idMedida'] . "</th>";
                                             $indice = 0;
                                             $tallas = array();
@@ -279,6 +387,10 @@ if(isset($_SESSION['login'])){
                                                             $resultado = selectTableWhere2("productomedida", "idProducto", "'" . $_POST['idProd'] . "'", "idMedida", "'" . $fila['idMedida'] . "'");
                                                             //selectTableWhere2("productomedida","idproducto",$_POST['idProd'],"idmedida",$fila['idMedida']);
                                                             while ($filasa = mysql_fetch_array($resultado)) {
+                                                                $res=selectTableWhere('Medida','idMedida',"'".$filasa['idMedida']."'");
+                                                                while ($fil=mysql_fetch_array($res)){
+                                                                    echo "<td>".$fil['idUnidadMedida']."</td>";
+                                                                }
                                                                 echo "<td>" . $filasa['tolerancia'] . "</td>";
                                                             }
                                                             $bandera = true;
@@ -296,6 +408,11 @@ if(isset($_SESSION['login'])){
                                         }
                                     } else {
                                         echo "<tr>";
+                                        $med="SELECT * FROM medida WHERE idMedida ='".$fila['idMedida']."'";
+                                        $quer=mysql_query($med);
+                                        while($fl=mysql_fetch_array($quer)){
+                                            echo "<th>".$fl['descripcion']."</th>";
+                                        }
                                         echo "<th>" . $fila['idMedida'] . "</th>";
                                         $indice = 0;
                                         $tallas = array();
@@ -356,6 +473,10 @@ if(isset($_SESSION['login'])){
                                                         $resultado = selectTableWhere2("productomedida","idProducto","'".$_POST['idProd']."'","idMedida","'".$fila['idMedida']."'");
                                                         //selectTableWhere2("productomedida","idproducto",$_POST['idProd'],"idmedida",$fila['idMedida']);
                                                         while($filasa = mysql_fetch_array($resultado)) {
+                                                            $res=selectTableWhere('Medida','idMedida',"'".$filasa['idMedida']."'");
+                                                            while ($fil=mysql_fetch_array($res)){
+                                                                echo "<td>".$fil['idUnidadMedida']."</td>";
+                                                            }
                                                             echo "<td>".$filasa['tolerancia']."</td>";
                                                         }
                                                         $bandera = true;
@@ -383,21 +504,25 @@ if(isset($_SESSION['login'])){
                 </div>
             </section>
 
-            <section class="container">
+            <section class="container col-sm-12">
                 <div>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>Observaciones</th>
+                            <th>Observaciones - Medidas</th>
                         </tr>
                         </thead>
                         <tbody>
                                 <?php
                                     $result2 = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."'");
                                     while($fila2 = mysql_fetch_array($result2)){
-                                        echo "<tr>";
-                                        echo "<td>".$fila2['observacion']."</td>";
-                                        echo "</tr>";
+                                        if($fila2['observacion']===''||$fila2['observacion']=== null){
+
+                                        }else{
+                                            echo "<tr>";
+                                            echo "<td>".$fila2['observacion']."</td>";
+                                            echo "</tr>";
+                                        }
                                     }
                                 ?>
                         </tbody>
@@ -409,6 +534,13 @@ if(isset($_SESSION['login'])){
 </div>
 
 <hr>
+<section class="container col-lg-9 col-lg-offset-3">
+    <form action="hefinalpdf.php" method="post" class="form-horizontal col-sm-12">
+        <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+        <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" name="pdf" value="Descargar PDF">
+    </form>
+    <br>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
