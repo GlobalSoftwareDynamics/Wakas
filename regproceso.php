@@ -31,6 +31,16 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
+        function getprocedim(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_proce.php",
+                data:'compesp_id='+val,
+                success: function(data){
+                    $("#procedi").html(data);
+                }
+            });
+        }
     </script>
 
 </head>
@@ -88,7 +98,7 @@ mysql_query("SET NAMES 'utf8'");
                 <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente:</label>
             </div>
             <div class="col-xs-12">
-                <select id='componentes' class="ddselect-12" name='componente'>
+                <select id='componentes' class="ddselect-12" name='componente' onChange='getprocedim(this.value);'>
                     <option>Seleccionar</option>
                 </select>
             </div>
@@ -99,14 +109,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-xs-12">
                 <select id="procedi" name="procedimiento" class="ddselect-12">
-                    <?php
-                        $result1=selectTable("SubProceso");
-                        while ($fila1=mysql_fetch_array($result1)){
-                            echo "
-                                <option value='".$fila1['idProcedimiento']."'>".$fila1['descripcion']."</option>
-                            ";
-                        }
-                    ?>
+                    <option>Seleccionar</option>
                 </select>
             </div>
         </div>
@@ -131,6 +134,6 @@ mysql_query("SET NAMES 'utf8'");
 </html>
 <?php
 }else{
-    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifiquese.";
 }
 ?>
