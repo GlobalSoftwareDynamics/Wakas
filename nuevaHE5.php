@@ -457,7 +457,7 @@ if(isset($_SESSION['login'])){
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif($fila['tipo']==='idinsumo') {
-                                    echo "<p id='idinsumo'></p>";
+                                    echo "<span id='idinsumo' style='font-size: 14px'></span>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='ProcedimientoTiempos'){
                                     echo "<select name='selectprocedimiento' id='selectprocedimiento'  onchange='getProcedimiento(this.value)' class='ddselect-12'>";
@@ -469,7 +469,7 @@ if(isset($_SESSION['login'])){
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='IdProcedimiento'){
-                                    echo "<p id='idProcedimiento'></p>";
+                                    echo "<span id='idProcedimiento' style='font-size: 14px'></span>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='maquinatiempo'){
                                     echo "<select name='selectmaquinatiempo' id='selectmaquinatiempo' class='ddselect-12'>";
