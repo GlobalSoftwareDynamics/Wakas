@@ -2,7 +2,7 @@
 
 #descripcionbrand {
     margin-top: 10px;
-    padding-left: 0px;
+    padding-left: 0;
     margin-left: 2%;
 }
 
@@ -24,7 +24,7 @@ h3 {
 
 #tabla {
     padding-top: 20px;
-    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 /*Confirmación de venta*/
@@ -46,4 +46,24 @@ section div p {
 
 #total {
     font-weight: bold;
+}
+/*OP*/
+.observacionop {
+    border: 1px solid;
+    text-align: justify;
+}
+/*HE*/
+
+.sideselect {
+    margin: 5px;
+}
+.seperadorhe {
+    height: 15px;
+}
+
+.table>thead>tr>th.thobservacion {
+    text-align: left;
+}
+.table>tbody>tr>td.tdobservacion {
+    text-align: justify;
 }

@@ -15,25 +15,23 @@
 }
 
 .alfa {
-    font-size: 22px;
+    font-family: "Times New Roman";
+    font-size: 21px;
 }
 
 .alfalogin {
-    font-size: 42px;
+    font-family: "Times New Roman";
+    font-size: 36px;
 }
-
 .imagenlogo {
     margin-top: 15px;
 }
 
 /*Formatos para tablas*/
 
-th {
+table.table>thead>tr>th, table.table>tbody>tr>td, table.table>thead>tr>td, table.table>tbody>tr>th {
     text-align: center;
-}
-
-td {
-    text-align: center;
+    vertical-align: middle;
 }
 
 .jumbotron {

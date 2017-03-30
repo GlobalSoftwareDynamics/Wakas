@@ -15,10 +15,12 @@
 }
 
 .alfa {
+    font-family: "Times New Roman";
     font-size: 21px;
 }
 
 .alfalogin {
+    font-family: "Times New Roman";
     font-size: 36px;
 }
 
@@ -364,6 +366,20 @@ form.jumbotron {
     border-radius: 4px;
 }
 
+.areainput-12 {
+    display: inline-block;
+    height: 100px;
+    width: 100%;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 5px;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 .formlabels {
     font-size: 15px;
     padding: 10px;
@@ -373,6 +389,10 @@ form.jumbotron {
 .formlabels1 {
     font-size: 15px;
     padding: 10px;
+    text-align: left;
+}
+.formlabelscel {
+    font-size: 15px;
     text-align: left;
 }
 
@@ -387,4 +407,18 @@ form.jumbotron {
     -webkit-box-shadow: 3px 3px 5px -2px rgba(0,0,0,0.75);
     -moz-box-shadow: 3px 3px 5px -2px rgba(0,0,0,0.75);
     box-shadow: 3px 3px 5px -2px rgba(0,0,0,0.75);
+}
+.table-bordered > thead > tr.bordes > th, .table-bordered > thead > tr.bordes > td,
+.table-bordered >tbody > tr.bordes >th, .table-bordered > tbody > tr.bordes > td{
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    border-color: #000000;
+}
+.table>thead:first-child>tr:first-child>th.border {
+    border-top: 1px solid #000000;
+}
+/*Main Operarios*/
+.h3operario, .h4operario{
+    text-align: center;
+    margin-bottom: 15px;
 }
