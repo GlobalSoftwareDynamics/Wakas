@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -144,12 +145,16 @@ if(isset($_SESSION['login'])){
         </section>
         <hr>
         <section class="container">
-            <form class="form-horizontal col-sm-12">
-                <div class="col-sm-6">
-                    <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" formaction="gestionMaquinas.php" name="regresar" value="Regresar">
+            <form class="form-horizontal col-sm-12" method="post">
+                <input type="hidden" name="idmaquina" value="<?php echo $_GET['idMaquina']; ?>" readonly>
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-default col-sm-6 col-sm-offset-3" formaction="gestionMaquinas.php" name="regresar" value="Regresar">
                 </div>
-                <div class="col-sm-6">
-                    <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" formaction="gestionRepuestos.php" name="asignarrep" value="Ir a Repuestos">
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-default col-sm-6 col-sm-offset-3" formaction="gestionRepuestos.php" name="asignarrep" value="Ir a Repuestos">
+                </div>
+                <div class="col-sm-4">
+                    <input type="submit" class="btn btn-default col-sm-6 col-sm-offset-3" formaction="verrepuestospdf.php" value="Descargar PDF">
                 </div>
             </form>
         </section>

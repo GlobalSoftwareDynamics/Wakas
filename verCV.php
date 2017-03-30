@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
     ?>
 <html lang="es">
 
@@ -394,7 +395,14 @@ if(isset($_SESSION['login'])){
                 <p>Countersigned</p>
             </div>
         </section>
-
+        <hr>
+        <section class="container">
+            <form action="vercvpdf.php" method="post" class="form-horizontal col-sm-12">
+                <input type="hidden" name="contrato" value="<?php echo $_POST['contrato'];?>" readonly>
+                <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-default col-sm-4 col-sm-offset-4">
+            </form>
+        </section>
+        <br>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 

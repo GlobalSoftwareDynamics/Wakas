@@ -5,16 +5,17 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
    <head>
 
-    	<meta charset="utf-8">
-    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="viewport" content="width=device-width, initial-scale=1">    
-        <title>Ver Órden de Producción</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-        <link href="css/Tablas.css" rel="stylesheet">
+       <meta charset="utf-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1">
+       <title>Ver Órden de Producción</title>
+       <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+       <link href="css/Tablas.css" rel="stylesheet">
        <link href="css/Formatos.css" rel="stylesheet">
 
    </head>
@@ -130,7 +131,7 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="col-sm-12">
                     <div class="col-sm-2">
-                        <label for="cliente">ID Cliente:</label>
+                        <label for="cliente">Cliente:</label>
                     </div>
                     <div class="col-sm-10">
                         <?php
@@ -227,6 +228,38 @@ if(isset($_SESSION['login'])){
                 ?>
                 </tbody>
             </table>
+        </section>
+        <section class="container">
+            <div>
+                <h5>Observación:</h5>
+            </div>
+            <div class="observacionop">
+                <?php
+                    $observacion=selectTableWhere('OrdenProduccion','idOrdenProduccion',"'".$idOP."'");
+                    while ($fila5=mysql_fetch_array($observacion)){
+                        echo "
+                            <p>".$fila5['Observacion']."</p>
+                        ";
+                    }
+                ?>
+            </div>
+        </section>
+        <hr>
+        <section class="container">
+            <form action="veroppdf.php" method="post" class="form-horizontal col-sm-12">
+                <input type="hidden" name="idop" value="<?php
+                $result4=selectTableWhere('OrdenProduccion','idContrato',"'".$_POST['contrato']."'");
+                while ($fila4=mysql_fetch_array($result4)){
+                    echo $fila4['idOrdenProduccion'];
+                }
+                ?>" readonly>
+                <div class="col-sm-6">
+                    <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-default col-sm-6 col-sm-offset-3">
+                </div>
+                <div class="col-sm-6">
+                    <input type="submit" formaction="nuevaOP1.php" name="nuevaobs" value="Agregar Observaciones" class="btn btn-default col-sm-6 col-sm-offset-3">
+                </div>
+            </form>
         </section>
         <br>
 

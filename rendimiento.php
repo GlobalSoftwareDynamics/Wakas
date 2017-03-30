@@ -24,6 +24,9 @@ mysql_query("SET NAMES 'utf8'");
         $(function() {
             $( "#datepicker" ).datepicker();
         });
+        $(function() {
+            $( "#datepicker1" ).datepicker();
+        });
     </script>
 
 </head>
@@ -85,93 +88,71 @@ mysql_query("SET NAMES 'utf8'");
 </header>
 
 <section class="container">
-        <form action="verActividadMuerta.php" method="post" class="form-horizontal jumbotron col-sm-12">
-            <div class="form-group col-sm-6">
-                <div class="col-sm-5">
-                    <label for="datepicker" class="formlabels col-sm-12">Indique la Fecha:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" name="fecha" id="datepicker" class="ddselect-12" value="mm/dd/aa">
-                </div>
+    <form action="#" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+        <div>
+            <h3>Generación de Reportes de Rendimiento</h3>
+        </div>
+        <hr>
+        <div>
+            <h4>Reporte Diario Individual</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="datepicker1" class="formlabels col-sm-12">Indique la Fecha:</label>
             </div>
-            <div class="form-group col-sm-6">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input class="btn btn-default col-sm-10 col-sm-offset-2 boton" type="submit" name="buscar" value="Buscar">
-                    </div>
-                    <div class="col-sm-6">
-                        <input class="btn btn-default col-sm-10 col-sm-offset-2 boton" type="submit" name="eliminarfiltro" value="Eliminar Filtro">
-                    </div>
-                </div>
+            <div class="col-sm-7">
+                <input type="text" name="fecha" id="datepicker1" class="textinput-8" value="mm/dd/aa">
             </div>
-        </form>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="idemp" class="formlabels col-sm-12">Indique el DNI:</label>
+            </div>
+            <div class="col-sm-7">
+                <input type="text" name="dni" id="idemp" class="textinput-8">
+            </div>
+        </div>
+        <div class="form-group">
+            <input formaction="reporterendimientodia.php" class="btn btn-default col-sm-8 col-sm-offset-2 boton" type="submit" name="generarindi" value="Generar">
+        </div>
+        <hr>
+        <div>
+            <h4>Reporte Mensual Individual</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="messe" class="formlabels col-sm-12">Indique el Mes:</label>
+            </div>
+            <div class="col-sm-7">
+                <select name="mes" id="messe" class="ddselect-8">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="idemp" class="formlabels col-sm-12">Indique el DNI:</label>
+            </div>
+            <div class="col-sm-7">
+                <input type="text" name="dni1" id="idemp" class="textinput-8">
+            </div>
+        </div>
+        <div class="form-group">
+            <input formaction="rendimientomensual.php" class="btn btn-default col-sm-8 col-sm-offset-2 boton" type="submit" name="generarindimes" value="Generar">
+        </div>
+    </form>
 </section>
-<hr>
-<section class="container">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Empleado</th>
-                    <th>Actividad Muerta</th>
-                    <th>Descripcion</th>
-                    <th>Fecha</th>
-                    <th>Tiempo Estandar</th>
-                    <th>Tiempo Real</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                if(isset($_POST['buscar'])){
-                    $result=selectTableWhere('EmpleadoActividadMuerta','fecha',"'".$_POST['fecha']."'");
-                    while ($fila=mysql_fetch_array($result)){
-                        $result2 = selectTableWhere("Empleado","idEmpleado","'".$fila['idEmpleado']."'");
-                        while($fila2=mysql_fetch_array($result2)){
-                            $nombreEmpleado = $fila2['nombres']." ".$fila2['apellidos'];
-                        }
-                        $result2 = selectTableWhere("ActividadMuerta","idActividadMuerta","'".$fila['idActividadMuerta']."'");
-                        while($fila2=mysql_fetch_array($result2)){
-                            $actividaddescripcion = $fila2['descripcion'];
-                            $tiempoestandar = $fila2['tiempoEstandar'];
-                        }
-                        echo            "<tr>
-                                            <td>".$nombreEmpleado."</td>
-                                            <td>".$actividaddescripcion."</td>
-                                            <td>".$fila['descripcion']."</td>
-                                            <td>".$fila['fecha']."</td>
-                                            <td>".$tiempoestandar."</td>
-                                            <td>".$fila['tiempo']."</td>
-                                        </tr>
-                                        ";
-                    }
-                }else{
-                    $result=selectTable('EmpleadoActividadMuerta');
-                    while ($fila=mysql_fetch_array($result)){
-                        $result2 = selectTableWhere("Empleado","idEmpleado","'".$fila['idEmpleado']."'");
-                        while($fila2=mysql_fetch_array($result2)){
-                            $nombreEmpleado = $fila2['nombres']." ".$fila2['apellidos'];
-                        }
-                        $result2 = selectTableWhere("ActividadMuerta","idActividadMuerta","'".$fila['idActividadMuerta']."'");
-                        while($fila2=mysql_fetch_array($result2)){
-                            $actividaddescripcion = $fila2['descripcion'];
-                            $tiempoestandar = $fila2['tiempoEstandar'];
-                        }
-
-                        echo            "<tr>
-                                            <td>".$nombreEmpleado."</td>
-                                            <td>".$actividaddescripcion."</td>
-                                            <td>".$fila['descripcion']."</td>
-                                            <td>".$fila['fecha']."</td>
-                                            <td>".$tiempoestandar."</td>
-                                            <td>".$fila['tiempo']."</td>
-                                        </tr>
-                                        ";
-                    }
-                }
-                ?>
-                </tbody>
-            </table>
-</section>
-
 <script src="js/bootstrap.min.js"></script>
 
 </body>
