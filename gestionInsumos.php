@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -83,17 +84,7 @@ if(isset($_SESSION['login'])){
                             <label for="buscarins" class="formlabels col-sm-12">Buscar Insumos:</label>
                         </div>
                         <div class="col-sm-7">
-                            <select id="buscarins" name="filtroInsumo" class="ddselect-12">
-                                <option>Seleccionar Insumo</option>
-                                <?php
-                                $datos=selectTable("Insumos");
-                                while($opcion=mysql_fetch_array($datos)){
-                                    echo "
-                                        <option>".$opcion['descripcion']."</option>
-                                    ";
-                                }
-                                ?>
-                            </select>
+                            <input type="text" id="buscarins" name="filtroInsumo" class="textinput-12">
                         </div>
                     </div>
                     <div class="form-group col-sm-6">
@@ -153,12 +144,11 @@ if(isset($_SESSION['login'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
-                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
                 ";
-                $result = selectTableWhere('Insumos','descripcion',"'".$_POST['filtroInsumo']."'");
+                $result = selectTableWhereLikeSingle('Insumos','descripcion',"'".$_POST['filtroInsumo']."'");
                 while($fila=mysql_fetch_array($result)){
                     echo "
                                 <tr>
@@ -167,7 +157,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarproveedoresins.php?idInsumo=".$fila['idInsumo']."'>Asignar Proveedores</a></td>
                                     <td><a href='actualizarInsumo.php?idInsumo=".$fila['idInsumo']."'>Modificar</a></td>
-                                    <td><a href='gestionInsumos.php?eliminarInsumo=".$fila['idInsumo']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }
@@ -192,13 +181,12 @@ if(isset($_SESSION['login'])){
                 unset($_POST['filtroInsumo']);
                 echo "
                     <div class='container'>
-                        <table class='table table-hover table-condensed'>
+                        <table class='table table-hover'>
                             <thead>
                                 <tr>
                                     <th>idInsumo</th>
                                     <th>Descrici&oacute;n</th>
                                     <th>Unidad de Medida</th>
-                                    <th></th>
                                     <th></th>
                                     <th></th>
                                     </tr>
@@ -214,7 +202,6 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila['idUnidadMedida']."</td>
                                     <td><a href='asignarproveedoresins.php?idInsumo=".$fila['idInsumo']."'>Asignar Proveedores</a></td>
                                     <td><a href='actualizarInsumo.php?idInsumo=".$fila['idInsumo']."'>Modificar</a></td>
-                                    <td><a href='gestionInsumos.php?eliminarInsumo=".$fila['idInsumo']."'>Eliminar</a></td>
                                 </tr>
                     ";
                 }

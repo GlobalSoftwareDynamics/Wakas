@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 <head>
@@ -118,6 +119,7 @@ if(isset($_SESSION['login'])){
                     <option value="galga">Galga</option>
                     <option value="fotografia">Fotograf&iacute;a</option>
                     <option value="color">Color</option>
+                    <option value="fotografiaproducto">Fotografía de Producto</option>
                     <option value="otro">Otro</option>
                 </select>
             </div>
@@ -146,7 +148,7 @@ if(isset($_POST['guardar'])){
     }else{
         echo "<br>";
         echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Actividad Muerta Agregada Exitosamente</strong></p>";
+        echo 	"<p> <strong>Característica Agregada Exitosamente</strong></p>";
         echo " </div>";
     }
 }

@@ -5,8 +5,9 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,7 +15,6 @@ if(isset($_SESSION['login'])){
     <title>Gestion Procedimientos</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -73,7 +73,7 @@ if(isset($_SESSION['login'])){
     </nav>
 </header>
 
-<section class="container">
+
 <?php
 if(isset($_POST['guardarsubproc'])){
     $agregar = "INSERT INTO Subproceso(idProcedimiento, idProceso, descripcion) VALUES ('".$_POST['idSubProc']."','".$_POST['idProc']."','".$_POST['desc']."')";
@@ -83,11 +83,7 @@ if(isset($_POST['guardarsubproc'])){
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
-if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Subproceso.*/
-}
 ?>
-</section>
 <section>
     <div class='container'>
         <h3>Subprocesos de
@@ -117,18 +113,24 @@ if(isset($_GET['eliminarProceso'])) {
                     //echo "<td>".$_POST['idProceso']."</td>";
                     //echo "<td>".$fila['idProcedimiento']."</td>";
                     echo "<td>".$fila['descripcion']."</td>";
-                    echo "  <td>
+                    if(($fila['idProcedimiento'] === 'PROCEDIMIENTO1')||($fila['idProcedimiento'] === 'PROCEDIMIENTO2')||($fila['idProcedimiento'] === 'PROCEDIMIENTO6')||($fila['idProcedimiento'] === 'PROCEDIMIENTO30')||($fila['idProcedimiento'] === 'PROCEDIMIENTO26')||($fila['idProcedimiento'] === 'PROCEDIMIENTO32')){
+                        echo "  <td>
                                 <form method='post'>
-                                    <input class='btn-link' type='submit' formaction='#' value='Asignar'>
-                                    <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
+                                    <input class='btn-link' type='submit' formaction='asignarmaquinasubproc.php' value='Asignar'>
+                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
+                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
                                 </form>                                                                     
                             </td>";
-                    echo "  <td>
+                        echo "  <td>
                                 <form method='post'>
                                     <input class='btn-link' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
                                 </form>
                             </td>";
+                    } else {
+                        echo "<td> - </td><td> - </td>";
+                    }
+
                 echo "</tr>";
             }
             ?>

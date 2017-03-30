@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 <head>
@@ -72,7 +73,24 @@ if(isset($_SESSION['login'])){
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
+    <?php
+    if(isset($_POST['asignar'])){
+        $agregar2="INSERT INTO RepuestosMaquina(idRepuestos, idMaquina) VALUES ('".$_POST['idRep']."','".$_POST['idMaq']."')";
+        $agregar3=mysql_query($agregar2);
+        if ( !empty( $error = mysql_error() ) )
+        {
+            echo 'Mysql error '. $error ."<br />\n";
+        }else {
+            echo "<br>
+                          <div class='container'>
+                            <div class='alert alert-success' role='alert'>
+                                <p><strong>Repuesto Asignado Exitosamente</strong></p>
+                            </div>
+                          </div>
+                    ";
+        }
+    }
+    ?>
     <section class="container">
         <form action="asignarRepuestos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
             <?php
@@ -124,20 +142,7 @@ if(isset($_SESSION['login'])){
                 </div>
             </div>
         </form>
-
-        <?php
-        if(isset($_POST['asignar'])){
-            $agregar2="INSERT INTO RepuestosMaquina(idRepuestos, idMaquina) VALUES ('".$_POST['idRep']."','".$_POST['idMaq']."')";
-            $agregar3=mysql_query($agregar2);
-            if ( !empty( $error = mysql_error() ) )
-            {
-                echo 'Mysql error '. $error ."<br />\n";
-            }
-        }
-        ?>
     </section>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 

@@ -90,7 +90,7 @@ if(isset($_SESSION['login'])){
                     $aux++;
                 }
                 $aux++;
-                echo "<input class='textinput-5' type='text' name= 'idProv' id='idProv' value='PROV".$aux."' readonly>";
+                echo "<input class='textinput-5' type='text' name= 'idProv' id='idProv' value='PROV".$aux."'>";
                 ?>
             </div>
         </div>

@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -134,10 +135,13 @@ if(isset($_SESSION['login'])){
             {
                 echo 'Mysql error '. $error ."<br />\n";
             }else{
-                echo "<br>";
-                echo "<div class='alert alert-success' role='alert'>";
-                echo 	"<p> <strong>Actividad Muerta Agregada Exitosamente</strong></p>";
-                echo " </div>";
+                echo "<br>
+                    <div>
+                        <div class='alert alert-success' role='alert'>
+                            <p><strong>Actividad Muerta Agregada Exitosamente</strong></p>
+                        </div>
+                    </div>
+                ";
             }
         }
 

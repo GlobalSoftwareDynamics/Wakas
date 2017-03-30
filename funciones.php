@@ -65,6 +65,13 @@ function selectOrderedTableWhere1($tabla,$field,$value,$campo,$campo1){
 	echo $result;
 }
 
+function selectTableWhereLikeSingle($tabla,$field,$value){
+    $value1=strval($value);
+    $value2=str_replace("'","",$value1);
+    $result=mysql_query("SELECT * FROM $tabla WHERE $field LIKE '%$value2%'");
+    return $result;
+}
+
 function insertData1($tabla,$field1,$value1){
 	$result = mysql_query("INSERT INTO ".$tabla." (".$field1.") VALUES (".$value1.")");
 	if($result){

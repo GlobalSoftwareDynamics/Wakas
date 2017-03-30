@@ -3,9 +3,10 @@
 session_start();
 require('funciones.php');
 conexion();
-
+mysql_query("SET NAMES 'utf8'");
 $pais=SelectTable('Pais');
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 
 ?>
 <html>
@@ -167,15 +168,15 @@ if(isset($_SESSION['login'])){
                         $aux++;
                     }
                     $aux++;
-                    echo "<input type='hidden' name= 'idCon' value='CONT".$aux."' readonly>";
+                    echo "<input type='hidden' name= 'idCon' value='".$aux."' readonly>";
 
                     $aux2 = 0;
-                    $result = selectTable("Direccion");
-                    while($fila = mysql_fetch_array($result)){
+                    $result1 = selectTable("Direccion");
+                    while($fila2 = mysql_fetch_array($result1)){
                         $aux2++;
                     }
                     $aux2++;
-                    echo "<input type='hidden' name= 'idDir' value='DIR".$aux."' readonly>";
+                    echo "<input type='hidden' name= 'idDir' value='".$aux2."' readonly>";
                 ?>
                 <input type="hidden" name="cliente" value="<?php echo $_POST['idCli'] ?>">
                 <hr>

@@ -5,15 +5,17 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
-<html>
+<html lang="es">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gestion Procedimientos</title>
+    <title>Gestion Caracteristicas</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -82,18 +84,10 @@ if(isset($_POST['insertar'])){
     }
     $agregar = "INSERT INTO SubProcesoCaracteristica (idSubprocesoCaracteristica, idProcedimiento, idCaracteristica, tipo) VALUES ('".$_POST['idSubprocesoCaracteristica']."','".$_POST['idProcedimiento']."','".$_POST['selectcaracteristica']."','".$tipo."')";
     $agregar1 = mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
 }
 if(isset($_POST['eliminar'])){
     $eliminar = "DELETE FROM SubProcesoCaracteristica WHERE idProcedimiento = '".$_POST['idProcedimiento']."' AND idCaracteristica = '".$_POST['caracteristica']."'";
     $eliminar1 = mysql_query($eliminar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
 }
 ?>
 
@@ -108,6 +102,9 @@ if(isset($_POST['eliminar'])){
             }
             ?>
         </h3>
+        <div class="alert alert-warning" role="alert">
+            <strong>Recuerde!</strong> La Característica #1 debe ser siempre "Componente" para cualquier combinación de Proceso/Subproceso.
+        </div>
     </div>
     <hr>
     <div>

@@ -4,6 +4,7 @@ session_start();
 require('funciones.php');
 conexion();
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
     ?>
     <html>
     <head>
@@ -76,20 +77,10 @@ if(isset($_SESSION['login'])){
         <form action="gestionOperarios.php" method="post" class="form-horizontal jumbotron col-sm-12">
             <div class="form-group col-sm-6">
                 <div class="col-sm-5">
-                    <label for="filtroEmpleado" class="formlabels col-sm-12">Buscar Colaborador:</label>
+                    <label for="filtroEmpleado" class="formlabels col-sm-12">Buscar por DNI:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select id="filtroEmpleado" name="filtroEmpleado" class="ddselect-12">
-                        <option>Seleccionar</option>
-                        <?php
-                        $datos=selectTable("Empleado");
-                        while($opcion=mysql_fetch_array($datos)){
-                            echo "
-                        <option>".$opcion['idEmpleado']."</option>
-                      ";
-                        }
-                        ?>
-                    </select>
+                    <input type="text" id="filtroEmpleado" name="filtroEmpleado" class="textinput-12">
                 </div>
             </div>
             <div class="form-group col-sm-6">
@@ -153,12 +144,11 @@ if(isset($_SESSION['login'])){
 				            <th>Usuario</th>
 				            <th>Contrase&ntilde;a</th>
 				            <th></th>
-				            <th></th>
 				         </tr>
 			        </thead>
 			        <tbody>
         ";
-        $result = selectTableWhere('Empleado','idEmpleado',"'".$_POST['filtroEmpleado']."'");
+        $result = selectTableWhereLikeSingle('Empleado','idEmpleado',"'".$_POST['filtroEmpleado']."'");
         while($fila=mysql_fetch_array($result)){
             echo "
                         <tr>
@@ -175,7 +165,6 @@ if(isset($_SESSION['login'])){
             echo "          <td>".$fila['usuario']."</td>
                             <td>".$fila['contrasena']."</td>
                             <td><a href='actualizarPersonal.php?idEmpleado=".$fila['idEmpleado']."'>Modificar</a></td>
-        			        <td><a href='gestionOperarios.php?eliminarEmpleado=".$fila['idEmpleado']."'>Eliminar</a></td>
                         </tr>
             ";
         }
@@ -213,7 +202,6 @@ if(isset($_SESSION['login'])){
                                 <th>Usuario</th>
                                 <th>Contrase&ntilde;a</th>
                                 <th></th>
-                                <th></th>
 				            </tr>
 			        </thead>
 			        <tbody>
@@ -236,7 +224,6 @@ if(isset($_SESSION['login'])){
                                 <td>".$fila['usuario']."</td>
                                 <td>".$fila['contrasena']."</td>
                                 <td><a href='actualizarPersonal.php?idEmpleado=".$fila['idEmpleado']."'>Modificar</a></td>
-        			            <td><a href='gestionOperarios.php?eliminarEmpleado=".$fila['idEmpleado']."'>Eliminar</a></td>
                             </tr>
                 ";
         }

@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 
@@ -95,7 +96,7 @@ if(isset($_SESSION['login'])){
                                     <td>".$fila ['idgenero']."</td>
                                     <td>
                                         <form method='post'>
-                                            <input type='hidden' name='idProductoSel' value='".$fila['idProducto']."' readonly>
+                                            <input type='hidden' name='idProd' value='".$fila['idProducto']."' readonly>
                                             <input type='submit' formaction='HEFinal.php' class='btn-link' value='Ver Detalle'>
                                         </form>
                                     </td>

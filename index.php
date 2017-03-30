@@ -18,6 +18,7 @@
 	</head>
 <?php 
 	require("funciones.php");
+    mysql_query("SET NAMES 'utf8'");
 	conexion();
 	session_start();
 	session_unset();

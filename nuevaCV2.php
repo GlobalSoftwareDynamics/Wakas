@@ -2,9 +2,10 @@
 session_start();
 require('funciones.php');
 conexion();
-
+mysql_query("SET NAMES 'utf8'");
 $prod0 = selectTable("Producto");
 if(isset($_SESSION['login'])){
+    mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>

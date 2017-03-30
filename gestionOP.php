@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
     <head>
@@ -82,7 +83,16 @@ if(isset($_SESSION['login'])){
                 </div>
             </nav>
         </header>
-
+        <?php
+        if(isset($_POST['guardarobs'])){
+            $actualziar="UPDATE OrdenProduccion SET Observacion = '".$_POST['observacion']."' WHERE idOrdenProduccion = '".$_POST['idop']."'";
+            $actualziar1=mysql_query($actualziar);
+            if ( !empty( $error = mysql_error() ) )
+            {
+                echo 'Mysql error '. $error ."<br />\n";
+            }
+        }
+        ?>
         <section class="container">
             <form action="gestionOP.php" method="post" class="form-horizontal jumbotron col-sm-12">
                 <div class="form-group col-sm-6">
