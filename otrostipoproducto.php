@@ -97,6 +97,14 @@ mysql_query("SET NAMES 'utf8'");
                         <input id="tamano" class="textinput-4" type="text" name="tamanolote">
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label class="formlabels col-sm-12" for="digitoID">Dígito de Identificación:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <input id="digitoID" class="textinput-4" type="text" name="digitoID">
+                    </div>
+                </div>
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-12">
@@ -114,7 +122,7 @@ mysql_query("SET NAMES 'utf8'");
         <?php
 
         if(isset($_POST['guardar'])){
-            $agregar="INSERT INTO tipoproducto(idTipoProducto, tamanoLote) VALUES ('".$_POST['idtipoprod']."','".$_POST['tamanolote']."')";
+            $agregar="INSERT INTO tipoproducto(idTipoProducto, tamanoLote, digitoID) VALUES ('".$_POST['idtipoprod']."','".$_POST['tamanolote']."','".$_POST['digitoID']."')";
             $agregar1=mysql_query($agregar);
             if ( !empty( $error = mysql_error() ) )
             {
