@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO talla(idTalla, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['tipo']."')";
+    $agregar="INSERT INTO talla(idTalla, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -107,12 +107,21 @@ if(isset($_GET['eliminarTalla'])){
             <h3>Nueva Talla</h3>
         </div>
         <hr>
+        <?php
+        $aux = 0;
+        $result = selectTable("Talla");
+        while($fila = mysql_fetch_array($result)){
+            $aux++;
+        }
+        $aux++;
+        echo "<input type='hidden' name= 'idtalla' value='".$aux."' readonly>";
+        ?>
         <div class="form-group">
             <div  class="col-sm-12">
-                <label for="id" class="formlabels1 col-sm-12">Talla:</label>
+                <label for="desc" class="formlabels1 col-sm-12">Talla:</label>
             </div>
             <div class="col-sm-12">
-                <input id="id" class="textinput-6" type="text" name="idtalla">
+                <input id="desc" class="textinput-6" type="text" name="descripcion">
             </div>
         </div>
         <div class="form-group">

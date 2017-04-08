@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO genero(idgenero) VALUES ('".$_POST['idgenero']."')";
+    $agregar="INSERT INTO genero(idgenero, descripcion) VALUES ('".$_POST['idgenero']."','".$_POST['descripcion']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -107,12 +107,21 @@ if(isset($_GET['eliminarGenero'])){
             <h3>Nuevo Género</h3>
         </div>
         <hr>
+        <?php
+        $aux = 0;
+        $result = selectTable("Genero");
+        while($fila = mysql_fetch_array($result)){
+            $aux++;
+        }
+        $aux++;
+        echo "<input type='hidden' name= 'idgenero' value='".$aux."' readonly>";
+        ?>
         <div class="form-group">
             <div class="col-sm-12">
-                <label for="idgen" class="formlabels1 col-sm-12">Genero:</label>
+                <label for="desc" class="formlabels1 col-sm-12">Genero:</label>
             </div>
             <div class="col-sm-12">
-                <input id="idgen" type="text" name="idgenero" class="textinput-12">
+                <input id="desc" type="text" name="descripcion" class="textinput-12">
             </div>
         </div>
         <hr>
@@ -141,7 +150,7 @@ if(isset($_GET['eliminarGenero'])){
             while ($fila1=mysql_fetch_array($result1)){
                 echo "
                             <tr>
-                                <td>".$fila1['idgenero']."</td>
+                                <td>".$fila1['descripcion']."</td>
                                 <td><a href='otrosgenero.php?eliminarGenero=".$fila1['idgenero']."'>Eliminar</a></td>
                             </tr>
                         ";
