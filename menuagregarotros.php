@@ -119,7 +119,7 @@ mysql_query("SET NAMES 'utf8'");
                     <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostalla.php">Agregar Talla</button>
                 </div>
                 <div class="col-sm-12">
-                    <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostipotalla.php">Agregar Tipo de Talla</button>
+                    <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostipotalla.php">Agregar Códificacion de Talla</button>
                 </div>
             </form>
         </section>
