@@ -143,7 +143,7 @@ if(isset($_GET['eliminarTipoProducto'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>

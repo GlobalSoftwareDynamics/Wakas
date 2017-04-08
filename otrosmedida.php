@@ -16,6 +16,7 @@ mysql_query("SET NAMES 'utf8'");
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
+        <link href="css/Tablas.css" rel="stylesheet">
 
     </head>
 
@@ -41,6 +42,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                 <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                 <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                 <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                             </ul>
                         </li>
@@ -49,6 +51,7 @@ mysql_query("SET NAMES 'utf8'");
                             <ul class="dropdown-menu">
                                 <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                 <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -76,59 +79,6 @@ mysql_query("SET NAMES 'utf8'");
         </nav>
     </header>
 
-    <section class="container">
-        <form class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" action="otrosmedida.php" method="post">
-            <div>
-                <h3>Nueva Medida</h3>
-            </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label class="formlabels col-sm-12" for="idmedida">idMedida:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input class="textinput-3" id="idmedida" type="text" name="idmedida">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label class="formlabels col-sm-12" for="unimedida">Unidad de Medida:</label>
-                </div>
-                <div class="col-sm-7">
-                    <select class="ddselect-6" id="unimedida" name="unimed">
-                        <?php
-                        $result=selectTable("UnidadMedida");
-                        while ($fila=mysql_fetch_array($result)){
-                            echo "
-                                <option>".$fila['idUnidadMedida']."</option>
-                            ";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label class="formlabels col-sm-12" for="descripcion">Descripci&oacute;n:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input class="textinput-12" id="descripcion" type="text" name="desc">
-                </div>
-            </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input class="btn btn-default boton col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
-                    </div>
-                    <div class="col-sm-6">
-                        <input formaction="menuagregarotros.php" class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
-
     <?php
     if(isset($_POST['guardar'])){
         $agregar="INSERT INTO medida(idMedida, idUnidadMedida, descripcion) VALUES ('".$_POST['idmedida']."','".$_POST['unimed']."','".$_POST['desc']."')";
@@ -146,8 +96,91 @@ mysql_query("SET NAMES 'utf8'");
             ";
         }
     }
+    if(isset($_GET['eliminarMedida'])){
+        $eliminar="DELETE FROM medida WHERE idMedida ='".$_GET['eliminarMedida']."'";
+        $eliminar1=mysql_query($eliminar);
+    }
     ?>
 
+    <section class="container col-sm-6">
+        <form class="form-horizontal jumbotron col-sm-10 col-sm-offset-1" action="otrosmedida.php" method="post">
+            <div>
+                <h3>Nueva Medida</h3>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="formlabels1 col-sm-12" for="idmedida">idMedida:</label>
+                </div>
+                <div class="col-sm-12">
+                    <input class="textinput-6" id="idmedida" type="text" name="idmedida">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="formlabels1 col-sm-12" for="unimedida">Unidad de Medida:</label>
+                </div>
+                <div class="col-sm-12">
+                    <select class="ddselect-6" id="unimedida" name="unimed">
+                        <?php
+                        $result=selectTable("UnidadMedida");
+                        while ($fila=mysql_fetch_array($result)){
+                            echo "
+                                <option>".$fila['idUnidadMedida']."</option>
+                            ";
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label class="formlabels1 col-sm-12" for="descripcion">Descripci&oacute;n:</label>
+                </div>
+                <div class="col-sm-12">
+                    <input class="textinput-12" id="descripcion" type="text" name="desc">
+                </div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
+                </div>
+                <div class="col-sm-6">
+                    <input class="btn btn-success boton col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="container col-sm-6">
+        <div class="container col-sm-10 col-sm-offset-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>idMedida</th>
+                    <th>Descripción</th>
+                    <th>Unidad</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $result1=selectTable('Medida');
+                while ($fila1=mysql_fetch_array($result1)){
+                    echo "
+                            <tr>
+                                <td>".$fila1['idMedida']."</td>
+                                <td>".$fila1['descripcion']."</td>
+                                <td>".$fila1['idUnidadMedida']."</td>
+                                <td><a href='otrosmedida.php?eliminarMedida=".$fila1['idMedida']."'>Eliminar</a></td>
+                            </tr>
+                        ";
+                }
+                ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 

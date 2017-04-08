@@ -16,7 +16,8 @@ mysql_query("SET NAMES 'utf8'");
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
-    
+        <link href="css/Tablas.css" rel="stylesheet">
+
     </head>
 
 	<body>
@@ -40,6 +41,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -48,6 +50,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -75,44 +78,6 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </header>
 
-        <section class="container">
-            <form action="otrosvia.php" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
-                <div>
-                    <h3>Nueva Vía de Envío</h3>
-                </div>
-                <hr>
-                <?php
-                $aux = 0;
-                $result = selectTable("Via");
-                while($fila = mysql_fetch_array($result)){
-                    $aux++;
-                }
-                $aux++;
-                echo "<input type='hidden' name= 'idvia' value='".$aux."' readonly>";
-                ?>
-                <div class="form-group">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <label  class="formlabels1 col-sm-12" for="idvi">V&iacute;a de Env&iacute;o:</label>
-                    </div>
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <input class="textinput-12" id="idvi" type="text" name="descvia">
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <input class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
-                        </div>
-                        <div class="col-sm-6">
-                            <input formaction="menuagregarotros.php" class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        </section>
-
         <?php
         if(isset($_POST['guardar'])){
             $agregar="INSERT INTO via(idVia, descripcion) VALUES ('".$_POST['idvia']."','".$_POST['descvia']."')";
@@ -130,8 +95,71 @@ mysql_query("SET NAMES 'utf8'");
                 ";
             }
         }
+        if(isset($_GET['eliminarVia'])){
+            $eliminar="DELETE FROM via WHERE idVia ='".$_GET['eliminarVia']."'";
+            $eliminar1=mysql_query($eliminar);
+        }
         ?>
 
+        <section class="container col-sm-6">
+            <form action="otrosvia.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+                <div>
+                    <h3>Nueva Vía de Envío</h3>
+                </div>
+                <hr>
+                <?php
+                $aux = 0;
+                $result = selectTable("Via");
+                while($fila = mysql_fetch_array($result)){
+                    $aux++;
+                }
+                $aux++;
+                echo "<input type='hidden' name= 'idvia' value='".$aux."' readonly>";
+                ?>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label  class="formlabels1 col-sm-12" for="idvi">V&iacute;a de Env&iacute;o:</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <input class="textinput-12" id="idvi" type="text" name="descvia">
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="container col-sm-6">
+            <div class="container col-sm-10 col-sm-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Vía de Envío</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $result1=selectTable('Via');
+                    while ($fila1=mysql_fetch_array($result1)){
+                        echo "
+                            <tr>
+                                <td>".$fila1['descripcion']."</td>
+                                <td><a href='otrosvia.php?eliminarVia=".$fila1['idVia']."'>Eliminar</a></td>
+                            </tr>
+                        ";
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 

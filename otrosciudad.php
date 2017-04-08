@@ -16,7 +16,8 @@ mysql_query("SET NAMES 'utf8'");
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
-    
+        <link href="css/Tablas.css" rel="stylesheet">
+
     </head>
 
 	<body>
@@ -40,6 +41,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -48,6 +50,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -75,68 +78,6 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </header>
 
-        <section class="container">
-            <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
-                <div>
-                    <h3>Nueva Ciudad</h3>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="idciu" class="formlabels col-sm-12">id Ciudad:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <?php
-                        $aux = 0;
-                        $result = selectTable("Ciudad");
-                        while($fila = mysql_fetch_array($result)){
-                            $aux++;
-                        }
-                        $aux++;
-                        echo "<input class='textinput-3' id='idciu' type='text' name= 'idciudad' value='".$aux."' readonly>";
-                        ?>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div  class="col-sm-5">
-                        <label for="nom" class="formlabels col-sm-12">Nombre de la Ciudad:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <input id="nom" class="textinput-8" type="text" name="nombre">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="pais" class="formlabels col-sm-12">Seleccione Pa&iacute;s:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <select id="pais" name="idpais" class="ddselect-8">
-                            <option>Seleccionar País</option>
-                            <?php
-                            $result=selectTable("Pais");
-                            while ($fila=mysql_fetch_array($result)){
-                                echo "
-                                <option value='".$fila['idPais']."'>".$fila['pais']."</option>
-                            ";
-                            }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-                <hr>
-                <div class="form-group">
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <input class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" name="guardar" value="Agregar">
-                        </div>
-                        <div class="col-sm-6">
-                            <input formaction="menuagregarotros.php" class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </section>
-
         <?php
         if(isset($_POST['guardar'])){
             $agregar="INSERT INTO ciudad(idCiudad, idPais, nombre) VALUES ('".$_POST['idciudad']."','".$_POST['idpais']."','".$_POST['nombre']."')";
@@ -154,8 +95,101 @@ mysql_query("SET NAMES 'utf8'");
                 ";
             }
         }
+        if(isset($_GET['eliminarCiudad'])){
+            $eliminar="DELETE FROM ciudad WHERE idCiudad ='".$_GET['eliminarCiudad']."'";
+            $eliminar1=mysql_query($eliminar);
+        }
         ?>
 
+        <section class="container col-sm-6">
+            <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+                <div>
+                    <h3>Nueva Ciudad</h3>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="idciu" class="formlabels1 col-sm-12">id Ciudad:</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <?php
+                        $aux = 0;
+                        $result = selectTable("Ciudad");
+                        while($fila = mysql_fetch_array($result)){
+                            $aux++;
+                        }
+                        $aux++;
+                        echo "<input class='textinput-6' id='idciu' type='text' name= 'idciudad' value='".$aux."' readonly>";
+                        ?>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div  class="col-sm-12">
+                        <label for="nom" class="formlabels1 col-sm-12">Nombre de la Ciudad:</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <input id="nom" class="textinput-12" type="text" name="nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <label for="pais" class="formlabels1 col-sm-12">Seleccione Pa&iacute;s:</label>
+                    </div>
+                    <div class="col-sm-12">
+                        <select id="pais" name="idpais" class="ddselect-12">
+                            <option>Seleccionar País</option>
+                            <?php
+                            $result=selectTable("Pais");
+                            while ($fila=mysql_fetch_array($result)){
+                                echo "
+                                <option value='".$fila['idPais']."'>".$fila['pais']."</option>
+                            ";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                    </div>
+                </div>
+            </form>
+        </section>
+        <section class="container col-sm-6">
+            <div class="container col-sm-10 col-sm-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Ciudad</th>
+                        <th>País</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                    $result1=selectTable('Ciudad');
+                    while ($fila1=mysql_fetch_array($result1)){
+                        $result2=selectTableWhere('Pais','idPais',"'".$fila1['idPais']."'");
+                        while ($fila2=mysql_fetch_array($result2)){
+                            echo "
+                            <tr>
+                                <td>".$fila1['nombre']."</td>
+                                <td>".$fila2['pais']."</td>
+                                <td><a href='otrosciudad.php?eliminarCiudad=".$fila1['idCiudad']."'>Eliminar</a></td>
+                            </tr>
+                        ";
+                        }
+                    }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
