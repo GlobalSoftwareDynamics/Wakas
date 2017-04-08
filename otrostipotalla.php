@@ -3,6 +3,7 @@
 session_start();
 require('funciones.php');
 conexion();
+
 if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
 ?>
@@ -16,10 +17,10 @@ mysql_query("SET NAMES 'utf8'");
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
     <link href="css/Tablas.css" rel="stylesheet">
-
 </head>
 
 <body>
+
 <header>
     <nav class="navbar navbar-inverse">
         <div class="container">
@@ -40,6 +41,7 @@ mysql_query("SET NAMES 'utf8'");
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                             <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                             <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                         </ul>
                     </li>
@@ -48,6 +50,7 @@ mysql_query("SET NAMES 'utf8'");
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                             <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -77,64 +80,48 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO tipoproducto(idTipoProducto,descripcion, tamanoLote, digitoID) VALUES ('".$_POST['idtipoprod']."','".$_POST['descripcion']."','".$_POST['tamanolote']."','".$_POST['digitoID']."')";
+    $agregar="INSERT INTO codificaciontalla(idcodificacionTalla, descripcion) VALUES ('".$_POST['idtipotalla']."','".$_POST['descripcion']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
         echo 'Mysql error '. $error ."<br />\n";
     }else{
         echo "<br>
-                <div class='container'>
-                    <div class='alert alert-success' role='alert'>
-                        <p><strong>Tipo de Producto Agregado Exitosamente</strong></p>
-                    </div>
+            <div class='container'>
+                <div class='alert alert-success' role='alert'>
+                    <p><strong>Codificación de Talla Agregada Exitosamente</strong></p>
                 </div>
-        ";
+            </div>
+            ";
     }
 }
-if(isset($_GET['eliminarTipoProducto'])){
-    $eliminar="DELETE FROM tipoproducto WHERE idTipoProducto ='".$_GET['eliminarTipoProducto']."'";
+if(isset($_GET['eliminarTipoTalla'])){
+    $eliminar="DELETE FROM codificaciontalla WHERE idcodificacionTalla ='".$_GET['eliminarTipoTalla']."'";
     $eliminar1=mysql_query($eliminar);
 }
 ?>
 
 <section class="container col-sm-6">
-    <form action="otrostipoproducto.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+    <form action="otrosgenero.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
-            <h3>Nuevo Tipo de Producto</h3>
+            <h3>Nueva Codificación de Talla</h3>
         </div>
         <hr>
         <?php
         $aux = 0;
-        $result = selectTable("TipoProducto");
+        $result = selectTable("codificacionTalla");
         while($fila = mysql_fetch_array($result)){
             $aux++;
         }
         $aux++;
-        echo "<input class='textinput-6' type='text' name='idtipoprod' value='".$aux."' readonly>";
+        echo "<input class='textinput-4' type='hidden' name= 'idtipotalla' value='".$aux."' readonly>";
         ?>
         <div class="form-group">
             <div class="col-sm-12">
-                <label class="formlabels1 col-sm-12" for="idtipo">Tipo de Producto:</label>
+                <label for="desc" class="formlabels1 col-sm-12">Codificación de Talla:</label>
             </div>
             <div class="col-sm-12">
-                <input id="idtipo" class="textinput-12" type="text" name="descripcion">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label class="formlabels1 col-sm-12" for="tamano">Tama&ntilde;o de Lote:</label>
-            </div>
-            <div class="col-sm-12">
-                <input id="tamano" class="textinput-6" type="text" name="tamanolote">
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <label class="formlabels1 col-sm-12" for="digitoID">Dígito de Identificación:</label>
-            </div>
-            <div class="col-sm-12">
-                <input id="digitoID" class="textinput-6" type="text" name="digitoID">
+                <input id="desc" type="text" name="descripcion" class="textinput-12">
             </div>
         </div>
         <hr>
@@ -153,31 +140,26 @@ if(isset($_GET['eliminarTipoProducto'])){
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Tipo</th>
-                <th>Tamaño de Lote</th>
-                <th>Digito Inicial</th>
+                <th>Tipo de Talla</th>
                 <th></th>
             </tr>
             </thead>
             <tbody>
             <?php
-            $result1=selectTable('TipoProducto');
+            $result1=selectTable('codificacionTalla');
             while ($fila1=mysql_fetch_array($result1)){
                 echo "
                             <tr>
                                 <td>".$fila1['descripcion']."</td>
-                                <td>".$fila1['tamanoLote']."</td>
-                                <td>".$fila1['digitoID']."</td>
-                                <td><a href='otrostipoproducto.php?eliminarTipoProducto=".$fila1['idTipoProducto']."'>Eliminar</a></td>
+                                <td><a href='otrostipotalla.php?eliminarTipoTalla=".$fila1['idcodificacionTalla']."'>Eliminar</a></td>
                             </tr>
-                        ";
+                ";
             }
             ?>
             </tbody>
         </table>
     </div>
 </section>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 
