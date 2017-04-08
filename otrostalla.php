@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO talla(idTalla, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
+    $agregar="INSERT INTO talla(idTalla, descripcion, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
