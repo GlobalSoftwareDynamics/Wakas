@@ -40,6 +40,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -48,6 +49,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -77,7 +79,7 @@ mysql_query("SET NAMES 'utf8'");
 
         <?php
         if(isset($_POST['asignar'])){
-            $agregar2="INSERT INTO ProveedorInsumos(idProveedor, idInsumo, costo) VALUES ('".$_POST['idProv']."','".$_POST['idIns']."','".$_POST['costo']."')";
+            $agregar2="INSERT INTO ProveedorInsumos(idProveedor, idInsumo, costo) VALUES ('".$_POST['idProv']."','".$_POST['idIns']."','-')";
             $agregar3=mysql_query($agregar2);
             if ( !empty( $error = mysql_error() ) )
             {
@@ -113,11 +115,11 @@ mysql_query("SET NAMES 'utf8'");
                     }
                 ?>
                 <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="proveedor" class="formlabels col-sm-12">Seleccionar Proveedor:</label>
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <label for="proveedor" class="formlabels1 col-sm-12">Seleccionar Proveedor:</label>
                     </div>
-                    <div class="col-sm-7">
-                        <select name="idProv" id="proveedor" class="ddselect-10">
+                    <div class="col-sm-8 col-sm-offset-2">
+                        <select name="idProv" id="proveedor" class="ddselect-12">
                             <?php
                                 $result=selectTable('Proveedor');
                                 while ($fila=mysql_fetch_array($result)){
@@ -129,25 +131,25 @@ mysql_query("SET NAMES 'utf8'");
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <div class="col-sm-5">
                         <label for="cost" class="formlabels col-sm-12">Precio de Venta:</label>
                     </div>
                     <div class="col-sm-7">
                         <input id="cost" type="text" name="costo" class="textinput-3">
                     </div>
-                </div>
+                </div>-->
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <div class="col-sm-4">
-                            <input class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" name="asignar" value="Asignar Proveedor">
+                            <input formaction="gestionInsumos.php" class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" value="Regresar">
                         </div>
                         <div class="col-sm-4">
                             <input formaction="gestionProveedores.php" class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" value="Ir a Proveedores">
                         </div>
                         <div class="col-sm-4">
-                            <input formaction="gestionInsumos.php" class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" value="Regresar">
+                            <input class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" name="asignar" value="Asignar">
                         </div>
                     </div>
                 </div>

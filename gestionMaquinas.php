@@ -39,6 +39,7 @@ if(isset($_SESSION['login'])){
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -47,6 +48,7 @@ if(isset($_SESSION['login'])){
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -149,10 +151,10 @@ if(isset($_SESSION['login'])){
                 <form>
                     <div class="col-sm-12">
                         <div class="col-sm-6">
-                            <button class="btn btn-default col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar M&aacute;quina</button>
+                            <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Galgas</button>
                         </div>
                         <div class="col-sm-6">
-                            <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Gestionar Galgas</button>
+                            <button class="btn btn-success col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar</button>
                         </div>
                     </div>
                 </form>

@@ -41,6 +41,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -49,6 +50,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -126,10 +128,10 @@ mysql_query("SET NAMES 'utf8'");
                     <div class="form-group">
                         <div class="col-sm-12">
                             <div class="col-sm-6">
-                                <input type="submit" name="agregar" class="btn btn-default col-sm-10 col-sm-offset-1" value="Agregar Precio">
+                                <input type="submit" name="agregar" class="btn btn-success col-sm-10 col-sm-offset-1" value="Agregar Precio">
                             </div>
                             <div class="col-sm-6">
-                                <input type="submit" class="btn btn-default col-sm-10 col-sm-offset-1" formaction="CVFinal.php" name="finalizar" value="Finalizar">
+                                <input type="submit" class="btn btn-primary col-sm-10 col-sm-offset-1" formaction="CVFinal.php" name="finalizar" value="Finalizar">
                             </div>
                         </div>
                     </div>
@@ -167,7 +169,8 @@ mysql_query("SET NAMES 'utf8'");
                 </table>
             </div>
         </section>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 
 </html>

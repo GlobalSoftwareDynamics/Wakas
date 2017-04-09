@@ -179,12 +179,12 @@ mysql_query("SET NAMES 'utf8'");
 		    <section class='container'>
 		         <form class='form-horizontal col-sm-12'>
 		              <div class='form-group col-sm-12'>
-		                <div class='col-sm-6'>
-		                    <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar Colaborador</button>
-                        </div>
-			            <div class='col-sm-6'>
-			                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
-                        </div>
+                            <div class='col-sm-6'>
+                                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
+                            </div>
+                            <div class='col-sm-6'>
+                                <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar</button>
+                            </div>
 			          </div>
 		         </form>
             </section>
@@ -238,12 +238,12 @@ mysql_query("SET NAMES 'utf8'");
             <section class='container'>
                  <form class='form-horizontal col-sm-12'>
 		              <div class='form-group col-sm-12'>
-		                <div class='col-sm-6'>
-		                    <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar Colaborador</button>
-                        </div>
-			            <div class='col-sm-6'>
-			                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
-                        </div>
+                          <div class='col-sm-6'>
+                                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
+                            </div>
+                            <div class='col-sm-6'>
+                                <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar</button>
+                            </div>
 			          </div>
 		         </form>
             </section>

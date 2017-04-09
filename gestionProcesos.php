@@ -40,6 +40,7 @@ mysql_query("SET NAMES 'utf8'");
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                             <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                             <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                         </ul>
                     </li>
@@ -48,6 +49,7 @@ mysql_query("SET NAMES 'utf8'");
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                             <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -129,7 +131,7 @@ if(isset($_GET['eliminarProceso'])) {
         <div class='container'>
             <form action="agregarProceso.php" class="form-horizontal">
                 <div class="col-sm-12">
-                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar Proceso">
+                    <input class='btn btn-success col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar">
                 </div>
             </form>
         </div>

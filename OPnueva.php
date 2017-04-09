@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <?php
 session_start();
 require('funciones.php');
@@ -8,16 +8,83 @@ if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
-
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Waka-s Textiles Finos S.A.</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <title>Nueva Orden de Producción</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link href="css/Formularios.css" rel="stylesheet">
+    <script>
 
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+
+        function getcv(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_cv.php",
+                data:'fecha='+val,
+                success: function(data){
+                    $("#cont").html(data);
+                }
+            });
+        }
+
+        function getproducto(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_producto.php",
+                data:{'contrato':val},
+                success: function(data){
+                    $("#prod").html(data);
+                }
+            });
+        }
+        function getcolor() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            $.ajax({
+                type: "POST",
+                url: "get_color.php",
+                data:'contrato=' + contrato + '&producto=' + producto,
+                success: function(data){
+                    $("#col").html(data);
+                }
+            });
+        }
+        function gettalla() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            $.ajax({
+                type: "POST",
+                url: "get_tallas.php",
+                data:'contrato=' + contrato + '&producto=' + producto,
+                success: function(data){
+                    $("#tall").html(data);
+                }
+            });
+        }
+        function getcantidad() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            var color = document.getElementById('col').value;
+            var talla = document.getElementById('tall').value;
+            $.ajax({
+                type: "POST",
+                url: "get_cantidad.php",
+                data:{'contrato':contrato, 'producto':producto, 'color':color, 'talla':talla},
+                success: function(data){
+                    $("#cant").html(data);
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -77,92 +144,91 @@ mysql_query("SET NAMES 'utf8'");
         </div>
     </nav>
 </header>
-
-    <section class="container">
-        <form action="gestionOperarios.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
-            <div>
-                <h3>Agregar Colaborador</h3>
-            </div>
-            <hr>
-            <div class="form-group">
+<section class="container">
+    <form class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" action="nuevaOP.php" method="post">
+        <div>
+            <h4>Nueva Órden de Producción</h4>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-12">
                 <div class="col-sm-5">
-                    <label for="idEmp" class="formlabels col-sm-12">DNI:</label>
+                    <label for="datepicker" class="formlabels col-sm-12">Fecha:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-4" name="idEmp" id="idEmp">
+                    <input name="fecha" class="textinput-4" id="datepicker" onchange='getcv(this.value);'>
                 </div>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
                 <div class="col-sm-5">
-                    <label for="nombres" class="formlabels col-sm-12">Nombres:</label>
+                    <label for="cont" class="formlabels col-sm-12">Confirmación de Venta:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-6" name="nombres" id="nombres">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="apellidos" class="formlabels col-sm-12">Apellidos:</label>
-                </div>
-                <div class="col-sm-7">
-                    <input type="text" class="textinput-8" name="apellidos" id="apellidos">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="tipouser" class="formlabels col-sm-12">Tipo de Usuario:</label>
-                </div>
-                <div class="col-sm-7">
-                    <select name="tipouser" class="ddselect-5" id="tipouser">
+                    <select name="contrato" class="ddselect-8" id="cont" onchange='getproducto(this.value);'>
                         <option>Seleccionar</option>
-                        <?php
-                        $result=selectTable('TipoUsuario');
-                        while($fila=mysql_fetch_array($result)){
-                            echo "
-                            <option value='".$fila['idTipoUsuario']."'>".$fila['Descripcion']."</option>
-                        ";
-                        }
-                        ?>
                     </select>
                 </div>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
                 <div class="col-sm-5">
-                    <label for="usuario" class="formlabels col-sm-12">Usuario:</label>
+                    <label for="prod" class="formlabels col-sm-12">Producto:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="usuario" id="usuario">
+                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();gettalla();">
+                        <option>Seleccionar</option>
+                    </select>
                 </div>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
                 <div class="col-sm-5">
-                    <label for="pass" class="formlabels col-sm-12">Contrase&ntilde;a:</label>
+                    <label for="col" class="formlabels col-sm-12">Color:</label>
                 </div>
                 <div class="col-sm-7">
-                    <input type="text" class="textinput-5" name="pass" id="pass">
+                    <select name="color" class="ddselect-6" id="col">
+                        <option>Selecc.</option>
+                    </select>
                 </div>
             </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Regresar" formaction="gestionOperarios.php">
-                    </div>
-                    <div class="col-sm-6">
-                        <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="guardaremp" value="Agregar">
-                    </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-5">
+                    <label for="tall" class="formlabels col-sm-12">Talla:</label>
+                </div>
+                <div class="col-sm-7">
+                    <select name="talla" class="ddselect-6" id="tall" onchange="getcantidad()">
+                        <option>Selecc.</option>
+                    </select>
                 </div>
             </div>
-        </form>
-    </section>
-
-</body>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-5">
+                    <label for="cantidad" class="formlabels col-sm-12">Cantidad:</label>
+                </div>
+                <div class="col-sm-7" id="cant">
+                    <input type="text" name="cantidad" class="textinput-4" id="cant">
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-success col-sm-6 col-sm-offset-3" name="ordenprodform" value="Crear Orden">
+            </div>
+        </div>
+    </form>
+</section>
 <script src="js/bootstrap.min.js"></script>
-
+</body>
 </html>
-
 <?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
