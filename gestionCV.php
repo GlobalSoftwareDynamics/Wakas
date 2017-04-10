@@ -50,6 +50,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -58,6 +59,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -116,7 +118,6 @@ mysql_query("SET NAMES 'utf8'");
                         <th>Fecha</th>
                         <th>Cliente</th>
                         <th></th>
-                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -143,12 +144,6 @@ mysql_query("SET NAMES 'utf8'");
                                                     <input type='submit' class='btn-link' name='detalle' value='Ver Detalle'>
                                                 </form>
                                             </td>
-                                            <td>
-                                                <form action='verOP.php' method='post'>
-                                                    <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
-                                                    <input type='submit' class='btn-link' name='detalle' value='Ver Órden de Producción'>
-                                                </form>
-                                            </td>
                                             </tr>
                                         ";
                                     }
@@ -172,12 +167,6 @@ mysql_query("SET NAMES 'utf8'");
                                                     <form action='verCV.php' method='post'>
                                                         <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
                                                         <input type='submit' class='btn-link' name='detalle' value='Ver Detalle'>
-                                                    </form>
-                                                </td>
-                                                <td>
-                                                    <form action='verOP.php' method='post'>
-                                                        <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
-                                                        <input type='submit' class='btn-link' name='detalle' value='Ver Órden de Producción'>
                                                     </form>
                                                 </td>
                                             </tr>
