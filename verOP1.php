@@ -255,14 +255,17 @@ mysql_query("SET NAMES 'utf8'");
         <section class="container">
             <form action="veroppdf.php" method="post" class="form-horizontal col-sm-12">
                 <input type="hidden" name="idop" value="<?php echo $_POST['ordenprod']; ?>" readonly>
-                <div class="col-sm-4">
-                    <input type="submit" formaction="gestionOP.php" value="Regresar" class="btn btn-default col-sm-8 col-sm-offset-2">
+                <div class="col-sm-3">
+                    <input type="submit" formaction="gestionOP.php" value="Regresar" class="btn btn-default col-sm-10 col-sm-offset-1">
                 </div>
-                <div class="col-sm-4">
-                    <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-8 col-sm-offset-2">
+                <div class="col-sm-3">
+                    <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-10 col-sm-offset-1">
                 </div>
-                <div class="col-sm-4">
-                    <input type="submit" formaction="nuevaOPobs.php" name="nuevaobs" value="Agregar Observaciones" class="btn btn-success col-sm-8 col-sm-offset-2">
+                <div class="col-sm-3">
+                    <input type="submit" formaction="tarjetasOPpdf.php" value="Descargar Tarjetas" class="btn btn-primary col-sm-10 col-sm-offset-1">
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" formaction="nuevaOPobs.php" name="nuevaobs" value="Agregar Observaciones" class="btn btn-success col-sm-10 col-sm-offset-1">
                 </div>
             </form>
         </section>
