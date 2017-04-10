@@ -102,7 +102,7 @@ if(isset($_GET['eliminarTipoTalla'])){
 ?>
 
 <section class="container col-sm-6">
-    <form action="otrosgenero.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+    <form action="otrostipotalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Codificación de Talla</h3>
         </div>

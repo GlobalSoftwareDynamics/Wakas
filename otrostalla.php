@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO talla(idTalla, descripcion, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
+    $agregar="INSERT INTO talla(idTalla, descripcion, idcodificacionTalla) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -102,7 +102,7 @@ if(isset($_GET['eliminarTalla'])){
 ?>
 
 <section class="container col-sm-6">
-    <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+    <form action="otrostalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Talla</h3>
         </div>
@@ -171,7 +171,7 @@ if(isset($_GET['eliminarTalla'])){
                         while ($fila2=mysql_fetch_array($result2)){
                             echo "
                             <tr>
-                                <td>".$fila1['idTalla']."</td>
+                                <td>".$fila1['descripcion']."</td>
                                 <td>".$fila2['descripcion']."</td>
                                 <td><a href='otrostalla.php?eliminarTalla=".$fila1['idTalla']."'>Eliminar</a></td>
                             </tr>
