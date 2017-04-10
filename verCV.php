@@ -401,7 +401,12 @@ mysql_query("SET NAMES 'utf8'");
         <section class="container">
             <form action="vercvpdf.php" method="post" class="form-horizontal col-sm-12">
                 <input type="hidden" name="contrato" value="<?php echo $_POST['contrato'];?>" readonly>
-                <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-4 col-sm-offset-4">
+                <div class="col-sm-6">
+                    <input type="submit" formaction="gestionCV.php" value="Regresar" class="btn btn-default col-sm-6 col-sm-offset-3">
+                </div>
+                <div class="col-sm-6">
+                    <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-6 col-sm-offset-3">
+                </div>
             </form>
         </section>
         <br>
