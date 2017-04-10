@@ -58,7 +58,7 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
-        function gettalla() {
+        function gettallas() {
             var contrato = document.getElementById('cont').value;
             var producto = document.getElementById('prod').value;
             $.ajax({
@@ -178,7 +178,7 @@ mysql_query("SET NAMES 'utf8'");
                     <label for="prod" class="formlabels col-sm-12">Producto:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();gettalla();">
+                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();gettallas();">
                         <option>Seleccionar</option>
                     </select>
                 </div>

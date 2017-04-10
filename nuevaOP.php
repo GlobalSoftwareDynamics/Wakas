@@ -49,6 +49,7 @@ while ($fila=mysql_fetch_array($result1)){
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -57,6 +58,7 @@ while ($fila=mysql_fetch_array($result1)){
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -116,6 +118,7 @@ while ($fila=mysql_fetch_array($result1)){
                     }
                     $result6=selectTableWhere('Producto','idProducto',"'".$fila1['idProducto']."'");
                     $cantidadlote=$fila1['cantidad'];
+                    settype($cantidadlote,"integer");
                     while ($fila2=mysql_fetch_array($result6)){
                         $result8=selectTableWhere('TipoProducto','idTipoProducto',"'".$fila2['idTipoProducto']."'");
                         while ($fila4=mysql_fetch_array($result8)){
@@ -131,7 +134,8 @@ while ($fila=mysql_fetch_array($result1)){
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
                                     $cantidadlote1 = $fila4['tamanoLote'];
-                                    $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "')";
+                                    settype($cantidadlote1,"integer");
+                                    $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
                                     $agregarlote1 = mysql_query($agreglote);
                                 } else {
                                     $aux1 = 0;
@@ -142,12 +146,98 @@ while ($fila=mysql_fetch_array($result1)){
                                     }
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
-                                    $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "')";
+                                    $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
                                     $agregarlote1 = mysql_query($agreglote);
                                 }
                                 $cantidadlote = $cantidadlote - $tamanolote;
                                 $aux2++;
                             }
+                        }
+                    }
+                    $cantidadactual=$fila1['cantidad'];
+                    $actualizar="UPDATE confirmacionventaproducto SET cantidadop = '".$cantidadactual."' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$fila1['idProducto']."' AND idColor='".$fila1['idColor']."' AND idTalla='".$fila1['idTalla']."'";
+                    $query=mysql_query($actualizar);
+                    $actualizar1="UPDATE confirmacionventaproducto SET estado = '0' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$fila1['idProducto']."' AND idColor='".$fila1['idColor']."' AND idTalla='".$fila1['idTalla']."'";
+                    $query1=mysql_query($actualizar1);
+                }
+            }
+            if(isset($_POST['ordenprodform'])){
+            $result4="SELECT * FROM confirmacionventaproducto WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
+            $result5=mysql_query($result4);
+            while ($fila1=mysql_fetch_array($result5)){
+                $cantidadrestante=$fila1['cantidad']-$fila1['cantidadop'];
+                if ($cantidadrestante<$_POST['cantidad']){
+                    echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>La cantidad ingresada es inválida.</span></div><hr>";
+                }else {
+                        $aux = 0;
+                        $result = selectTable("OrdenProduccion");
+                        while($fila = mysql_fetch_array($result)){
+                            $aux++;
+                        }
+
+                        $aux++;
+                        $idOrdProd="OP".$aux;
+                        $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$_POST['contrato']."'");
+                        while ($fila=mysql_fetch_array($result1)){
+                            $fechacreacion=(string)$fila['fecha'];
+                            $fechadespacho=(string)$fila['shipdate'];
+                        }
+
+                        $result2="INSERT INTO ordenproduccion(idOrdenProduccion, idContrato, idEmpleado, fechaCreacion, fechaDespacho) VALUES ('".$idOrdProd."','".$_POST['contrato']."','".$idempleado."','".$fechacreacion."','".$fechadespacho."')";
+                        $agregar=mysql_query($result2);
+                        if ( !empty( $error = mysql_error() ) ) {
+                            echo 'Mysql error '. $error ."<br />\n";
+                        }
+
+                        $material=selectTableWhere('Material','idMaterial',"'".$fila1['idMaterial']."'");
+                        while ($fila6=mysql_fetch_array($material)){
+                            $nombremat=$fila6['material'];
+                        }
+                        $result6=selectTableWhere('Producto','idProducto',"'".$fila1['idProducto']."'");
+                        $cantidadlote=$_POST['cantidad'];
+                        settype($cantidadlote,"integer");
+                        while ($fila2=mysql_fetch_array($result6)){
+                            $result8=selectTableWhere('TipoProducto','idTipoProducto',"'".$fila2['idTipoProducto']."'");
+                            while ($fila4=mysql_fetch_array($result8)){
+                                $tamanolote=$fila4['tamanoLote'];
+                                $aux2=0;
+                                for ($i=0;$cantidadlote > 0;$i++) {
+                                    if (($cantidadlote) > $fila4['tamanoLote']) {
+                                        $aux1 = 0;
+                                        $result7 = selectTable("Lote");
+                                        while ($fila3 = mysql_fetch_array($result7)) {
+                                            $aux1++;
+                                        }
+                                        $aux1++;
+                                        $idlote = $idOrdProd . "LT" . $aux1;
+                                        $cantidadlote1 = $fila4['tamanoLote'];
+                                        settype($cantidadlote1,"integer");
+                                        $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
+                                        $agregarlote1 = mysql_query($agreglote);
+                                    } else {
+                                        $aux1 = 0;
+                                        $result7 = selectTable("Lote");
+                                        while ($fila3 = mysql_fetch_array($result7)) {
+                                            $aux1++;
+
+                                        }
+                                        $aux1++;
+                                        $idlote = $idOrdProd . "LT" . $aux1;
+                                        $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
+                                        $agregarlote1 = mysql_query($agreglote);
+                                    }
+                                    $cantidadlote = $cantidadlote - $tamanolote;
+                                    $aux2++;
+                                }
+                            }
+                        }
+                        $cantidadactual=$fila1['cantidadop']+$_POST['cantidad'];
+                        $actualizar="UPDATE confirmacionventaproducto SET cantidadop = '".$cantidadactual."' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
+                        $query=mysql_query($actualizar);
+                        $resta=$fila1['cantidad']-$cantidadactual;
+                        if($resta==0){
+                            $actualizar1="UPDATE confirmacionventaproducto SET estado = '0' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
+                            $query1=mysql_query($actualizar1);
                         }
                     }
                 }
@@ -282,20 +372,23 @@ while ($fila=mysql_fetch_array($result1)){
                 <tbody>
                     <?php
                     $aux3=1;
-                    $result1="SELECT * FROM Lote WHERE idOrdenProduccion ='".$idOrdProd."' ORDER BY idProducto ASC";
+                    $result1="SELECT * FROM Lote WHERE idOrdenProduccion ='".$idOrdProd."' ORDER BY idProducto ASC, posicion ASC";
                     $result=mysql_query($result1);
                     while ($fila=mysql_fetch_array($result)){
-                        echo "
+                        $result9=selectTableWhere('Talla','idTalla',"'".$fila['idTalla']."'");
+                        while ($fila7=mysql_fetch_array($result9)){
+                            echo "
                                 <tr>
                                     <td>".$aux3."</td>
                                     <td>".$fila['idLote']."</td>
                                     <td>".$fila['idProducto']."</td>
                                     <td>".$fila['material']."</td>
                                     <td>".$fila['idColor']."</td>
-                                    <td>".$fila['idTalla']."</td>
+                                    <td>".$fila7['descripcion']."</td>
                                     <td>".$fila['cantidad']."</td>
                                 </tr>
                             ";
+                        }
                         $aux3++;
                     }
                     ?>
