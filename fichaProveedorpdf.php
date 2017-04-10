@@ -140,7 +140,7 @@ if(isset($_SESSION['login'])){
           </div>
     ';
     $nombrearchivo='FichadeProveedor'.$_POST['idproveedor'].'.pdf';
-    $mpdf = new mPDF();
+    $mpdf = new mPDF('','A4',0,'','15',15,35,35,6,6);
 
 // Write some HTML code:
     $mpdf->SetHTMLHeader($htmlheader);
