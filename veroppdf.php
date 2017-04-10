@@ -91,20 +91,23 @@ if(isset($_SESSION['login'])){
                     </thead>
                     <tbody>';
                     $aux3=1;
-                    $result1="SELECT * FROM Lote WHERE idOrdenProduccion ='".$_POST['idop']."' ORDER BY idProducto ASC";
+                    $result1="SELECT * FROM Lote WHERE idOrdenProduccion ='".$_POST['idop']."' ORDER BY idProducto ASC, posicion ASC";
                     $result=mysql_query($result1);
                     while ($fila=mysql_fetch_array($result)){
-                        $html .='
-                                    <tr>
-                                        <td>'.$aux3.'</td>
-                                        <td>'.$fila['idLote'].'</td>
-                                        <td>'.$fila['idProducto'].'</td>
-                                        <td>'.$fila['material'].'</td>
-                                        <td>'.$fila['idColor'].'</td>
-                                        <td>'.$fila['idTalla'].'</td>
-                                        <td>'.$fila['cantidad'].'</td>
-                                    </tr>
-                                ';
+                        $result9=selectTableWhere('Talla','idTalla',"'".$fila['idTalla']."'");
+                        while ($fila7=mysql_fetch_array($result9)){
+                            $html .='
+                                <tr>
+                                    <td>'.$aux3.'</td>
+                                    <td>'.$fila['idLote'].'</td>
+                                    <td>'.$fila['idProducto'].'</td>
+                                    <td>'.$fila['material'].'</td>
+                                    <td>'.$fila['idColor'].'</td>
+                                    <td>'.$fila7['descripcion'].'</td>
+                                    <td>'.$fila['cantidad'].'</td>
+                                </tr>
+                            ';
+                        }
                         $aux3++;
                     }
     $html .='
