@@ -15,6 +15,7 @@ mysql_query("SET NAMES 'utf8'");
     <title>Ver Orden de Producción</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
+    <link href="css/Formularios.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="lib/barcode/JsBarcode.all.min.js"></script>
 
@@ -115,6 +116,15 @@ mysql_query("SET NAMES 'utf8'");
 <hr>
 <section class="container">
     <form class="form-horizontal" method="post">
+        <div class="form-group jumbotron">
+            <div>
+                <h4>Agregar Observación para Tarjetas</h4>
+            </div>
+            <hr>
+            <div class="col-sm-6 col-sm-offset-3 ">
+                <textarea id="obs" rows="3" name="observacion" class="areainput-12"></textarea>
+            </div>
+        </div>
         <div class="col-sm-4">
             <input type="submit" class="btn btn-default col-sm-8 col-sm-offset-2" formaction="gestionOP.php" value="Regresar">
         </div>
