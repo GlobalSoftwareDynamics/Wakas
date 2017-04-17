@@ -384,7 +384,7 @@ mysql_query("SET NAMES 'utf8'");
                     <input class="btn btn-success col-sm-6 col-sm-offset-3" type="submit" name="ordenprod" value="Crear Orden de Producción">
                 </div>
                 <div class="col-sm-6">
-                    <input class="btn btn-primary col-sm-6 col-sm-offset-3" type="submit" name="finalizar" value="Finalizar">
+                    <input class="btn btn-primary col-sm-6 col-sm-offset-3" type="submit" name="finalizar" value="Finalizar" formaction="gestionCV.php">
                 </div>
             </form>
         </section>
