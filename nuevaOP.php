@@ -201,13 +201,9 @@ while ($fila=mysql_fetch_array($result1)){
                             while ($fila4=mysql_fetch_array($result8)){
                                 $tamanolote=$fila4['tamanoLote'];
                                 $aux2=0;
+                                $aux1 = 0;
                                 for ($i=0;$cantidadlote > 0;$i++) {
                                     if (($cantidadlote) > $fila4['tamanoLote']) {
-                                        $aux1 = 0;
-                                        $result7 = selectTable("Lote");
-                                        while ($fila3 = mysql_fetch_array($result7)) {
-                                            $aux1++;
-                                        }
                                         $aux1++;
                                         $idlote = $idOrdProd . "LT" . $aux1;
                                         $cantidadlote1 = $fila4['tamanoLote'];
@@ -215,12 +211,6 @@ while ($fila=mysql_fetch_array($result1)){
                                         $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
                                         $agregarlote1 = mysql_query($agreglote);
                                     } else {
-                                        $aux1 = 0;
-                                        $result7 = selectTable("Lote");
-                                        while ($fila3 = mysql_fetch_array($result7)) {
-                                            $aux1++;
-
-                                        }
                                         $aux1++;
                                         $idlote = $idOrdProd . "LT" . $aux1;
                                         $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";

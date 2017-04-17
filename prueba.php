@@ -133,7 +133,7 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="col-sm-4">
             <input type="hidden" name="idop" value="<?php echo $_POST['idop'];?>" readonly>
-            <input type="submit" class="btn btn-primary col-sm-8 col-sm-offset-2" name="tarjetas" value="Crear Tarjetas" formaction="tarjetasOPpdf.php">
+            <input type="submit" class="btn btn-primary col-sm-8 col-sm-offset-2" name="tarjetas" value="Descargar Tarjetas" formaction="tarjetasOPpdf.php">
         </div>
     </form>
 </section>
