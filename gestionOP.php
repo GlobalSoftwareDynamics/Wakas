@@ -49,6 +49,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                                     <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 </ul>
                             </li>
@@ -57,6 +58,7 @@ mysql_query("SET NAMES 'utf8'");
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                                     <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -116,7 +118,7 @@ mysql_query("SET NAMES 'utf8'");
             </form>
         </section>
 
-        <section>
+        <section class="container">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -135,6 +137,10 @@ mysql_query("SET NAMES 'utf8'");
                             ";
                                 $result=selectTableWhere('OrdenProduccion','fechaCreacion',"'".$_POST['fecha']."'");
                                 while ($fila=mysql_fetch_array($result)){
+                                    $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$fila['idContrato']."'");
+                                    while ($fila1=mysql_fetch_array($result1)){
+                                        $idcodif=$fila1['idcodificacionTalla'];
+                                    }
                                     echo "
                                                 <tr>
                                                 <td>".$fila['idOrdenProduccion']."</td>
@@ -149,6 +155,7 @@ mysql_query("SET NAMES 'utf8'");
                                                 <td>
                                                     <form action='verCV.php' method='post'>
                                                         <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
+                                                        <input type='hidden' name='idcodificacionTalla' value='".$idcodif."'>
                                                         <input type='submit' class='btn-link' value='Ver Confirmación de Venta'>
                                                     </form>
                                                 </td>
@@ -160,6 +167,10 @@ mysql_query("SET NAMES 'utf8'");
                         }else{
                             $result=selectTable('OrdenProduccion');
                             while ($fila=mysql_fetch_array($result)){
+                                $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$fila['idContrato']."'");
+                                while ($fila1=mysql_fetch_array($result1)){
+                                    $idcodif=$fila1['idcodificacionTalla'];
+                                }
                                 echo "
                                             <tr>
                                             <td>".$fila['idOrdenProduccion']."</td>
@@ -174,6 +185,7 @@ mysql_query("SET NAMES 'utf8'");
                                             <td>
                                                 <form action='verCV.php' method='post'>
                                                     <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
+                                                    <input type='hidden' name='idcodificacionTalla' value='".$idcodif."'>
                                                     <input type='submit' class='btn-link' value='Ver Confirmación de Venta'>
                                                 </form>
                                             </td>

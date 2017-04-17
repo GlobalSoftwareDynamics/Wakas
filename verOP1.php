@@ -262,7 +262,7 @@ mysql_query("SET NAMES 'utf8'");
                     <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-10 col-sm-offset-1">
                 </div>
                 <div class="col-sm-3">
-                    <input type="submit" formaction="tarjetasOPpdf.php" value="Descargar Tarjetas" class="btn btn-primary col-sm-10 col-sm-offset-1">
+                    <input type="submit" formaction="prueba.php" value="Descargar Tarjetas" class="btn btn-primary col-sm-10 col-sm-offset-1">
                 </div>
                 <div class="col-sm-3">
                     <input type="submit" formaction="nuevaOPobs.php" name="nuevaobs" value="Agregar Observaciones" class="btn btn-success col-sm-10 col-sm-offset-1">

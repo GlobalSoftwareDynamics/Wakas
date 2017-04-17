@@ -107,8 +107,14 @@ mysql_query("SET NAMES 'utf8'");
                         echo "
                                 <tr>
                                     <td>".$fila['idProducto']."</td>
-                                    <td>".$fila['idTalla']."</td>        
                             ";
+                        $result2=selectTableWhere('Talla','idTalla',"'".$fila['idTalla']."'");
+                        while ($fila3=mysql_fetch_array($result2)){
+                            echo "
+                                <td>".$fila3['descripcion']."</td>
+                            ";
+                            $idcodif=$fila3['idcodificacionTalla'];
+                        }
                         $result1=selectTableWhere('Material','idMaterial',"'".$fila['idMaterial']."'");
                         while ($fila2=mysql_fetch_array($result1)){
                             echo "
@@ -124,6 +130,7 @@ mysql_query("SET NAMES 'utf8'");
                                             <input type='hidden' name='color' value='".$fila['idColor']."'>
                                             <input type='hidden' name='talla' value='".$fila['idTalla']."'>
                                             <input type='hidden' name='material' value='".$fila['idMaterial']."'>
+                                            <input type='hidden' name='idcodificacionTalla' value='".$idcodif."'>
                                             <input type='submit' class='btn-link' name='eliminar' value='Eliminar'>
                                         </form>
                                     </td>
@@ -139,6 +146,7 @@ mysql_query("SET NAMES 'utf8'");
         <section class="container">
             <form action="nuevaCV4.php" method="post">
                 <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
+                <input type="hidden" name="idcodificacionTalla" value="<?php echo $_POST['idcodificacionTalla']; ?>">
                 <div class="col-sm-12">
                     <div class="col-sm-6">
                         <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" formaction="nuevaCV2.php" name="regresar" value="Regresar">

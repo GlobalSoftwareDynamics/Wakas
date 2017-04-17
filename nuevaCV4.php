@@ -97,6 +97,7 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <hr>
                     <input type="hidden" name="contrato" value="<?php echo $_POST['contrato']; ?>">
+                    <input type='hidden' name='idcodificacionTalla' value="<?php echo $_POST['idcodificacionTalla']; ?>">
                     <div class="form-group">
                         <div class="col-sm-8 col-sm-offset-2">
                             <label for="selproducto" class="formlabels1 col-sm-12">Producto:</label>
@@ -157,6 +158,7 @@ mysql_query("SET NAMES 'utf8'");
                                     <td>
                                         <form action='nuevaCV4.php' method='post'>
                                             <input type='hidden' name='contrato' value='".$_POST['contrato']."'>
+                                            <input type='hidden' name='idcodificacionTalla' value='".$_POST['idcodificacionTalla']."'>
                                             <input type='hidden' name='producto' value='".$fila1['idProducto']."'>
                                             <input type='submit' name='eliminar' value='Eliminar' class='btn-link'>
                                         </form>

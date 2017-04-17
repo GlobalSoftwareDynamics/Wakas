@@ -142,144 +142,120 @@ if(isset($_SESSION['login'])){
                     <table class="tabla">
                         <thead id="theadborder">
                             <tr>
-                                <th style="width: 7%">Our Code</th>
-                                <th style="width: 7%">Your Code</th>
-                                <th style="width: 15%">Material</th>
-                                <th style="width: 7%">Color</th>
-                                <th style="width: 5%">XXS</th>
-                                <th style="width: 5%">XS</th>
-                                <th style="width: 5%">S</th>
-                                <th style="width: 5%">M</th>
-                                <th style="width: 5%">L</th>
-                                <th style="width: 5%">XL</th>
-                                <th style="width: 5%">XXL</th>
-                                <th style="width: 5%">TU</th>
-                                <th style="width: 8%">Total</th>
-                                <th style="width: 8%">Price (USD)</th>
-                                <th style="width: 8%">Total (USD)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-    ';
-                            $ProdActual="ninguno";
-                            $ColorActual="ninguno";
-                            $inicio=0;
-                            $sumafinal=0;
-                            $sumafinalprod=0;
-                            $result="SELECT * FROM confirmacionventaproducto WHERE idContrato ='".$_POST['contrato']."' ORDER BY idProducto ASC, idColor ASC";
-                            $resultxvr=mysql_query($result);
-                            while ($fila=mysql_fetch_array($resultxvr)){
-                                if(($ProdActual==$fila['idProducto'])&&($ColorActual==$fila['idColor'])) {
-                                    $html .='</tr>';
-                                }else{
-                                    $html .='<tr>';
-                                    $html .='
-                                                <td>'.$fila['idProducto'].'</td>
-                                                <td>'.$fila['yourcode'].'</td>
-                                    ';
-                                    $result2=selectTableWhere('Material','idMaterial',"'".$fila['idMaterial']."'");
-                                    while ($fila2=mysql_fetch_array($result2)){
-                                        $html .='
-                                                        <td>'.$fila2['material'].'</td>
-                                                    ';
+                        <th>Our Code</th>
+                        <th>Your Code</th>
+                        <th>Material</th>
+                        <th>Color</th>';
+                        $result11=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila11=mysql_fetch_array($result11)){
+                            $html .='
+                                    <th>'.$fila11['descripcion'].'</th>
+                                ';
+                        }
+$html .='
+                        <th>Total</th>
+                        <th>Price (USD)</th>
+                        <th>Total (USD)</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                $ProdActual="ninguno";
+                $ColorActual="ninguno";
+                $inicio=0;
+                $sumafinal=0;
+                $sumafinalprod=0;
+                $result12="SELECT * FROM confirmacionventaproducto WHERE idContrato ='".$_POST['contrato']."' ORDER BY idProducto ASC, idColor ASC";
+                $resultxvr=mysql_query($result12);
+                while ($fila12=mysql_fetch_array($resultxvr)){
+                    if(($ProdActual==$fila12['idProducto'])&&($ColorActual==$fila12['idColor'])) {
+                        $html .='</tr>';
+                    }else{
+                        $html .='<tr>';
+                        $html .='
+                                                <td>'.$fila12['idProducto'].'</td>
+                                                <td>'.$fila12['yourcode'].'</td>
+                                        ';
+                        $result2=selectTableWhere('Material','idMaterial',"'".$fila12['idMaterial']."'");
+                        while ($fila2=mysql_fetch_array($result2)){
+                            $html .='
+                                                <td>'.$fila2['material'].'</td>
+                                            ';
+                        }
+                        $html .='
+                                            <td>'.$fila12['idColor'].'</td>
+                                        ';
+                        $tallas1=array();
+                        $tallas2=array();
+                        $indice1=0;
+                        $indice2=0;
+                        $result=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila=mysql_fetch_array($result)) {
+                            $tallas1[$indice1] = $fila['idTalla'];
+                            $indice1++;
+                        }
+                        $talla ="SELECT * FROM confirmacionventaproducto WHERE idProducto = '".$fila12['idProducto']."' AND idContrato='".$_POST['contrato']."' AND idColor='".$fila12['idColor']."' AND idMaterial='".$fila12['idMaterial']."'";
+                        $result2=mysql_query($talla);
+                        while ($fila1=mysql_fetch_array($result2)){
+                            $tallas2[$indice2]=$fila1['idTalla'];
+                            $indice2++;
+                        }
+                        foreach ($tallas1 as $value1) {
+                            $encontrado=false;
+                            foreach ($tallas2 as $value2) {
+                                if ($value1 == $value2){
+                                    $encontrado=true;
+                                    $cant="SELECT * FROM confirmacionventaproducto WHERE idProducto='".$fila12['idProducto']."' AND idContrato='".$_POST['contrato']."' AND idColor='".$fila12['idColor']."' AND idTalla='".$value1."'";
+                                    $cant1=mysql_query($cant);
+                                    while ($filacant=mysql_fetch_array($cant1)){
+                                        $html .='<td>'.$filacant['cantidad'].'</td>';
                                     }
-                                    $html .='
-                                                    <td>'.$fila['idColor'].'</td>
-                                                ';
-                                    $indice = 0;
-                                    $tallas = array();
-                                    $valores = array();
-                                    $result3 = selectTableWhere4('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila['idProducto']."'",'idColor',"'".$fila['idColor']."'",'idMaterial',"'".$fila['idMaterial']."'");
-                                    while ($fila3 = mysql_fetch_array($result3)) {
-                                        $tallas[$indice] = $fila3['idTalla'];
-                                        $valores[$indice] = $fila3['cantidad'];
-                                        $indice++;
-                                    }
-                                    $aux = 0;
-                                    $aux2 = 0;
-                                    while ($aux < 9) {
-                                        $bandera=false;
-                                        switch ($aux) {
-                                            case 0:
-                                                $aux2 = "XXS";
-                                                break;
-                                            case 1:
-                                                $aux2 = "XS";
-                                                break;
-                                            case 2:
-                                                $aux2 = "S";
-                                                break;
-                                            case 3:
-                                                $aux2 = "M";
-                                                break;
-                                            case 4:
-                                                $aux2 = "L";
-                                                break;
-                                            case 5:
-                                                $aux2 = "XL";
-                                                break;
-                                            case 6:
-                                                $aux2 = "XXL";
-                                                break;
-                                            case 7:
-                                                $aux2 = "TU";
-                                                break;
-                                            case 8:
-                                                $aux2 = "Total";
-                                                break;
-                                        }
-                                        for ($i = 0; $i < count($tallas); $i++) {
-                                            if ($tallas[$i] == $aux2) {
-                                                $html .='<td>' . $valores[$i] . '</td>';
-                                                $bandera = true;
-                                            }
-                                        }
-                                        if($aux2=='Total'){
-                                            $suma=array_sum($valores);
-                                            $result2=selectTableWhere2('Precio','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila['idProducto']."'");
-                                            while($fila2=mysql_fetch_array($result2)){
-                                                $html .='
-                                                                    <td>'.$suma .'</td>
-                                                                    <td>$ '.$fila2['precio'].'</td>
-                                                                ';
-                                                $totalusd=$suma*$fila2['precio'];
-                                                $html .='
-                                                                    <td>$ '.$totalusd.'</td>
-                                                                ';
-                                                $sumafinal=$sumafinal+$totalusd;
-                                                $sumafinalprod=$sumafinalprod+$suma;
-                                            }
-                                            $bandera=true;
-                                        }
-                                        if($bandera==false){
-                                            $html .='
-                                                            <td></td>
-                                                        ';
-                                        }
-                                        $aux++;
-                                    }
-                                    $ProdActual=$fila['idProducto'];
-                                    $ColorActual=$fila['idColor'];
                                 }
                             }
+                            if ($encontrado == false){
+                                $html .='<td></td>';
+                            }
+                        }
+                        $ProdActual=$fila12['idProducto'];
+                        $ColorActual=$fila12['idColor'];
+                        $numproductos=array();
+                        $indice=0;
+                        $result3 = selectTableWhere4('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila12['idProducto']."'",'idColor',"'".$fila12['idColor']."'",'idMaterial',"'".$fila12['idMaterial']."'");
+                        while ($fila3 = mysql_fetch_array($result3)) {
+                            $numproductos[$indice] = $fila3['cantidad'];
+                            $indice++;
+                        }
+                        $suma=array_sum($numproductos);
+                        $result2=selectTableWhere2('Precio','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila12['idProducto']."'");
+                        while($fila2=mysql_fetch_array($result2)) {
                             $html .='
-                                    <tr id="totales">
-                                        <td class="total">Total</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>'.$sumafinalprod.'</td>
-                                        <td></td>
-                                        <td>$ '.$sumafinal.'</td>
-                                    </tr>
+                                                            <td>' . $suma . '</td>
+                                                            <td>' . $fila2['precio'] . '</td>
+                                                        ';
+                            $totalusd = $suma * $fila2['precio'];
+                            $html .='
+                                                            <td>$ ' . $totalusd . '</td>
+                                                        ';
+                            $sumafinal = $sumafinal + $totalusd;
+                            $sumafinalprod = $sumafinalprod + $suma;
+                        }
+                    }
+                }
+    $html .='
+                            <tr id="totales">
+                                <td class="total">Total<td>
+                                <td></td>
+                                <td></td>';
+                        $result11=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila11=mysql_fetch_array($result11)){
+                            $html .='
+                                    <td></td>
+                                ';
+                        }
+    $html .='
+                                <td>'.$sumafinalprod.'</td>
+                                <td></td>
+                                <td>$ '.$sumafinal.'</td>
+                            </tr>
                         </tbody>
                     </table>
                 </section>

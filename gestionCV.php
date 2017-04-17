@@ -141,6 +141,7 @@ mysql_query("SET NAMES 'utf8'");
                                             <td>
                                                 <form action='verCV.php' method='post'>
                                                     <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
+                                                    <input type='hidden' name='idcodificacionTalla' value='".$fila['idcodificacionTalla']."'>
                                                     <input type='submit' class='btn-link' name='detalle' value='Ver Detalle'>
                                                 </form>
                                             </td>
@@ -166,6 +167,7 @@ mysql_query("SET NAMES 'utf8'");
                                                 <td>
                                                     <form action='verCV.php' method='post'>
                                                         <input type='hidden' name='contrato' value='".$fila['idContrato']."'>
+                                                        <input type='hidden' name='idcodificacionTalla' value='".$fila['idcodificacionTalla']."'>
                                                         <input type='submit' class='btn-link' name='detalle' value='Ver Detalle'>
                                                     </form>
                                                 </td>

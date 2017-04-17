@@ -196,6 +196,24 @@ if(isset($_SESSION['login'])){
                         </select>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="col-sm-4">
+                        <label for="codif" class="formlabels col-sm-12">Codificación de Talla:</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <select id="codif" class="ddselect-6" name="idcodificacionTalla">
+                            <option>Seleccionar</option>
+                            <?php
+                            $result3=selectTable("CodificacionTalla");
+                            while($fila3=mysql_fetch_array($result3)){
+                                echo"
+                                        <option value='".$fila3['idcodificacionTalla']."'>".$fila3['descripcion']."</option>
+                                    ";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-12">
