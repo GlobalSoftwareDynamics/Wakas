@@ -13,7 +13,13 @@ body.landscape {
     margin: 0 auto;
     font-family: "Helvetica", Helvetica, Arial, sans-serif;
 }
-
+body.tarjetalote {
+    position: relative;
+    width: 10.2cm;
+    height: 15.3cm;
+    margin: 0 auto;
+    font-family: "Helvetica", Helvetica, Arial, sans-serif;
+}
 /* Encabezado formatos */
 
 header {
@@ -178,7 +184,45 @@ tr.borderbottom td, tr.borderbottom th {
 .tdleft {
     text-align: left;
 }
-
+/*Tarjeta*/
+.derecha {
+    float: right;
+}
+.izquierda {
+    float: left;
+}
+.row {
+    padding: 0;
+    margin:0;
+    height:4px;
+}
+.columnaizquierda1 {
+    background-color: black;
+    color: white;
+    text-align: left;
+}
+.cuadrobservacion {
+    border: 2px solid black;
+}
+.columnaizquierda {
+    background-color: black;
+    color: white;
+    text-align: left;
+    border-bottom: 1px solid black;
+}
+.columnaderecha {
+    text-align: center;
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+    width: 4cm;
+    padding: 0;
+    margin:0;
+}
+div.tarjetacont p {
+    margin:0;
+    font-size: 11px;
+    text-transform: uppercase;
+}
 /*Formatos para tablas*/
 .tabla {
     width: 100%;
