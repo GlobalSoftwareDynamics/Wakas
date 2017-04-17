@@ -86,7 +86,7 @@ if(isset($_SESSION['login'])){
         </body>
     </html>
     ';
-    $nombrearchivo='Tarjetas.pdf';
+    $nombrearchivo='Tarjetas'.$_POST['idop'].'.pdf';
     $mpdf = new mPDF('utf8',array(102,153),0,'',3,3,3,3,6,6);
 // Write some HTML code:
     $mpdf->WriteHTML($html);
