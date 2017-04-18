@@ -24,6 +24,7 @@ if(isset($_SESSION['login'])){
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
         <link href="css/Tablas.css" rel="stylesheet">
+        <link href="css/Formatos.css" rel="stylesheet">
 
     </head>
 
@@ -85,363 +86,169 @@ if(isset($_SESSION['login'])){
     <!-- Insert de datos NuevaHE -->
         <?php
         if(isset($_POST['creacion'])){
-            $insertar = mysql_query("INSERT INTO producto (idProducto, idProvisional, idTipoProducto, idCliente, fechaCreacion, creador, observaciones, descripcionGeneral, idgenero) VALUES ('".$_POST['idProd']."', '".$_POST['idProv'].
-                "', '".$_POST['selecttipo']."', '".$_POST['selectidcliente']."', '".$_POST['date']."', '".$_POST['selectempleado']."', '".$_POST['observGen']."', '".$_POST['descrGen']."', '".$_POST['selectgenero']."')",$con);
-            if(!$insertar){
-                echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
-            }
-        }
-
-        if(isset($_POST['add'])&&($_POST['add']=='Agregar')){
-            $insertar = mysql_query("INSERT INTO tallamedida (idProducto, idTalla, idMedida, valor) VALUES ('".$_POST['idProd']."', '".$_POST['selecttalla']."', '".$_POST['selectmedida']."','".$_POST['valormedida']."')",$con);
-            if(!$insertar){
-                echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
-            }
-        }
-
-        if(isset($_POST['tolobs'])){
-            $insertar = mysql_query("INSERT INTO productomedida (idProducto, idMedida, tolerancia, observacion) VALUES ('".$_POST['idProd']."', '".$_POST['selectmedida']."', '".$_POST['tolerancia']."','".$_POST['observacion']."')",$con);
+            $insertar = mysql_query("INSERT INTO producto (idProducto, idProvisional, idTipoProducto, idCliente, fechaCreacion, creador, observaciones, descripcionGeneral, idgenero, idcodificacionTalla) VALUES ('".$_POST['idProd']."', '".$_POST['idProv'].
+                "', '".$_POST['selecttipo']."', '".$_POST['selectidcliente']."', '".$_POST['date']."', '".$_POST['selectempleado']."', '".$_POST['observGen']."', '".$_POST['descrGen']."', '".$_POST['selectgenero']."','".$_POST['selectcodificaciontalla']."')",$con);
             if(!$insertar){
                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
             }
         }
         ?>
-        <!-- Tabla de Datos de NuevaHE2 -->
+
+    <!-- Insert de datos Medidas -->
+    <?php
+    if(isset($_POST['Agregar'])){
+        $result = mysql_query("SELECT * FROM Talla WHERE idcodificacionTalla = '".$_POST['selectcodificaciontalla']."'");
+        while ($fila = mysql_fetch_array($result)){
+            if(isset($_POST[$fila['idTalla']])){
+                $insertar = mysql_query("INSERT INTO TallaMedida (idProducto, idTalla, idMedida, valor) VALUES ('".$_POST['idProd']."','".$fila['idTalla']."','".$_POST['selectmedida']."','".$_POST[$fila['idTalla']]."')");
+            }
+        }
+
+        $insertar = mysql_query("INSERT INTO ProductoMedida (idProducto, idMedida, tolerancia, observacion) VALUES ('".$_POST['idProd']."','".$_POST['selectmedida']."','".$_POST['tolerancia']."','".$_POST['observacion']."')");
+    }
+    ?>
+
+    <!-- Eliminar datos Medidas -->
+    <?php
+    if(isset($_POST['borrar'])){
+       $eliminar = mysql_query("DELETE FROM TallaMedida WHERE idProducto = '".$_POST['idProd']."' AND idMedida = '".$_POST['medidaEliminar']."'");
+       $eliminar = mysql_query("DELETE FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."' AND idMedida = '".$_POST['medidaEliminar']."'");
+    }
+    ?>
+
+    <!-- Tabla de Datos de NuevaHE2 -->
     <section class="container">
         <div>
             <h3>Paso 2: Medidas y Tallas</h3>
         </div>
-        <hr>
-        <table class="table table-bordered" border="1">
-            <thead>
+        <div>
+            <table class="table table-hover">
+                <thead>
                 <tr>
-                    <th>Medidas</th>
-                    <th>XXS</th>
-                    <th>XS</th>
-                    <th>S</th>
-                    <th>M</th>
-                    <th>L</th>
-                    <th>XL</th>
-                    <th>XXL</th>
-                    <th>TU</th>
-                    <th>T +/-</th>
-                    <th>Observaciones</th>
+                    <th></th>
+                    <th></th>
+                    <?php
+                    $result = mysql_query("SELECT * FROM Talla WHERE idcodificacionTalla = '".$_POST['selectcodificaciontalla']."' ORDER BY LENGTH (idTalla) ASC");
+                    while ($fila = mysql_fetch_array($result)){
+                        echo "<th>".$fila['descripcion']."</th>";
+                    }
+                    ?>
+                    <th>Unidad</th>
+                    <th>T(+/-)</th>
                 </tr>
-            </thead>
-            <tbody>
+                </thead>
+                <tbody>
                 <?php
-                $bandera2 = false;
-                $contador = 0;
-                $medidasusadas = array();
-                $verificador = false;
-                $result = selectOrderedTable("tallamedida","idMedida");
-                while($fila = mysql_fetch_array($result)) {
-                    if($fila['idProducto']==$_POST['idProd']){
-                        //if ($fila['idProducto'] == "PROD1") {
-                        $medidasusadas[$contador] = $fila['idMedida'];
-                        $contador++;
-                        if (isset($medidasusadas[$contador - 2])) {
-                            if ($medidasusadas[($contador - 2)] == $fila['idMedida']) {
-                            } else {
-                                echo "<tr>";
-                                echo "<td>" . $fila['idMedida'] . "</td>";
-                                $indice = 0;
-                                $tallas = array();
-                                $valores = array();
-                                //while($fila2 = mysql_fetch_array($result2)){
-                                $result3 = selectTableWhere2("tallamedida","idMedida","'".$fila['idMedida']."'","idProducto","'".$_POST['idProd']."'");
-                                //$result3 = selectTableWhere2("tallamedida", "idMedida", "'" . $fila['idMedida'] . "'", "idProducto", "'PROD1'");
-                                while ($fila3 = mysql_fetch_array($result3)) {
-                                    $tallas[$indice] = $fila3['idTalla'];
-                                    $valores[$indice] = $fila3['valor'];
-                                    $indice++;
-                                }
-                                $aux = 0;
-                                while ($aux < 9) {
+                $result = mysql_query("SELECT DISTINCT idMedida FROM TallaMedida WHERE idProducto = '".$_POST['idProd']."'  ORDER BY LENGTH (idTalla) ASC");
+                while($fila = mysql_fetch_array($result)){
+                    echo "<tr>";
 
-                                    $bandera = false;
-                                    switch ($aux) {
-                                        case 0:
-                                            $aux2 = "XXS";
-                                            break;
-                                        case 1:
-                                            $aux2 = "XS";
-                                            break;
-                                        case 2:
-                                            $aux2 = "S";
-                                            break;
-                                        case 3:
-                                            $aux2 = "M";
-                                            break;
-                                        case 4:
-                                            $aux2 = "L";
-                                            break;
-                                        case 5:
-                                            $aux2 = "XL";
-                                            break;
-                                        case 6:
-                                            $aux2 = "XXL";
-                                            break;
-                                        case 7:
-                                            $aux2 = "TU";
-                                            break;
-                                        case 8:
-                                            $aux2 = "Tolerancia";
-                                            break;
-                                        case 9:
-                                            $aux2 = "Observaciones";
-                                            break;
-                                    }
-                                    for ($i = 0; $i < count($tallas); $i++) {
-                                        if ($tallas[$i] == $aux2) {
-                                            echo "<td>" . $valores[$i] . "</td>";
-                                            $tallarealizada = true;
-                                            $bandera = true;
-                                        }
-                                        if($aux2 == "Tolerancia"){
-                                            if($bandera2){
-                                            }else {
-                                                $resultado = selectTableWhere2("productomedida", "idProducto", "'" . $_POST['idProd'] . "'", "idMedida", "'" . $fila['idMedida'] . "'");
-                                                //selectTableWhere2("productomedida","idproducto",$_POST['idProd'],"idmedida",$fila['idMedida']);
-                                                while ($filasa = mysql_fetch_array($resultado)) {
-                                                    echo "<td>" . $filasa['tolerancia'] . "</td>";
-                                                    echo "<td>" . $filasa['observacion'] . "</td>";
-                                                }
-                                                $bandera = true;
-                                                $bandera2 = true;
-                                            }
-                                        }
-                                    }
-                                    if ($bandera == false) {
-                                        echo "<td></td>";
-                                    }
-                                    $aux++;
-                                }
-                                echo "</tr>";
-                                $bandera2 = false;
-                            }
-                        } else {
-                            echo "<tr>";
-                            echo "<td>" . $fila['idMedida'] . "</td>";
-                            $indice = 0;
-                            $tallas = array();
-                            $valores = array();
-                            //while($fila2 = mysql_fetch_array($result2)){
-                            $result3 = selectTableWhere2("tallamedida","idMedida","'".$fila['idMedida']."'","idProducto","'".$_POST['idProd']."'");
-                            //$result3 = selectTableWhere2("tallamedida", "idMedida", "'" . $fila['idMedida'] . "'", "idProducto", "'PROD1'");
-                            while ($fila3 = mysql_fetch_array($result3)) {
-                                $tallas[$indice] = $fila3['idTalla'];
-                                $valores[$indice] = $fila3['valor'];
-                                $indice++;
-                            }
-                            $aux = 0;
-                            while ($aux < 9) {
-
-                                $bandera = false;
-                                switch ($aux) {
-                                    case 0:
-                                        $aux2 = "XXS";
-                                        break;
-                                    case 1:
-                                        $aux2 = "XS";
-                                        break;
-                                    case 2:
-                                        $aux2 = "S";
-                                        break;
-                                    case 3:
-                                        $aux2 = "M";
-                                        break;
-                                    case 4:
-                                        $aux2 = "L";
-                                        break;
-                                    case 5:
-                                        $aux2 = "XL";
-                                        break;
-                                    case 6:
-                                        $aux2 = "XXL";
-                                        break;
-                                    case 7:
-                                        $aux2 = "TU";
-                                        break;
-                                    case 8:
-                                        $aux2 = "Tolerancia";
-                                        break;
-                                    case 9:
-                                        $aux2 = "Observaciones";
-                                        break;
-                                }
-                                for ($i = 0; $i < count($tallas); $i++) {
-                                    if ($tallas[$i] == $aux2) {
-                                        echo "<td>" . $valores[$i] . "</td>";
-                                        $tallarealizada = true;
-                                        $bandera = true;
-                                    }
-                                    if($aux2 == "Tolerancia"){
-                                        if($bandera2){
-                                        }else{
-                                            $resultado = selectTableWhere2("productomedida","idProducto","'".$_POST['idProd']."'","idMedida","'".$fila['idMedida']."'");
-                                            //selectTableWhere2("productomedida","idproducto",$_POST['idProd'],"idmedida",$fila['idMedida']);
-                                            while($filasa = mysql_fetch_array($resultado)) {
-                                                echo "<td>".$filasa['tolerancia']."</td>";
-                                                echo "<td>".$filasa['observacion']."</td>";
-                                            }
-                                            $bandera = true;
-                                            $bandera2 = true;
-                                        }
-                                    }
-                                }
-
-
-
-                                if ($bandera == false) {
-                                    echo "<td></td>";
-                                }
-                                $aux++;
-                            }
-                            echo "</tr>";
-                            $bandera2 = false;
-                        }
+                    $result2 = mysql_query("SELECT * FROM Medida WHERE idMedida = '".$fila['idMedida']."'");
+                    while($fila2 = mysql_fetch_array($result2)){
+                        echo "<td class='tdobservacion'>".$fila2['descripcion']."</td>";
+                        echo "<td>".$fila2['idMedida']."</td>";
+                        $unidadMedida = $fila2['idUnidadMedida'];
+                    }
+                    $result3 = mysql_query("SELECT * FROM TallaMedida WHERE idProducto = '".$_POST['idProd']."' AND idMedida = '".$fila['idMedida']."' ORDER BY LENGTH (idTalla) ASC");
+                    while ($fila3 = mysql_fetch_array($result3)){
+                        echo "<td>".$fila3['valor']."</td>";
+                    }
+                    echo "<td>".$unidadMedida."</td>";
+                    $result4 = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."' AND idMedida = '".$fila['idMedida']."'");
+                    while ($fila4 = mysql_fetch_array($result4)){
+                        echo "<td>".$fila4['tolerancia']."</td>";
+                    }
+                    echo "<form method='post' action='#'>";
+                    echo "<td><input type='submit' value='Eliminar' name='borrar' class='btn-link'></td>";
+                    echo "<input type='hidden' name='medidaEliminar' value='".$fila['idMedida']."'>";
+                    echo '<input type="hidden" name="idProd" value="'.$_POST['idProd'].'">
+                          <input type="hidden" name="selectcodificaciontalla" value="'.$_POST['selectcodificaciontalla'].'">';
+                    echo "</form>";
+                    echo "</tr>";
+                }
+                ?>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="thobservacion">Observaciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php
+                $result = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."'");
+                while ($fila = mysql_fetch_array($result)){
+                    if($fila['observacion'] === '' ||$fila['observacion'] === null ){
+                    }else{
+                        echo "<tr><td class='tdobservacion'>".$fila['observacion']."</td></tr>";
                     }
                 }
                 ?>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </section>
+
     <hr>
-    <?php
-        if(isset($_POST["add"])&&!isset($_POST["addtolerancias"])){
-            echo "<section class='container'>
-                    <form action='#' method='post' class='form-horizontal jumbotron col-sm-6 col-sm-offset-3'>
-                        <div class='form-group'>
-                            <div class='col-sm-12'>
-                                <div class='col-sm-4'>
-                                    <label for='selectmedida' class='formlabels col-sm-12'>Medida:</label>
-                                </div>
-                                <div class='col-sm-8'>";
-                $result = selectTable("medida");
-                echo "<select name='selectmedida' id='selectmedida' class='ddselect-12'>";
-                echo "<option>Seleccionar</option>";
-                while($fila = mysql_fetch_array($result)){
-                    echo "<option value=".$fila['idMedida'].">".$fila['descripcion']."</option>";
-                }
-                echo "</select>";
-                echo "</div>
-                            </div>
-                        </div>
-                        <div class='form-group'>
-                            <div class='col-sm-12'>
-                                <div class='col-sm-4'>
-                                    <label for='valormedida' class='formlabels col-sm-12'>Valor Medida:</label>
-                                </div>
-                                <div class='col-sm-8'>
-                                    <input type='text' name='valormedida' id='valormedida' class='textinput-4'>
-                                </div >
-                            </div>
-                        </div>
-                            <input type='hidden' value='".$_POST['idProd']."' name='idProd'>
-                        <div class='form-group'>
-                            <div class='col-sm-12'>
-                            <div class='col-sm-4'>
-                                <label for='selecttalla' class='formlabels col-sm-12'>Talla:</label>
-                            </div>
-                            <div class='col-sm-8'>";
-            $result = selectTable("talla");
-            echo "<select name='selecttalla' id='selecttalla' class='ddselect-4'>";
-            echo "<option>Selecc.</option>";
-            while($fila = mysql_fetch_array($result)){
-                echo "<option value=".$fila['idTalla'].">".$fila['idTalla']."</option>";
-            }
-            echo "</select>";
-            echo "</div>
-                    </div>
-                            </div>
-                            <hr>
-                            <div class='form-group'>
-                                <div class='col-sm-12'>
-                                    <div class='col-sm-6'>
-                                        <input class='btn btn-default col-sm-10 col-lg-offset-1' type='submit' value='Agregar' name='add'>
-                                    </div>
-                                    <div class='col-sm-6'>
-                                        <input class='btn btn-default col-sm-10 col-lg-offset-1' type='submit' value='Gestionar Tolerancias' name='addtolerancias'>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </section>";
-        }else{
-            echo "<section class='container'>
-                    <form action='#' method='post' class='form-horizontal jumbotron col-sm-6 col-lg-offset-3'>
-                        <div class='form-group'>
-                            <div class='col-sm-12'>
-                                <div class='col-sm-4'>
-                                    <label for='selectmedida' class='formlabels col-sm-12'>Medida:</label>
-                                </div>
-                                <div class='col-sm-8'>";
-                                    $aux = "A";
-                                    $aux2 = "B";
-                                    settype($aux,"string");
-                                    settype($aux2,"string");
-                                    $result = mysql_query("SELECT * FROM tallamedida WHERE idProducto = '".$_POST['idProd']."' ORDER BY idMedida");
-                                    echo "<select name='selectmedida' id='selectmedida' class='ddselect-12'>";
-                                        echo "<option>Seleccionar</option>";
-                                        while($fila = mysql_fetch_array($result)){
-                                            $aux = $fila['idMedida'];
-                                            if($aux != $aux2){
-                                                $aux2 = $fila['idMedida'];
-                                                $result2 = selectTableWhere("medida","idMedida","'".$fila['idMedida']."'");
-                                                while($fila2 = mysql_fetch_array($result2)){
-                                                    echo "<option value=".$fila2['idMedida'].">".$fila2['descripcion']."</option>";
-                                                }
-                                            }
-                                        }
-                                    echo "</select>";
-                                echo "</div>
-                            </div>
-                            </div>
-                            <div class='form-group'>
-                                <div class='col-sm-12'>
-                                    <div class='col-sm-4'>
-                                        <label for='tolerancia' class='formlabels col-sm-12'>Tolerancia:</label>
-                                    </div>
-                                    <div class='col-sm-8'>
-                                        <input type='text' name='tolerancia' id='tolerancia' class='textinput-4'>
-                                    </div>
-                                </div>
-                            </div>
-                            <input type='hidden' value='".$_POST['idProd']."' name='idProd'>
-                            <div class='form-group'>
-                                <div class='col-sm-12'>
-                                    <div class='col-sm-4'>
-                                        <label for='observacion' class='formlabels col-sm-12'>Observaci&oacute;n:</label>
-                                    </div>
-                                    <div class='col-sm-8'>
-                                        <textarea name='observacion' cols='30' rows='3' id='observacion' class='areainput-12'></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class='form-group'>
-                                <div class='col-sm-12'>
-                                    <div class='col-sm-6'>
-                                        <input class='btn btn-default col-sm-10 col-sm-offset-1' type='submit' value='Agregar' name='tolobs'>
-                                    </div>
-                                    <div class='col-sm-6'>
-                                        <input class='btn btn-default col-sm-10 col-sm-offset-1' type='submit' value='Gestionar Medidas' name='add'>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-                    </section>";
-        }
-    ?>
+
+    <section class="container">
+        <div>
+            <form method="post" action="#" class="form-horizontal jumbotron col-sm-12">
+                <div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th style="width: 25%">Medida</th>
+                            <?php
+                            $result = mysql_query("SELECT * FROM Talla WHERE idcodificacionTalla = '".$_POST['selectcodificaciontalla']."' ORDER BY LENGTH (idTalla) ASC");
+                            while ($fila = mysql_fetch_array($result)){
+                                echo "<th>".$fila['descripcion']."</th>";
+                            }
+                            ?>
+                            <th>T(+/-)</th>
+                            <th>Observación</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td><select name="selectmedida" class="form-control">
+                                    <?php
+                                    $result2 = mysql_query("SELECT * FROM Medida");
+                                    while ($fila2 = mysql_fetch_array($result2)){
+                                        echo "<option value='".$fila2['idMedida']."'>".$fila2['descripcion']."</option>";
+                                    }
+                                    ?>
+                                </select></td>
+                        <?php
+                        mysql_data_seek($result, 0);
+                        while ($fila = mysql_fetch_array($result)){
+                            echo "<td><input type='text' class='form-control' name='".$fila['idTalla']."'></td>";
+                        }
+                        echo "<td><input type='text' class='form-control' name='tolerancia'></td>";
+                        echo "<td><input type='text' class='form-control' name='observacion'></td>";
+                        ?>
+                            <td><input type="submit" name="Agregar" value="Agregar" class="btn btn-success"></td>
+                            <input type="hidden" name="idProd" value="<?php echo $_POST['idProd']?>">
+                            <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </section>
 
     <hr>
 
     <section class="container">
         <form action="nuevaHE3.php" method="post" class="col-sm-12">
             <div class="form-group">
+                <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
                 <input type="hidden" name="idProd" value="<?php echo $_POST['idProd'] ?>">
-                <input class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Continuar">
+                <input class="btn btn-default col-sm-3 col-sm-offset-2" type="submit" value="Regresar" formaction="nuevaHE.php">
+                <input class="btn btn-primary col-sm-3 col-sm-offset-2" type="submit" value="Siguiente">
             </div>
         </form>
     </section>

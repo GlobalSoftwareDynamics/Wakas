@@ -122,6 +122,7 @@ if(isset($_SESSION['login'])){
     <form method="post" action="HEFinal.php">
         <div class="col-sm-12">
             <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+            <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
             <input type="submit" value="Finalizar" name="Finalizar" class="btn btn-default col-sm-4 col-sm-offset-4">
         </div>
     </form>

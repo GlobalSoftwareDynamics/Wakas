@@ -49,7 +49,7 @@ if(isset($_SESSION['login'])){
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                                    <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

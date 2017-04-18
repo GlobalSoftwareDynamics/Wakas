@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO talla(idTalla, descripcion, idcodificacionTalla) VALUES ('".$_POST['idtalla']."','".$_POST['descripcion']."','".$_POST['tipo']."')";
+    $agregar="INSERT INTO talla(idTalla, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['tipo']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -102,26 +102,17 @@ if(isset($_GET['eliminarTalla'])){
 ?>
 
 <section class="container col-sm-6">
-    <form action="otrostalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+    <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Talla</h3>
         </div>
         <hr>
-        <?php
-        $aux = 0;
-        $result = selectTable("Talla");
-        while($fila = mysql_fetch_array($result)){
-            $aux++;
-        }
-        $aux++;
-        echo "<input type='hidden' name= 'idtalla' value='".$aux."' readonly>";
-        ?>
         <div class="form-group">
             <div  class="col-sm-12">
-                <label for="desc" class="formlabels1 col-sm-12">Talla:</label>
+                <label for="id" class="formlabels1 col-sm-12">Talla:</label>
             </div>
             <div class="col-sm-12">
-                <input id="desc" class="textinput-6" type="text" name="descripcion">
+                <input id="id" class="textinput-6" type="text" name="idtalla">
             </div>
         </div>
         <div class="form-group">
@@ -148,7 +139,7 @@ if(isset($_GET['eliminarTalla'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>
@@ -165,19 +156,19 @@ if(isset($_GET['eliminarTalla'])){
             </thead>
             <tbody>
             <?php
-                    $result1=selectTable('Talla');
-                    while ($fila1=mysql_fetch_array($result1)){
-                        $result2=selectTableWhere('codificacionTalla','idcodificacionTalla',"'".$fila1['idcodificacionTalla']."'");
-                        while ($fila2=mysql_fetch_array($result2)){
-                            echo "
+            $result1=selectTable('Talla');
+            while ($fila1=mysql_fetch_array($result1)){
+                $result2=selectTableWhere('codificacionTalla','idcodificacionTalla',"'".$fila1['idcodificacionTalla']."'");
+                while ($fila2=mysql_fetch_array($result2)){
+                    echo "
                             <tr>
-                                <td>".$fila1['descripcion']."</td>
+                                <td>".$fila1['idTalla']."</td>
                                 <td>".$fila2['descripcion']."</td>
                                 <td><a href='otrostalla.php?eliminarTalla=".$fila1['idTalla']."'>Eliminar</a></td>
                             </tr>
                         ";
-                        }
-                    }
+                }
+            }
             ?>
             </tbody>
         </table>

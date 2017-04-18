@@ -19,6 +19,7 @@ mysql_query("SET NAMES 'utf8'");
     <link href="css/navbar-fixed-side.css" rel="stylesheet" />
     <link href="css/Formatos.css" rel="stylesheet">
     <link href="css/Tablas.css" rel="stylesheet">
+
 </head>
 
 <body >
@@ -166,7 +167,7 @@ mysql_query("SET NAMES 'utf8'");
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
-
+                                    }elseif($fila2['tipo']==='tiempo'){
                                     }else{
                                         echo "<th>".$fila2['descripcion']."</th>";
                                     }
@@ -195,7 +196,7 @@ mysql_query("SET NAMES 'utf8'");
                                                 echo "<tr>";
                                                 $result5 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$componente."'");
                                                 while ($fila5 = mysql_fetch_array($result5)){
-                                                    echo "<td>".$fila5['descripcion']."</td>";
+                                                    echo "<td class='tdobservacion'>".$fila5['descripcion']."</td>";
                                                     $result6 = mysql_query("SELECT * FROM Material WHERE idMaterial = '".$fila3['idMaterial']."'");
                                                     while($fila6 = mysql_fetch_array($result6)){
                                                         echo "<td>".$fila6['material']."</td>";
@@ -221,6 +222,7 @@ mysql_query("SET NAMES 'utf8'");
                                                 }
                                                 echo "</td>";
                                             }elseif ($tipo[$j] === 'observacion'){
+                                            }elseif ($tipo[$j] === 'tiempo'){
                                             } else {
                                                 echo "<td>".$fila4['valor']."</td>";
                                             }
@@ -254,7 +256,7 @@ mysql_query("SET NAMES 'utf8'");
                             $cantidadMaterial = 0;
                             $k = 0;
                             $resumenMateriales = array();
-                            $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
+                            $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."' AND estado = '1'");
                             while ($fila3 = mysql_fetch_array($result3)){
                                 $componente = $fila3['idComponente'];
                                 echo "<tr>";
@@ -265,7 +267,7 @@ mysql_query("SET NAMES 'utf8'");
                                             if($tipo[$j] === 'componente'){
                                                 $result5 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$componente."'");
                                                 while ($fila5 = mysql_fetch_array($result5)){
-                                                    echo "<td>".$fila5['descripcion']."</td>";
+                                                    echo "<td class='tdobservacion'>".$fila5['descripcion']."</td>";
                                                 }
                                             }
                                         }
@@ -311,7 +313,7 @@ mysql_query("SET NAMES 'utf8'");
                             $colorRepetido = array();
                             $puntero = 0;
                             mysql_data_seek($result3, 0);
-                            $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."' ORDER BY `productocomponentesprenda`.`idMaterial` ASC") ;
+                            $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."' AND estado = '1' ORDER BY `productocomponentesprenda`.`idMaterial` ASC") ;
                             while ($fila3 = mysql_fetch_array($result3)){
                                 $bandera = false;
                                 echo "<tr>";
@@ -352,7 +354,7 @@ mysql_query("SET NAMES 'utf8'");
                         <tbody>
                         <?php
                         $aux = 0;
-                        $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
+                        $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."' AND estado = '1'");
                         while ($fila3 = mysql_fetch_array($result3)){
                             $componente = $fila3['idComponente'];
                             $result4 = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '".$fila3['idComponenteEspecifico']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica");

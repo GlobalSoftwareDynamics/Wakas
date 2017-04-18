@@ -102,7 +102,7 @@ if(isset($_GET['eliminarTipoTalla'])){
 ?>
 
 <section class="container col-sm-6">
-    <form action="otrostipotalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+    <form action="otrosgenero.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Codificación de Talla</h3>
         </div>
@@ -130,7 +130,7 @@ if(isset($_GET['eliminarTipoTalla'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>

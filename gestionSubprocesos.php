@@ -38,7 +38,6 @@ mysql_query("SET NAMES 'utf8'");
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                             <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                             <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                            <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                         </ul>
                     </li>
@@ -47,7 +46,6 @@ mysql_query("SET NAMES 'utf8'");
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                             <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -85,6 +83,18 @@ if(isset($_POST['guardarsubproc'])){
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
+
+if(isset($_POST['actualizar'])) {
+    $actualizar = mysql_query("UPDATE subproceso SET descripcion = '".$_POST['Descripcion']."' WHERE idProcedimiento = '".$_POST['idProcedimiento']."'");
+    if ( !empty( $error = mysql_error() ) )
+    {
+        echo 'Mysql error '. $error ."<br />\n";
+    }else{
+        echo "<div class=\"alert alert-success\" role=\"alert\">
+                Subproceso actualizado satisfactoriamente.
+              </div>";
+    }
+}
 ?>
 <section>
     <div class='container'>
@@ -105,6 +115,7 @@ if(isset($_POST['guardarsubproc'])){
                 <th>Descripción</th>
                 <th>Asignar M&aacute;quina</th>
                 <th>Ver Caracter&iacute;sticas</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -120,20 +131,19 @@ if(isset($_POST['guardarsubproc'])){
                                 <form method='post'>
                                     <input class='btn-link' type='submit' formaction='asignarmaquinasubproc.php' value='Asignar'>
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
-                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
-                                </form>                                                                     
+                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>                                                                     
                             </td>";
                         echo "  <td>
-                                <form method='post'>
                                     <input class='btn-link' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
                                     <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
-                                </form>
+
                             </td>";
                     } else {
                         echo "<td> - </td><td> - </td>";
                     }
-
+                    echo "<td><input type='submit' value='Modificar' class='btn-link' formaction='actualizarSubproceso.php'></td>";
+                    echo "</form>";
                 echo "</tr>";
             }
             ?>
@@ -150,10 +160,10 @@ if(isset($_POST['guardarsubproc'])){
             <div class="col-sm-12">
                 <input type='hidden' name='idProceso' value="<?php echo $_POST['idProceso']?>">
                 <div class="col-sm-6">
-                    <input class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionProcesos.php" type="submit" name="regresar" value="Regresar">
+                    <input class='btn btn-default col-sm-6 col-sm-offset-3' type="submit" name="agregar" value="Agregar Subproceso">
                 </div>
                 <div class="col-sm-6">
-                    <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="agregar" value="Agregar Subproceso">
+                    <input class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionProcesos.php" type="submit" name="regresar" value="Regresar">
                 </div>
             </div>
         </form>

@@ -40,7 +40,6 @@ mysql_query("SET NAMES 'utf8'");
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                             <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
                             <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                            <li><a href="estadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                         </ul>
                     </li>
@@ -49,7 +48,6 @@ mysql_query("SET NAMES 'utf8'");
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
                             <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -88,8 +86,17 @@ if(isset($_POST['guardarproc'])){
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
-if(isset($_GET['eliminarProceso'])) {
-    /*Código para eliminar en cascada todo lo relacionado al Proceso.*/
+
+if(isset($_POST['actualizar'])) {
+    $actualizar = mysql_query("UPDATE Proceso SET descripcion = '".$_POST['Descripcion']."' WHERE idProceso = '".$_POST['idProceso']."'");
+    if ( !empty( $error = mysql_error() ) )
+    {
+        echo 'Mysql error '. $error ."<br />\n";
+    }else{
+        echo "<div class=\"alert alert-success\" role=\"alert\">
+                Proceso actualizado satisfactoriamente.
+              </div>";
+    }
 }
 ?>
 </section>
@@ -102,6 +109,7 @@ if(isset($_GET['eliminarProceso'])) {
                     <th>idProceso</th>
                     <th>Descripción</th>
                     <th>Ver Subprocesos</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -111,12 +119,14 @@ if(isset($_GET['eliminarProceso'])) {
                 echo "<tr>";
                     echo "<td>".$fila['idProceso']."</td>";
                     echo "<td>".$fila['descripcion']."</td>";
-                    echo "  <td>
-                                <form method='post'>
-                                    <input class=' btn-link' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
-                                    <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
-                                </form>
-                            </td>";
+                    echo "  
+                          <form method='post'>
+                          <td>
+                              <input class=' btn-link' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
+                              <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>   
+                          </td>";
+                    echo "<td><input type='submit' value='Modificar' class='btn-link' formaction='actualizarProceso.php'></td>
+                        </form>";
                 echo "</tr>";
             }
             ?>
@@ -130,8 +140,11 @@ if(isset($_GET['eliminarProceso'])) {
 <section>
         <div class='container'>
             <form action="agregarProceso.php" class="form-horizontal">
-                <div class="col-sm-12">
-                    <input class='btn btn-success col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar">
+                <div class="col-sm-6">
+                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar Proceso">
+                </div>
+                <div class="col-sm-6">
+                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="regresar" value="Regresar" formaction="mainadmin.php">
                 </div>
             </form>
         </div>

@@ -1,25 +1,45 @@
 <!DOCTYPE html>
+
+<html lang="es">
+
 <?php
 session_start();
 require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
-mysql_query("SET NAMES 'utf8'");
-?>
-<html lang="es">
+    mysql_query("SET NAMES 'utf8'");
+    ?>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Waka-s Textiles Finos S.A.</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/Formularios.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>
+        <script>
+            function getData(val) {
+                $.ajax({
+                    type: "POST",
+                    url: "get_HE.php",
+                    data:'idProd='+val,
+                    success: function(data){
+                        $("#formulario").html(data);
+                    }
+                });
+            }
+        </script>
+    </head>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gesti&oacute;n de Productos</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-    <link href="css/Tablas.css" rel="stylesheet">
-    <link href="css/Formularios.css" rel="stylesheet">
-</head>
-
-<body>
+    <body>
     <header>
         <nav class="navbar navbar-inverse">
             <div class="container">
@@ -75,50 +95,46 @@ mysql_query("SET NAMES 'utf8'");
         </nav>
     </header>
 
+
     <section class="container">
-        <table class='table table-hover'>
-            <thead>
-                <tr>
-                    <th>idProducto</th>
-                    <th>Tipo de Producto</th>
-                    <th>Género</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    $result=selectTable("Producto");
-                    while ($fila=mysql_fetch_array($result)){
-                        echo "
-                                <tr>
-                                    <td>".$fila ['idProducto']."</td>";
-                                    $result2 = selectTableWhere("TipoProducto","idTipoProducto","'".$fila['idTipoProducto']."'");
-                                    while ($fila2 = mysql_fetch_array($result2)){
-                                        echo "<td>".$fila2 ['descripcion']."</td>";
-                                    }
-                                    echo "<td>".$fila ['idgenero']."</td>
-                                    <td>
-                                        <form method='post'>
-                                            <input type='hidden' name='idProd' value='".$fila['idProducto']."' readonly>
-                                            <input type='submit' formaction='HEFinal.php' class='btn-link' value='Ver Detalle'>
-                                        </form>
-                                    </td>
-                                </tr>
-                            ";
-                    }
-                ?>
-            </tbody>
-        </table>
+        <div>
+            <h3>Paso 1: Datos Generales</h3>
+        </div>
+        <hr>
+        <form method="post" action="versionHE2.php" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" id="formulario">
+            <div>
+                <h4>Nueva Versión de Hoja de Especificaciones</h4>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="col-sm-5">
+                        <label for="idProd" class="formlabels col-sm-12">Id Producto:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <?php
+                        echo "<select name='idProd' id='idProd' class='ddselect-8' onChange='getData(this.value)'>";
+                        echo "<option>Seleccionar</option>";
+                        $result = selectTable('Producto');
+                        while($fila = mysql_fetch_array($result)){
+                            echo "<option value=".$fila['idProducto'].">".$fila['idProducto']."</option>";
+                        }
+                        echo "</select>";
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </form>
     </section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 
-</body>
+    </body>
 
-</html>
-<?php
+    <?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
+
+</html>

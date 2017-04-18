@@ -166,7 +166,10 @@ mysql_query("SET NAMES 'utf8'");
 
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<th>".$fila2['descripcion']."</th>";
+                                    if($fila2['descripcion'] === 'Componente'){
+                                    }else{
+                                        echo "<th>".$fila2['descripcion']."</th>";
+                                    }
                                 }
                             }
                             ?>
@@ -204,16 +207,19 @@ mysql_query("SET NAMES 'utf8'");
                             while($fila = mysql_fetch_array($result)){
                                 $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td>".$fila2['descripcion']."</td>";
+                                    if($fila2['descripcion'] === 'Prenda'){
+                                    }else{
+                                        echo "<td>".$fila2['descripcion']."</td>";
+                                    }
                                 }
                             }
                             echo "<td>".$contenido[$i+$entradas]."</td>";
                             $result = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$contenido[$i+$entradas]."'");
                             while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila['descripcion']."</td>";
+                                echo "<td class='tdobservacion'>".$fila['descripcion']."</td>";
                             }
                             echo "<td>".$contenido[$i+($entradas*2)]."</td>";
-                            echo "<td>".$contenido[$i+($entradas*3)]."</td>";
+                            echo "<td class='tdobservacion'>".$contenido[$i+($entradas*3)]."</td>";
                             /*echo "<td>".$contenido[$i]."</td>";
                             echo "<td>".$contenido[$i+$entradas]."</td>";
                             echo "<td>".$contenido[$i+($entradas*2)]."</td>";

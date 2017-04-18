@@ -167,7 +167,7 @@ mysql_query("SET NAMES 'utf8'");
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
-
+                                    }elseif($fila2['tipo']==='tiempo'){
                                     }else{
                                         echo "<th>".$fila2['descripcion']."</th>";
                                     }
@@ -224,6 +224,7 @@ mysql_query("SET NAMES 'utf8'");
                                             }
                                             echo "<td>".$fila4['valor']."</td>";
                                         } elseif ($tipo[$j] === 'observacion'){
+                                        } elseif ($tipo[$j] === 'tiempo'){
                                         } else {
                                             echo "<td>".$fila4['valor']."</td>";
                                         }
@@ -300,8 +301,8 @@ mysql_query("SET NAMES 'utf8'");
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
-
-                                    }else{
+                                    } elseif ($fila['tipo'] === 'tiempo'){
+                                    } else{
                                         echo "<th>".$fila2['descripcion']."</th>";
                                     }
                                 }
@@ -335,6 +336,8 @@ mysql_query("SET NAMES 'utf8'");
                                                 echo "<td>".$fila5['Descripcion']."</td>";
                                             }
                                         } elseif ($tipo[$j] === 'observacion'){
+
+                                        } elseif ($tipo[$j] === 'tiempo'){
 
                                         } else {
                                             echo "<td>".$fila4['valor']."</td>";

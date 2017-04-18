@@ -25,6 +25,18 @@ if(isset($_SESSION['login'])){
                 $("#datepicker").datepicker();
             });
         </script>
+        <script>
+            function getID(val,val2) {
+                $.ajax({
+                    type: "POST",
+                    url: "get_ProdID.php",
+                    data:'tipoproducto=' + val + '&idProd=' + val2,
+                    success: function(data){
+                        $("#idProd").html(data);
+                    }
+                });
+            }
+        </script>
     </head>
 
     <body>
@@ -99,7 +111,7 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-5">
                         <label for="idProd" class="formlabels col-sm-12">Id Producto:</label>
                     </div>
-                    <div class="col-sm-7">
+                    <div class="col-sm-7" id="idProd">
                         <?php
                         $aux = 0;
                         $result = selectTable("producto");
@@ -107,7 +119,9 @@ if(isset($_SESSION['login'])){
                             $aux++;
                         }
                         $aux++;
-                        echo "<input type='text' class='textinput-6' name= 'idProd' id='idProd' value='PROD".$aux."' readonly>";
+                        $idProd = $aux + 6000;
+                        //echo "<span id='idProd'>".$idProd."</span>";
+                        echo "<input type='text' class='form-control textinput-6' name='idProd' id='idProd' value='".$idProd."' readonly>"
                         ?>
                     </div>
                 </div>
@@ -118,22 +132,22 @@ if(isset($_SESSION['login'])){
                         <label for="idProv" class="formlabels col-sm-12">Id Provisional:</label>
                     </div>
                     <div class="col-sm-7">
-                        <input type="text" name="idProv" id="idProv" class="textinput-6">
+                        <input type="text" name="idProv" id="idProv" class="textinput-6 form-control">
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="col-sm-5">
-                        <label for="selecttipo" class="formlabels col-sm-12">Tipo:</label>
+                        <label for="selecttipo" class="formlabels col-sm-12">Tipo de Producto:</label>
                     </div>
                     <div class="col-sm-7">
                         <?php
                         $result = selectTable("tipoproducto");
-                        echo "<select name='selecttipo' id='selecttipo' class='ddselect-8'>";
+                        echo "<select name='selecttipo' id='selecttipo' class='ddselect-8  form-control' onchange='getID(this.value,$idProd)'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
-                            echo "<option value=".$fila['idTipoProducto'].">".$fila['idTipoProducto']."</option>";
+                            echo "<option value=".$fila['idTipoProducto'].">".$fila['descripcion']."</option>";
                         }
                         echo "</select>";
                         ?>
@@ -148,10 +162,28 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-7">
                         <?php
                         $result = selectTable("genero");
-                        echo "<select name='selectgenero' id='selectgenero' class='ddselect-6'>";
+                        echo "<select name='selectgenero' id='selectgenero' class='ddselect-6 form-control'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
-                            echo "<option value=".$fila['idgenero'].">".$fila['idgenero']."</option>";
+                            echo "<option value=".$fila['idgenero'].">".$fila['descripcion']."</option>";
+                        }
+                        echo "</select>";
+                        ?>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="col-sm-5">
+                        <label for="selectcodificaciontalla" class="formlabels col-sm-12">Codificación de Talla:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <?php
+                        $result = selectTable("codificacionTalla");
+                        echo "<select name='selectcodificaciontalla' id='selectcodificaciontalla' class='ddselect-6 form-control'>";
+                        echo "<option>Seleccionar</option>";
+                        while($fila = mysql_fetch_array($result)){
+                            echo "<option value=".$fila['idcodificacionTalla'].">".$fila['descripcion']."</option>";
                         }
                         echo "</select>";
                         ?>
@@ -166,7 +198,7 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-7">
                         <?php
                         $result = selectTable("cliente");
-                        echo "<select name='selectidcliente' id='selectidcliente' class='ddselect-10'>";
+                        echo "<select name='selectidcliente' id='selectidcliente' class='ddselect-10 form-control'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idCliente'].">".$fila['nombre']."</option>";
@@ -179,20 +211,10 @@ if(isset($_SESSION['login'])){
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="col-sm-5">
-                        <label for="codProdCliente" class="formlabels col-sm-12">C&oacute;digo de Producto Cliente:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <input type="text" name="codProdCliente" id="codProdCliente" class="textinput-6">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="col-sm-5">
                         <label for="datepicker" class="formlabels col-sm-12">Fecha de Creaci&oacute;n:</label>
                     </div>
                     <div class="col-sm-7">
-                        <input name="date" id="datepicker" class="textinput-6">
+                        <input name="date" id="datepicker" class="textinput-6 form-control">
                     </div>
                 </div>
             </div>
@@ -204,7 +226,7 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-7">
                         <?php
                         $result = selectTable("empleado");
-                        echo "<select name='selectempleado' id='selectempleado' class='ddselect-10'>";
+                        echo "<select name='selectempleado' id='selectempleado' class='ddselect-10 form-control'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idEmpleado'].">".$fila['nombres']." ".$fila['apellidos']."</option>";
@@ -220,7 +242,7 @@ if(isset($_SESSION['login'])){
                         <label for="observGen" class="formlabels col-sm-12">Observaciones Generales:</label>
                     </div>
                     <div class="col-sm-7">
-                        <textarea name="observGen" id="observGen" cols="30" rows="3" class="areainput-12"></textarea>
+                        <textarea name="observGen" id="observGen" cols="30" rows="3" class="areainput-12 form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -230,7 +252,7 @@ if(isset($_SESSION['login'])){
                         <label for="descrGen" class="formlabels col-sm-12">Descripci&oacute;n General:</label>
                     </div>
                     <div  class="col-sm-7">
-                        <textarea name="descrGen" id="descrGen" cols="30" rows="3" class="areainput-12"></textarea>
+                        <textarea name="descrGen" id="descrGen" cols="30" rows="3" class="areainput-12 form-control"></textarea>
                     </div>
                 </div>
             </div>
@@ -239,7 +261,8 @@ if(isset($_SESSION['login'])){
                 <input type="hidden" value="1" name="creacion">
                 <input type="hidden" value="add" name="add">
                 <div class="col-sm-12">
-                    <input class="btn btn-default col-sm-6 col-sm-offset-3" type="submit" value="Siguiente">
+                    <input class="btn btn-default col-sm-3 col-sm-offset-2" type="submit" value="Regresar" formaction="mainAdmin.php">
+                    <input class="btn btn-primary col-sm-3 col-sm-offset-2" type="submit" value="Siguiente">
                 </div>
             </div>
         </form>

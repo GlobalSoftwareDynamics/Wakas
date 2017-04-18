@@ -1,41 +1,23 @@
-<!DOCTYPE html>
-
-<html lang="es">
-
+<!doctype html>
 <?php
 session_start();
 require('funciones.php');
-$con=mysql_connect("localhost","root","");
-if($con){
-    $bd=mysql_select_db("wakas",$con);
-    if(!$bd) echo "No existe la bd";
-}else{
-    echo "No existe la conexi&oacute;n";
-}
+conexion();
 
 if(isset($_SESSION['login'])){
-    mysql_query("SET NAMES 'utf8'");
+mysql_query("SET NAMES 'utf8'");
 ?>
+<html lang="es">
+
 <head>
-    <meta charset="UTF-8">
+
+    <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
 
-    <script>
-        function getSubproceso(val) {
-            $.ajax({
-                type: "POST",
-                url: "get_subproceso.php",
-                data:'idProceso='+val,
-                success: function(data){
-                    $("#selectsubproceso").html(data);
-                }
-            });
-        }
-    </script>
 </head>
 
 <body>
@@ -93,67 +75,47 @@ if(isset($_SESSION['login'])){
     </div>
 </nav>
 
-<!-- Insert de datos -->
-
-
-
-<!-- Seleecionar Subproceso -->
-
 <section class="container">
-    <div>
-        <h3>Paso 4: Selección de Procesos y Subprocesos para <?php echo $_POST['idProd']?></h3>
-    </div>
-    <hr>
-    <form action="#" method="post" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+    <form action="gestionProcesos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+        <div>
+            <h3>Actualizar Proceso</h3>
+        </div>
+        <hr>
         <div class="form-group">
-            <div class="col-sm-12">
-                <div class="col-sm-5">
-                    <label for="selectproceso" class="formlabels col-sm-12">Proceso:</label>
-                </div>
-                <div class="col-sm-7">
-                    <?php
-                    $result = selectTable("proceso");
-                    echo "<select name='selectproceso' id='selectproceso' onChange='getSubproceso(this.value,selectsubproceso.value);' class='ddselect-10'>";
-                    echo "<option>Seleccionar</option>";
-                    while($fila = mysql_fetch_array($result)){
-                        if($fila['tipo']==='1'){
-                            $aux = $fila['idProceso'];
-                            echo "<option value=".$fila['idProceso'].">".$fila['descripcion']."</option>";
-                        }else{
-
-                        }
-                    }
-                    echo "</select>";
-                    ?>
-                </div>
+            <div class="col-sm-5">
+                <label for="idProceso" class="formlabels col-sm-12">ID Proceso:</label>
+            </div>
+            <div class="col-sm-7">
+                <?php
+                echo "
+                     <input class='textinput-4 form-control' type='text' name='idProceso' id='idProceso' value='".$_POST['idProceso']."' readonly>
+                ";
+                ?>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <div class="col-sm-5">
-                    <label for="selectsubproceso" class="formlabels col-sm-12">Subproceso:</label>
-                </div>
-                <div class="col-sm-7">
-                    <select name="selectsubproceso" id="selectsubproceso" class="ddselect-10">
-                        <option>Seleccionar</option>
-                    </select>
-                </div>
+            <div class="col-sm-5">
+                <label for="Descripcion" class="formlabels col-sm-12">Descripcion:</label>
+            </div>
+            <div class="col-sm-7">
+                <?php
+                $valor=selectTableWhere("Proceso","idProceso","'".$_POST['idProceso']."'");
+                while($fila=mysql_fetch_array($valor)){
+                    echo "
+                        <input class='textinput-6 form-control' type='text' name='Descripcion' id='Descripcion' value='".$fila['descripcion']."'>
+                    ";
+                }
+                ?>
             </div>
         </div>
         <hr>
         <div class="form-group">
             <div class="col-sm-12">
-                <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-                <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
                 <div class="col-sm-6">
-                    <input class="btn btn-default col-sm-12" type="submit" value="Regresar" name="Regresar" formaction="nuevaHE3.php">
+                    <input class='btn btn-default col-sm-6 col-sm-offset-3' type="submit" name="actualizar" value="Guardar Cambios">
                 </div>
                 <div class="col-sm-6">
-                    <input class="btn btn-success col-sm-12" type="submit" value="Valores de Subproceso" name="siguiente" formaction="nuevaHE5.php">
-                </div>
-                <hr><br>
-                <div class="col-sm-12">
-                    <input class="btn btn-primary col-sm-6 col-sm-offset-3" type="submit" value="Finalizar" name="finalizar" formaction="nuevaHE6.php">
+                    <input class='btn btn-default col-sm-6 col-sm-offset-3' type="submit" value="Regresar" formaction="gestionProcesos.php">
                 </div>
             </div>
         </div>
@@ -165,10 +127,10 @@ if(isset($_SESSION['login'])){
 
 </body>
 
-    <?php
+</html>
+
+<?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
-
-</html>
