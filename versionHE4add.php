@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="es">
 
@@ -598,17 +598,17 @@ if(isset($_SESSION['login'])){
     <section class="container">
         <!-- Contenido Real -->
         <div>
-        <form method="post" action="#" class="form-horizontal jumbotron col-sm-12">
-            <input type="hidden" name="idProd" value="<?php echo $_POST['idProd']; ?>">
-            <input type="hidden" name="selectproceso" value="<?php echo $_POST['selectproceso']; ?>">
-            <input type="hidden" name="selectsubproceso" value="<?php echo $_POST['selectsubproceso']; ?>">
-            <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
-            <br>
-            <div class="form-group">
-                <table class="table table-bordered" style="background: whitesmoke">
-            <?php
-                $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".$_POST['selectsubproceso']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
-                echo "
+            <form method="post" action="#" class="form-horizontal jumbotron col-sm-12">
+                <input type="hidden" name="idProd" value="<?php echo $_POST['idProd']; ?>">
+                <input type="hidden" name="selectproceso" value="<?php echo $_POST['selectproceso']; ?>">
+                <input type="hidden" name="selectsubproceso" value="<?php echo $_POST['selectsubproceso']; ?>">
+                <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
+                <br>
+                <div class="form-group">
+                    <table class="table table-bordered" style="background: whitesmoke">
+                        <?php
+                        $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".$_POST['selectsubproceso']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
+                        echo "
                 
                     <thead>
                         <tr class='bordes'>";
@@ -708,11 +708,11 @@ if(isset($_SESSION['login'])){
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='insumo') {
                                     echo "<select name='selectinsumo' id='selectinsumo'  onchange='getInsumo(this.value)' class='ddselect-12'>";
-                                        echo "<option>Seleccionar</option>";
-                                        $result3 = selectTable("Insumos");
-                                        while ($fila3 = mysql_fetch_array($result3)) {
-                                            echo "<option value='" . $fila3['idInsumo'] . "'>" . $fila3['descripcion'] . "</option>";
-                                        }
+                                    echo "<option>Seleccionar</option>";
+                                    $result3 = selectTable("Insumos");
+                                    while ($fila3 = mysql_fetch_array($result3)) {
+                                        echo "<option value='" . $fila3['idInsumo'] . "'>" . $fila3['descripcion'] . "</option>";
+                                    }
                                     echo "</select>";
                                     echo "</td>";
                                 } elseif ($fila['tipo']==='insumo1') {
@@ -775,33 +775,33 @@ if(isset($_SESSION['login'])){
                             }
                         }
                         echo "</tr>";
-                    echo "</tbody>";
-            ?>
-            </table>
-            </div>
+                        echo "</tbody>";
+                        ?>
+                    </table>
+                </div>
 
-            <hr>
+                <hr>
 
-            <?php
-            $indice = 0;
-            $query = mysql_query("SELECT * FROM PCPSPC");
-            while($row = mysql_fetch_array($query)){
-                $indice++;
-            }
-            echo "<input type='hidden' name='fila' value='".$indice."'>";
-            ?>
+                <?php
+                $indice = 0;
+                $query = mysql_query("SELECT * FROM PCPSPC");
+                while($row = mysql_fetch_array($query)){
+                    $indice++;
+                }
+                echo "<input type='hidden' name='fila' value='".$indice."'>";
+                ?>
 
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input type="submit" name="Volver" value="Volver" class="btn btn-default col-sm-8 col-sm-offset-2" formaction="nuevaHE4.php">
-                    </div>
-                    <div class="col-sm-6">
-                        <input type="submit" name="Agregar" value="Agregar" class="btn btn-success col-sm-8 col-sm-offset-2">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <div class="col-sm-6">
+                            <input type="submit" name="Volver" value="Volver" class="btn btn-default col-sm-8 col-sm-offset-2" formaction="versionHE4.php">
+                        </div>
+                        <div class="col-sm-6">
+                            <input type="submit" name="Agregar" value="Agregar" class="btn btn-success col-sm-8 col-sm-offset-2">
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         </div>
     </section>
 
