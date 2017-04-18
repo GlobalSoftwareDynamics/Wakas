@@ -51,7 +51,7 @@ if(!empty($_POST["idProd"])) {
                             $aux++;
                         }
                 }
-                $idProd = $aux + 6000;
+                $idProd = $aux + 6001;
                 //echo "<span id='idProd'>".$idProd."</span>";
                 echo "<input type='text' class='form-control textinput-6' name='idProd' id='idProd' value='".$idProd."' readonly>"
                 ?>

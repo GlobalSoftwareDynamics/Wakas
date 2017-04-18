@@ -215,10 +215,10 @@ if(isset($_SESSION['login'])){
                 <div class='form-group'>
                     <div class="col-sm-12">
                         <div class="col-sm-6">
-                            <input class='btn btn-default col-sm-6 col-sm-offset-3' type='submit' name='agregar' value='Agregar'>
+                            <input class='btn btn-success col-sm-6 col-sm-offset-3' type='submit' name='agregar' value='Agregar'>
                         </div>
                         <div class="col-sm-6">
-                            <input class='btn btn-default col-sm-6 col-sm-offset-3' type='submit' formaction="nuevaCV3.php" name='continuar' value='Siguiente'>
+                            <input class='btn btn-primary col-sm-6 col-sm-offset-3' type='submit' formaction="nuevaCV3.php" name='continuar' value='Siguiente'>
                         </div>
                     </div>
                 </div>
