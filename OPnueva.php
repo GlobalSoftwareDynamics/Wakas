@@ -19,6 +19,7 @@ mysql_query("SET NAMES 'utf8'");
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link href="css/Formularios.css" rel="stylesheet">
+    <link href="css/Tablas.css" rel="stylesheet">
     <script>
 
         $(function() {
@@ -61,16 +62,17 @@ mysql_query("SET NAMES 'utf8'");
         function gettallas() {
             var contrato = document.getElementById('cont').value;
             var producto = document.getElementById('prod').value;
+            var color = document.getElementById('col').value;
             $.ajax({
                 type: "POST",
                 url: "get_tallas.php",
-                data:'contrato=' + contrato + '&producto=' + producto,
+                data:{'contrato':contrato, 'producto':producto, 'color':color},
                 success: function(data){
-                    $("#tall").html(data);
+                    $("#tablatallas").html(data);
                 }
             });
         }
-        function getcantidad() {
+        /*function getcantidad() {
             var contrato = document.getElementById('cont').value;
             var producto = document.getElementById('prod').value;
             var color = document.getElementById('col').value;
@@ -83,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
                     $("#cant").html(data);
                 }
             });
-        }
+        }*/
     </script>
 </head>
 
@@ -178,7 +180,7 @@ mysql_query("SET NAMES 'utf8'");
                     <label for="prod" class="formlabels col-sm-12">Producto:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();gettallas();">
+                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();">
                         <option>Seleccionar</option>
                     </select>
                 </div>
@@ -190,33 +192,13 @@ mysql_query("SET NAMES 'utf8'");
                     <label for="col" class="formlabels col-sm-12">Color:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select name="color" class="ddselect-6" id="col">
+                    <select name="color" class="ddselect-6" id="col" onchange="gettallas();">
                         <option>Selecc.</option>
                     </select>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <div class="col-sm-5">
-                    <label for="tall" class="formlabels col-sm-12">Talla:</label>
-                </div>
-                <div class="col-sm-7">
-                    <select name="talla" class="ddselect-6" id="tall" onchange="getcantidad()">
-                        <option>Selecc.</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12">
-                <div class="col-sm-5">
-                    <label for="cantidad" class="formlabels col-sm-12">Cantidad:</label>
-                </div>
-                <div class="col-sm-7" id="cant">
-                    <input type="text" name="cantidad" class="textinput-4" id="cant">
-                </div>
-            </div>
+        <div class="form-group" id="tablatallas">
         </div>
         <hr>
         <div class="form-group">

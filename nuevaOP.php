@@ -162,72 +162,76 @@ while ($fila=mysql_fetch_array($result1)){
                 }
             }
             if(isset($_POST['ordenprodform'])){
-            $result4="SELECT * FROM confirmacionventaproducto WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
-            $result5=mysql_query($result4);
-            while ($fila1=mysql_fetch_array($result5)){
-                $cantidadrestante=$fila1['cantidad']-$fila1['cantidadop'];
-                if ($cantidadrestante<$_POST['cantidad']){
-                    echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>La cantidad ingresada es inválida.</span></div><hr>";
-                }else {
-                        $aux = 0;
-                        $result = selectTable("OrdenProduccion");
-                        while($fila = mysql_fetch_array($result)){
-                            $aux++;
-                        }
+                $aux = 0;
+                $result = selectTable("OrdenProduccion");
+                while($fila = mysql_fetch_array($result)){
+                    $aux++;
+                }
 
-                        $aux++;
-                        $idOrdProd="OP".$aux;
-                        $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$_POST['contrato']."'");
-                        while ($fila=mysql_fetch_array($result1)){
-                            $fechacreacion=(string)$fila['fecha'];
-                            $fechadespacho=(string)$fila['shipdate'];
-                        }
+                $aux++;
+                $idOrdProd="OP".$aux;
+                $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$_POST['contrato']."'");
+                while ($fila=mysql_fetch_array($result1)){
+                    $fechacreacion=(string)$fila['fecha'];
+                    $fechadespacho=(string)$fila['shipdate'];
+                }
 
-                        $result2="INSERT INTO ordenproduccion(idOrdenProduccion, idContrato, idEmpleado, fechaCreacion, fechaDespacho) VALUES ('".$idOrdProd."','".$_POST['contrato']."','".$idempleado."','".$fechacreacion."','".$fechadespacho."')";
-                        $agregar=mysql_query($result2);
-                        if ( !empty( $error = mysql_error() ) ) {
-                            echo 'Mysql error '. $error ."<br />\n";
-                        }
-
-                        $material=selectTableWhere('Material','idMaterial',"'".$fila1['idMaterial']."'");
-                        while ($fila6=mysql_fetch_array($material)){
-                            $nombremat=$fila6['material'];
-                        }
-                        $result6=selectTableWhere('Producto','idProducto',"'".$fila1['idProducto']."'");
-                        $cantidadlote=$_POST['cantidad'];
-                        settype($cantidadlote,"integer");
-                        while ($fila2=mysql_fetch_array($result6)){
-                            $result8=selectTableWhere('TipoProducto','idTipoProducto',"'".$fila2['idTipoProducto']."'");
-                            while ($fila4=mysql_fetch_array($result8)){
-                                $tamanolote=$fila4['tamanoLote'];
-                                $aux2=0;
-                                $aux1 = 0;
-                                for ($i=0;$cantidadlote > 0;$i++) {
-                                    if (($cantidadlote) > $fila4['tamanoLote']) {
-                                        $aux1++;
-                                        $idlote = $idOrdProd . "LT" . $aux1;
-                                        $cantidadlote1 = $fila4['tamanoLote'];
-                                        settype($cantidadlote1,"integer");
-                                        $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
-                                        $agregarlote1 = mysql_query($agreglote);
-                                    } else {
-                                        $aux1++;
-                                        $idlote = $idOrdProd . "LT" . $aux1;
-                                        $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
-                                        $agregarlote1 = mysql_query($agreglote);
+                $result2="INSERT INTO ordenproduccion(idOrdenProduccion, idContrato, idEmpleado, fechaCreacion, fechaDespacho) VALUES ('".$idOrdProd."','".$_POST['contrato']."','".$idempleado."','".$fechacreacion."','".$fechadespacho."')";
+                $agregar=mysql_query($result2);
+                if ( !empty( $error = mysql_error() ) ) {
+                    echo 'Mysql error '. $error ."<br />\n";
+                }
+                $aux1 = 0;
+                $result1=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                while ($fila2=mysql_fetch_array($result1)){
+                    if(isset($_POST[$fila2['idTalla']])&&$_POST[$fila2['idTalla']]){
+                        $result4="SELECT * FROM confirmacionventaproducto WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$fila2['idTalla']."' ORDER BY idProducto ASC, idColor ASC, idTalla DESC";
+                        $result5=mysql_query($result4);
+                        while ($fila1=mysql_fetch_array($result5)){
+                            $cantidadrestante=$fila1['cantidad']-$fila1['cantidadop'];
+                            if ($cantidadrestante<$_POST[$fila2['idTalla']]){
+                                echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>La cantidad ingresada es inválida.</span></div><hr>";
+                            }else {
+                                $material=selectTableWhere('Material','idMaterial',"'".$fila1['idMaterial']."'");
+                                while ($fila6=mysql_fetch_array($material)){
+                                    $nombremat=$fila6['material'];
+                                }
+                                $result6=selectTableWhere('Producto','idProducto',"'".$fila1['idProducto']."'");
+                                $cantidadlote=$_POST[$fila2['idTalla']];
+                                settype($cantidadlote,"integer");
+                                while ($fila5=mysql_fetch_array($result6)){
+                                    $result8=selectTableWhere('TipoProducto','idTipoProducto',"'".$fila5['idTipoProducto']."'");
+                                    while ($fila4=mysql_fetch_array($result8)){
+                                        $tamanolote=$fila4['tamanoLote'];
+                                        $aux2=0;
+                                        for ($i=0;$cantidadlote > 0;$i++) {
+                                            if (($cantidadlote) > $fila4['tamanoLote']) {
+                                                $aux1++;
+                                                $idlote = $idOrdProd . "LT" . $aux1;
+                                                $cantidadlote1 = $fila4['tamanoLote'];
+                                                settype($cantidadlote1,"integer");
+                                                $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
+                                                $agregarlote1 = mysql_query($agreglote);
+                                            } else {
+                                                $aux1++;
+                                                $idlote = $idOrdProd . "LT" . $aux1;
+                                                $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
+                                                $agregarlote1 = mysql_query($agreglote);
+                                            }
+                                            $cantidadlote = $cantidadlote - $tamanolote;
+                                            $aux2++;
+                                        }
                                     }
-                                    $cantidadlote = $cantidadlote - $tamanolote;
-                                    $aux2++;
+                                }
+                                $cantidadactual=$fila1['cantidadop']+$_POST[$fila2['idTalla']];
+                                $actualizar="UPDATE confirmacionventaproducto SET cantidadop = '".$cantidadactual."' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$fila2['idTalla']."'";
+                                $query=mysql_query($actualizar);
+                                $resta=$fila1['cantidad']-$cantidadactual;
+                                if($resta==0){
+                                    $actualizar1="UPDATE confirmacionventaproducto SET estado = '0' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$fila2['idTalla']."'";
+                                    $query1=mysql_query($actualizar1);
                                 }
                             }
-                        }
-                        $cantidadactual=$fila1['cantidadop']+$_POST['cantidad'];
-                        $actualizar="UPDATE confirmacionventaproducto SET cantidadop = '".$cantidadactual."' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
-                        $query=mysql_query($actualizar);
-                        $resta=$fila1['cantidad']-$cantidadactual;
-                        if($resta==0){
-                            $actualizar1="UPDATE confirmacionventaproducto SET estado = '0' WHERE idContrato='".$_POST['contrato']."' AND idProducto='".$_POST['producto']."' AND idColor='".$_POST['color']."' AND idTalla='".$_POST['talla']."'";
-                            $query1=mysql_query($actualizar1);
                         }
                     }
                 }

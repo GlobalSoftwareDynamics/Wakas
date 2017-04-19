@@ -8,5 +8,4 @@ $img = str_replace(' ', '+', $img);
 $data = base64_decode($img);
 $file = $upload_dir .$_POST['op'] ."LT".$_POST['name'] . ".png";
 $success = file_put_contents($file, $data);
-print $success ? $file : 'Unable to save the file.';
 ?>

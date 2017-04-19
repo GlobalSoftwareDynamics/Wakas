@@ -160,7 +160,7 @@ mysql_query("SET NAMES 'utf8'");
                     if (e.lengthComputable) {
                         var percentComplete = (e.loaded / e.total) * 100;
                         console.log(percentComplete + '% uploaded');
-                        alert('Succesfully uploaded');
+
                     }
                 };
 
@@ -172,6 +172,7 @@ mysql_query("SET NAMES 'utf8'");
         }
 
 </script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 <?php
