@@ -215,7 +215,7 @@ if(isset($_SESSION['login'])){
     <hr>
 
     <section class="container col-sm-6">
-        <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-3">
+        <form action="#" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
             <div class="form-group">
                 <div class="col-sm-12">
                     <div class="col-sm-5">
@@ -284,7 +284,7 @@ if(isset($_SESSION['login'])){
     <hr>
 
     <section class="container col-sm-6">
-        <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-1">
+        <form action="#" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
             <div class="form-group">
                 <div class="col-sm-5">
                     <label for="selectParte" class="formlabels col-sm-12">Parte:</label>
