@@ -224,7 +224,7 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-7">
                         <?php
                         $result = mysql_query("SELECT * FROM ComponentesPrenda WHERE tipo = '1'");
-                        echo "<select name='selectcomponente' id='selectcomponente' class='ddselect-8'>";
+                        echo "<select name='selectcomponente' id='selectcomponente' class='ddselect-12'>";
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idComponente'].">".$fila['descripcion']."</option>";
                         }
@@ -256,7 +256,7 @@ if(isset($_SESSION['login'])){
                         <label for="cantMat" class="formlabels col-sm-12">Cantidad:</label>
                     </div>
                     <div class="col-sm-7">
-                        <input type="text" name="cantMat" id="cantMat" class="textinput-4">
+                        <input type="text" name="cantMat" id="cantMat" class="textinput-8">
                     </div>
                 </div>
             </div>
@@ -266,7 +266,7 @@ if(isset($_SESSION['login'])){
                         <label for="selectColor" class="formlabels col-sm-12">Color:</label>
                     </div>
                     <div class="col-sm-7">
-                        <input type="text" name="selectColor" class="textinput-4 form-control">
+                        <input type="text" name="selectColor" class="textinput-8 form-control">
                     </div>
                 </div>
             </div>
@@ -290,7 +290,7 @@ if(isset($_SESSION['login'])){
                     <label for="selectParte" class="formlabels col-sm-12">Parte:</label>
                 </div>
                 <div class="col-sm-7">
-                    <select name="selectParte" class="form-control">
+                    <select name="selectParte" class="ddselect-12 form-control">
                         <?php
                         $result = mysql_query("SELECT * FROM ComponentesPrenda WHERE Tipo = '2'");
                         while($fila = mysql_fetch_array($result)){
