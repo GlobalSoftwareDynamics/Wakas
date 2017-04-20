@@ -50,6 +50,14 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
+                <label for="lot" class="formlabelscel col-xs-12">Lote:</label>
+            </div>
+            <div class="col-xs-12">
+                <input class="textinput-12" id="lot" type="text" name="idlote" value="<?php echo $_POST['idlote'];?>" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
                 <label for="producto" class="formlabelscel col-xs-12">Producto:</label>
             </div>
             <div class="col-xs-12">

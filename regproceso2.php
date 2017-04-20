@@ -42,7 +42,7 @@ if(isset($_POST['guardar'])){
     date_default_timezone_set('America/Lima');
     $fecha=date("m/d/Y");
 
-    $proceso="INSERT INTO EmpleadoLote(idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
+    $proceso="INSERT INTO EmpleadoLote(idLote, idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$_POST['idlote']."','".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
     $insert=mysql_query($proceso);
     if ( !empty( $error = mysql_error() ) ) {
         echo 'Mysql error '. $error ."<br/>\n";

@@ -21,6 +21,16 @@ mysql_query("SET NAMES 'utf8'");
 
 
     <script>
+        function getproduct(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_product.php",
+                data:'idlote='+val,
+                success: function(data){
+                    $("#product").html(data);
+                }
+            });
+        }
         function getcomponentes(val) {
             $.ajax({
                 type: "POST",
@@ -77,25 +87,25 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
+                <label for="lot" class="formlabelscel col-xs-12">Indique el idLote:</label>
+            </div>
+            <div class="col-xs-12">
+                <input class="textinput-12" id="lot" type="text" name="idlote" oninput="getproduct(this.value)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
                 <label for="product" class="formlabelscel col-xs-12">Seleccione Producto:</label>
             </div>
             <div class="col-xs-12">
                 <select id="product" name="producto" class="ddselect-12" onChange='getcomponentes(this.value);'>
                     <option>Seleccionar</option>
-                    <?php
-                    $result=selectTable("Producto");
-                    while ($fila=mysql_fetch_array($result)){
-                        echo "
-                                <option value='".$fila['idProducto']."'>".$fila['idProducto']."</option>
-                            ";
-                    }
-                    ?>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <div class="col-xs-12">
-                <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente:</label>
+                <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente o Parte:</label>
             </div>
             <div class="col-xs-12">
                 <select id='componentes' class="ddselect-12" name='componente' onChange='getprocedim(this.value);'>

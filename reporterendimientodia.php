@@ -98,7 +98,7 @@ mysql_query("SET NAMES 'utf8'");
                 $idcaractiempo=$fila2['idCaracteristica'];
                 /*echo $idcaractiempo." ";*/
             }
-            $result3=selectTableWhere('SubProceso','descripcion','"Hoja de Tiempos y Secuencia"');
+            $result3=selectTableWhere('SubProceso','idProcedimiento','"PROCEDIMIENTO32"');
             while ($fila3=mysql_fetch_array($result3)){
                 $idprocedimientotiempo=$fila3['idProcedimiento'];
                 /*echo $idprocedimientotiempo." ";*/
@@ -116,9 +116,15 @@ mysql_query("SET NAMES 'utf8'");
                     /*echo $fila5['idComponenteEspecifico']. " ";*/
                     $result6=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila5['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                     while ($fila6=mysql_fetch_array($result6)){
-                        /*echo $fila6['valor']." ";*/
-                        $tiempoactividad=$fila6['valor']*$fila5['cantidad'];
-                        /*echo $tiempoactividad." ";*/
+                        $idpcpspc=$fila6['id']-1;
+                        $result10=selectTableWhere('PCPSPC','id',"'".$idpcpspc."'");
+                        while ($fila10=mysql_fetch_array($result10)){
+                            if ($fila10['valor']=="MAQUINA9"){
+                                /*echo $fila6['valor']." ";*/
+                                $tiempoactividad=$fila6['valor']*$fila5['cantidad'];
+                                /*echo $tiempoactividad." ";*/
+                            }
+                        }
                     }
                 $sumatiempos=$sumatiempos+$tiempoactividad;
                 /*echo $sumatiempos." ";*/
@@ -221,16 +227,19 @@ mysql_query("SET NAMES 'utf8'");
                                     ";
                                     $result9=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila7['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                                     while ($fila9=mysql_fetch_array($result9)){
-                                        echo "
-                                            <td>".$fila9['valor']."</td>
-                                        ";
-                                    }
-                                    $result8=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila7['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
-                                    while ($fila8=mysql_fetch_array($result8)){
-                                        $tiempoempleado=$fila8['valor']*$fila7['cantidad'];
-                                        echo "
-                                            <td>".$tiempoempleado."</td>
-                                        ";
+                                        $idpcpspc1=$fila9['id']-1;
+                                        $result11=selectTableWhere('PCPSPC','id',"'".$idpcpspc1."'");
+                                        while ($fila11=mysql_fetch_array($result11)){
+                                            if($fila11['valor']=="MAQUINA9"){
+                                                echo "
+                                                    <td>".$fila9['valor']."</td>
+                                                ";
+                                                $tiempoempleado=$fila9['valor']*$fila7['cantidad'];
+                                                echo "
+                                                    <td>".$tiempoempleado."</td>
+                                                ";
+                                            }
+                                        }
                                     }
                                     echo "</tr>";
                                 }
