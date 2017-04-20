@@ -24,6 +24,29 @@ if(!empty($_POST["producto"])) {
         foreach ($compesp2 as $value2) {
             if ($value1 == $value2){
                 $encontrado=true;
+                $indice3=0;
+                $indice4=0;
+                $result1=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$value2."'",'idSubProcesoCaracteristica','"SUBPROCESOCARAC35"');
+                while ($fila4=mysql_fetch_array($result1)){
+                    $indice3++;
+                }
+                $result2=selectTableWhere2('EmpleadoLote','idLote',"'".$_POST["lote"]."'",'idProducto',"'".$_POST["producto"]."'");
+                while ($fila5=mysql_fetch_array($result2)){
+                    $indice4++;
+                }
+                echo "<option>".$indice3."</option>";
+                echo "<option>".$indice4."</option>";
+                if($indice3>$indice4){
+                    $componente=selectTableWhere('ProductoComponentesPrenda','idComponenteEspecifico',"'".$value2."'");
+                    while ($fila3=mysql_fetch_array($componente)){
+                        $comp1=selectTableWhere("ComponentesPrenda","idComponente","'".$fila3['idComponente']."'");
+                        while ($fila1=mysql_fetch_array($comp1)){
+                            echo "
+                                <option value=".$value2.">".$fila1["descripcion"]."</option>
+                            ";
+                        }
+                    }
+                }
             }
         }
         if ($encontrado == false){
