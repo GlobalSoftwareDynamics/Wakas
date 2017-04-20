@@ -104,7 +104,7 @@ mysql_query("SET NAMES 'utf8'");
             <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostipoproducto.php">Agregar Tipo de Producto</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otroscomponente.php">Agregar Componente</button>
+            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otroscomponente.php">Agregar Componentes/Partes</button>
         </div>
         <div class="col-sm-12">
             <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosmedida.php">Agregar Medidas</button>

@@ -42,6 +42,7 @@ if(isset($_SESSION['login'])){
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
 
+                                    }elseif($fila2['tipo']==='tiempo'){
                                     }else{
                                        $html .='<th>'.$fila2['descripcion'].'</th>';
                                     }

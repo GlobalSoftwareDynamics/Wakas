@@ -41,7 +41,8 @@ if(isset($_SESSION['login'])){
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
-                                    }else{
+                                    } elseif($fila2['tipo']==='tiempo'){
+                                    } else{
                                         $html .='<th>'.$fila2['descripcion'].'</th>';
                                     }
                                 }
@@ -169,6 +170,7 @@ if(isset($_SESSION['login'])){
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
                                     if($fila2['tipo']==='observacion'){
+                                    }elseif($fila2['tipo']==='tiempo'){
                                     }else{
                                         $html .='<th>'.$fila2['descripcion'].'</th>';
                                     }

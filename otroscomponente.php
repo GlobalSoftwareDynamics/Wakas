@@ -80,7 +80,7 @@ mysql_query("SET NAMES 'utf8'");
 
     <?php
     if(isset($_POST['guardar'])){
-        $agregar="INSERT INTO componentesprenda(idComponente, descripcion) VALUES ('".$_POST['idcomponente']."','".$_POST['descripcion']."')";
+        $agregar="INSERT INTO componentesprenda(idComponente, descripcion,tipo) VALUES ('".$_POST['idcomponente']."','".$_POST['descripcion']."','".$_POST['selecttipo']."')";
         $agregar1=mysql_query($agregar);
         if ( !empty( $error = mysql_error() ) )
         {
@@ -89,7 +89,7 @@ mysql_query("SET NAMES 'utf8'");
             echo "<br>
             <div class='container'>
                 <div class='alert alert-success' role='alert'>
-                    <p><strong>Componente Agregado Exitosamente</strong></p>
+                    <p><strong>Componente/Prenda Agregado Exitosamente</strong></p>
                 </div>
             </div>
             ";
@@ -101,10 +101,10 @@ mysql_query("SET NAMES 'utf8'");
     }
     ?>
 
-    <section class="container col-sm-6">
+    <section class="container col-sm-6 col-sm-offset-3">
         <form action="otroscomponente.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
             <div>
-                <h3>Nuevo Componente</h3>
+                <h3>Nuevo Componente/Parte</h3>
             </div>
             <hr>
             <?php
@@ -116,15 +116,27 @@ mysql_query("SET NAMES 'utf8'");
             $aux++;
             echo "<input type='hidden' name= 'idcomponente' value='COMPONENTE".$aux."' readonly>";
             ?>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="idcomp" class="formlabels1 col-sm-12">Componente:</label>
+            <div class="form-group col-sm-12">
+                <div class="col-sm-3">
+                    <label for="idcomp" class="formlabels col-sm-12">Descripcion:</label>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <input id="idcomp" type="text" name="descripcion" class="textinput-12">
                 </div>
             </div>
+            <div class="form-group col-sm-12">
+                <div class="col-sm-3">
+                    <label for="selecttipo" class="formlabels col-sm-12">Tipo:</label>
+                </div>
+                <div class="col-sm-8">
+                    <select id="selecttipo" name="selecttipo" class="form-control ddselect-6">
+                        <option value="1">Componente</option>
+                        <option value="2">Parte</option>
+                    </select>
+                </div>
+            </div>
             <hr>
+            <br><br><br><br><br><br>
             <div class="form-group">
                 <div class="col-sm-6">
                     <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
@@ -135,23 +147,32 @@ mysql_query("SET NAMES 'utf8'");
             </div>
         </form>
     </section>
-    <section class="container col-sm-6">
+
+    <hr>
+
+    <section class="container jumbotron col-sm-6 col-sm-offset-3">
         <div class="container col-sm-10 col-sm-offset-1">
             <table class="table table-hover">
                 <thead>
                 <tr>
-                    <th>Componente</th>
+                    <th>Descripcion</th>
+                    <th>Tipo</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
-                $result1=selectTable('ComponentesPrenda');
+                $result1= mysql_query("SELECT * FROM ComponentesPrenda ORDER BY Tipo, Descripcion");
                 while ($fila1=mysql_fetch_array($result1)){
                     echo "
                             <tr>
-                                <td>".$fila1['descripcion']."</td>
-                                <td><a href='otroscomponente.php?eliminarComponente=".$fila1['idComponente']."'>Eliminar</a></td>
+                                <td>".$fila1['descripcion']."</td>";
+                                if($fila1['tipo']=='1'){
+                                    echo "<td>Componente</td>";
+                                }else{
+                                    echo "<td>Parte</td>";
+                                }
+                    echo "      <td><a href='otroscomponente.php?eliminarComponente=".$fila1['idComponente']."'>Eliminar</a></td>
                             </tr>
                         ";
                 }
