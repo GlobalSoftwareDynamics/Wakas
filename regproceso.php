@@ -31,11 +31,13 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
-        function getcomponentes(val) {
+        function getcomponentes() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
             $.ajax({
                 type: "POST",
                 url: "get_comps.php",
-                data:'producto_id='+val,
+                data:'lote=' + lote + '&producto=' + producto,
                 success: function(data){
                     $("#componentes").html(data);
                 }
@@ -98,7 +100,7 @@ mysql_query("SET NAMES 'utf8'");
                 <label for="product" class="formlabelscel col-xs-12">Seleccione Producto:</label>
             </div>
             <div class="col-xs-12">
-                <select id="product" name="producto" class="ddselect-12" onChange='getcomponentes(this.value);'>
+                <select id="product" name="producto" class="ddselect-12" onChange='getcomponentes();'>
                     <option>Seleccionar</option>
                 </select>
             </div>
@@ -109,7 +111,6 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-xs-12">
                 <select id='componentes' class="ddselect-12" name='componente' onChange='getprocedim(this.value);'>
-                    <option>Seleccionar</option>
                 </select>
             </div>
         </div>
