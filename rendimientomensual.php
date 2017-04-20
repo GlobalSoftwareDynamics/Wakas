@@ -227,9 +227,15 @@ mysql_query("SET NAMES 'utf8'");
                     /*echo $fila5['idComponenteEspecifico']. " ";*/
                     $result6=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila5['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                     while ($fila6=mysql_fetch_array($result6)){
-                        /*echo $fila6['valor']." ";*/
-                        $tiempoactividad=$fila6['valor']*$fila5['cantidad'];
-                        /*echo $tiempoactividad." ";*/
+                        $idpcpspc=$fila6['id']-1;
+                        $result10=selectTableWhere('PCPSPC','id',"'".$idpcpspc."'");
+                        while ($fila10=mysql_fetch_array($result10)){
+                            if ($fila10['valor']=="MAQUINA9"){
+                                /*echo $fila6['valor']." ";*/
+                                $tiempoactividad=$fila6['valor']*$fila5['cantidad'];
+                                /*echo $tiempoactividad." ";*/
+                            }
+                        }
                     }
                 $sumatiempos=$sumatiempos+$tiempoactividad;
                 /*echo $sumatiempos." ";*/
