@@ -98,11 +98,11 @@ mysql_query("SET NAMES 'utf8'");
                 $bar=$fila['idLote'];
                 echo "<tr>";
                 echo "<td>".$bar."</td>";
-                echo "<td><svg id='".$indice."'></svg></td>";
+                echo "<td><canvas id='".$indice."'></canvas></td>";
                 ?>
                 <script>
                     $(document).ready(function () {
-                        $("#<?php echo $indice;?>").JsBarcode("<?php echo $bar;?>");
+                        $("#<?php echo $indice;?>").JsBarcode("<?php echo $bar;?>",{displayValue:false});
                     });
                 </script>
                 <?php
@@ -144,6 +144,7 @@ mysql_query("SET NAMES 'utf8'");
     <input name="op" id='op' type="hidden" value="<?php echo $_POST['idop'];?>"/>
 </form>
 <script>
+
     function uploadEx() {
         for ($i=0; $i<<?php echo $indice+1?>; $i++) {
 

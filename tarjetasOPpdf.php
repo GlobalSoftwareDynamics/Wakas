@@ -18,6 +18,8 @@ if(isset($_SESSION['login'])){
                     <title>Tarjeta</title>
                     <link href="css/bootstrap.min.css" rel="stylesheet">
                     <link href="css/Formatospdf.css" rel="stylesheet">
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                    <script src="lib/barcode/JsBarcode.all.min.js"></script>
                 </head>
                 <body>
     ';
@@ -30,10 +32,14 @@ if(isset($_SESSION['login'])){
                         <div class="contenedor">
                             <div>
                                 <img width="3cm" height="70" src="image/Brand.png" class="izquierda">
-                                <img width="3cm" height="70" src="barcodes/'.$_POST['idop'].'/'.$bar.'.png" class="derecha">
+                                <img width="200" height="80" src="barcodes/OP1/OP1LT1.png" class="derecha">
                             </div>
                         </div>
                         <div class="contenedor">
+                                        <div class="tarjetacont" >
+                                            <p class="columnaizquierda1 col-xs-3">idLote</p>
+                                            <p class="col-xs-5">'.$fila['idLote'].'</p>
+                                        </div>
                                         <div class="tarjetacont" >
                                             <p class="columnaizquierda1 col-xs-3">idModelo</p>
                                             <p class="col-xs-5">'.$fila['idProducto'].'</p>
@@ -76,7 +82,7 @@ if(isset($_SESSION['login'])){
         $html .='
                         </div>
                         <div class="cuadrobservacion" style="font-size: 12px">
-                            <span class="columnaizquierda1">OBSERVACIONES</span>
+                            <p class="columnaizquierda1">OBSERVACIONES</p>
                             <p>'.$_POST['observacion'].'</p>
                         </div>
                 </section>
