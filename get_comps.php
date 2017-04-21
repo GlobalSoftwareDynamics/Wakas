@@ -34,8 +34,6 @@ if(!empty($_POST["producto"])) {
                 while ($fila5=mysql_fetch_array($result2)){
                     $indice4++;
                 }
-                echo "<option>".$indice3."</option>";
-                echo "<option>".$indice4."</option>";
                 if($indice3>$indice4){
                     $componente=selectTableWhere('ProductoComponentesPrenda','idComponenteEspecifico',"'".$value2."'");
                     while ($fila3=mysql_fetch_array($componente)){
