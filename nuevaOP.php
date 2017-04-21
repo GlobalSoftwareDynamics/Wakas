@@ -108,7 +108,7 @@ while ($fila=mysql_fetch_array($result1)){
                 if ( !empty( $error = mysql_error() ) ) {
                     echo 'Mysql error '. $error ."<br />\n";
                 }
-
+                $aux1 = 0;
                 $result4="SELECT * FROM confirmacionventaproducto WHERE idContrato='".$_POST['contrato']."' ORDER BY idProducto ASC, idColor ASC, idTalla DESC";
                 $result5=mysql_query($result4);
                 while ($fila1=mysql_fetch_array($result5)){
@@ -126,11 +126,6 @@ while ($fila=mysql_fetch_array($result1)){
                             $aux2=0;
                             for ($i=0;$cantidadlote > 0;$i++) {
                                 if (($cantidadlote) > $fila4['tamanoLote']) {
-                                    $aux1 = 0;
-                                    $result7 = selectTable("Lote");
-                                    while ($fila3 = mysql_fetch_array($result7)) {
-                                        $aux1++;
-                                    }
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
                                     $cantidadlote1 = $fila4['tamanoLote'];
@@ -138,12 +133,6 @@ while ($fila=mysql_fetch_array($result1)){
                                     $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
                                     $agregarlote1 = mysql_query($agreglote);
                                 } else {
-                                    $aux1 = 0;
-                                    $result7 = selectTable("Lote");
-                                    while ($fila3 = mysql_fetch_array($result7)) {
-                                        $aux1++;
-
-                                    }
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
                                     $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
