@@ -98,7 +98,7 @@ mysql_query("SET NAMES 'utf8'");
                 $bar=$fila['idLote'];
                 echo "<tr>";
                 echo "<td>".$bar."</td>";
-                echo "<td><canvas id='".$indice."'></canvas></td>";
+                echo "<td><svg id='".$indice."'></svg></td>";
                 ?>
                 <script>
                     $(document).ready(function () {
