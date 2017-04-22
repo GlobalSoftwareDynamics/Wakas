@@ -64,8 +64,8 @@ if(isset($_SESSION['login'])){
                     /*echo $fila5[\'idComponenteEspecifico\']. " ";*/
                     $result6=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila5['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                     while ($fila6=mysql_fetch_array($result6)){
-                        $idpcpspc=$fila6['id']-1;
-                        $result10=selectTableWhere('PCPSPC','id',"'".$idpcpspc."'");
+                        $idpcpspc=$fila6['fila'];
+                        $result10=selectTableWhere('PCPSPC','fila',"'".$idpcpspc."'");
                         while ($fila10=mysql_fetch_array($result10)){
                             if ($fila10['valor']=="MAQUINA9"){
                                 /*echo $fila6['valor']." ";*/
@@ -138,8 +138,8 @@ if(isset($_SESSION['login'])){
                                     ';
                                     $result9=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila7['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                                     while ($fila9=mysql_fetch_array($result9)){
-                                        $idpcpspc1=$fila9['id']-1;
-                                        $result11=selectTableWhere('PCPSPC','id',"'".$idpcpspc1."'");
+                                        $idpcpspc1=$fila9['fila'];
+                                        $result11=selectTableWhere('PCPSPC','fila',"'".$idpcpspc1."'");
                                         while ($fila11=mysql_fetch_array($result11)){
                                             if($fila11['valor']=="MAQUINA9"){
                                                 $html .='
