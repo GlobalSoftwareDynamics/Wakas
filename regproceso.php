@@ -31,25 +31,28 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
-        function getcomponentes() {
+        function getprocedim() {
             var lote = document.getElementById('lot').value;
             var producto = document.getElementById('product').value;
             $.ajax({
                 type: "POST",
-                url: "get_comps.php",
+                url: "get_proce.php",
                 data:'lote=' + lote + '&producto=' + producto,
                 success: function(data){
-                    $("#componentes").html(data);
+                    $("#procedi").html(data);
                 }
             });
         }
-        function getprocedim(val) {
+        function getcomponentes() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
+            var procedimiento = document.getElementById('procedi').value;
             $.ajax({
                 type: "POST",
-                url: "get_proce.php",
-                data:'compesp_id='+val,
+                url: "get_comps.php",
+                data:'lote=' + lote + '&producto=' + producto + '&procedimiento=' + procedimiento,
                 success: function(data){
-                    $("#procedi").html(data);
+                    $("#componentes").html(data);
                 }
             });
         }
@@ -100,7 +103,17 @@ mysql_query("SET NAMES 'utf8'");
                 <label for="product" class="formlabelscel col-xs-12">Seleccione Producto:</label>
             </div>
             <div class="col-xs-12">
-                <select id="product" name="producto" class="ddselect-12" onChange='getcomponentes();'>
+                <select id="product" name="producto" class="ddselect-12" onChange='getprocedim();'>
+                    <option>Seleccionar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label for="procedi" class="formlabelscel col-xs-12">Seleccione Procedimiento:</label>
+            </div>
+            <div class="col-xs-12">
+                <select id="procedi" name="procedimiento" class="ddselect-12" onChange='getcomponentes();'>
                     <option>Seleccionar</option>
                 </select>
             </div>
@@ -110,17 +123,7 @@ mysql_query("SET NAMES 'utf8'");
                 <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente o Parte:</label>
             </div>
             <div class="col-xs-12">
-                <select id='componentes' class="ddselect-12" name='componente' onChange='getprocedim(this.value);'>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
-            </div>
-            <div class="col-xs-12">
-                <select id="procedi" name="procedimiento" class="ddselect-12">
-                    <option>Seleccionar</option>
+                <select id='componentes' class="ddselect-12" name='componente'>
                 </select>
             </div>
         </div>

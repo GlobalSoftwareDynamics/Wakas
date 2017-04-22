@@ -66,6 +66,20 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
+                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
+            </div>
+            <div class="col-xs-12">
+                <input type="hidden" name="procedimiento" value="<?php echo $_POST['procedimiento'];?>" readonly>
+                <?php
+                $result2=selectTableWhere("SubProceso","idProcedimiento","'".$_POST['procedimiento']."'");
+                while ($fila2=mysql_fetch_array($result2)){
+                    echo "<input type='text' id='procedi' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                }
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
                 <label for='componentes' class="formlabelscel col-xs-12">Componente:</label>
             </div>
             <div class="col-xs-12">
@@ -77,20 +91,6 @@ mysql_query("SET NAMES 'utf8'");
                     while ($fila1=mysql_fetch_array($result1)){
                         echo "<input type='text' id='componentes' class='textinput-12' value='".$fila1['descripcion']."' readonly>";
                     }
-                }
-                ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
-            </div>
-            <div class="col-xs-12">
-                <input type="hidden" name="procedimiento" value="<?php echo $_POST['procedimiento'];?>" readonly>
-                <?php
-                $result2=selectTableWhere("SubProceso","idProcedimiento","'".$_POST['procedimiento']."'");
-                while ($fila2=mysql_fetch_array($result2)){
-                    echo "<input type='text' id='procedi' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
                 }
                 ?>
             </div>
