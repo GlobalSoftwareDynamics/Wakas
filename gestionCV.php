@@ -126,7 +126,7 @@ mysql_query("SET NAMES 'utf8'");
                             echo "
                                 <tr>
                             ";
-                            $result=selectTableWhere('ConfirmacionVenta','fecha',"'".$_POST['fecha']."'");
+                            $result=selectOrderedTableWhere('ConfirmacionVenta','fecha',"'".$_POST['fecha']."'",'fecha');
                             while ($fila=mysql_fetch_array($result)){
                                 echo "
                                     <td>".$fila['idContrato']."</td>
@@ -151,7 +151,7 @@ mysql_query("SET NAMES 'utf8'");
                                 }
                             }
                         }else{
-                            $result=selectTable('ConfirmacionVenta');
+                            $result=selectOrderedTable('ConfirmacionVenta','fecha');
                             while ($fila=mysql_fetch_array($result)){
                                 echo "
                                     <tr>
