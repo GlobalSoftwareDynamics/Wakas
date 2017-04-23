@@ -13,7 +13,7 @@ if(isset($_SESSION['login'])){
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">    
         <title>Gesti&oacute;n de M&aacute;quinas</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/Tablas.css" rel="stylesheet">
 
     </head>
@@ -22,6 +22,7 @@ if(isset($_SESSION['login'])){
         <header>
             <nav class="navbar navbar-inverse">
                 <div class="container">
+
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                             <span class="sr-only">Toggle navigation</span>
@@ -29,28 +30,30 @@ if(isset($_SESSION['login'])){
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                        <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                                     <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                                    <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
                                     <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                                    <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                    <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OPERACIONES<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                                    <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
+                                    <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFORMACIÓN INTERNA<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="gestionMateriales.php">Materiales</a></li>
                                     <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
@@ -62,7 +65,7 @@ if(isset($_SESSION['login'])){
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACTOS<span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="gestionClientes.php">Clientes</a></li>
                                     <li><a href="gestionProveedores.php">Proveedores</a></li>
@@ -136,7 +139,7 @@ if(isset($_SESSION['login'])){
 										<td>".$fila['idMaquina']."</td>
 										<td>".$fila['descripcion']."</td>
 										<td>".$fila['costoFijo']."</td>
-										<td><a href='verrepuestos.php?idMaquina=".$fila['idMaquina']."'>Repuestos</a></td>
+										<td><a href='verrepuestos.php?idMaquina=".$fila['idMaquina']."'>Ver Repuestos</a></td>
 										<td><a href='actualizarmaquina.php?idMaquina=".$fila['idMaquina']."'>Modificar</a></td>
 								</tr>
 							";
@@ -149,10 +152,10 @@ if(isset($_SESSION['login'])){
                 <form>
                     <div class="col-sm-12">
                         <div class="col-sm-6">
-                            <button class="btn btn-default col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar M&aacute;quina</button>
+                            <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Galgas</button>
                         </div>
                         <div class="col-sm-6">
-                            <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Gestionar Galgas</button>
+                            <button class="btn btn-success col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar</button>
                         </div>
                     </div>
                 </form>
@@ -167,6 +170,6 @@ if(isset($_SESSION['login'])){
 </html>
 <?php 
 }else{
-        echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+        echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
     }
 ?>

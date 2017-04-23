@@ -1,19 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <?php
-require('funciones.php');
 session_start();
+require('funciones.php');
 conexion();
+
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link href="css/Tablas.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
 
 </head>
@@ -77,72 +81,33 @@ if(isset($_SESSION['login'])){
     </nav>
 </header>
 
-    <section class="container">
-        <form action="gestionProveedores.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
-            <div>
-                <h3>Actualizar Proveedor</h3>
+<section class="container">
+    <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+        <div>
+            <h3>Seguimiento de Lotes</h3>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="op" class="formlabels col-sm-12">Orden de Producción:</label>
             </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="idProv" class="formlabels col-sm-12">idProveedor</label>
-                </div>
-                <div class="col-sm-7">
-                    <?php
-                    $result=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
-                    while ($fila=mysql_fetch_array($result)){
-                        echo "
-                            <input class='textinput-5' type='text' name='idProv' id='idProv' value='".$_GET['idProveedor']."' readonly>
-                        ";
-                    }
-                    ?>
-                </div>
+            <div class="col-sm-7">
+                <input type="text" name="idop" id="op" class="textinput-8">
             </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="nombre" class="formlabels col-sm-12">Nombre</label>
+        </div>
+        <hr>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <input formaction="regproceexterno.php" class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="regproceexter" value="Registrar Proceso Tercerizado">
                 </div>
-                <div class="col-sm-7">
-                    <?php
-                    $result1=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
-                    while ($fila1=mysql_fetch_array($result1)){
-                        echo "
-                                <input class='textinput-8' type='text' name='nombre' id='nombre' value='".$fila1['nombre']."'>
-                            ";
-                    }
-                    ?>
+                <div class="col-sm-6">
+                    <input formaction="estadoordenprod.php" class="btn btn-primary col-sm-10 col-sm-offset-1" type="submit" name="revestado" value="Revisar Estado">
                 </div>
             </div>
-            <div class="form-group">
-                <div class="col-sm-5">
-                    <label for="direccion" class="formlabels col-sm-12">Direcci&oacute;n</label>
-                </div>
-                <div class="col-sm-7">
-                    <?php
-                    $result2=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
-                    while ($fila2=mysql_fetch_array($result2)){
-                        echo "
-                                <input class='textinput-10' type='text' name='direccion' id='direccion' value='".$fila2['Direccion']."'>
-                            ";
-                    }
-                    ?>
-                </div>
-            </div>
-            <hr>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <div class="col-sm-6">
-                        <input class='btn btn-default col-sm-6 col-sm-offset-3' type="submit" name="regresar" value="Regresar">
-                    </div>
-                    <div class="col-sm-6">
-                        <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="actualizar" value="Guardar Cambios">
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        </div>
+    </form>
+</section>
 <script src="js/bootstrap.min.js"></script>
 
 </body>
