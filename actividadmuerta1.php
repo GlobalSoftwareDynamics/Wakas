@@ -57,6 +57,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div class="col-xs-12">
                     <select id="actividad" name="actimuerta" class="ddselect-12">
+                        <option>Seleccionar</option>
                         <?php
                         $result=selectTable("ActividadMuerta");
                         while ($fila=mysql_fetch_array($result)){
@@ -98,6 +99,6 @@ mysql_query("SET NAMES 'utf8'");
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
