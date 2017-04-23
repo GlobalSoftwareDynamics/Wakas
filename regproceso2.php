@@ -52,13 +52,13 @@ if(isset($_POST['guardar'])){
     if ( !empty( $error = mysql_error() ) ) {
         echo "
             <section class='container'>
-                <h4 class='h4operario'>¡Felicitaciones ha ingresado los datos con &eacute;xito!</h4>
+                <h4 class='h4operario'>Error al Ingresar los Datos</h4>
             </section>
         ";
     }else{
         echo "
             <section class='container'>
-                <h4 class='h4operario'>Error al Ingresar los Datos</h4>
+                <h4 class='h4operario'>¡Felicitaciones ha ingresado los datos con &eacute;xito!</h4>
             </section>
         ";
     }
