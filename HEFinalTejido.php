@@ -24,7 +24,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <body >
 <header>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
 
             <div class="navbar-header">
@@ -34,7 +34,7 @@ mysql_query("SET NAMES 'utf8'");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
+                <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -42,7 +42,7 @@ mysql_query("SET NAMES 'utf8'");
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                            <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                            <li><a href="gestionOP.php">Visualizaci&oacuten de Órdenes de Producci&oacuten</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                             <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
                             <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
@@ -82,7 +82,7 @@ mysql_query("SET NAMES 'utf8'");
 </header>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-2">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -92,44 +92,44 @@ mysql_query("SET NAMES 'utf8'");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./">Secciones disponibles</a>
+                    <a class="navbar-brand" href="#">Secciones disponibles</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <form method="post">
                         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinal.php" value="Sección General">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinal.php" value="Sección General">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalTejido.php" value="Sección Tejido">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTejido.php" value="Sección Tejido">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalConfeccion.php" value="Sección Confección">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalConfeccion.php" value="Sección Confección">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
                         </div>
                     </form>
                 </div>
             </nav>
         </div>
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-10">
             <!-- Page Contents -->
             <section class="container-fluid">
                 <div class="col-sm-2">
                     <div>
-                        <img width="110" height="110" src="image/logowakas.jpg"/>
+                        <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
                     </div>
                 </div>
                 <div class="col-sm-5" id="descripcionbrand">
                     <div>
-                        <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                        <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></span></b>
                     </div>
                     <div>
                         <span>Urb. Francisco Mostajo G-25</span>
@@ -140,7 +140,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div class="col-sm-4">
                     <div class="titulo">
-                        <h3>Ficha de Repuestos</h3>
+                        <h3>Hoja de Especificaciones</h3>
                     </div>
                     <div>
                         <h4 class='desctitulo'>MOD <?php echo $_POST['idProd']; ?></h4>

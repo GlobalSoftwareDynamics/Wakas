@@ -41,7 +41,7 @@ if(isset($_SESSION['login'])){
 
     <body>
     <header>
-        <nav class="navbar navbar-inverse">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
 
                 <div class="navbar-header">
@@ -51,7 +51,7 @@ if(isset($_SESSION['login'])){
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
+                    <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -59,7 +59,7 @@ if(isset($_SESSION['login'])){
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                                <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                                <li><a href="gestionOP.php">Visualizaci&oacuten de Órdenes de Producci&oacuten</a></li>
                                 <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
                                 <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
                                 <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
@@ -132,7 +132,12 @@ if(isset($_SESSION['login'])){
                                 $aux++;
                             }
                         }
-                        $idProd = $aux + 6001;
+                        if($aux == 0){
+                            $idProd = 6000;
+                        }else{
+                            $idProd = $aux + 6001;
+                        }
+                        //echo "<span id='idProd'>".$idProd."</span>";
                         echo "<input type='text' class='form-control textinput-6' name='idProd' id='idProd' value='".$idProd."' readonly>"
                         ?>
                     </div>
