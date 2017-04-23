@@ -20,64 +20,69 @@ if(isset($_SESSION['login'])){
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Waka-s Textiles Finos S.A.</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
     </head>
 
     <body>
 
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
+                                <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                                <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                                <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OPERACIONES<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
+                                <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
+                                <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFORMACIÓN INTERNA<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionMateriales.php">Materiales</a></li>
+                                <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
+                                <li><a href="gestionInsumos.php">Insumos</a></li>
+                                <li><a href="gestionOperarios.php">Empleados</a></li>
+                                <li><a href="gestionProcesos.php">Procesos</a></li>
+                                <li><a href="gestionRepuestos.php">Repuestos</a></li>
+                                <li><a href="menuagregarotros.php">Otros</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACTOS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionClientes.php">Clientes</a></li>
+                                <li><a href="gestionProveedores.php">Proveedores</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                            <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                            <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                            <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionMateriales.php">Materiales</a></li>
-                            <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
-                            <li><a href="gestionInsumos.php">Insumos</a></li>
-                            <li><a href="gestionOperarios.php">Empleados</a></li>
-                            <li><a href="gestionProcesos.php">Procesos</a></li>
-                            <li><a href="gestionRepuestos.php">Repuestos</a></li>
-                            <li><a href="menuagregarotros.php">Otros</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="gestionClientes.php">Clientes</a></li>
-                            <li><a href="gestionProveedores.php">Proveedores</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div><!--/.nav-collapse -->
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <section class="container">
         <?php
@@ -89,17 +94,17 @@ if(isset($_SESSION['login'])){
         if(isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
             if($check !== false) {
-                echo "Seleccionada una imagen - " . $check["mime"] . ".";
+                echo "<div class='container'><span class='alert alert-success col-sm-8 col-sm-offset-2'>Seleccionada una imagen - " . $check["mime"] . ".</span></div>";
                 echo "<br>";
                 $uploadOk = 1;
             } else {
-                echo "El documento seleccionado es sospechoso.";
+                echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>El documento seleccionado es sospechoso.</span></div><br>";
                 $uploadOk = 0;
             }
         }
 
         if (file_exists($target_file)) {
-            echo "Lo lamentamos, su fotografía ya ha sido agregada previamente.";
+            echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>Lo lamentamos, su fotografía ya ha sido agregada previamente.</span></div><br>";
             $uploadOk = 0;
         }
 
@@ -110,12 +115,12 @@ if(isset($_SESSION['login'])){
 
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
-            echo "Lo lamentamos, solo se permiten los formatos de imagen jpg, png, jpeg y gif.";
+            echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>Lo lamentamos, solo se permiten los formatos de imagen jpg, png, jpeg y gif.</span></div><br>";
             $uploadOk = 0;
         }
 
         if ($uploadOk == 0) {
-            echo "Su fotografía no fue subida.";
+            echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>Su fotografía no fue subida.</span></div><br>";
 
         } else {
             $i = 0;
@@ -129,13 +134,14 @@ if(isset($_SESSION['login'])){
             $temp = explode(".", $_FILES["fileToUpload"]["name"]);
             $newfilename = $_POST['idProd'] . '-prod.' . end($temp);
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_dir.$newfilename)) {
-                echo "La fotografía ". basename( $_FILES["fileToUpload"]["name"]). "  fue registrada exitosamente.";
+                echo "<div class='container'><span class='alert alert-success col-sm-8 col-sm-offset-2'>La fotografía ". basename( $_FILES["fileToUpload"]["name"]). "  fue registrada exitosamente.</span></div><br>";
             } else {
-                echo "Lo lamentamos, hubo un error subiendo su fotografía.";
+                echo "<div class='container'><span class='alert alert-danger col-sm-8 col-sm-offset-2'>Lo lamentamos, hubo un error subiendo su fotografía.</span></div><br>";
             }
         }
         ?>
-        <form method="post" action="nuevaHE6.php" class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+        <hr>
+        <form method="post" action="nuevaHE6.php" class="form-horizontal col-sm-6 col-sm-offset-3">
             <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
             <input type="submit" class="btn btn-default col-sm-8 col-sm-offset-2" value="Volver">
         </form>
@@ -148,7 +154,7 @@ if(isset($_SESSION['login'])){
 
     <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
 

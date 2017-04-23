@@ -5,6 +5,7 @@ require('funciones.php');
 conexion();
 
 if(isset($_SESSION['login'])){
+mysql_query("SET NAMES 'utf8'");
     ?>
 <html lang="es">
 
@@ -14,66 +15,69 @@ if(isset($_SESSION['login'])){
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">    
         <title>Ver Confirmacion de Venta</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/Tablas.css" rel="stylesheet">
         <link href="css/Formatos.css" rel="stylesheet">
 
     </head>
     <body>
-        <header>
-            <nav class="navbar navbar-inverse">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                                    <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                                    <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
-                                    <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                                    <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="gestionMateriales.php">Materiales</a></li>
-                                    <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
-                                    <li><a href="gestionInsumos.php">Insumos</a></li>
-                                    <li><a href="gestionOperarios.php">Empleados</a></li>
-                                    <li><a href="gestionProcesos.php">Procesos</a></li>
-                                    <li><a href="gestionRepuestos.php">Repuestos</a></li>
-                                    <li><a href="menuagregarotros.php">Otros</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="gestionClientes.php">Clientes</a></li>
-                                    <li><a href="gestionProveedores.php">Proveedores</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
+    <header>
+        <nav class="navbar navbar-inverse">
+            <div class="container">
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
                 </div>
-            </nav>
-        </header>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
+                                <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
+                                <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                                <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                                <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OPERACIONES<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
+                                <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
+                                <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFORMACIÓN INTERNA<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionMateriales.php">Materiales</a></li>
+                                <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
+                                <li><a href="gestionInsumos.php">Insumos</a></li>
+                                <li><a href="gestionOperarios.php">Empleados</a></li>
+                                <li><a href="gestionProcesos.php">Procesos</a></li>
+                                <li><a href="gestionRepuestos.php">Repuestos</a></li>
+                                <li><a href="menuagregarotros.php">Otros</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACTOS<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="gestionClientes.php">Clientes</a></li>
+                                <li><a href="gestionProveedores.php">Proveedores</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+    </header>
 
         <section class="container-fluid">
             <div class="col-sm-1">
@@ -241,138 +245,117 @@ if(isset($_SESSION['login'])){
                         <th>Your Code</th>
                         <th>Material</th>
                         <th>Color</th>
-                        <th>XXS</th>
-                        <th>XS</th>
-                        <th>S</th>
-                        <th>M</th>
-                        <th>L</th>
-                        <th>XL</th>
-                        <th>XXL</th>
-                        <th>TU</th>
+                        <?php
+                        $result11=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila11=mysql_fetch_array($result11)){
+                            echo "
+                                    <th>".$fila11['descripcion']."</th>
+                                ";
+                        }
+                        ?>
                         <th>Total</th>
                         <th>Price (USD)</th>
                         <th>Total (USD)</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                    $ProdActual="ninguno";
-                    $ColorActual="ninguno";
-                    $inicio=0;
-                    $sumafinal=0;
-                    $sumafinalprod=0;
-                    $result="SELECT * FROM confirmacionventaproducto WHERE idContrato ='".$_POST['contrato']."' ORDER BY idProducto ASC, idColor ASC";
-                    $resultxvr=mysql_query($result);
-                    while ($fila=mysql_fetch_array($resultxvr)){
-                        if(($ProdActual==$fila['idProducto'])&&($ColorActual==$fila['idColor'])) {
-                            echo "</tr>";
-                        }else{
-                            echo "<tr>";
-                            echo "
-                                                <td>".$fila['idProducto']."</td>
-                                                <td>".$fila['yourcode']."</td>
+                <?php
+                $ProdActual="ninguno";
+                $ColorActual="ninguno";
+                $inicio=0;
+                $sumafinal=0;
+                $sumafinalprod=0;
+                $result12="SELECT * FROM confirmacionventaproducto WHERE idContrato ='".$_POST['contrato']."' ORDER BY idProducto ASC, idColor ASC";
+                $resultxvr=mysql_query($result12);
+                while ($fila12=mysql_fetch_array($resultxvr)){
+                    if(($ProdActual==$fila12['idProducto'])&&($ColorActual==$fila12['idColor'])) {
+                        echo "</tr>";
+                    }else{
+                        echo "<tr>";
+                        echo "
+                                                <td>".$fila12['idProducto']."</td>
+                                                <td>".$fila12['yourcode']."</td>
                                         ";
-                            $result2=selectTableWhere('Material','idMaterial',"'".$fila['idMaterial']."'");
-                            while ($fila2=mysql_fetch_array($result2)){
-                                echo "
+                        $result2=selectTableWhere('Material','idMaterial',"'".$fila12['idMaterial']."'");
+                        while ($fila2=mysql_fetch_array($result2)){
+                            echo "
                                                 <td>".$fila2['material']."</td>
                                             ";
-                            }
-                            echo "
-                                            <td>".$fila['idColor']."</td>
+                        }
+                        echo "
+                                            <td>".$fila12['idColor']."</td>
                                         ";
-                            $indice = 0;
-                            $tallas = array();
-                            $valores = array();
-                            $result3 = selectTableWhere4('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila['idProducto']."'",'idColor',"'".$fila['idColor']."'",'idMaterial',"'".$fila['idMaterial']."'");
-                            while ($fila3 = mysql_fetch_array($result3)) {
-                                $tallas[$indice] = $fila3['idTalla'];
-                                $valores[$indice] = $fila3['cantidad'];
-                                $indice++;
-                            }
-                            $aux = 0;
-                            $aux2 = 0;
-                            while ($aux < 9) {
-                                $bandera=false;
-                                switch ($aux) {
-                                    case 0:
-                                        $aux2 = "XXS";
-                                        break;
-                                    case 1:
-                                        $aux2 = "XS";
-                                        break;
-                                    case 2:
-                                        $aux2 = "S";
-                                        break;
-                                    case 3:
-                                        $aux2 = "M";
-                                        break;
-                                    case 4:
-                                        $aux2 = "L";
-                                        break;
-                                    case 5:
-                                        $aux2 = "XL";
-                                        break;
-                                    case 6:
-                                        $aux2 = "XXL";
-                                        break;
-                                    case 7:
-                                        $aux2 = "TU";
-                                        break;
-                                    case 8:
-                                        $aux2 = "Total";
-                                        break;
-                                }
-                                for ($i = 0; $i < count($tallas); $i++) {
-                                    if ($tallas[$i] == $aux2) {
-                                        echo "<td>" . $valores[$i] . "</td>";
-                                        $bandera = true;
+                        $tallas1=array();
+                        $tallas2=array();
+                        $indice1=0;
+                        $indice2=0;
+                        $result=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila=mysql_fetch_array($result)) {
+                            $tallas1[$indice1] = $fila['idTalla'];
+                            $indice1++;
+                        }
+                        $talla ="SELECT * FROM confirmacionventaproducto WHERE idProducto = '".$fila12['idProducto']."' AND idContrato='".$_POST['contrato']."' AND idColor='".$fila12['idColor']."' AND idMaterial='".$fila12['idMaterial']."'";
+                        $result2=mysql_query($talla);
+                        while ($fila1=mysql_fetch_array($result2)){
+                            $tallas2[$indice2]=$fila1['idTalla'];
+                            $indice2++;
+                        }
+                        foreach ($tallas1 as $value1) {
+                            $encontrado=false;
+                            foreach ($tallas2 as $value2) {
+                                if ($value1 == $value2){
+                                    $encontrado=true;
+                                    $cant="SELECT * FROM confirmacionventaproducto WHERE idProducto='".$fila12['idProducto']."' AND idContrato='".$_POST['contrato']."' AND idColor='".$fila12['idColor']."' AND idTalla='".$value1."'";
+                                    $cant1=mysql_query($cant);
+                                    while ($filacant=mysql_fetch_array($cant1)){
+                                        echo "<td>".$filacant['cantidad']."</td>";
                                     }
                                 }
-                                if($aux2=='Total'){
-                                    $suma=array_sum($valores);
-                                    $result2=selectTableWhere2('Precio','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila['idProducto']."'");
-                                    while($fila2=mysql_fetch_array($result2)){
-                                        echo "
-                                                            <td>".$suma ."</td>
-                                                            <td>".$fila2['precio'] ."</td>
-                                                        ";
-                                        $totalusd=$suma*$fila2['precio'];
-                                        echo "
-                                                            <td>".$totalusd."</td>
-                                                        ";
-                                        $sumafinal=$sumafinal+$totalusd;
-                                        $sumafinalprod=$sumafinalprod+$suma;
-                                    }
-                                    $bandera=true;
-                                }
-                                if($bandera==false){
-                                    echo "
-                                                    <td></td>
-                                                ";
-                                }
-                                $aux++;
                             }
-                            $ProdActual=$fila['idProducto'];
-                            $ColorActual=$fila['idColor'];
+                            if ($encontrado == false){
+                                echo "<td></td>";
+                            }
+                        }
+                        $ProdActual=$fila12['idProducto'];
+                        $ColorActual=$fila12['idColor'];
+                        $numproductos=array();
+                        $indice=0;
+                        $result3 = selectTableWhere4('ConfirmacionVentaProducto','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila12['idProducto']."'",'idColor',"'".$fila12['idColor']."'",'idMaterial',"'".$fila12['idMaterial']."'");
+                        while ($fila3 = mysql_fetch_array($result3)) {
+                            $numproductos[$indice] = $fila3['cantidad'];
+                            $indice++;
+                        }
+                        $suma=array_sum($numproductos);
+                        $result2=selectTableWhere2('Precio','idContrato',"'".$_POST['contrato']."'",'idProducto',"'".$fila12['idProducto']."'");
+                        while($fila2=mysql_fetch_array($result2)) {
+                            echo "
+                                                            <td>" . $suma . "</td>
+                                                            <td>" . $fila2['precio'] . "</td>
+                                                        ";
+                            $totalusd = $suma * $fila2['precio'];
+                            echo "
+                                                            <td>$ " . $totalusd . "</td>
+                                                        ";
+                            $sumafinal = $sumafinal + $totalusd;
+                            $sumafinalprod = $sumafinalprod + $suma;
                         }
                     }
+                }
                     echo "
                             <tr>
                                 <td>Total<td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td></td>";
+                        $result11=selectTableWhere('Talla','idcodificacionTalla',"'".$_POST['idcodificacionTalla']."'");
+                        while ($fila11=mysql_fetch_array($result11)){
+                            echo "
+                                    <td></td>
+                                ";
+                        }
+                    echo "
                                 <td>".$sumafinalprod."</td>
                                 <td></td>
-                                <td>".$sumafinal."</td>
+                                <td>$ ".$sumafinal."</td>
                             </tr>
                     ";
                     ?>
@@ -394,7 +377,20 @@ if(isset($_SESSION['login'])){
                 <p>Countersigned</p>
             </div>
         </section>
-
+        <hr>
+        <section class="container">
+            <form action="vercvpdf.php" method="post" class="form-horizontal col-sm-12">
+                <input type="hidden" name="contrato" value="<?php echo $_POST['contrato'];?>" readonly>
+                <input type="hidden" name="idcodificacionTalla" value="<?php echo $_POST['idcodificacionTalla'];?>" readonly>
+                <div class="col-sm-6">
+                    <input type="submit" formaction="gestionCV.php" value="Regresar" class="btn btn-default col-sm-6 col-sm-offset-3">
+                </div>
+                <div class="col-sm-6">
+                    <input type="submit" name="pdf" value="Descargar PDF" class="btn btn-primary col-sm-6 col-sm-offset-3">
+                </div>
+            </form>
+        </section>
+        <br>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
 
@@ -403,6 +399,6 @@ if(isset($_SESSION['login'])){
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>

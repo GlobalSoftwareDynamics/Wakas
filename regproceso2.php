@@ -13,7 +13,7 @@ mysql_query("SET NAMES 'utf8'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registro Exitoso</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Formularios.css" rel="stylesheet">
 </head>
 <body>
@@ -42,7 +42,7 @@ if(isset($_POST['guardar'])){
     date_default_timezone_set('America/Lima');
     $fecha=date("m/d/Y");
 
-    $proceso="INSERT INTO EmpleadoLote(idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
+    $proceso="INSERT INTO EmpleadoLote(idLote, idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$_POST['idlote']."','".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
     $insert=mysql_query($proceso);
     if ( !empty( $error = mysql_error() ) ) {
         echo 'Mysql error '. $error ."<br/>\n";
@@ -68,6 +68,6 @@ if(isset($_POST['guardar'])){
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>

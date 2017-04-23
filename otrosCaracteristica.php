@@ -14,8 +14,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Waka-s Textiles Finos S.A.</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
+    <link href="css/Tablas.css" rel="stylesheet">
 
 </head>
 
@@ -23,6 +24,7 @@ mysql_query("SET NAMES 'utf8'");
 <header>
     <nav class="navbar navbar-inverse">
         <div class="container">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -30,28 +32,30 @@ mysql_query("SET NAMES 'utf8'");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
                             <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OPERACIONES<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                            <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFORMACIÓN INTERNA<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionMateriales.php">Materiales</a></li>
                             <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
@@ -63,7 +67,7 @@ mysql_query("SET NAMES 'utf8'");
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACTOS<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionClientes.php">Clientes</a></li>
                             <li><a href="gestionProveedores.php">Proveedores</a></li>
@@ -74,18 +78,39 @@ mysql_query("SET NAMES 'utf8'");
         </div>
     </nav>
 </header>
-
-<section class="container">
+<?php
+if(isset($_POST['guardar'])){
+    $agregar="INSERT INTO Caracteristica VALUES ('".$_POST['idCaracteristica']."','".$_POST['descripcion']."','".$_POST['selecttipo']."')";
+    $agregar1=mysql_query($agregar);
+    if ( !empty( $error = mysql_error() ) )
+    {
+        echo 'Mysql error '. $error ."<br />\n";
+    }else{
+        echo "<br>
+                    <div class='container col-sm-12'>
+                        <div class='alert alert-success' role='alert'>
+                            <p><strong>Caracterítica Agregada Exitosamente</strong></p>
+                        </div>
+                    </div>
+                ";
+    }
+}
+if(isset($_GET['eliminarCaracteristica'])){
+    $eliminar="DELETE FROM caracteristica WHERE idCaracteristica ='".$_GET['eliminarCaracteristica']."'";
+    $eliminar1=mysql_query($eliminar);
+}
+?>
+<section class="container col-sm-7">
     <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
         <div>
             <h3>Nueva Caracter&iacute;stica</h3>
         </div>
         <hr>
         <div class="form-group">
-            <div class="col-sm-5">
-                <label for="idCaracteristica" class="formlabels col-sm-12">idCaracteristica:</label>
+            <div class="col-sm-12">
+                <label for="idCaracteristica" class="formlabels1 col-sm-12">idCaracteristica:</label>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-12">
                 <?php
                 $aux = 0;
                 $result = selectTable("Caracteristica");
@@ -93,24 +118,24 @@ mysql_query("SET NAMES 'utf8'");
                     $aux++;
                 }
                 $aux++;
-                echo "<input class='textinput-5' id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
+                echo "<input class='textinput-6' id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
                 ?>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-5">
-                <label for="Descripcion" class="formlabels col-sm-12">Descripcion:</label>
+            <div class="col-sm-12">
+                <label for="Descripcion" class="formlabels1 col-sm-12">Descripcion:</label>
             </div>
-            <div class="col-sm-7">
-                <input class="textinput-10" id="Descripcion" type="text" name="descripcion">
+            <div class="col-sm-12">
+                <input class="textinput-12" id="Descripcion" type="text" name="descripcion">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-5">
-                <label for="selecttipo" class="formlabels col-sm-12">Tipo:</label>
+            <div class="col-sm-12">
+                <label for="selecttipo" class="formlabels1 col-sm-12">Tipo:</label>
             </div>
-            <div class="col-sm-7">
-                <select name="selecttipo" id="selecttipo" class="ddselect-6">
+            <div class="col-sm-12">
+                <select name="selecttipo" id="selecttipo" class="ddselect-12">
                     <option value="componente">Componente</option>
                     <option value="maquina">Maquina</option>
                     <option value="insumo">Insumo</option>
@@ -126,33 +151,41 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <hr>
         <div class="form-group">
-            <div class="col-sm-12">
-                <div class="col-sm-6">
-                    <input class="btn btn-default boton col-sm-6 col-sm-offset-3"type="submit" name="guardar" value="Agregar">
-                </div>
-                <div class="col-sm-6">
-                    <input formaction="menuagregarotros.php" class="btn btn-default boton col-sm-6 col-sm-offset-3" type="submit" value="Regresar">
-                </div>
+            <div class="col-sm-6">
+                <input formaction="menuagregarotros.php" class="btn btn-default boton col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
+            </div>
+            <div class="col-sm-6">
+                <input class="btn btn-success boton col-sm-10 col-sm-offset-1"type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>
 </section>
 
-<?php
-if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO Caracteristica VALUES ('".$_POST['idCaracteristica']."','".$_POST['descripcion']."','".$_POST['selecttipo']."')";
-    $agregar1=mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }else{
-        echo "<br>";
-        echo "<div class='alert alert-success' role='alert'>";
-        echo 	"<p> <strong>Característica Agregada Exitosamente</strong></p>";
-        echo " </div>";
-    }
-}
-?>
+<section class="container col-sm-5">
+    <div class="container col-sm-10 col-sm-offset-1">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Descripción</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php
+            $result1=selectTable('Caracteristica');
+            while ($fila1=mysql_fetch_array($result1)){
+                echo "
+                            <tr>
+                                <td>".$fila1['descripcion']."</td>
+                                <td><a href='otrosCaracteristica.php?eliminarCaracteristica=".$fila1['idCaracteristica']."'>Eliminar</a></td>
+                            </tr>
+                        ";
+            }
+            ?>
+            </tbody>
+        </table>
+    </div>
+</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
@@ -162,6 +195,6 @@ if(isset($_POST['guardar'])){
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
