@@ -28,6 +28,10 @@ header {
     border-bottom: 1px solid #c5c5c5;
 }
 
+th {
+    font-size: 12px;
+}
+
 #descripcionbrand {
     float: left;
     text-align: left;
@@ -49,7 +53,7 @@ header {
 
 .desctitulo {
     text-align: center;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 .direccion {
@@ -105,20 +109,20 @@ header {
     text-align: left;
     float: left;
     width: 13cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .descladoderecho {
     text-align: left;
     float: right;
     width: 5cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .observacionop {
     border: 1px solid black;
     text-align: justify;
     bottom: 0;
     height: 3cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 
     /*CV*/
@@ -127,21 +131,21 @@ header {
     text-align: left;
     float: left;
     width: 12cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .descladoderechoCV {
     text-align: left;
     float: right;
     width: 7cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .parrafotabla {
     padding-top: 15px;
     padding-bottom: 10px;
-    font-size: 12px;
+    font-size: 10px;
 }
 .parrafofinal {
-    font-size: 12px;
+    font-size: 10px;
     text-align: justify;
 }
 /*HE*/
@@ -150,13 +154,13 @@ header {
     text-align: left;
     float: left;
     width: 8.5cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .descladoderechoHE {
     text-align: left;
     float: right;
     width: 8.5cm;
-    font-size: 12px;
+    font-size: 10px;
 }
 .tablaobservacionesHEgeneral {
     width: 100%;
@@ -169,6 +173,7 @@ header {
 }
 .thlabel {
     text-align: left;
+    font-size: 10px;
     font-weight: bold;
     background-color: #c5c5c5;
 }
@@ -235,18 +240,18 @@ div.tarjetacont p {
 
 th, td {
     text-align: center;
+    font-size: 10px;
 }
 
 table td {
     padding: 5px;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 table th {
     padding: 5px 20px;
-    border-bottom: 2px solid #C1CED9;
     white-space: nowrap;
-    font-size: 12px;
+    font-size: 10px;
 }
 
 #theadborder th{

@@ -2328,6 +2328,7 @@ fieldset[disabled] .btn-link {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
+
 .btn-link,
 .btn-link:hover,
 .btn-link:focus,
@@ -2340,6 +2341,15 @@ fieldset[disabled] .btn-link {
   text-decoration: underline;
   background-color: transparent;
 }
+
+.btn-links:hover,
+.btn-links:focus {
+  color: #d9524b;
+  text-decoration: none;
+  background-color: transparent;
+}
+
+
 .btn-link[disabled]:hover,
 fieldset[disabled] .btn-link:hover,
 .btn-link[disabled]:focus,
@@ -3673,7 +3683,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   position: relative;
   min-height: 50px;
   margin-bottom: 20px;
-  border: 1px solid transparent;
+  border: 0px solid transparent;
 }
 @media (min-width: 768px) {
   .navbar {
