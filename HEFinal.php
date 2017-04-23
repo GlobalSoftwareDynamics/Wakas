@@ -130,7 +130,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div class="col-sm-5" id="descripcionbrand">
                     <div>
-                        <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></span></b>
+                        <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></b>
                     </div>
                     <div>
                         <span>Urb. Francisco Mostajo G-25</span>

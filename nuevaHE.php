@@ -133,7 +133,7 @@ if(isset($_SESSION['login'])){
                             }
                         }
                         if($aux == 0){
-                            $idProd = 6000;
+                            $idProd = 6001;
                         }else{
                             $idProd = $aux + 6001;
                         }
