@@ -151,7 +151,7 @@ mysql_query("SET NAMES 'utf8'");
 <section class="container">
     <form class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" action="nuevaOP.php" method="post">
         <div>
-            <h4>Nueva Órden de Producción</h4>
+            <h4>Nueva Orden de Producción</h4>
         </div>
         <hr>
         <div class="form-group">
