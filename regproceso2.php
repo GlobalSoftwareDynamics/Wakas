@@ -50,14 +50,21 @@ if(isset($_POST['guardar'])){
     $proceso="INSERT INTO EmpleadoLote(idRegistro,idLote, idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$aux."','".$_POST['idlote']."','".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
     $insert=mysql_query($proceso);
     if ( !empty( $error = mysql_error() ) ) {
-        echo 'Mysql error '. $error ."<br/>\n";
+        echo "
+            <section class='container'>
+                <h4 class='h4operario'>¡Felicitaciones ha ingresado los datos con &eacute;xito!</h4>
+            </section>
+        ";
     }else{
+        echo "
+            <section class='container'>
+                <h4 class='h4operario'>Error al Ingresar los Datos</h4>
+            </section>
+        ";
     }
 }
 ?>
-<section class="container">
-    <h4 class="h4operario">¡Felicitaciones ha ingresado los datos con &eacute;xito!</h4>
-</section>
+
 <br>
 <section class="container">
     <form action="mainOperario.php" class="form-horizontal jumbotron col-xs-12">
