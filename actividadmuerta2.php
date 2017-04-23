@@ -13,7 +13,7 @@ mysql_query("SET NAMES 'utf8'");
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Revisar tus datos</title>
-        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+        <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/Formularios.css" rel="stylesheet">
     </head>
     <body>
@@ -27,11 +27,11 @@ mysql_query("SET NAMES 'utf8'");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="mainOperario.php">Waka-s Textiles</a>
+                    <a href="mainOperario.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="mainOperario.php">Inicio</a></li>
+                        <li><a href="mainOperario.php">Inicio</a></li>
                     </ul>
                 </div>
             </div>

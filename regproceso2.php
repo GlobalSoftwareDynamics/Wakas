@@ -27,11 +27,11 @@ mysql_query("SET NAMES 'utf8'");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="mainOperario.php">Waka-s Textiles</a>
+                <a href="mainOperario.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="mainOperario.php">Inicio</a></li>
+                    <li><a href="mainOperario.php">Inicio</a></li>
                 </ul>
             </div>
         </div>
@@ -41,8 +41,13 @@ mysql_query("SET NAMES 'utf8'");
 if(isset($_POST['guardar'])){
     date_default_timezone_set('America/Lima');
     $fecha=date("m/d/Y");
-
-    $proceso="INSERT INTO EmpleadoLote(idLote, idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$_POST['idlote']."','".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
+    $aux=0;
+    $result=selectTable('EmpleadoLote');
+    while ($fila=mysql_fetch_array($result)){
+        $aux++;
+    }
+    $aux++;
+    $proceso="INSERT INTO EmpleadoLote(idRegistro,idLote, idEmpleado, idProducto, idProcedimiento, idComponenteEspecifico, cantidad, fecha) VALUES ('".$aux."',''".$_POST['idlote']."','".$_POST['idempleado']."','".$_POST['producto']."','".$_POST['procedimiento']."','".$_POST['componente']."','".$_POST['cantidad']."','".$fecha."')";
     $insert=mysql_query($proceso);
     if ( !empty( $error = mysql_error() ) ) {
         echo 'Mysql error '. $error ."<br/>\n";

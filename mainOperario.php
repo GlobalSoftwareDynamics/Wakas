@@ -27,11 +27,11 @@ mysql_query("SET NAMES 'utf8'");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="mainOperario.php">W<span>&alpha;</span>k<span>&alpha;</span>-s</a>
+                    <a href="mainOperario.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="mainOperario.php">Inicio</a></li>
+                        <li><a href="mainOperario.php">Inicio</a></li>
                     </ul>
                 </div>
             </div>
