@@ -4,14 +4,35 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-family: "Raleway",sans-serif, Helvetica, Arial, sans-serif!important;
+
+}
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
       -ms-text-size-adjust: 100%;
 }
+
 body {
-  margin: 0;
+    margin: 0;
+    padding-top: 65px;
 }
+
 article,
 aside,
 details,
@@ -235,6 +256,7 @@ th {
   }
   .navbar {
     display: none;
+      padding: 0;
   }
   .table td,
   .table th {
@@ -2080,8 +2102,8 @@ fieldset[disabled] .btn-default.active {
 }
 .btn-primary {
   color: #fff;
-  background-color: #428bca;
-  border-color: #357ebd;
+  background-color: #56a4d8;
+  border-color: #5598cc;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -2089,8 +2111,8 @@ fieldset[disabled] .btn-default.active {
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
   color: #fff;
-  background-color: #3276b1;
-  border-color: #285e8e;
+  background-color: #548dc0;
+  border-color: #4e8ab9;
 }
 .btn-primary:active,
 .btn-primary.active,
@@ -2121,8 +2143,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: #fff;
-  background-color: #5cb85c;
-  border-color: #4cae4c;
+  background-color: #E8554E;
+  border-color: #d9524b;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -2130,8 +2152,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: #fff;
-  background-color: #47a447;
-  border-color: #398439;
+  background-color: #d15049;
+  border-color: #c24e47;
 }
 .btn-success:active,
 .btn-success.active,
@@ -2289,6 +2311,15 @@ fieldset[disabled] .btn-danger.active {
   cursor: pointer;
   border-radius: 0;
 }
+
+.btn-links {
+    margin-top: 5px;
+    font-weight: 500;
+    color: #575757;
+    cursor: pointer;
+    border-radius: 0;
+}
+
 .btn-link,
 .btn-link:active,
 .btn-link[disabled],
@@ -3014,8 +3045,8 @@ input[type="button"].btn-block {
   display: none;
   float: left;
   min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
+  padding: 0px 0;
+  margin: 0px 0 0;
   font-size: 14px;
   list-style: none;
   background-color: #ffffff;
@@ -3049,7 +3080,7 @@ input[type="button"].btn-block {
 .dropdown-menu > li > a:focus {
   color: #333;
   text-decoration: none;
-  background-color: #ede8df;
+  background-color: #f5f5f6;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -3728,6 +3759,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-fixed-top {
   top: 0;
+    margin-bottom: 30px;
   border-width: 0 0 1px;
 }
 .navbar-fixed-bottom {
@@ -3737,10 +3769,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-brand {
   float: left;
-  height: 50px;
-  padding: 15px 15px;
+  height: 60px;
+  padding-bottom: 10px;
   font-size: 18px;
-  line-height: 20px;
+  line-height: 0px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -3784,12 +3816,16 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-nav {
   margin: 7.5px -15px;
 }
+
+
+
 .navbar-nav > li > a {
   padding-top: 10px;
   padding-bottom: 10px;
   line-height: 20px;
 }
 @media (max-width: 767px) {
+
   .navbar-nav .open .dropdown-menu {
     position: static;
     float: none;
@@ -4019,9 +4055,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-link:hover {
   color: #333;
 }
+
 .navbar-inverse {
   background-color: #ede8df;
-  border-color: #ede8df;
+  border-color: #000000;
+    border-bottom: hidden;
 }
 .navbar-inverse .navbar-brand {
   color: #999;
