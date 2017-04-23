@@ -132,7 +132,11 @@ $lote=strtoupper ($_POST["idlote"]);
             echo "<td>".$fila['fecha']."</td>";
             $result1=selectTableWhere('Empleado','idEmpleado',"'".$fila['idEmpleado']."'");
             while ($fila1=mysql_fetch_array($result1)){
-                echo "<td>".$fila1['nombres']." ".$fila1['apellidos']."</td>";
+                if($fila1['idTipoUsuario']=="1"){
+                    echo "<td>Proceso Tercerizado</td>";
+                }else{
+                    echo "<td>".$fila1['nombres']." ".$fila1['apellidos']."</td>";
+                }
             }
             $result2=selectTableWhere('SubProceso','idProcedimiento',"'".$fila['idProcedimiento']."'");
             while ($fila2=mysql_fetch_array($result2)){
