@@ -14,7 +14,7 @@ if(!empty($_POST["producto"])) {
         $cantidad1=$cantidad1+$result2['cantidad'];
     }
     if($cantidad==$cantidad1){
-        echo "<input type=text value='".$cantidad."' name='cantidad' class='textinput-4' id='cant'>";
+        echo "<input type=text value='0' name='cantidad' class='textinput-4' id='cant'>";
     }else{
         $res=$cantidad-$cantidad1;
         echo "<input type=text value='".$res."' name='cantidad' class='textinput-4' id='cant'>";
