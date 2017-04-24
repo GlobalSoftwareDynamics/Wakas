@@ -3,7 +3,6 @@
 session_start();
 require('funciones.php');
 conexion();
-
 if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
 ?>
@@ -13,7 +12,7 @@ mysql_query("SET NAMES 'utf8'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registar datos</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Formularios.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
@@ -21,11 +20,37 @@ mysql_query("SET NAMES 'utf8'");
 
 
     <script>
-        function getcomponentes(val) {
+        function getproduct(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_product.php",
+                data:'idlote='+val,
+                success: function(data){
+                    $("#product").html(data);
+                }
+            });
+        }
+        function getprocedim() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
+            $.ajax({
+                type: "POST",
+                url: "get_proce.php",
+                //
+                data:'lote=' + lote +' &producto=' + producto,
+                success: function(data){
+                    $("#procedi").html(data);
+                }
+            });
+        }
+        function getcomponentes() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
+            var procedimiento = document.getElementById('procedi').value;
             $.ajax({
                 type: "POST",
                 url: "get_comps.php",
-                data:'producto_id='+val,
+                data:'lote=' + lote + '&producto=' + producto + '&procedimiento=' + procedimiento,
                 success: function(data){
                     $("#componentes").html(data);
                 }
@@ -67,46 +92,38 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
+                <label for="lot" class="formlabelscel col-xs-12">Indique el idLote:</label>
+            </div>
+            <div class="col-xs-12">
+                <input class="textinput-12" id="lot" type="text" name="idlote" oninput="getproduct(this.value)">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
                 <label for="product" class="formlabelscel col-xs-12">Seleccione Producto:</label>
             </div>
             <div class="col-xs-12">
-                <select id="product" name="producto" class="ddselect-12" onChange='getcomponentes(this.value);'>
+                <select id="product" name="producto" class="ddselect-12" onChange='getprocedim(this.value);'>
                     <option>Seleccionar</option>
-                    <?php
-                    $result=selectTable("Producto");
-                    while ($fila=mysql_fetch_array($result)){
-                        echo "
-                                <option value='".$fila['idProducto']."'>".$fila['idProducto']."</option>
-                            ";
-                    }
-                    ?>
                 </select>
             </div>
         </div>
         <div class="form-group">
             <div class="col-xs-12">
-                <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente:</label>
+                <label for="procedi" class="formlabelscel col-xs-12">Seleccione Procedimiento:</label>
+            </div>
+            <div class="col-xs-12">
+                <select id="procedi" name="procedimiento" class="ddselect-12" onChange='getcomponentes(this.value);'>
+                    <option>Seleccionar</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente o Parte:</label>
             </div>
             <div class="col-xs-12">
                 <select id='componentes' class="ddselect-12" name='componente'>
-                    <option>Seleccionar</option>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
-            </div>
-            <div class="col-xs-12">
-                <select id="procedi" name="procedimiento" class="ddselect-12">
-                    <?php
-                        $result1=selectTable("SubProceso");
-                        while ($fila1=mysql_fetch_array($result1)){
-                            echo "
-                                <option value='".$fila1['idProcedimiento']."'>".$fila1['descripcion']."</option>
-                            ";
-                        }
-                    ?>
                 </select>
             </div>
         </div>
@@ -131,6 +148,6 @@ mysql_query("SET NAMES 'utf8'");
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifiquese.";
 }
 ?>

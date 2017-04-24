@@ -3,7 +3,6 @@
 session_start();
 require('funciones.php');
 conexion();
-
 if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
 ?>
@@ -13,7 +12,7 @@ mysql_query("SET NAMES 'utf8'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registar datos</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Formularios.css" rel="stylesheet">
 </head>
 <body>
@@ -50,10 +49,32 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
+                <label for="lot" class="formlabelscel col-xs-12">Lote:</label>
+            </div>
+            <div class="col-xs-12">
+                <input class="textinput-12" id="lot" type="text" name="idlote" value="<?php echo $_POST['idlote'];?>" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
                 <label for="producto" class="formlabelscel col-xs-12">Producto:</label>
             </div>
             <div class="col-xs-12">
                 <input type="text" class="textinput-12" name="producto" value="<?php echo $_POST['producto'];?>" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
+            </div>
+            <div class="col-xs-12">
+                <input type="hidden" name="procedimiento" value="<?php echo $_POST['procedimiento'];?>" readonly>
+                <?php
+                $result2=selectTableWhere("SubProceso","idProcedimiento","'".$_POST['procedimiento']."'");
+                while ($fila2=mysql_fetch_array($result2)){
+                    echo "<input type='text' id='procedi' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                }
+                ?>
             </div>
         </div>
         <div class="form-group">
@@ -69,20 +90,6 @@ mysql_query("SET NAMES 'utf8'");
                     while ($fila1=mysql_fetch_array($result1)){
                         echo "<input type='text' id='componentes' class='textinput-12' value='".$fila1['descripcion']."' readonly>";
                     }
-                }
-                ?>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <label for="procedi" class="formlabelscel col-xs-12">Procedimiento:</label>
-            </div>
-            <div class="col-xs-12">
-                <input type="hidden" name="procedimiento" value="<?php echo $_POST['procedimiento'];?>" readonly>
-                <?php
-                $result2=selectTableWhere("SubProceso","idProcedimiento","'".$_POST['procedimiento']."'");
-                while ($fila2=mysql_fetch_array($result2)){
-                    echo "<input type='text' id='procedi' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
                 }
                 ?>
             </div>
@@ -109,6 +116,6 @@ mysql_query("SET NAMES 'utf8'");
 </html>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
