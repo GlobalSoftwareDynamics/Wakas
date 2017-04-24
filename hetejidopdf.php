@@ -275,7 +275,11 @@ if(isset($_SESSION['login'])){
     ';
     $htmlfooter='
           <div class="footer">
-               <span style="font-size: 10px">Waka-s Textiles Finos SAC</span>
+                <span style="font-size: 10px;">Waka-s Textiles Finos SAC. </span>
+                                   
+                                 
+                              
+                <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
     $nombrearchivo='HETejido'.$_POST['idProd'].'.pdf';

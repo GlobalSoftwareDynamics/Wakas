@@ -14,6 +14,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Hoja de Especificaci&oacuten</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-side.css" rel="stylesheet" />
@@ -82,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -122,15 +125,15 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </nav>
         </div>
-        <div class="col-sm-10">
+        <div class="col-sm-9">
             <!-- Page Contents -->
             <section class="container-fluid">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     <div>
                         <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
                     </div>
                 </div>
-                <div class="col-sm-5" id="descripcionbrand">
+                <div class="col-sm-4" id="descripcionbrand">
                     <div>
                         <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></span></b>
                     </div>
@@ -276,11 +279,16 @@ mysql_query("SET NAMES 'utf8'");
 <section class="container col-sm-9 col-sm-offset-3">
     <form action="heconfeccionfinalpdf.php" method="post" class="form-horizontal col-sm-12">
         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-        <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" name="pdf" value="Descargar PDF">
+        <input type="submit" class="btn btn-primary col-sm-4 col-sm-offset-4" name="pdf" value="Descargar PDF">
     </form>
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 <?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";

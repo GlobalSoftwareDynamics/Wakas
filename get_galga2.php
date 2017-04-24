@@ -11,8 +11,18 @@ if(!empty($_POST["idMaquina"])) {
     if($aux === 0){
 
     }else{
-        echo "<label for='selectgalga'>Seleccionar Galga</label>";
-        echo "<select name=\"galga\" id='selectgalga'>";
+        echo "
+        <div class='form-group'>
+            <div class='col-sm-12'>
+                <div class='col-sm-5'>
+                    <label for='selectgalga' class='formlabels col-sm-12'>Seleccionar Galga</label>
+                </div>
+        ";
+        echo "
+                <div class='col-sm-7'>
+                    <select name='galga' id='selectgalga' class='ddselect-10'>
+                
+        ";
         echo "<option value='-'>Seleccionar</option>";
         mysql_data_seek($componente, 0);
         $componente =mysql_query("SELECT * FROM Galgas WHERE idMaquina = '" . $_POST["idMaquina"] . "'");
@@ -21,7 +31,11 @@ if(!empty($_POST["idMaquina"])) {
                 <option value=".$result2["idGalgas"].">".$result2["Descripcion"]."</option>
             ";
         }
-        echo "</select>";
+        echo "
+                    </select>
+                </div>
+            </div>
+        </div>";
     }
 }
 ?>

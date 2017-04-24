@@ -16,7 +16,7 @@ if(isset($_SESSION['login'])){
             <head>
                 <meta charset="utf-8">
                 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                <meta name="viewport" content="width=device-width, initial-scale=1">    
+                <meta name="viewport" content="width=device-width, initial-scale=1"> 
                 <title>HE Final</title>
                 <link href="css/Formatospdf.css" rel="stylesheet">
             </head>
@@ -1129,7 +1129,11 @@ $html.='
     ';
     $htmlfooter='
           <div class="footer">
-               <span style="font-size: 10px">Waka-s Textiles Finos SAC</span>
+                <span style="font-size: 10px;">Waka-s Textiles Finos SAC. </span>
+                                   
+                                 
+                              
+                <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
     $nombrearchivo='Hoja de Especificación '.$_POST['idProd'].'.pdf';

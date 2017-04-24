@@ -241,7 +241,6 @@ $html .='
     ';
     $htmlheader='
         <header>
-        
             <div id="descripcionbrand">
                 <img style="margin-top: 20px" width="auto" height="60" src="image/WakasPDF.png"/>
             </div>
@@ -255,7 +254,11 @@ $html .='
     ';
     $htmlfooter='
           <div class="footer">
-               <span style="font-size: 10px">Waka-s Textiles Finos SAC</span>
+                <span style="font-size: 10px;">Waka-s Textiles Finos SAC. </span>
+                                   
+                                 
+                              
+                <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
     $nombrearchivo='HEDatosGenerales'.$_POST['idProd'].'.pdf';
