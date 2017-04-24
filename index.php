@@ -24,8 +24,12 @@
 		<link href="css/fonts1.css" type='text/css'>
 		<link href="css/theme-loading-bar.css" rel="stylesheet" />
         <link href="css/Formularios.css" rel="stylesheet">
-    
-	</head>
+
+        <meta name="apple-mobile-web-app-title" content="Waka-s">
+        <meta name="application-name" content="Waka-s">
+        <meta name="theme-color" content="#ef4a43">
+
+    </head>
 <?php 
 	require("funciones.php");
     mysql_query("SET NAMES 'utf8'");
