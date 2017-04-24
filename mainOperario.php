@@ -78,7 +78,7 @@ mysql_query("SET NAMES 'utf8'");
  		<script src="js/bootstrap.min.js"></script>
     <footer class="panel-footer navbar-fixed-bottom">
         <div class="container col-sm-6 col-sm-offset-3 text-center">
-            <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+            <span>© 2017 by Global Software Dynamics.<br>Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
         </div>
     </footer>
     </body>
