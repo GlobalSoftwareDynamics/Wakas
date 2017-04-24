@@ -116,6 +116,9 @@ mysql_query("SET NAMES 'utf8'");
                         <div class="col-sm-12 sideselect">
                             <input type="submit" class="btn-link btn-links" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
                         </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn btn-success" formaction="HEpdf.php" value="Descargar Hoja">
+                        </div>
                     </form>
                 </div>
             </nav>
@@ -187,6 +190,8 @@ mysql_query("SET NAMES 'utf8'");
                         $auxproced = 0;
                         $auxmaquina = 0;
                         $auxtiempo = 0;
+                        $auxfila = 0;
+                        $filaproceso = array();
                         $componente = array();
                         $procedimiento = array();
                         $maquina = array();
@@ -211,6 +216,8 @@ mysql_query("SET NAMES 'utf8'");
                             } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
                                 $procedimiento[$auxproced] = $fila2['valor'];
                                 $auxproced++;
+                                $filaproceso[$auxfila] = $fila2['fila'];
+                                $auxfila++;
                             } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
                                 $maquina[$auxmaquina] = $fila2['valor'];
                                 $auxmaquina++;
@@ -230,10 +237,26 @@ mysql_query("SET NAMES 'utf8'");
                             }
                             $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
                             while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila['idProcedimiento']."</td>";
-                                $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
-                                while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                if($procedimiento[$j]==='PROCEDIMIENTO26'){
+                                    $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '".$filaproceso[$j]."' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC29'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumo = $row['valor'];
+                                    }
+                                    $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$insumo."'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumo = $row['descripcion'];
+                                    }
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$insumo."-".$prenda."</td>";
+                                    }
+                                }else{
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                    }
                                 }
                             }
                             $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$maquina[$j]."'");

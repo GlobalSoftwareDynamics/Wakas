@@ -29,7 +29,7 @@ if(isset($_SESSION['login'])){
                         <tr class="trborder">
                             <th class="thlabel" colspan="6">Hoja de Tiempos y Secuencias</th>
                         </tr>
-                        <tr class="trborder">';
+                        <tr class="borderbottom">';
                             $caracteristicas = array();
                             $tipo = array();
                             $i = 0;
@@ -53,66 +53,86 @@ $html.='
                         </thead>
                         <tbody>';
 
-                        $auxcomp = 0;
-                        $auxproced = 0;
-                        $auxmaquina = 0;
-                        $auxtiempo = 0;
-                        $componente = array();
-                        $procedimiento = array();
-                        $maquina = array();
-                        $tiempo = array();
-                        $string = null;
-                        $bandera = false;
-                        $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
-                        while($fila = mysql_fetch_array($result)) {
-                            if($bandera == false){
-                                $string = $string."idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
-                                $bandera = true;
-                            }else{
-                                $string = $string."OR idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
-                            }
-                        }
-                        $query ="SELECT * FROM PCPSPC WHERE ".$string." ORDER BY LENGTH (id)";
-                        $result2 = mysql_query($query);
-                        while($fila2 = mysql_fetch_array($result2)){
-                            if($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC32'){   //CAMBIAR AL DEJAR FIJO!!!!!
-                                $componente[$auxcomp] = $fila2['valor'];
-                                $auxcomp++;
-                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                $procedimiento[$auxproced] = $fila2['valor'];
-                                $auxproced++;
-                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                $maquina[$auxmaquina] = $fila2['valor'];
-                                $auxmaquina++;
-                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC36'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                $tiempo[$auxtiempo] = $fila2['valor'];
-                                $auxtiempo++;
-                            }
-                        }
-                        for($j = 0; $j < $auxcomp; $j++){
-                            $html.= "<tr>";
-                            $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$componente[$j]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
-                                while($fila2 = mysql_fetch_array($result2)){
-                                    $prenda = $fila2['descripcion'];
+                            $auxcomp = 0;
+                            $auxproced = 0;
+                            $auxmaquina = 0;
+                            $auxtiempo = 0;
+                            $auxfila = 0;
+                            $filaproceso = array();
+                            $componente = array();
+                            $procedimiento = array();
+                            $maquina = array();
+                            $tiempo = array();
+                            $string = null;
+                            $bandera = false;
+                            $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
+                            while($fila = mysql_fetch_array($result)) {
+                                if($bandera == false){
+                                    $string = $string."idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
+                                    $bandera = true;
+                                }else{
+                                    $string = $string."OR idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
                                 }
                             }
-                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                $html.= "<td>".$fila['idProcedimiento']."</td>";
-                                $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
-                                while($fila2 = mysql_fetch_array($result2)){
-                                    $html.= "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                            $query ="SELECT * FROM PCPSPC WHERE ".$string." ORDER BY LENGTH (id)";
+                            $result2 = mysql_query($query);
+                            while($fila2 = mysql_fetch_array($result2)){
+                                if($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC32'){   //CAMBIAR AL DEJAR FIJO!!!!!
+                                    $componente[$auxcomp] = $fila2['valor'];
+                                    $auxcomp++;
+                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                    $procedimiento[$auxproced] = $fila2['valor'];
+                                    $auxproced++;
+                                    $filaproceso[$auxfila] = $fila2['fila'];
+                                    $auxfila++;
+                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                    $maquina[$auxmaquina] = $fila2['valor'];
+                                    $auxmaquina++;
+                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC36'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                    $tiempo[$auxtiempo] = $fila2['valor'];
+                                    $auxtiempo++;
                                 }
                             }
-                            $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$maquina[$j]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                $html.= "<td>".$fila['descripcion']."</td>";
+                            for($j = 0; $j < $auxcomp; $j++){
+                                $html .= "<tr>";
+                                $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$componente[$j]."'");
+                                while($fila = mysql_fetch_array($result)){
+                                    $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        $prenda = $fila2['descripcion'];
+                                    }
+                                }
+                                $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
+                                while($fila = mysql_fetch_array($result)){
+                                    if($procedimiento[$j]==='PROCEDIMIENTO26'){
+                                        $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '".$filaproceso[$j]."' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC29'");
+                                        while($row = mysql_fetch_array($query)){
+                                            $insumo = $row['valor'];
+                                        }
+                                        $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$insumo."'");
+                                        while($row = mysql_fetch_array($query)){
+                                            $insumo = $row['descripcion'];
+                                        }
+                                        $html .= "<td>".$fila['idProcedimiento']."</td>";
+                                        $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                        while($fila2 = mysql_fetch_array($result2)){
+                                            $html .= "<td>".$fila2['descripcion']."-".$insumo."-".$prenda."</td>";
+                                        }
+                                    }else{
+                                        $html .= "<td>".$fila['idProcedimiento']."</td>";
+                                        $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                        while($fila2 = mysql_fetch_array($result2)){
+                                            $html .= "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                        }
+                                    }
+                                }
+                                $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$maquina[$j]."'");
+                                while($fila = mysql_fetch_array($result)){
+                                    $html .= "<td>".$fila['descripcion']."</td>";
+                                }
+                                $html .= "<td>".$tiempo[$j]."</td>";
+                                $html .= "</tr>";
                             }
-                            $html.= "<td>".$tiempo[$j]."</td>";
-                            $html.= "</tr>";
-                        }
     $html.='
                         </tbody>
                     </table>

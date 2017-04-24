@@ -114,6 +114,9 @@ mysql_query("SET NAMES 'utf8'");
                         <div class="col-sm-12 sideselect">
                             <input type="submit" class="btn-link btn-links" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
                         </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn btn-success" formaction="HEpdf.php" value="Descargar Hoja">
+                        </div>
                     </form>
                 </div>
             </nav>

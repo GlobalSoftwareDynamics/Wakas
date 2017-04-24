@@ -29,7 +29,7 @@ if(isset($_SESSION['login'])){
                         <tr class="trborder">
                         <th class="thlabel" colspan="3">Confeccion</th>
 </tr>
-                        <tr class="trborder">';
+                        <tr class="borderbottom">';
 
                             $idSubProcesoCaracteristica = array();
                             $tipo = array();
@@ -45,9 +45,9 @@ if(isset($_SESSION['login'])){
                                     } elseif ($fila2['descripcion'] === 'Maquina- Hoja Tiempos'){
                                     } elseif ($fila2['descripcion'] === 'Tiempo'){
                                     } elseif ($fila2['descripcion'] === 'Componente'){
-                                        $html .= "<th class=\"thlabel\">Parte</th>";
+                                        $html .= "<th>Parte</th>";
                                     } else {
-                                        $html .= "<th class=\"thlabel\">".$fila2['descripcion']."</th>";
+                                        $html .= "<th>".$fila2['descripcion']."</th>";
                                     }
                                 }
                             }
