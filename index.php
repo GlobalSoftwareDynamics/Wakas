@@ -5,8 +5,18 @@
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
    	 	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<title>Waka-s login</title>
-    	
-		<script src="js/pace.js"></script>
+
+        <link rel="icon" type="image/x-icon" href="favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="smartphone-icon-152-185337.png">
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="smartphone-icon-152-185337.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="smartphone-icon-144-185337.png">
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="smartphone-icon-120-185337.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="smartphone-icon-114-185337.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="smartphone-icon-72-185337.png">
+        <link rel="apple-touch-icon-precomposed" href="smartphone-icon-57-185337.png">
+        <link rel="icon" href="smartphone-icon-32-185337.png" sizes="32x32">
+
+        <script src="js/pace.js"></script>
     	<link href="css/bootstrap.css" rel="stylesheet">
     	<link href="css/theme.css" rel="stylesheet">
     	<link href="css/font-awesome.css" rel="stylesheet">
@@ -59,7 +69,7 @@
 		<div class="container" id="container" style="display:none;">
 		<section id="form" class="animated fadeInDown">
 			<div class="container">    
-				<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    
+				<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 					<div class="panel white-alpha-90" >
 						<div class="panel-heading">
 							<div class="panel-title text-center"><h3>Ingresar al Portal</h3></div>
