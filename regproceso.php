@@ -56,6 +56,20 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
+        function getcantidadlote() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
+            var procedimiento = document.getElementById('procedi').value;
+            var componente = document.getElementById('componentes').value;
+            $.ajax({
+                type: "POST",
+                url: "get_cantlote.php",
+                data:'lote=' + lote + '&producto=' + producto + '&procedimiento=' + procedimiento+ '&componente=' + componente,
+                success: function(data){
+                    $("#canti").html(data);
+                }
+            });
+        }
     </script>
 
 </head>
@@ -70,11 +84,11 @@ mysql_query("SET NAMES 'utf8'");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="mainOperario.php">W<span>&alpha;</span>k<span>&alpha;</span>-s Textiles</a>
+                <a href="mainOperario.php"><img src="image/LogoWakas.png" height="60" width="auto"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="mainOperario.php">Inicio</a></li>
+                    <li><a href="mainOperario.php">Inicio</a></li>
                 </ul>
             </div>
         </div>
@@ -123,7 +137,7 @@ mysql_query("SET NAMES 'utf8'");
                 <label for='componentes' class="formlabelscel col-xs-12">Seleccione Componente o Parte:</label>
             </div>
             <div class="col-xs-12">
-                <select id='componentes' class="ddselect-12" name='componente'>
+                <select id='componentes' class="ddselect-12" name='componente' onChange='getcantidadlote();'>
                 </select>
             </div>
         </div>
@@ -131,7 +145,7 @@ mysql_query("SET NAMES 'utf8'");
             <div class="col-xs-12">
                 <label for="cant" class="formlabelscel col-xs-12">Cantidad Terminada:</label>
             </div>
-            <div class="col-xs-12">
+            <div class="col-xs-12" id="canti">
                 <input id="cant" type="text" name="cantidad" class="textinput-12">
             </div>
         </div>
