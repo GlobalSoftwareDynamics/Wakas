@@ -82,7 +82,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3 col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -92,179 +92,112 @@ mysql_query("SET NAMES 'utf8'");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Secciones disponibles</a>
+                    <a class="navbar-brand" href="./">Secciones disponibles</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <form method="post">
                         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinal.php" value="Sección General">
+                            <input type="submit" class="btn-link" formaction="versionHE2.php" value="Sección Medidas">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTejido.php" value="Sección Tejido">
+                            <input type="submit" class="btn-link" formaction="versionHE3.php" value="Sección Tejido">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
+                            <input type="submit" class="btn-link" formaction="versionHE4.php" value="Sección Lavado y Secado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinalConfeccion.php" value="Sección Confección">
+                            <input type="submit" class="btn-link" formaction="versionHE5.php" value="Sección Confección">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
+                            <input type="submit" class="btn-link" formaction="versionHE6.php" value="Sección Etiquetado y Embolsado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
-                        </div>
-                        <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn btn-success" formaction="HEpdf.php" value="Descargar Hoja">
+                            <input type="submit" class="btn-link" formaction="versionHE7.php" value="Sección Tiempos y Secuencia">
                         </div>
                     </form>
                 </div>
             </nav>
         </div>
 
-        <div class="col-sm-10">
+        <div class="col-sm-9 col-sm-9">
             <!-- your page content -->
-            <section class="container-fluid">
-                <div class="col-sm-2">
-                    <div>
-                        <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
-                    </div>
-                </div>
-                <div class="col-sm-5" id="descripcionbrand">
-                    <div>
-                        <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></b>
-                    </div>
-                    <div>
-                        <span>Urb. Francisco Mostajo G-25</span>
-                    </div>
-                    <div>
-                        <span>04002 Arequipa - Peru</span>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="titulo">
-                        <h3>Hoja de Especificaciones</h3>
-                    </div>
-                    <div>
-                        <h4 class='desctitulo'>MOD <?php echo $_POST['idProd']; ?></h4>
-                    </div>
-                </div>
-            </section>
-            <hr>
-            <div class="container col-sm-6">
-                <div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>ID Producto:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php echo $_POST['idProd'];?></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>ID Provisional:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idProvisional']?></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>Tipo:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idTipoProducto']?></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>Género:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idgenero']?></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>ID Cliente:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['idCliente']?></span>
-                        </div>
-                    </div>
-                    <div class="container col-sm-12 seperadorhe">
 
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>Fecha de Creación:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['fechaCreacion']?></span>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="col-sm-6">
-                            <label>Creado por:</label>
-                        </div>
-                        <div class="col-sm-6">
-                            <span><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['creador']?></span>
-                        </div>
-                    </div>
-                </div>
-                <div class="container col-sm-12">
-                    <br>
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th class="thobservacion">Observaciones Generales</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="tdobservacion"><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['observaciones']?></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="container col-sm-6">
-                <table class="table table-bordered">
-                    <thead>
-                    <tr>
-                        <th class="thobservacion">Descripción General</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td class="tdobservacion"><?php $result = selectTableWhere("Producto","idProducto","'".$_POST['idProd']."'"); $fila=mysql_fetch_array($result); echo $fila['descripcionGeneral']?></td>
-                    </tr>
-                    <tr>
-                        <?php
-                        $file = null;
-                        $filenamejpg = 'Fotografias/'.$_POST['idProd'].'-prod.jpg';
-                        $filenamejpeg = 'Fotografias/'.$_POST['idProd'].'-prod.jpeg';
-                        $filenamegif = 'Fotografias/'.$_POST['idProd'].'-prod.gif';
-                        $filenamepng = 'Fotografias/'.$_POST['idProd'].'-prod.png';
-                        if(file_exists($filenamejpg)){
-                            $file=$filenamejpg;
-                        } elseif(file_exists($filenamejpeg)){
-                            $file=$filenamejpeg;
-                        } elseif(file_exists($filenamegif)){
-                            $file=$filenamegif;
-                        } elseif(file_exists($filenamepng)){
-                            $file=$filenamepng;
-                        } else{
-                            echo "No existe foto para el producto";
+            <?php
+            $sqlquery = mysql_query("SET FOREIGN_KEY_CHECKS=0");
+            $pointer = 0;
+            $pointer2 = 1;
+            if(isset($_POST['Siguiente'])){
+                $query = mysql_query("SELECT * FROM Producto WHERE idProducto LIKE '".$_POST['idProd']."%'");
+                while($search = mysql_fetch_array($query)){
+                    $pointer++;
+                }
+
+                $add = mysql_query("INSERT INTO Producto (idProducto,idTipoProducto,idCliente,creador,idgenero,idcodificacionTalla,idProvisional,fechaCreacion,observaciones,descripcionGeneral) 
+                                    VALUES ('".$_POST['idProd']."','".$_POST['tipoProducto']."','".$_POST['idcliente']."','".$_POST['selectempleado']."','".$_POST['genero']."','".$_POST['idcodificacionTalla']."','".$_POST['idProv']."','".$_POST['date']."','".$_POST['observGen']."','".$_POST['descrGen']."')");
+                if ( !empty( $error = mysql_error() ) )
+                {
+                    echo 'Mysql error '. $error ."<br />\n";
+                    echo "Query: ".$add."<br>";
+                }
+
+                $query = mysql_query("SELECT * FROM tallamedida WHERE idProducto = '".$_POST['idProdOrig']."'");
+                while($search = mysql_fetch_array($query)){
+                    $add = mysql_query("INSERT INTO tallamedida VALUES ('".$_POST['idProd']."','".$search['idTalla']."','".$search['idMedida']."','".$search['valor']."')");
+                    if ( !empty( $error = mysql_error() ) )
+                    {
+                        echo 'Mysql error '. $error ."<br />\n";
+                    }
+                }
+
+                $query = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProdOrig']."'");
+                while($search = mysql_fetch_array($query)){
+                    $add = mysql_query("INSERT INTO ProductoMedida VALUES ('".$_POST['idProd']."','".$search['idMedida']."','".$search['tolerancia']."','".$search['observacion']."')");
+                    if ( !empty( $error = mysql_error() ) )
+                    {
+                        echo 'Mysql error '. $error ."<br />\n";
+                    }
+                }
+
+
+                $query = mysql_query("SELECT * FROM ProductoComponentesPrenda");
+                while($search = mysql_fetch_array($query)){
+                    $pointer2++;
+                }
+                mysql_data_seek($query, 0);
+                $query = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProdOrig']."' AND estado = '1'");
+                while($search = mysql_fetch_array($query)){
+                    $add = mysql_query("INSERT INTO ProductoComponentesPrenda (idComponenteEspecifico,idProducto,idComponente,idMaterial,idColor,cantidadMaterial,tipoComponente,estado) 
+                                    VALUES ('COMPESP".$pointer2."','".$_POST['idProd']."','".$search['idComponente']."','".$search['idMaterial']."','".$search['idColor']."','".$search['cantidadMaterial']."','".$search['tipoComponente']."','".$search['estado']."')");
+                    if ( !empty( $error = mysql_error() ) )
+                    {
+                        echo 'Mysql error '. $error ."<br />\n";
+                    }
+
+
+                    $pointer3 = 1;
+
+                    $query2 = mysql_query("SELECT * FROM PCPSPC");
+                    while($search2 = mysql_fetch_array($query2)){
+                        $pointer3++;
+                    }
+                    mysql_data_seek($query2, 0);
+                    $query2 = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '".$search['idComponenteEspecifico']."'");
+                    while($search2 = mysql_fetch_array($query2)){
+                        $add = mysql_query("INSERT INTO PCPSPC 
+                                    VALUES ('".$pointer3."','COMPESP".$pointer2."','".$search2['idSubProcesoCaracteristica']."','".$search2['valor']."','".($search2['fila']+1)."')");
+                        $pointer3++;
+                        if ( !empty( $error = mysql_error() ) )
+                        {
+                            echo 'Mysql error '. $error ."<br />\n";
                         }
-                        ?>
-                        <td><img src="<?php echo $file;?>" alt='Fotografia de Producto' height='300' width='auto'/></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                    }
+                    $pointer2++;
+                }
+
+            }
+            $sqlquery = mysql_query("SET FOREIGN_KEY_CHECKS=1");
+            ?>
 
             <section class="container col-sm-12">
                 <div>
@@ -326,33 +259,98 @@ mysql_query("SET NAMES 'utf8'");
                         </tr>
                         </thead>
                         <tbody>
-                                <?php
-                                    $result2 = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."'");
-                                    while($fila2 = mysql_fetch_array($result2)){
-                                        if($fila2['observacion']===''||$fila2['observacion']=== null){
-                                        }else {
-                                            echo "<tr>";
-                                            echo "<td class='tdobservacion'>" . $fila2['observacion'] . "</td>";
-                                            echo "</tr>";
-                                        }
-                                    }
-                                ?>
+                        <?php
+                        $result2 = mysql_query("SELECT * FROM ProductoMedida WHERE idProducto = '".$_POST['idProd']."'");
+                        while($fila2 = mysql_fetch_array($result2)){
+                            if($fila2['observacion']===''||$fila2['observacion']=== null){
+                            }else {
+                                echo "<tr>";
+                                echo "<td class='tdobservacion'>" . $fila2['observacion'] . "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
             </section>
+            <section class="container">
+                <div>
+                    <div class="form-group">
+                        <form method="post" action="#">
+                            <input type="hidden" name='idProd' value="<?php echo $_POST['idProd']?>">
+                            <?php
+                            $query = mysql_query("SELECT * FROM Producto WHERE idProducto = '".$_POST['idProd']."'");
+                            while($row = mysql_fetch_array($query)){
+                                $selectcodificaciontalla = $row['idcodificacionTalla'];
+                            }
+                            echo "<input type='hidden' name='selectcodificaciontalla' value='".$selectcodificaciontalla."'>";
+                            ?>
+                            <input type="submit" name="add" value="Modificar Valores" class="btn btn-default col-sm-3 col-sm-offset-3" formaction="versionHE2add.php">
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <hr>
+            <section class="container col-sm-6 col-sm-offset-3">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="thobservacion">Fotografía de Producto</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <?php
+                        $estado = true;
+                        $file = null;
+                        $filenamejpg = 'Fotografias/'.$_POST['idProd'].'-prod.jpg';
+                        $filenamejpeg = 'Fotografias/'.$_POST['idProd'].'-prod.jpeg';
+                        $filenamegif = 'Fotografias/'.$_POST['idProd'].'-prod.gif';
+                        $filenamepng = 'Fotografias/'.$_POST['idProd'].'-prod.png';
+                        if(file_exists($filenamejpg)){
+                            $file=$filenamejpg;
+                        } elseif(file_exists($filenamejpeg)){
+                            $file=$filenamejpeg;
+                        } elseif(file_exists($filenamegif)){
+                            $file=$filenamegif;
+                        } elseif(file_exists($filenamepng)){
+                            $file=$filenamepng;
+                        } else{
+                            echo "<td>No existe foto para el producto</td>";
+                            $estado = false;
+                        }
+                        if($estado == true){
+                          echo "<td><img src='".$file."' alt='Fotografia de Producto' height='300' width='auto'></td>";
+                        }
+                        ?>
+                    </tr>
+                    <tr>
+                        <?php
+                                    echo "<form action='uploadfotoproducto2.php' method='post' enctype='multipart/form-data'>
+                                <input type='hidden' name='idProd' value='".$_POST['idProd']."'>
+                                <div>
+                                    <td style='text-align: center'><input type='file' name='fileToUpload' id='fileToUpload'>
+                                </div>
+                          <input type='submit' value='Upload Image' name='submit'></td>
+                          </form>";
+                        ?>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+
+
+            <hr>
+
+
+
+
         </div>
     </div>
 </div>
 
 <hr>
-<section class="container col-sm-9 col-sm-offset-3">
-    <form action="hefinalpdf.php" method="post" class="form-horizontal col-sm-12">
-        <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-        <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" name="pdf" value="Descargar PDF">
-    </form>
-    <br>
-</section>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

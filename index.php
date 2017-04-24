@@ -57,16 +57,6 @@
 	
 	<body>
 		<div class="container" id="container" style="display:none;">
-		<header>
-			<!-- Main company header -->
-			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-			  <div class="container">
-				<div class="navbar-header">
-				  <a class="navbar-brand top-navbar-brand" href="#" id="brandlogin">W<span class="alfalogin">&alpha;</span>k<span class="alfalogin">&alpha;</span>-s</a>
-				</div>
-			  </div>
-			</nav>
-		</header>
 		<section id="form" class="animated fadeInDown">
 			<div class="container">    
 				<div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">                    

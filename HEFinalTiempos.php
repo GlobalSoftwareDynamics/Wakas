@@ -15,7 +15,7 @@ mysql_query("SET NAMES 'utf8'");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hoja de Especificaci&oacuten</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-side.css" rel="stylesheet" />
     <link href="css/Formatos.css" rel="stylesheet">
     <link href="css/Tablas.css" rel="stylesheet">
@@ -23,8 +23,9 @@ mysql_query("SET NAMES 'utf8'");
 
 <body >
 <header>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -32,28 +33,30 @@ mysql_query("SET NAMES 'utf8'");
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="mainAdmin.php" id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s</a>
+                <a href="mainAdmin.php"><img src="image/LogoWakas.png" height="60"></a>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Registros<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REGISTROS<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionCV.php">Visualizaci&oacuten de Confirmaciones de Venta</a></li>
-                            <li><a href="gestionOP.php">Visualizaci&oacuten de Ordenes de Producci&oacuten</a></li>
-                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="gestionOP.php">Visualizaci&oacuten de Órdenes de Producci&oacuten</a></li>
                             <li><a href="gestionProductos.php">Visualizaci&oacuten de Productos</a></li>
+                            <li><a href="rendimiento.php">Visualizaci&oacuten de Rendimiento</a></li>
+                            <li><a href="menuestadoproceso.php">Visualizaci&oacuten de Estado de Proceso</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Operaciones<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">OPERACIONES<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="nuevaCV.php">Nueva Confirmaci&oacuten de Venta</a></li>
-                            <li><a href="nuevaHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OpcionHE.php">Nueva Hoja de Especificaciones</a></li>
+                            <li><a href="OPnueva.php">Nueva Orden de Producción</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Informaci&oacuten Interna<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INFORMACIÓN INTERNA<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionMateriales.php">Materiales</a></li>
                             <li><a href="gestionMaquinas.php">M&aacutequinas</a></li>
@@ -65,7 +68,7 @@ mysql_query("SET NAMES 'utf8'");
                         </ul>
                     </li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contactos<span class="caret"></span></a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">CONTACTOS<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="gestionClientes.php">Clientes</a></li>
                             <li><a href="gestionProveedores.php">Proveedores</a></li>
@@ -80,7 +83,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-lg-3">
+        <div class="col-sm-2">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -90,44 +93,47 @@ mysql_query("SET NAMES 'utf8'");
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./">Secciones disponibles</a>
+                    <a class="navbar-brand" href="#">Secciones disponibles</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <form method="post">
                         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinal.php" value="Sección General">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinal.php" value="Sección General">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalTejido.php" value="Sección Tejido">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTejido.php" value="Sección Tejido">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalLavSec.php" value="Sección Lavado y Secado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalConfeccion.php" value="Sección Confección">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalConfeccion.php" value="Sección Confección">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalEtiqEmb.php" value="Sección Etiquetado y Embolsado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
+                            <input type="submit" class="btn-link btn-links" formaction="HEFinalTiempos.php" value="Sección Tiempos y Secuencia">
+                        </div>
+                        <div class="col-sm-12 sideselect">
+                            <input type="submit" class="btn btn-success" formaction="HEpdf.php" value="Descargar Hoja">
                         </div>
                     </form>
                 </div>
             </nav>
         </div>
-        <div class="col-sm-9 col-lg-9">
+        <div class="col-sm-10">
             <!-- Page Contents -->
             <section class="container-fluid">
                 <div class="col-sm-2">
                     <div>
-                        <img width="110" height="110" src="image/logowakas.jpg"/>
+                        <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
                     </div>
                 </div>
                 <div class="col-sm-5" id="descripcionbrand">
                     <div>
-                        <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                        <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></span></b>
                     </div>
                     <div>
                         <span>Urb. Francisco Mostajo G-25</span>
@@ -138,14 +144,16 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div class="col-sm-4">
                     <div class="titulo">
-                        <h3>Ficha de Repuestos</h3>
+                        <h3>Hoja de Especificaciones</h3>
                     </div>
                     <div>
                         <h4 class='desctitulo'>MOD <?php echo $_POST['idProd']; ?></h4>
                     </div>
                 </div>
             </section>
+
             <hr>
+
             <section class="container col-sm-12">
                 <div>
                     <table class="table table-hover">
@@ -166,7 +174,11 @@ mysql_query("SET NAMES 'utf8'");
 
                                 $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<th>".$fila2['descripcion']."</th>";
+                                    if($fila2['descripcion'] === 'Componente'){
+                                    }else{
+                                        echo "<th>".$fila2['descripcion']."</th>";
+                                    }
+
                                 }
                             }
                             ?>
@@ -174,55 +186,84 @@ mysql_query("SET NAMES 'utf8'");
                         </thead>
                         <tbody>
                         <?php
-                        $aux = 0;
-                        $aux2 = 0;
-                        $contenido = array();
-                        $subprocesocaracteristica = array();
-                        $tipocontenido = array();
-                        $compespec = array();
-                        $result3 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
-                        while ($fila3 = mysql_fetch_array($result3)){
-                            $compespec[$aux2] = $fila3['idComponenteEspecifico'];
-                            $aux2++;
-                        }
-                        for($j = 0; $j<count($compespec);$j++){
-                            //$result4 = mysql_query("SELECT DISTINCT pcpspc.* FROM `PCPSPC`,`SubProcesoCaracteristica` WHERE pcpspc.idSubProcesoCaracteristica = subprocesocaracteristica.idSubProcesoCaracteristica AND subprocesocaracteristica.idProcedimiento = 'PROCEDIMIENTO32' AND pcpspc.idComponenteEspecifico = '".$compespec[$j]."' ORDER BY LENGTH (id),idSubProcesoCaracteristica");
-                            $result4 = mysql_query("SELECT DISTINCT pcpspc.* FROM `PCPSPC`,`SubProcesoCaracteristica` WHERE pcpspc.idSubProcesoCaracteristica = subprocesocaracteristica.idSubProcesoCaracteristica AND subprocesocaracteristica.idProcedimiento = 'PROCEDIMIENTO32' AND pcpspc.idComponenteEspecifico = '".$compespec[$j]."' ORDER BY `PCPSPC`.`id` ASC ");
-                            while ($fila4 = mysql_fetch_array($result4)) {
-                                $contenido[$aux] = $fila4['valor'];
-                                $subprocesocaracteristica[$aux] = $fila4['idSubProcesoCaracteristica'];
-                                $result5 = mysql_query("SELECT * FROM SubProcesoCaracteristica WHERE idSubProcesoCaracteristica = '" . $fila4['idSubProcesoCaracteristica'] . "'");
-                                while ($fila5 = mysql_fetch_array($result5)) {
-                                    $tipocontenido[$aux] = $fila5['tipo'];
-                                }
-                                $aux++;
+                        $auxcomp = 0;
+                        $auxproced = 0;
+                        $auxmaquina = 0;
+                        $auxtiempo = 0;
+                        $auxfila = 0;
+                        $filaproceso = array();
+                        $componente = array();
+                        $procedimiento = array();
+                        $maquina = array();
+                        $tiempo = array();
+                        $string = null;
+                        $bandera = false;
+                        $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
+                        while($fila = mysql_fetch_array($result)) {
+                            if($bandera == false){
+                                $string = $string."idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
+                                $bandera = true;
+                            }else{
+                                $string = $string."OR idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
                             }
                         }
-                        $entradas = $aux/4;
-                        for ($i = 0; $i < count($contenido); $i=$i+4) {
+                        $query ="SELECT * FROM PCPSPC WHERE ".$string." ORDER BY LENGTH (id)";
+                        $result2 = mysql_query($query);
+                        while($fila2 = mysql_fetch_array($result2)){
+                            if($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC32'){   //CAMBIAR AL DEJAR FIJO!!!!!
+                                $componente[$auxcomp] = $fila2['valor'];
+                                $auxcomp++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $procedimiento[$auxproced] = $fila2['valor'];
+                                $auxproced++;
+                                $filaproceso[$auxfila] = $fila2['fila'];
+                                $auxfila++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $maquina[$auxmaquina] = $fila2['valor'];
+                                $auxmaquina++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC36'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $tiempo[$auxtiempo] = $fila2['valor'];
+                                $auxtiempo++;
+                            }
+                        }
+                        for($j = 0; $j < $auxcomp; $j++){
                             echo "<tr>";
-                            $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$contenido[$i]."'");
+                            $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$componente[$j]."'");
                             while($fila = mysql_fetch_array($result)){
                                 $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td>".$fila2['descripcion']."</td>";
+                                    $prenda = $fila2['descripcion'];
                                 }
                             }
-                            echo "<td>".$contenido[$i+1]."</td>";
-                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$contenido[$i+1]."'");
+                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
+                            while($fila = mysql_fetch_array($result)){
+                                if($procedimiento[$j]==='PROCEDIMIENTO26'){
+                                    $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '".$filaproceso[$j]."' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC29'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumo = $row['valor'];
+                                    }
+                                    $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$insumo."'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumo = $row['descripcion'];
+                                    }
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$insumo."-".$prenda."</td>";
+                                    }
+                                }else{
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                    }
+                                }
+                            }
+                            $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$maquina[$j]."'");
                             while($fila = mysql_fetch_array($result)){
                                 echo "<td>".$fila['descripcion']."</td>";
                             }
-                            $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$contenido[$i+2]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila['descripcion']."</td>";
-                            }
-                            //echo "<td>".$contenido[$i+($entradas*2)]."</td>";
-                            echo "<td>".$contenido[$i+3]."</td>";
-                            /*echo "<td>".$contenido[$i]."</td>";
-                            echo "<td>".$contenido[$i+$entradas]."</td>";
-                            echo "<td>".$contenido[$i+($entradas*2)]."</td>";
-                            echo "<td>".$contenido[$i+($entradas*3)]."</td>";*/
+                            echo "<td>".$tiempo[$j]."</td>";
                             echo "</tr>";
                         }
                         ?>
@@ -230,11 +271,12 @@ mysql_query("SET NAMES 'utf8'");
                     </table>
                 </div>
             </section>
+
         </div>
     </div>
 </div>
 <hr>
-<section class="container col-lg-9 col-lg-offset-3">
+<section class="container col-sm-9 col-sm-offset-3">
     <form action="hetiempopdf.php" method="post" class="form-horizontal col-sm-12">
         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
         <input type="submit" class="btn btn-default col-sm-4 col-sm-offset-4" name="pdf" value="Descargar PDF">
@@ -245,7 +287,7 @@ mysql_query("SET NAMES 'utf8'");
 <script src="js/bootstrap.min.js"></script>
 <?php
 }else{
-    echo "Alguien esta tratando de entrar a nuestro sitio Web. Un log ha sido creado automaticamente para despedirte. Gracias por visitar Waka-s SGI :)";
+    echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
 }
 ?>
 </body>

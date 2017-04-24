@@ -5,13 +5,7 @@
 <?php
 session_start();
 require('funciones.php');
-$con=mysql_connect("localhost","root","");
-if($con){
-    $bd=mysql_select_db("wakas",$con);
-    if(!$bd) echo "No existe la bd";
-}else{
-    echo "No existe la conexi&oacute;n";
-}
+conexion();
 
 if(isset($_SESSION['login'])){
     mysql_query("SET NAMES 'utf8'");
@@ -23,6 +17,26 @@ if(isset($_SESSION['login'])){
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#datepicker").datepicker();
+            });
+        </script>
+        <script>
+            function getData(val) {
+                $.ajax({
+                    type: "POST",
+                    url: "get_HE.php",
+                    data:'idProd='+val,
+                    success: function(data){
+                        $("#formulario").html(data);
+                    }
+                });
+            }
+        </script>
     </head>
 
     <body>
@@ -84,54 +98,38 @@ if(isset($_SESSION['login'])){
         </nav>
     </header>
 
-    <!-- Seleecionar Subproceso -->
-    <section class="container">
-        <h3>Agregar Fotografía de Producto (Máximo 1)</h3>
-        <hr>
-        <?php
-        echo "<form action='uploadfotoproducto.php' method='post' enctype='multipart/form-data' class='form-horizontal jumbotron col-sm-6 col-sm-offset-3'>
-                    <input type='hidden' name='idProd' value='".$_POST['idProd']."'>
-                    <div class='col-sm-12'>
-                        <input type='file' name='fileToUpload' id='fileToUpload'>
-                    </div>
-                    <hr>
-                    <input type='submit' value='Upload Image' name='submit' class='btn btn-default col-sm-8 col-sm-offset-2'>
-              </form>";
-        ?>
-        <br>
-    </section>
-
-    <hr>
 
     <section class="container">
-        <h3>Agregar Fotografía de Etiquetado y Embolsado (Máximo 4)</h3>
-        <hr>
-        <?php
-                    echo "<form action='upload.php' method='post' enctype='multipart/form-data' class='form-horizontal jumbotron col-sm-6 col-sm-offset-3'>
-                            <input type='hidden' name='idProd' value='".$_POST['idProd']."'>
-                            <div class='col-sm-12'>
-                                <input type='file' name='fileToUpload' id='fileToUpload'>
-                            </div>
-                            <hr>
-                            <input type='submit' value='Upload Image' name='submit' class='btn btn-default col-sm-8 col-sm-offset-2'>
-                          </form>";
-        ?>
-        <br>
-    </section>
-
-<hr>
-
-    <section class="container">
-    <form method="post" action="HEFinal.php">
-        <div class="col-sm-12">
-            <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-            <input type="hidden" name="selectcodificaciontalla" value="<?php echo $_POST['selectcodificaciontalla']?>">
-            <input type="submit" value="Finalizar" name="Finalizar" class="btn btn-default col-sm-4 col-sm-offset-4">
+        <div>
+            <h3>Paso 1: Datos Generales</h3>
         </div>
-    </form>
+        <hr>
+        <form method="post" action="versionHE2.php" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" id="formulario">
+            <div>
+                <h4>Nueva Versión de Hoja de Especificaciones</h4>
+            </div>
+            <hr>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <div class="col-sm-5">
+                        <label for="idProd" class="formlabels col-sm-12">Id Producto:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <?php
+                        echo "<select name='idProd' id='idProd' class='ddselect-8' onChange='getData(this.value)'>";
+                        echo "<option>Seleccionar</option>";
+                        $result = selectTable('Producto');
+                        while($fila = mysql_fetch_array($result)){
+                            echo "<option value=".$fila['idProducto'].">".$fila['idProducto']."</option>";
+                        }
+                        echo "</select>";
+                        ?>
+                    </div>
+                </div>
+            </div>
+        </form>
     </section>
-    <br>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <script src="js/bootstrap.min.js"></script>
 
     </body>
@@ -143,7 +141,3 @@ if(isset($_SESSION['login'])){
 ?>
 
 </html>
-
-
-
-

@@ -13,11 +13,80 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Waka-s Textiles Finos S.A.</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <title>Nueva Orden de Producción</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link href="css/Formularios.css" rel="stylesheet">
     <link href="css/Tablas.css" rel="stylesheet">
+    <script>
 
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+
+        function getcv(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_cv.php",
+                data:'fecha='+val,
+                success: function(data){
+                    $("#cont").html(data);
+                }
+            });
+        }
+
+        function getproducto(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_producto.php",
+                data:{'contrato':val},
+                success: function(data){
+                    $("#prod").html(data);
+                }
+            });
+        }
+        function getcolor() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            $.ajax({
+                type: "POST",
+                url: "get_color.php",
+                data:'contrato=' + contrato + '&producto=' + producto,
+                success: function(data){
+                    $("#col").html(data);
+                }
+            });
+        }
+        function gettallas() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            var color = document.getElementById('col').value;
+            $.ajax({
+                type: "POST",
+                url: "get_tallas.php",
+                data:{'contrato':contrato, 'producto':producto, 'color':color},
+                success: function(data){
+                    $("#tablatallas").html(data);
+                }
+            });
+        }
+        /*function getcantidad() {
+            var contrato = document.getElementById('cont').value;
+            var producto = document.getElementById('prod').value;
+            var color = document.getElementById('col').value;
+            var talla = document.getElementById('tall').value;
+            $.ajax({
+                type: "POST",
+                url: "get_cantidad.php",
+                data:{'contrato':contrato, 'producto':producto, 'color':color, 'talla':talla},
+                success: function(data){
+                    $("#cant").html(data);
+                }
+            });
+        }*/
+    </script>
 </head>
 
 <body>
@@ -79,120 +148,70 @@ mysql_query("SET NAMES 'utf8'");
     </nav>
 </header>
 
-<?php
-if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO Caracteristica VALUES ('".$_POST['idCaracteristica']."','".$_POST['descripcion']."','".$_POST['selecttipo']."')";
-    $agregar1=mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }else{
-        echo "<br>
-                    <div class='container col-sm-12'>
-                        <div class='alert alert-success' role='alert'>
-                            <p><strong>Caracterítica Agregada Exitosamente</strong></p>
-                        </div>
-                    </div>
-                ";
-    }
-}
-if(isset($_GET['eliminarCaracteristica'])){
-    $eliminar="DELETE FROM caracteristica WHERE idCaracteristica ='".$_GET['eliminarCaracteristica']."'";
-    $eliminar1=mysql_query($eliminar);
-}
-?>
-<section class="container col-sm-7">
-    <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+<section class="container">
+    <form class="form-horizontal jumbotron col-sm-8 col-sm-offset-2" action="nuevaOP.php" method="post">
         <div>
-            <h3>Nueva Caracter&iacute;stica</h3>
+            <h4>Nueva Órden de Producción</h4>
         </div>
         <hr>
         <div class="form-group">
             <div class="col-sm-12">
-                <label for="idCaracteristica" class="formlabels1 col-sm-12">idCaracteristica:</label>
-            </div>
-            <div class="col-sm-12">
-                <?php
-                $aux = 0;
-                $result = selectTable("Caracteristica");
-                while($fila = mysql_fetch_array($result)){
-                    $aux++;
-                }
-                $aux++;
-                echo "<input class='textinput-6' id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
-                ?>
+                <div class="col-sm-5">
+                    <label for="datepicker" class="formlabels col-sm-12">Fecha:</label>
+                </div>
+                <div class="col-sm-7">
+                    <input name="fecha" class="textinput-4" id="datepicker" onchange='getcv(this.value);'>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">
-                <label for="Descripcion" class="formlabels1 col-sm-12">Descripcion:</label>
-            </div>
-            <div class="col-sm-12">
-                <input class="textinput-12" id="Descripcion" type="text" name="descripcion">
+                <div class="col-sm-5">
+                    <label for="cont" class="formlabels col-sm-12">Confirmación de Venta:</label>
+                </div>
+                <div class="col-sm-7">
+                    <select name="contrato" class="ddselect-8" id="cont" onchange='getproducto(this.value);'>
+                        <option>Seleccionar</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12">
-                <label for="selecttipo" class="formlabels1 col-sm-12">Tipo:</label>
+                <div class="col-sm-5">
+                    <label for="prod" class="formlabels col-sm-12">Producto:</label>
+                </div>
+                <div class="col-sm-7">
+                    <select name="producto" class="ddselect-8" id="prod" onchange="getcolor();">
+                        <option>Seleccionar</option>
+                    </select>
+                </div>
             </div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-12">
-                <select name="selecttipo" id="selecttipo" class="ddselect-12">
-                    <option value="componente">Componente</option>
-                    <option value="maquina">Maquina</option>
-                    <option value="insumo">Insumo</option>
-                    <option value="idinsumo">ID Insumo</option>
-                    <option value="material">Material</option>
-                    <option value="galga">Galga</option>
-                    <option value="fotografia">Fotograf&iacute;a</option>
-                    <option value="color">Color</option>
-                    <option value="fotografiaproducto">Fotografía de Producto</option>
-                    <option value="otro">Otro</option>
-                </select>
+                <div class="col-sm-5">
+                    <label for="col" class="formlabels col-sm-12">Color:</label>
+                </div>
+                <div class="col-sm-7">
+                    <select name="color" class="ddselect-6" id="col" onchange="gettallas();">
+                        <option>Selecc.</option>
+                    </select>
+                </div>
             </div>
+        </div>
+        <div class="form-group" id="tablatallas">
         </div>
         <hr>
         <div class="form-group">
-            <div class="col-sm-6">
-                <input formaction="menuagregarotros.php" class="btn btn-default boton col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
-            </div>
-            <div class="col-sm-6">
-                <input class="btn btn-success boton col-sm-10 col-sm-offset-1"type="submit" name="guardar" value="Agregar">
+            <div class="col-sm-12">
+                <input type="submit" class="btn btn-success col-sm-6 col-sm-offset-3" name="ordenprodform" value="Crear Orden">
             </div>
         </div>
     </form>
 </section>
-
-<section class="container col-sm-5">
-    <div class="container col-sm-10 col-sm-offset-1">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Descripción</th>
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php
-            $result1=selectTable('Caracteristica');
-            while ($fila1=mysql_fetch_array($result1)){
-                echo "
-                            <tr>
-                                <td>".$fila1['descripcion']."</td>
-                                <td><a href='otrosCaracteristica.php?eliminarCaracteristica=".$fila1['idCaracteristica']."'>Eliminar</a></td>
-                            </tr>
-                        ";
-            }
-            ?>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
 </body>
-
 </html>
 <?php
 }else{
