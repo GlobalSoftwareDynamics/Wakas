@@ -155,7 +155,7 @@ if(isset($_SESSION['login'])){
                 <form>
                     <div class="col-sm-12">
                         <div class="col-sm-6">
-                            <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Galgas</button>
+                            <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction="gestionGalgas.php">Galgas</button>
                         </div>
                         <div class="col-sm-6">
                             <button class="btn btn-success col-sm-6 col-sm-offset-3" formaction="agregarMaquina.php">Agregar</button>
