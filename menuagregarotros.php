@@ -84,46 +84,46 @@ mysql_query("SET NAMES 'utf8'");
 <section class="container">
     <form class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otroscolor.php">Agregar Color</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otroscolor.php">Agregar Color</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosunidadmedida.php">Agregar Unidad de Medida</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosunidadmedida.php">Agregar Unidad de Medida</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosincoterm.php">Agregar Incoterm</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosincoterm.php">Agregar Incoterm</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosmetodopago.php">Agregar Metodo de Pago</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosmetodopago.php">Agregar Metodo de Pago</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrospais.php">Agregar Pais</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrospais.php">Agregar Pais</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosciudad.php">Agregar Ciudad</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosciudad.php">Agregar Ciudad</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosvia.php">Agregar Via de Envío</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosvia.php">Agregar Via de Envío</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostipoproducto.php">Agregar Tipo de Producto</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrostipoproducto.php">Agregar Tipo de Producto</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otroscomponente.php">Agregar Componente</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otroscomponente.php">Agregar Componente</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosmedida.php">Agregar Medidas</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosmedida.php">Agregar Medidas</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosactividadmuerta.php">Agregar Actividad Muerta</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosactividadmuerta.php">Agregar Actividad Muerta</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrosgenero.php">Agregar Género</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrosgenero.php">Agregar Género</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostalla.php">Agregar Talla</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrostalla.php">Agregar Talla</button>
         </div>
         <div class="col-sm-12">
-            <button class="btn btn-default col-sm-12 boton" type="submit" formaction="otrostipotalla.php">Agregar Códificacion de Talla</button>
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="otrostipotalla.php">Agregar Códificacion de Talla</button>
         </div>
     </form>
 </section>

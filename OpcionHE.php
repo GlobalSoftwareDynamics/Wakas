@@ -98,17 +98,17 @@ if(isset($_SESSION['login'])){
             <hr>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input type="submit" class="btn btn-default col-sm-12 boton" value="Nuevo Producto" formaction="nuevaHE.php">
+                    <input type="submit" class="btn btn-success col-sm-12 boton" value="Nuevo Producto" formaction="nuevaHE.php">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-12">
-                    <input type="submit" class="btn btn-default col-sm-12 boton" value="Nueva Versión de Producto" formaction="versionHE.php">
+                    <input type="submit" class="btn btn-success col-sm-12 boton" value="Nueva Versión de Producto" formaction="versionHE.php">
                 </div>
             </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="submit" class="btn btn-default col-sm-12 boton" value="Nuevo Producto a partir de Plantilla" formaction="plantillaHE.php">
+                        <input type="submit" class="btn btn-success col-sm-12 boton" value="Nuevo Producto a partir de Plantilla" formaction="plantillaHE.php">
                     </div>
                 </div>
         </form>
