@@ -112,7 +112,7 @@ mysql_query("SET NAMES 'utf8'");
                 <div class="col-sm-6">
                     <div class="col-sm-12">
                         <div class="col-sm-6">
-                            <input class="btn btn-default boton col-sm-10 col-sm-offset-2" type="submit" name="buscar" value="Buscar">
+                            <input class="btn btn-success boton col-sm-10 col-sm-offset-2" type="submit" name="buscar" value="Buscar">
                         </div>
                         <div class="col-sm-6">
                             <input class="btn btn-default boton col-sm-10 col-sm-offset-2" type="submit" name="eliminarfiltro" value="Eliminar Filtro">
