@@ -14,6 +14,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Hoja de Especificaci&oacuten</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/navbar-fixed-side.css" rel="stylesheet" />
@@ -399,7 +402,7 @@ mysql_query("SET NAMES 'utf8'");
                             }
                             echo "<input type='hidden' name='selectcodificaciontalla' value='".$selectcodificaciontalla."'>";
                             ?>
-                            <input type="submit" name="add" value="Agregar Valor" class="btn btn-default col-sm-3 col-sm-offset-3" formaction="versionHE3add.php">
+                            <input type="submit" name="add" value="Agregar Valor" class="btn btn-success col-sm-3 col-sm-offset-3" formaction="versionHE3add.php">
                         </form>
                     </div>
                 </div>
@@ -411,6 +414,11 @@ mysql_query("SET NAMES 'utf8'");
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 <?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
