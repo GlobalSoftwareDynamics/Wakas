@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -139,7 +142,7 @@ mysql_query("SET NAMES 'utf8'");
                         <input formaction="gestionRepuestos.php" class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" value="Regresar">
                     </div>
                     <div class="col-sm-4">
-                        <input formaction="gestionMaquinas.php" class="btn btn-default col-sm-10 col-sm-offset-2" type="submit" value="Ir a M&aacute;quinas">
+                        <input formaction="gestionMaquinas.php" class="btn btn-primary col-sm-10 col-sm-offset-2" type="submit" value="Ir a M&aacute;quinas">
                     </div>
                     <div class="col-sm-4">
                         <input class="btn btn-success col-sm-10 col-sm-offset-2" type="submit" name="asignar" value="Asignar">
@@ -150,7 +153,11 @@ mysql_query("SET NAMES 'utf8'");
     </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

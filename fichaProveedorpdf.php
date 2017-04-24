@@ -26,7 +26,7 @@ if(isset($_SESSION['login'])){
                         $result=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                         while ($fila=mysql_fetch_array($result)){
                             $html .='
-                                 <span>'.$fila['Direccion'].'</span>
+                                 <span style="font-size: 10px">'.$fila['Direccion'].'</span>
                             ';
                         }
         $html .='
@@ -39,7 +39,7 @@ if(isset($_SESSION['login'])){
                 </div>
                 <table class="tabla">
                     <thead>
-                        <tr>
+                        <tr class="borderbottom">
                             <th>IdInsumo</th>
                             <th>Descripci&oacute;n</th>
                             <th>Costo</th>
@@ -74,7 +74,7 @@ if(isset($_SESSION['login'])){
                 </div>
                 <table class="tabla">
                     <thead>
-                        <tr>
+                        <tr class="borderbottom">
                             <th>idMaterial</th>
                             <th>Descripci&oacute;n</th>
                             <th>Costo</th>
@@ -110,14 +110,7 @@ if(isset($_SESSION['login'])){
     $htmlheader='
         <header>
             <div id="descripcionbrand">
-                <img width="80" height="80" src="image/logowakas.jpg" class="imagenlogo">
-                <div class="aladologo">
-                    <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
-                    <br>
-                    <span class="direccion">Urb. Francisco Mostajo G-25</span>
-                    <br>
-                    <span class="direccion">04002 Arequipa - Peru</span>
-                </div>
+                <img style="margin-top: 20px" width="auto" height="60" src="image/WakasPDF.png"/>
             </div>
             <div id="tituloreporte">
                 <div class="titulo">
@@ -136,11 +129,11 @@ if(isset($_SESSION['login'])){
     ';
     $htmlfooter='
           <div class="footer">
-               <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+               <span style="font-size: 10px">Waka-s Textiles Finos SAC</span>
           </div>
     ';
     $nombrearchivo='FichadeProveedor'.$_POST['idproveedor'].'.pdf';
-    $mpdf = new mPDF();
+    $mpdf = new mPDF('','A4',0,'','15',15,35,35,6,6);
 
 // Write some HTML code:
     $mpdf->SetHTMLHeader($htmlheader);

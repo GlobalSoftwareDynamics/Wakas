@@ -12,6 +12,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Gestion Procedimientos</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
@@ -117,7 +120,6 @@ if(isset($_POST['actualizar'])) {
                 <th>idSubproceso</th>-->
                 <th>Descripción</th>
                 <th>Asignar M&aacute;quina</th>
-                <th>Ver Caracter&iacute;sticas</th>
                 <th></th>
             </tr>
             </thead>
@@ -134,19 +136,21 @@ if(isset($_POST['actualizar'])) {
                                 <form method='post'>
                                     <input class='btn-link' type='submit' formaction='asignarmaquinasubproc.php' value='Asignar'>
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
-                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>                                                                     
-                            </td>";
-                        echo "  <td>
-                                    <input class='btn-link' type='submit' formaction='gestionCaracteristicas.php' value='Ver'>
-                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
-                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
-
+                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'> 
+                                </form>
                             </td>";
                     } else {
-                        echo "<td> - </td><td> - </td>";
+                        echo "<td> - </td>";
                     }
-                    echo "<td><input type='submit' value='Modificar' class='btn-link' formaction='actualizarSubproceso.php'></td>";
-                    echo "</form>";
+                    echo "
+                            <td>
+                                <form method='post'>
+                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
+                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
+                                    <input type='submit' value='Modificar' class='btn-link' formaction='actualizarSubproceso.php'>
+                                </form>
+                            </td>
+                    ";
                 echo "</tr>";
             }
             ?>
@@ -163,10 +167,10 @@ if(isset($_POST['actualizar'])) {
             <div class="col-sm-12">
                 <input type='hidden' name='idProceso' value="<?php echo $_POST['idProceso']?>">
                 <div class="col-sm-6">
-                    <input class='btn btn-default col-sm-6 col-sm-offset-3' type="submit" name="agregar" value="Agregar Subproceso">
+                    <input class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionProcesos.php" type="submit" name="regresar" value="Regresar">
                 </div>
                 <div class="col-sm-6">
-                    <input class='btn btn-default col-sm-6 col-sm-offset-3' formaction="gestionProcesos.php" type="submit" name="regresar" value="Regresar">
+                    <input class='btn btn-success col-sm-6 col-sm-offset-3' type="submit" name="agregar" value="Agregar Subproceso">
                 </div>
             </div>
         </form>
@@ -175,7 +179,11 @@ if(isset($_POST['actualizar'])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

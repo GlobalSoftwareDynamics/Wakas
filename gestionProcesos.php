@@ -12,6 +12,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Gestion Procedimientos</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
@@ -117,7 +120,7 @@ if(isset($_POST['actualizar'])) {
             </thead>
             <tbody>
             <?php
-            $result=selectTable('Proceso');
+            $result=mysql_query("SELECT * FROM proceso ORDER BY LENGTH(idProceso)");
             while ($fila=mysql_fetch_array($result)){
                 echo "<tr>";
                     echo "<td>".$fila['idProceso']."</td>";
@@ -144,10 +147,10 @@ if(isset($_POST['actualizar'])) {
         <div class='container'>
             <form action="agregarProceso.php" class="form-horizontal">
                 <div class="col-sm-6">
-                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar Proceso">
+                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="regresar" value="Regresar" formaction="mainadmin.php">
                 </div>
                 <div class="col-sm-6">
-                    <input class='btn btn-default col-sm-4 col-sm-offset-4' type="submit" name="regresar" value="Regresar" formaction="mainadmin.php">
+                    <input class='btn btn-success col-sm-4 col-sm-offset-4' type="submit" name="agregar" value="Agregar Proceso">
                 </div>
             </form>
         </div>
@@ -155,7 +158,11 @@ if(isset($_POST['actualizar'])) {
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>
