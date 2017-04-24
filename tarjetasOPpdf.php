@@ -32,7 +32,7 @@ if(isset($_SESSION['login'])){
                         <div class="contenedor">
                             <div>
                                 <img width="3cm" height="70" src="image/Brand.png" class="izquierda">
-                                <img width="200" height="80" src="barcodes/'.$_POST['idop'].'/'.$bar.'.png" class="derecha">
+                                <img width="180" height="80" src="barcodes/'.$_POST['idop'].'/'.$bar.'.png" class="derecha">
                             </div>
                         </div>
                         <div class="contenedor">

@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -101,26 +104,26 @@ if(isset($_GET['eliminarColor'])){
 }
 ?>
 
-<section class="container col-sm-6">
+<section class="container col-sm-8 col-sm-offset-2">
     <form action="otroscolor.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Agregar Color</h3>
         </div>
         <hr>
         <div class="form-group">
-            <div class="col-sm-12">
-                <label for="idcolor" class="formlabels1 col-sm-12">idColor:</label>
+            <div class="col-sm-5">
+                <label for="idcolor" class="formlabels col-sm-12">idColor:</label>
             </div>
-            <div class="col-sm-12">
-                <input type="text" id="idcolor" name="idcolor" class="textinput-6">
+            <div class="col-sm-7">
+                <input type="text" id="idcolor" name="idcolor" class="textinput-5">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <label for="desc" class="formlabels1 col-sm-12">Descripción:<br></label>
+            <div class="col-sm-5">
+                <label for="desc" class="formlabels col-sm-12">Descripción:<br></label>
             </div>
-            <div class="col-sm-12">
-                <input type="text" id="desc" name="desc" class="textinput-12">
+            <div class="col-sm-7">
+                <input type="text" id="desc" name="desc" class="textinput-8">
             </div>
         </div>
         <hr>
@@ -134,7 +137,7 @@ if(isset($_GET['eliminarColor'])){
         </div>
     </form>
 </section>
-<section class="container col-sm-6">
+<section class="container col-sm-6 col-sm-offset-3 jumbotron">
     <div class="container col-sm-10 col-sm-offset-1">
         <table class="table table-hover">
             <thead>
@@ -163,7 +166,11 @@ if(isset($_GET['eliminarColor'])){
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

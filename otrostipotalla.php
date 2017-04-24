@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -102,8 +105,8 @@ if(isset($_GET['eliminarTipoTalla'])){
 }
 ?>
 
-<section class="container col-sm-6">
-    <form action="otrosgenero.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+<section class="container col-sm-6 col-sm-offset-3">
+    <form action="otrostipotalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Codificación de Talla</h3>
         </div>
@@ -115,7 +118,7 @@ if(isset($_GET['eliminarTipoTalla'])){
             $aux++;
         }
         $aux++;
-        echo "<input class='textinput-4' type='hidden' name= 'idtipotalla' value='".$aux."' readonly>";
+        echo "<input type='hidden' name= 'idtipotalla' value='".$aux."' readonly>";
         ?>
         <div class="form-group">
             <div class="col-sm-12">
@@ -131,12 +134,12 @@ if(isset($_GET['eliminarTipoTalla'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>
 </section>
-<section class="container col-sm-6">
+<section class="container col-sm-6 col-sm-offset-3 jumbotron">
     <div class="container col-sm-10 col-sm-offset-1">
         <table class="table table-hover">
             <thead>
@@ -163,7 +166,11 @@ if(isset($_GET['eliminarTipoTalla'])){
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

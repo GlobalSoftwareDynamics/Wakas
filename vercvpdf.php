@@ -280,14 +280,7 @@ $html .='
     $htmlheader='
         <header>
             <div id="descripcionbrand">
-                <img width="80" height="80" src="image/logowakas.jpg" class="imagenlogo">
-                <div class="aladologo">
-                    <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
-                    <br>
-                    <span class="direccion">Urb. Francisco Mostajo G-25</span>
-                    <br>
-                    <span class="direccion">04002 Arequipa - Peru</span>
-                </div>
+                <img style="margin-top: 20px" width="auto" height="60" src="image/WakasPDF.png"/>
             </div>
             <div id="tituloreporte">
                 <div class="titulo">
@@ -299,7 +292,11 @@ $html .='
     ';
     $htmlfooter='
           <div class="footer">
-               <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                <span style="font-size: 10px;">Waka-s Textiles Finos SAC. </span>
+                                   
+                                 
+                              
+                <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
     $nombrearchivo=$_POST['contrato'].'.pdf';

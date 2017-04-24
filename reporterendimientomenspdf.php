@@ -71,12 +71,12 @@ if(isset($_SESSION['login'])){
                                     break;
                             }
     $html .='
-                        <span>'.$nombremes.'</span>
+                        <span style="font-size: 10px">'.$nombremes.'</span>
                     </div>
                 </section>
                 <section class="contenedor">
                     <div>
-                        <h4>Resumen de Rendimientos Diarios</h4>
+                        <h5>Resumen de Rendimientos Diarios</h5>
                     </div>
                     <div class="contenedor">
                         <table class="tabla">
@@ -183,14 +183,7 @@ if(isset($_SESSION['login'])){
     $htmlheader='
         <header>
             <div id="descripcionbrand">
-                <img width="80" height="80" src="image/logowakas.jpg" class="imagenlogo">
-                <div class="aladologo">
-                    <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
-                    <br>
-                    <span class="direccion">Urb. Francisco Mostajo G-25</span>
-                    <br>
-                    <span class="direccion">04002 Arequipa - Peru</span>
-                </div>
+                <img style="margin-top: 20px" width="auto" height="60" src="image/WakasPDF.png"/>
             </div>
             <div id="tituloreporte">
                 <div class="titulo">
@@ -208,7 +201,11 @@ if(isset($_SESSION['login'])){
     ';
     $htmlfooter='
           <div class="footer">
-               <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                <span style="font-size: 10px;">Waka-s Textiles Finos SAC. </span>
+                                   
+                                 
+                              
+                <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
     $nombrearchivo='ReporteRendimientMensual'.$_POST['dni1'].'.pdf';

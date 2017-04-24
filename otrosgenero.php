@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -81,7 +84,13 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO genero(idgenero) VALUES ('".$_POST['idgenero']."')";
+    $aux=0;
+    $result=selectTable('Genero');
+    while ($fila=mysql_fetch_array($result)){
+        $aux++;
+    }
+    $aux++;
+    $agregar="INSERT INTO genero(idgenero, descripcion) VALUES ('".$aux."','".$_POST['descripcion']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -102,7 +111,7 @@ if(isset($_GET['eliminarGenero'])){
 }
 ?>
 
-<section class="container col-sm-6">
+<section class="container col-sm-6 col-sm-offset-3">
     <form action="otrosgenero.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nuevo Género</h3>
@@ -113,7 +122,7 @@ if(isset($_GET['eliminarGenero'])){
                 <label for="idgen" class="formlabels1 col-sm-12">Genero:</label>
             </div>
             <div class="col-sm-12">
-                <input id="idgen" type="text" name="idgenero" class="textinput-12">
+                <input id="idgen" type="text" name="descripcion" class="textinput-12">
             </div>
         </div>
         <hr>
@@ -122,12 +131,12 @@ if(isset($_GET['eliminarGenero'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>
 </section>
-<section class="container col-sm-6">
+<section class="container col-sm-6 col-sm-offset-3 jumbotron">
     <div class="container col-sm-10 col-sm-offset-1">
         <table class="table table-hover">
             <thead>
@@ -142,10 +151,10 @@ if(isset($_GET['eliminarGenero'])){
             while ($fila1=mysql_fetch_array($result1)){
                 echo "
                             <tr>
-                                <td>".$fila1['idgenero']."</td>
+                                <td>".$fila1['descripcion']."</td>
                                 <td><a href='otrosgenero.php?eliminarGenero=".$fila1['idgenero']."'>Eliminar</a></td>
                             </tr>
-                        ";
+                ";
             }
             ?>
             </tbody>
@@ -154,7 +163,11 @@ if(isset($_GET['eliminarGenero'])){
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

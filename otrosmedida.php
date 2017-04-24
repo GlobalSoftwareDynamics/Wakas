@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="apple-mobile-web-app-title" content="Waka-s">
+        <meta name="application-name" content="Waka-s">
+        <meta name="theme-color" content="#ef4a43">
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
@@ -103,26 +106,26 @@ mysql_query("SET NAMES 'utf8'");
     }
     ?>
 
-    <section class="container col-sm-6">
+    <section class="container col-sm-8 col-sm-offset-2">
         <form class="form-horizontal jumbotron col-sm-10 col-sm-offset-1" action="otrosmedida.php" method="post">
             <div>
                 <h3>Nueva Medida</h3>
             </div>
             <hr>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="formlabels1 col-sm-12" for="idmedida">idMedida:</label>
+                <div class="col-sm-5">
+                    <label class="formlabels col-sm-12" for="idmedida">idMedida:</label>
                 </div>
-                <div class="col-sm-12">
-                    <input class="textinput-6" id="idmedida" type="text" name="idmedida">
+                <div class="col-sm-7">
+                    <input class="textinput-4" id="idmedida" type="text" name="idmedida">
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="formlabels1 col-sm-12" for="unimedida">Unidad de Medida:</label>
+                <div class="col-sm-5">
+                    <label class="formlabels col-sm-12" for="unimedida">Unidad de Medida:</label>
                 </div>
-                <div class="col-sm-12">
-                    <select class="ddselect-6" id="unimedida" name="unimed">
+                <div class="col-sm-7">
+                    <select class="ddselect-4" id="unimedida" name="unimed">
                         <?php
                         $result=selectTable("UnidadMedida");
                         while ($fila=mysql_fetch_array($result)){
@@ -135,11 +138,11 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label class="formlabels1 col-sm-12" for="descripcion">Descripci&oacute;n:</label>
+                <div class="col-sm-5">
+                    <label class="formlabels col-sm-12" for="descripcion">Descripci&oacute;n:</label>
                 </div>
-                <div class="col-sm-12">
-                    <input class="textinput-12" id="descripcion" type="text" name="desc">
+                <div class="col-sm-7">
+                    <input class="textinput-10" id="descripcion" type="text" name="desc">
                 </div>
             </div>
             <hr>
@@ -153,7 +156,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
         </form>
     </section>
-    <section class="container col-sm-6">
+    <section class="container col-sm-6 col-sm-offset-3 jumbotron">
         <div class="container col-sm-10 col-sm-offset-1">
             <table class="table table-hover">
                 <thead>
@@ -184,7 +187,11 @@ mysql_query("SET NAMES 'utf8'");
     </section>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-
+    <footer class="panel-footer navbar-fixed-bottom">
+        <div class="container col-sm-6 col-sm-offset-3 text-center">
+            <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+        </div>
+    </footer>
     </body>
 
 </html>

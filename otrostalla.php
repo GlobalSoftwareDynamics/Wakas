@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -81,7 +84,13 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO talla(idTalla, tipo) VALUES ('".$_POST['idtalla']."','".$_POST['tipo']."')";
+    $aux = 0;
+    $result = selectTable("Talla");
+    while($fila = mysql_fetch_array($result)){
+        $aux++;
+    }
+    $aux++;
+    $agregar="INSERT INTO talla(idTalla, descripcion, idCodificacionTalla) VALUES ('".$aux."','".$_POST['descripcion']."','".$_POST['tipo']."')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -102,25 +111,25 @@ if(isset($_GET['eliminarTalla'])){
 }
 ?>
 
-<section class="container col-sm-6">
-    <form action="otrosciudad.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+<section class="container col-sm-8 col-sm-offset-2">
+    <form action="otrostalla.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Talla</h3>
         </div>
         <hr>
         <div class="form-group">
-            <div  class="col-sm-12">
-                <label for="id" class="formlabels1 col-sm-12">Talla:</label>
+            <div  class="col-sm-5">
+                <label for="desc" class="formlabels col-sm-12">Talla:</label>
             </div>
-            <div class="col-sm-12">
-                <input id="id" class="textinput-6" type="text" name="idtalla">
+            <div class="col-sm-7">
+                <input id="desc" class="textinput-6" type="text" name="descripcion">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <label for="type" class="formlabels1 col-sm-12">Tipo:</label>
+            <div class="col-sm-5">
+                <label for="type" class="formlabels col-sm-12">Codificación:</label>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-7">
                 <select id="type" name="tipo" class="ddselect-12">
                     <option>Seleccionar</option>
                     <?php
@@ -140,12 +149,12 @@ if(isset($_GET['eliminarTalla'])){
                 <input formaction="menuagregarotros.php" class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" value="Regresar">
             </div>
             <div class="col-sm-6">
-                <input class="btn btn-default col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
+                <input class="btn btn-success col-sm-10 col-sm-offset-1" type="submit" name="guardar" value="Agregar">
             </div>
         </div>
     </form>
 </section>
-<section class="container col-sm-6">
+<section class="container col-sm-6 col-sm-offset-3 jumbotron">
     <div class="container col-sm-10 col-sm-offset-1">
         <table class="table table-hover">
             <thead>
@@ -157,13 +166,13 @@ if(isset($_GET['eliminarTalla'])){
             </thead>
             <tbody>
             <?php
-            $result1=selectTable('Talla');
+            $result1=mysql_query("SELECT * FROM talla ORDER BY idCodificacionTalla");
             while ($fila1=mysql_fetch_array($result1)){
                 $result2=selectTableWhere('codificacionTalla','idcodificacionTalla',"'".$fila1['idcodificacionTalla']."'");
                 while ($fila2=mysql_fetch_array($result2)){
                     echo "
                             <tr>
-                                <td>".$fila1['idTalla']."</td>
+                                <td>".$fila1['descripcion']."</td>
                                 <td>".$fila2['descripcion']."</td>
                                 <td><a href='otrostalla.php?eliminarTalla=".$fila1['idTalla']."'>Eliminar</a></td>
                             </tr>
@@ -177,7 +186,11 @@ if(isset($_GET['eliminarTalla'])){
 </section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>

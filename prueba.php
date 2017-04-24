@@ -12,6 +12,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Ver Orden de Producción</title>
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
@@ -104,7 +107,7 @@ mysql_query("SET NAMES 'utf8'");
                 ?>
                 <script>
                     $(document).ready(function () {
-                        $("#<?php echo $indice;?>").JsBarcode("<?php echo $bar;?>");
+                        $("#<?php echo $indice;?>").JsBarcode("<?php echo $bar;?>",{displayValue: false});
                     });
                 </script>
                 <?php
@@ -175,6 +178,11 @@ mysql_query("SET NAMES 'utf8'");
 
 </script>
 <script src="js/bootstrap.min.js"></script>
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 </html>
 <?php

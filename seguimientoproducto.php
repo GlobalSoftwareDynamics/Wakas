@@ -12,6 +12,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Tablas.css" rel="stylesheet">
@@ -19,7 +22,7 @@ mysql_query("SET NAMES 'utf8'");
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-inverse">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
 
             <div class="navbar-header">
@@ -79,14 +82,14 @@ mysql_query("SET NAMES 'utf8'");
 $lote=strtoupper ($_POST["idlote"]);
 ?>
 <section class='container-fluid'>
-    <div class='col-sm-1'>
+    <div class="col-sm-2">
         <div>
-            <img width='110' height='110' src='image/logowakas.jpg'/>
+            <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
         </div>
     </div>
-    <div class='col-sm-6' id='descripcionbrand'>
+    <div class='col-sm-5' id='descripcionbrand'>
         <div>
-            <span id='brand'>W<span class='alfa'>&alpha;</span>k<span class='alfa'>&alpha;</span>-s <span id='subbrand'>Textiles Finos SAC</span></span>
+            <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></b>
         </div>
         <div>
             <span>Urb. Francisco Mostajo G-25</span>
@@ -149,8 +152,21 @@ $lote=strtoupper ($_POST["idlote"]);
         </tbody>
     </table>
 </section>
+<section class="container">
+    <form method="post" action="seguimientoprodpdf.php" class="form-horizontal col-sm-12">
+        <input type="hidden" value="<?php echo $lote?>" name="idlote">
+        <input type="hidden" value="<?php echo $_POST['avance']?>" name="avance">
+        <input type="submit" value="Descargar PDF" name="descargar" class="btn btn-primary col-sm-4 col-sm-offset-4">
+    </form>
+</section>
+<br>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 </html>
 <?php

@@ -13,6 +13,9 @@ mysql_query("SET NAMES 'utf8'");
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-title" content="Waka-s">
+    <meta name="application-name" content="Waka-s">
+    <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
@@ -101,17 +104,17 @@ if(isset($_GET['eliminarCaracteristica'])){
     $eliminar1=mysql_query($eliminar);
 }
 ?>
-<section class="container col-sm-7">
-    <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
+<section class="container col-sm-8 col-sm-offset-2">
+    <form action="#" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
         <div>
             <h3>Nueva Caracter&iacute;stica</h3>
         </div>
         <hr>
         <div class="form-group">
-            <div class="col-sm-12">
-                <label for="idCaracteristica" class="formlabels1 col-sm-12">idCaracteristica:</label>
+            <div class="col-sm-5">
+                <label for="idCaracteristica" class="formlabels col-sm-12">idCaracteristica:</label>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-7">
                 <?php
                 $aux = 0;
                 $result = selectTable("Caracteristica");
@@ -119,24 +122,24 @@ if(isset($_GET['eliminarCaracteristica'])){
                     $aux++;
                 }
                 $aux++;
-                echo "<input class='textinput-6' id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
+                echo "<input class='textinput-4' id='idCaracteristica' type='text' name= 'idCaracteristica' value='CARAC".$aux."' readonly>";
                 ?>
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
+            <div class="col-sm-5">
                 <label for="Descripcion" class="formlabels1 col-sm-12">Descripcion:</label>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-7">
                 <input class="textinput-12" id="Descripcion" type="text" name="descripcion">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <label for="selecttipo" class="formlabels1 col-sm-12">Tipo:</label>
+            <div class="col-sm-5">
+                <label for="selecttipo" class="formlabels col-sm-12">Tipo:</label>
             </div>
-            <div class="col-sm-12">
-                <select name="selecttipo" id="selecttipo" class="ddselect-12">
+            <div class="col-sm-7">
+                <select name="selecttipo" id="selecttipo" class="ddselect-8">
                     <option value="componente">Componente</option>
                     <option value="maquina">Maquina</option>
                     <option value="insumo">Insumo</option>
@@ -162,7 +165,7 @@ if(isset($_GET['eliminarCaracteristica'])){
     </form>
 </section>
 
-<section class="container col-sm-5">
+<section class="container col-sm-6 col-sm-offset-3 jumbotron">
     <div class="container col-sm-10 col-sm-offset-1">
         <table class="table table-hover">
             <thead>
@@ -190,7 +193,11 @@ if(isset($_GET['eliminarCaracteristica'])){
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
-
+<footer class="panel-footer navbar-fixed-bottom">
+    <div class="container col-sm-6 col-sm-offset-3 text-center">
+        <span>© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
+    </div>
+</footer>
 </body>
 
 </html>
