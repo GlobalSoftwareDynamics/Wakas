@@ -156,7 +156,13 @@ $lote=strtoupper ($_POST["idlote"]);
     <form method="post" action="seguimientoprodpdf.php" class="form-horizontal col-sm-12">
         <input type="hidden" value="<?php echo $lote?>" name="idlote">
         <input type="hidden" value="<?php echo $_POST['avance']?>" name="avance">
-        <input type="submit" value="Descargar PDF" name="descargar" class="btn btn-primary col-sm-4 col-sm-offset-4">
+        <input type="hidden" value="<?php echo $_POST['idop']?>" name="idop">
+        <div class="col-sm-6">
+            <input type="submit" formaction="estadoordenprod.php" value="Regresar" name="regresar" class="btn btn-default col-sm-8 col-sm-offset-2">
+        </div>
+        <div class="col-sm-6">
+            <input type="submit" value="Descargar PDF" name="descargar" class="btn btn-primary col-sm-8 col-sm-offset-2">
+        </div>
     </form>
 </section>
 <br>

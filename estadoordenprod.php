@@ -236,6 +236,7 @@ mysql_query("SET NAMES 'utf8'");
                       <form action='seguimientoproducto.php' method='post'>
                             <input type='hidden' value='".$fila4['idLote']."' name='idlote'>
                             <input type='hidden' value='".$avance1."' name='avance'>
+                            <input type='hidden' value='".$op."' name='idop'>
                             <input type='submit' class='btn-link' value='Detalle de Lote'>
                       </form>
                   </td>
