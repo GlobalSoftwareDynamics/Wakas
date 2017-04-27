@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <?php
 session_start();
 require('funciones.php');
@@ -94,6 +94,7 @@ while ($fila=mysql_fetch_array($result1)){
 
             if(isset($_POST['ordenprod'])){
                 $aux = 0;
+                $aux1=0;
                 $result = selectTable("OrdenProduccion");
                 while($fila = mysql_fetch_array($result)){
                     $aux++;
@@ -130,11 +131,6 @@ while ($fila=mysql_fetch_array($result1)){
                             $aux2=0;
                             for ($i=0;$cantidadlote > 0;$i++) {
                                 if (($cantidadlote) > $fila4['tamanoLote']) {
-                                    $aux1 = 0;
-                                    $result7 = selectTable("Lote");
-                                    while ($fila3 = mysql_fetch_array($result7)) {
-                                        $aux1++;
-                                    }
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
                                     $cantidadlote1 = $fila4['tamanoLote'];
@@ -142,12 +138,6 @@ while ($fila=mysql_fetch_array($result1)){
                                     $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote1 . "','" . $nombremat . "','1','".$aux1."')";
                                     $agregarlote1 = mysql_query($agreglote);
                                 } else {
-                                    $aux1 = 0;
-                                    $result7 = selectTable("Lote");
-                                    while ($fila3 = mysql_fetch_array($result7)) {
-                                        $aux1++;
-
-                                    }
                                     $aux1++;
                                     $idlote = $idOrdProd . "LT" . $aux1;
                                     $agreglote = "INSERT INTO Lote(idLote, idOrdenProduccion, idProducto, idColor, idTalla, cantidad, material, estado, posicion) VALUES ('" . $idlote . "','" . $idOrdProd . "','" . $fila1['idProducto'] . "','" . $fila1['idColor'] . "','" . $fila1['idTalla'] . "','" . $cantidadlote . "','" . $nombremat . "','1','".$aux1."')";
@@ -243,14 +233,14 @@ while ($fila=mysql_fetch_array($result1)){
         ?>
 
         <section class="container-fluid">
-            <div class="col-sm-2">
-                <div>
-                    <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
+            <div class="col-sm-3">
+                    <div>
+                        <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-6" id="descripcionbrand">
+            <div class="col-sm-5" id="descripcionbrand">
                 <div>
-                    <span id="brand">W<span class="alfa">&alpha;</span>k<span class="alfa">&alpha;</span>-s <span id="subbrand">Textiles Finos SAC</span></span>
+                    <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></b>
                 </div>
                 <div>
                     <span>Urb. Francisco Mostajo G-25</span>
@@ -261,7 +251,7 @@ while ($fila=mysql_fetch_array($result1)){
             </div>
             <div class="col-sm-3">
                 <div class="titulo">
-                    <h3>Órden de Producción</h3>
+                    <h3>Orden de Producción</h3>
                 </div>
             </div>
         </section>
