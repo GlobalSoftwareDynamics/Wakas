@@ -51,7 +51,7 @@ mysql_query("SET NAMES 'utf8'");
                 type: "POST",
                 url: "get_proce.php",
                 //
-                data:'lote=' + lote +' &producto=' + producto,
+                data:'lote=' + lote +' &producto=' + producto +' &proceso=' + proceso,
                 success: function(data){
                     $("#procedi").html(data);
                 }
