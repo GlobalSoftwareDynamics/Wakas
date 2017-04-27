@@ -29,13 +29,24 @@ mysql_query("SET NAMES 'utf8'");
                 url: "get_product.php",
                 data:'idlote='+val,
                 success: function(data){
-                    $("#product").html(data);
+                    $("#productos").html(data);
+                }
+            });
+        }
+        function getprocesos(val) {
+            $.ajax({
+                type: "POST",
+                url: "get_procesos.php",
+                data:{'lote':val},
+                success: function(data){
+                    $("#proceso").html(data);
                 }
             });
         }
         function getprocedim() {
             var lote = document.getElementById('lot').value;
             var producto = document.getElementById('product').value;
+            var proceso = document.getElementById('proceso').value;
             $.ajax({
                 type: "POST",
                 url: "get_proce.php",
@@ -112,15 +123,17 @@ mysql_query("SET NAMES 'utf8'");
                 <label for="lot" class="formlabelscel col-xs-12">Indique el idLote:</label>
             </div>
             <div class="col-xs-12">
-                <input class="textinput-12" id="lot" type="text" name="idlote" oninput="getproduct(this.value)">
+                <input class="textinput-12" id="lot" type="text" name="idlote" oninput="getproduct(this.value); getprocesos(this.value)">
             </div>
+        </div>
+        <div id="productos">
         </div>
         <div class="form-group">
             <div class="col-xs-12">
-                <label for="product" class="formlabelscel col-xs-12">Seleccione Producto:</label>
+                <label for="proceso" class="formlabelscel col-xs-12">Seleccione Proceso:</label>
             </div>
             <div class="col-xs-12">
-                <select id="product" name="producto" class="ddselect-12" onChange='getprocedim(this.value);'>
+                <select id="proceso" name="proce" class="ddselect-12" onChange='getprocedim();'>
                     <option>Seleccionar</option>
                 </select>
             </div>

@@ -2,7 +2,7 @@
 session_start();
 require('funciones.php');
 conexion();
-if(!empty($_POST["producto"])) {
+if(!empty($_POST["lote"])) {
     echo "<option>Seleccionar</option>";
     $componentes = array();
     $auxcomponentes = 0;
@@ -19,7 +19,11 @@ if(!empty($_POST["producto"])) {
     $auxvalores = 0;
     $flag = false;
 
-    $query = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '" . $_POST['producto'] . "'");
+    $query=selectTableWhere('Lote','idLote',"'".$_POST['lote']."'");
+    while ($row=mysql_fetch_array($query)){
+        $producto=$row['idProducto'];
+    }
+    $query = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '" . $producto . "'");
     while ($row = mysql_fetch_array($query)) {
         $componentes[$auxcomponentes] = $row['idComponenteEspecifico'];
         $auxcomponentes++;
@@ -28,10 +32,16 @@ if(!empty($_POST["producto"])) {
     for ($j = 0; $j < count($componentes); $j++) {
         $query = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '" . $componentes[$j] . "' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC34' ORDER BY LENGTH (id)");
         while ($row = mysql_fetch_array($query)) {
-            $idsubprocesos[$auxidsubprocesos] = $row['valor'];
-            $auxidsubprocesos++;
-            $filas[$auxfilas] = $row['fila'];
-            $auxfilas++;
+            $query2=selectTableWhere('SubProceso','idProcedimiento',"'".$row['valor']."'");
+            while ($row2=mysql_fetch_array($query2)){
+                $query1=selectTableWhere('Proceso','idProceso',"'".$row2['idProceso']."'");
+                while ($row1=mysql_fetch_array($query1)){
+                    $idsubprocesos[$auxidsubprocesos] = $row1['idProceso'];
+                    $auxidsubprocesos++;
+                    $filas[$auxfilas] = $row['fila'];
+                    $auxfilas++;
+                }
+            }
         }
     }
 
@@ -51,7 +61,7 @@ if(!empty($_POST["producto"])) {
 
     for ($j = 0; $j < count($idvalores); $j++) {
         mysql_data_seek($query, 0);
-        $query = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '" . $idvalores[$j] . "' ORDER BY idProcedimiento AND idProceso='".$_POST['proceso']."'");
+        $query = mysql_query("SELECT * FROM Proceso WHERE idProceso = '" . $idvalores[$j] . "' ORDER BY idProceso");
         while ($row = mysql_fetch_array($query)) {
             $valores[$auxvalores] = $row['descripcion'];
             $auxvalores++;

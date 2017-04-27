@@ -58,12 +58,21 @@ mysql_query("SET NAMES 'utf8'");
                 <input class="textinput-12" id="lot" type="text" name="idlote" value="<?php echo $_POST['idlote'];?>" readonly>
             </div>
         </div>
+        <div>
+            <input type="hidden" value="<?php echo $_POST['producto'];?>" name="producto">
+        </div>
         <div class="form-group">
             <div class="col-xs-12">
-                <label for="producto" class="formlabelscel col-xs-12">Producto:</label>
+                <label for="proceso" class="formlabelscel col-xs-12">Proceso:</label>
             </div>
             <div class="col-xs-12">
-                <input type="text" class="textinput-12" name="producto" value="<?php echo $_POST['producto'];?>" readonly>
+                <input type="hidden" class="textinput-12" value="<?php echo $_POST['proce'];?>" readonly>
+                <?php
+                $result2=selectTableWhere("Proceso","idProceso","'".$_POST['proce']."'");
+                while ($fila2=mysql_fetch_array($result2)){
+                    echo "<input type='text' id='proceso' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                }
+                ?>
             </div>
         </div>
         <div class="form-group">
