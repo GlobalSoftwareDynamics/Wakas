@@ -161,12 +161,12 @@ while ($fila=mysql_fetch_array($result1)){
                 while($fila = mysql_fetch_array($result)){
                     $aux++;
                 }
-
+                date_default_timezone_set('America/Lima');
                 $aux++;
                 $idOrdProd="OP".$aux;
                 $result1=selectTableWhere('ConfirmacionVenta','idContrato',"'".$_POST['contrato']."'");
                 while ($fila=mysql_fetch_array($result1)){
-                    $fechacreacion=(string)$fila['fecha'];
+                    $fechacreacion=date('m/d/Y');
                     $fechadespacho=(string)$fila['shipdate'];
                 }
 
@@ -309,10 +309,10 @@ while ($fila=mysql_fetch_array($result1)){
                     </div>
                     <div class="col-sm-4">
                         <?php
-                        $result=selectTableWhere('ConfirmacionVenta','idContrato',"'".$_POST['contrato']."'");
+                        $result=selectTableWhere('OrdenProduccion','idOrdenProduccion',"'".$idOrdProd."'");
                         while ($fila=mysql_fetch_array($result)){
                             echo "
-                            <span id='fechacrea'>".$fila['fecha']."</span>
+                            <span id='fechacrea'>".$fila['fechaCreacion']."</span>
                         ";
                         }
                         ?>

@@ -54,10 +54,10 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="descladoderecho">
                             <span class="label">Fecha de Creaci&oacute;n:</span>';
-                            $result=selectTableWhere('ConfirmacionVenta','idContrato',"'".$idContract."'");
+                            $result=selectTableWhere('OrdenProduccion','idOrdenProduccion',"'".$_POST['idop']."'");
                             while ($fila=mysql_fetch_array($result)){
                                 $html .='
-                                                <span>'.$fila['fecha'].'</span>
+                                                <span>'.$fila['fechaCreacion'].'</span>
                                             ';
                             }
     $html .='                        

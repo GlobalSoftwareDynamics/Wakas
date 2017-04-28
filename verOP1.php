@@ -165,10 +165,10 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <div class="col-sm-4">
                         <?php
-                            $result=selectTableWhere('ConfirmacionVenta','idContrato',"'".$idContract."'");
+                            $result=selectTableWhere('OrdenProduccion','idOrdenProduccion',"'".$_POST['ordenprod']."'");
                             while ($fila=mysql_fetch_array($result)){
                                 echo "
-                                    <span id='fechacre'>".$fila['fecha']."</span>
+                                    <span id='fechacre'>".$fila['fechaCreacion']."</span>
                                 ";
                             }
                         ?>
