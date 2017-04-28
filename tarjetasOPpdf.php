@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require('funciones.php');
 require_once __DIR__ . '/lib/mpdf/mpdf.php';
@@ -32,7 +32,7 @@ if(isset($_SESSION['login'])){
                         <div class="contenedor">
                             <div>
                                 <img width="3cm" height="70" src="image/Brand.png" class="izquierda">
-                                <img width="180" height="80" src="barcodes/'.$_POST['idop'].'/'.$bar.'.png" class="derecha">
+                                <img width="180" height="70" src="barcodes/'.$_POST['idop'].'/'.$bar.'.png" class="derecha">
                             </div>
                         </div>
                         <div class="contenedor">
@@ -49,8 +49,14 @@ if(isset($_SESSION['login'])){
                                             <p class="col-xs-5">'.$fila['material'].'</p>
                                         </div>
                                         <div class="tarjetacont">
-                                            <p class="columnaizquierda1 col-xs-3">Color</p>
-                                            <p class="col-xs-5">'.$fila['idColor'].'</p>
+                                            <p class="columnaizquierda1 col-xs-3">Color</p>';
+				$color=selectTableWhere('Color','idColor',"'".$fila['idColor']."'");
+				while($fila3=mysql_fetch_array($color)){
+					$html .='
+						<p class="col-xs-5">'.$fila['idColor'].' '.$fila3['descripcino'].'</p>';
+				}
+	$html .='
+                                            
                                         </div>
                                         <div class="tarjetacont">
                                             <p class="columnaizquierda1 col-xs-3">Talla</p>';
