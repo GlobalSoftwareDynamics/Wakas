@@ -169,7 +169,12 @@ if(isset($_POST['buscarmat'])){
                     <hr>
                     <div class='container'>
                          <form class='form-horizontal col-sm-12'>
-                              <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarMaterial.php'>Agregar</button>
+                            <div class='col-sm-6'>
+                                 <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction='gestionProveedores.php'>Proveedores</button>
+                            </div>
+                            <div class='col-sm-6'>
+                                 <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarMaterial.php'>Agregar</button>
+                            </div>
                          </form>
                     </div>
                 ";
@@ -209,7 +214,12 @@ if(isset($_POST['buscarmat'])){
                     <hr>
                     <div class='container'>
                          <form class='form-horizontal col-sm-12'>
-                              <button class='btn btn-success col-sm-4 col-sm-offset-4' formaction='agregarMaterial.php'>Agregar</button>
+                            <div class='col-sm-6'>
+                                 <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction='gestionProveedores.php'>Proveedores</button>
+                            </div>
+                            <div class='col-sm-6'>
+                                 <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarMaterial.php'>Agregar</button>
+                            </div>
                          </form>
                     </div>
                 ";
