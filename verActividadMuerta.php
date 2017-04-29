@@ -103,7 +103,7 @@ mysql_query("SET NAMES 'utf8'");
             <div class="form-group col-sm-6">
                 <div class="col-sm-12">
                     <div class="col-sm-6">
-                        <input class="btn btn-default col-sm-10 col-sm-offset-2 boton" type="submit" name="buscar" value="Buscar">
+                        <input class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" name="buscar" value="Buscar">
                     </div>
                     <div class="col-sm-6">
                         <input class="btn btn-default col-sm-10 col-sm-offset-2 boton" type="submit" name="eliminarfiltro" value="Eliminar Filtro">
@@ -121,7 +121,6 @@ mysql_query("SET NAMES 'utf8'");
                     <th>Actividad Muerta</th>
                     <th>Descripcion</th>
                     <th>Fecha</th>
-                    <th>Tiempo Estandar</th>
                     <th>Tiempo Real</th>
                 </tr>
                 </thead>
@@ -137,14 +136,12 @@ mysql_query("SET NAMES 'utf8'");
                         $result2 = selectTableWhere("ActividadMuerta","idActividadMuerta","'".$fila['idActividadMuerta']."'");
                         while($fila2=mysql_fetch_array($result2)){
                             $actividaddescripcion = $fila2['descripcion'];
-                            $tiempoestandar = $fila2['tiempoEstandar'];
                         }
                         echo            "<tr>
                                             <td>".$nombreEmpleado."</td>
                                             <td>".$actividaddescripcion."</td>
                                             <td>".$fila['descripcion']."</td>
                                             <td>".$fila['fecha']."</td>
-                                            <td>".$tiempoestandar."</td>
                                             <td>".$fila['tiempo']."</td>
                                         </tr>
                                         ";
@@ -159,7 +156,6 @@ mysql_query("SET NAMES 'utf8'");
                         $result2 = selectTableWhere("ActividadMuerta","idActividadMuerta","'".$fila['idActividadMuerta']."'");
                         while($fila2=mysql_fetch_array($result2)){
                             $actividaddescripcion = $fila2['descripcion'];
-                            $tiempoestandar = $fila2['tiempoEstandar'];
                         }
 
                         echo            "<tr>
@@ -167,7 +163,6 @@ mysql_query("SET NAMES 'utf8'");
                                             <td>".$actividaddescripcion."</td>
                                             <td>".$fila['descripcion']."</td>
                                             <td>".$fila['fecha']."</td>
-                                            <td>".$tiempoestandar."</td>
                                             <td>".$fila['tiempo']."</td>
                                         </tr>
                                         ";
