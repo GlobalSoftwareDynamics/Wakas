@@ -110,20 +110,15 @@ mysql_query("SET NAMES 'utf8'");
                     <h3>Nueva Actividad Muerta</h3>
                 </div><hr>
                 <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="idactividadmuerta" class="formlabels col-sm-12">id Actividad Muerta:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <?php
-                            $aux = 0;
-                            $result = selectTable("ActividadMuerta");
-                            while($fila = mysql_fetch_array($result)){
-                                $aux++;
-                            }
-                            $aux++;
-                            echo "<input class='textinput-4' id='idactividadmuerta' type='text' name= 'idactmuerta' value='".$aux."' readonly>";
-                        ?>
-                    </div>
+                    <?php
+                    $aux = 0;
+                    $result = selectTable("ActividadMuerta");
+                    while($fila = mysql_fetch_array($result)){
+                        $aux++;
+                    }
+                    $aux++;
+                    echo "<input class='textinput-4' id='idactividadmuerta' type='hidden' name= 'idactmuerta' value='".$aux."' readonly>";
+                    ?>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-5">
