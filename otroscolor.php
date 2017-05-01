@@ -142,7 +142,7 @@ if(isset($_GET['eliminarColor'])){
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>idColor</th>
+                <th>Código</th>
                 <th>Descripción</th>
                 <th></th>
             </tr>
