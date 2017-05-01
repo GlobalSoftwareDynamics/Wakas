@@ -106,33 +106,28 @@ mysql_query("SET NAMES 'utf8'");
         ?>
 
         <section class="container col-sm-8 col-sm-offset-2">
-            <form action="otrospais.php" method="post" class="form-horizontal jumbotron col-sm-10 col-sm-offset-1">
+            <form action="otrospais.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
                 <div>
                     <h3>Nuevo País</h3>
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-5">
-                        <label class="formlabels col-sm-12" for="idpa">idPa&iacute;s:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <?php
-                            $aux = 0;
-                            $result = selectTable("Pais");
-                            while($fila = mysql_fetch_array($result)){
-                                $aux++;
-                            }
-                            $aux++;
-                            echo "<input class='textinput-4' id='idpa' type='text' name= 'idpais' value='".$aux."' readonly>";
-                        ?>
-                    </div>
+                    <?php
+                    $aux = 0;
+                    $result = selectTable("Pais");
+                    while($fila = mysql_fetch_array($result)){
+                        $aux++;
+                    }
+                    $aux++;
+                    echo "<input class='textinput-4' id='idpa' type='hidden' name= 'idpais' value='".$aux."' readonly>";
+                    ?>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-5">
-                        <label class="formlabels col-sm-12" for="nombrepais">Nombre:</label>
+                    <div class="col-sm-12">
+                        <label class="formlabels1 col-sm-12" for="nombrepais">Nombre:</label>
                     </div>
-                    <div class="col-sm-7">
-                        <input class="textinput-8" id="nombrepais" type="text" name="pais">
+                    <div class="col-sm-12">
+                        <input class="textinput-12" id="nombrepais" type="text" name="pais">
                     </div>
                 </div>
                 <hr>
