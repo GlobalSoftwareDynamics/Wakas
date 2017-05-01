@@ -112,7 +112,7 @@ if(isset($_GET['eliminarColor'])){
         <hr>
         <div class="form-group">
             <div class="col-sm-5">
-                <label for="idcolor" class="formlabels col-sm-12">idColor:</label>
+                <label for="idcolor" class="formlabels col-sm-12">Código:</label>
             </div>
             <div class="col-sm-7">
                 <input type="text" id="idcolor" name="idcolor" class="textinput-5">
