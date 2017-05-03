@@ -118,7 +118,7 @@ if(isset($_GET['eliminarRelacionIns'])) {
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
-if(isset($_POST['eliminar'])) {
+if(isset($_GET['eliminarRelacionMat'])) {
     $eliminar1 = "DELETE FROM MaterialProveedor WHERE idProveedor = '".$_GET['eliminarRelacionMat']."'";
     $resutlt2 = mysql_query($eliminar1);
     if ( !empty( $error = mysql_error() ) )

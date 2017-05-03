@@ -107,18 +107,14 @@ mysql_query("SET NAMES 'utf8'");
 </section>
 <hr>
 <?php
-if(isset($_GET['eliminarMaterial'])) {
-    $eliminar1 = "DELETE FROM MaterialProveedor WHERE idMaterial = '".$_GET['eliminarMaterial']."'";
+if(isset($_POST['eliminarmat'])) {
+    $eliminar1 = "DELETE FROM MaterialProveedor WHERE idMaterial = '".$_POST['idmaterial']."'";
     $resutlt2 = mysql_query($eliminar1);
-    $eliminar = "DELETE FROM material WHERE idMaterial = '".$_GET['eliminarMaterial']."'";
-    $resutlt1 = mysql_query($eliminar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
+    $eliminarcont="UPDATE material SET estado = '0' WHERE idMaterial = '".$_POST['idmaterial']."'";
+    $eliminarcont1=mysql_query($eliminarcont);
 }
 if(isset($_POST['guardarmat'])){
-    $agregar = "INSERT INTO material(idMaterial, idUnidadMedida, material) VALUES ('".$_POST['idMat']."','".$_POST['unimed']."','".$_POST['descmat']."')";
+    $agregar = "INSERT INTO material(idMaterial, idUnidadMedida, material, estado) VALUES ('".$_POST['idMat']."','".$_POST['unimed']."','".$_POST['descmat']."','1')";
     $agregar1 = mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -146,19 +142,36 @@ if(isset($_POST['buscarmat'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
                 ";
-    $result = selectTableWhereLikeSingle('Material','material',"'".$_POST['filtroMaterial']."'");
+    $result = selectTableWhereLike1('Material','estado','1','material',"'".$_POST['filtroMaterial']."'");
     while($fila=mysql_fetch_array($result)){
         echo "
                                 <tr>
                                     <td>".$fila['idMaterial']."</td>
                                     <td>".$fila['material']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarproveedormat.php?idMaterial=".$fila['idMaterial']."'>Asignar Proveedores</a></td>
-                                    <td><a href='actualizarMaterial.php?idMaterial=".$fila['idMaterial']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='asignarmat' value='Asignar Proveedores' formaction='asignarproveedormat.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='modificar' value='Modificar' formaction='actualizarMaterial.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='eliminarmat' value='Eliminar' formaction='gestionMateriales.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                     ";
     }
@@ -191,19 +204,36 @@ if(isset($_POST['buscarmat'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                     </tr>
                             </thead>
                             <tbody>
                 ";
-    $result = mysql_query("SELECT * FROM material ORDER BY LENGTH(idMaterial)");
+    $result = mysql_query("SELECT * FROM material WHERE estado ='1' ORDER BY LENGTH(idMaterial)");
     while($fila = mysql_fetch_array($result)) {
         echo "
                                  <tr>
                                     <td>".$fila['idMaterial']."</td>
                                     <td>".$fila['material']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarproveedormat.php?idMaterial=".$fila['idMaterial']."'>Asignar Proveedores</a></td>
-                                    <td><a href='actualizarMaterial.php?idMaterial=".$fila['idMaterial']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='asignarmat' value='Asignar Proveedores' formaction='asignarproveedormat.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='modificar' value='Modificar' formaction='actualizarMaterial.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idmaterial' value='".$fila['idMaterial']."'>
+                                            <input type='submit' class='btn-link' name='eliminarmat' value='Eliminar' formaction='gestionMateriales.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                     ";
     }
