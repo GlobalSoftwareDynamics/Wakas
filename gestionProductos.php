@@ -80,7 +80,12 @@ mysql_query("SET NAMES 'utf8'");
         </div>
     </nav>
 </header>
-
+<?php
+if(isset($_POST['eliminarprod'])) {
+    $eliminarcont="UPDATE producto SET estado = '0' WHERE idProducto = '".$_POST['idProd']."'";
+    $eliminarcont1=mysql_query($eliminarcont);
+}
+?>
     <section class="container">
         <table class='table table-hover'>
             <thead>
@@ -89,11 +94,12 @@ mysql_query("SET NAMES 'utf8'");
                     <th>Tipo de Producto</th>
                     <th>Género</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <?php
-                    $result=selectTable("Producto");
+                    $result=selectTableWhere("Producto",'estado','1');
                     while ($fila=mysql_fetch_array($result)){
                         echo "
                                 <tr>
@@ -107,6 +113,12 @@ mysql_query("SET NAMES 'utf8'");
                                         <form method='post'>
                                             <input type='hidden' name='idProd' value='".$fila['idProducto']."' readonly>
                                             <input type='submit' formaction='HEFinal.php' class='btn-link' value='Ver Detalle'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idProd' value='".$fila['idProducto']."' readonly>
+                                            <input type='submit' name='eliminarprod' formaction='gestionProductos.php' class='btn-link' value='Eliminar'>
                                         </form>
                                     </td>
                                 </tr>

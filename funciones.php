@@ -60,6 +60,11 @@ function selectOrderedTableWhere($tabla,$field,$value,$campo){
 	return $result;
 }
 
+function selectOrderedTableWhere2($tabla,$field,$value,$field1,$value1,$campo){
+    $result=mysql_query("SELECT * FROM ".$tabla." WHERE ".$field." = ".$value." AND ".$field1." = ".$value1." ORDER BY ".$campo);
+    return $result;
+}
+
 function selectOrderedTable1($tabla,$campo,$campo1){
 	$result=mysql_query("SELECT * FROM ".$tabla." ORDER BY ".$campo." ASC,".$campo1." ASC");
 	return $result;
