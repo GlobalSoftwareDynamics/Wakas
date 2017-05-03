@@ -104,7 +104,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div>
                     <?php
-                    $result=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila=mysql_fetch_array($result)){
                         echo "
                                 <h4 class='desctitulo'>PROV ".$fila['nombre']."</h4>
@@ -120,7 +120,7 @@ mysql_query("SET NAMES 'utf8'");
             <label for="direccion">Direcci&oacute;n del Proveedor:</label>
             <span id="direccion">
                 <?php
-                $result=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                $result=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                 while ($fila=mysql_fetch_array($result)){
                     echo "
                          ".$fila['Direccion']."
@@ -145,7 +145,7 @@ mysql_query("SET NAMES 'utf8'");
             <tbody>
                 <tr>
                     <?php
-                    $result=selectTableWhere('ProveedorInsumos','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result=selectTableWhere('ProveedorInsumos','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila=mysql_fetch_array($result)){
                         echo "
                                     <td>".$fila['idInsumo']."</td>                             
@@ -181,7 +181,7 @@ mysql_query("SET NAMES 'utf8'");
             <tbody>
                 <tr>
                     <?php
-                    $result=selectTableWhere('MaterialProveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result=selectTableWhere('MaterialProveedor','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila=mysql_fetch_array($result)){
                         echo "
                                         <td>".$fila['idMaterial']."</td>                             
@@ -205,7 +205,7 @@ mysql_query("SET NAMES 'utf8'");
     <hr>
     <section class="container">
         <form action="fichaProveedorpdf.php" method="post" class="form-horizontal col-sm-12">
-            <input type="hidden" name="idproveedor" value="<?php echo $_GET['idProveedor']?>" readonly>
+            <input type="hidden" name="idproveedor" value="<?php echo $_POST['idproveedor']?>" readonly>
             <input class="btn btn-primary col-sm-4 col-sm-offset-4" type="submit" name="pdf" value="Descargar PDF">
         </form>
     </section>

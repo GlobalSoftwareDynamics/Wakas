@@ -92,10 +92,10 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="col-sm-7">
                     <?php
-                    $result=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila=mysql_fetch_array($result)){
                         echo "
-                            <input class='textinput-5' type='text' name='idProv' id='idProv' value='".$_GET['idProveedor']."' readonly>
+                            <input class='textinput-5' type='text' name='idProv' id='idProv' value='".$_POST['idproveedor']."' readonly>
                         ";
                     }
                     ?>
@@ -107,7 +107,7 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="col-sm-7">
                     <?php
-                    $result1=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result1=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila1=mysql_fetch_array($result1)){
                         echo "
                                 <input class='textinput-8' type='text' name='nombre' id='nombre' value='".$fila1['nombre']."'>
@@ -122,7 +122,7 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="col-sm-7">
                     <?php
-                    $result2=selectTableWhere('Proveedor','idProveedor',"'".$_GET['idProveedor']."'");
+                    $result2=selectTableWhere('Proveedor','idProveedor',"'".$_POST['idproveedor']."'");
                     while ($fila2=mysql_fetch_array($result2)){
                         echo "
                                 <input class='textinput-10' type='text' name='direccion' id='direccion' value='".$fila2['Direccion']."'>

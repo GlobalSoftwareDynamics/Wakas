@@ -83,7 +83,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardar'])){
-    $agregar="INSERT INTO Proveedor(idProveedor, nombre, Direccion) VALUES('".$_POST['idProv']."','".$_POST['nombre']."','".$_POST['direc']."')";
+    $agregar="INSERT INTO Proveedor(idProveedor, nombre, Direccion, estado) VALUES('".$_POST['idProv']."','".$_POST['nombre']."','".$_POST['direc']."','1')";
     $agregar1=mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -100,19 +100,15 @@ if(isset($_POST['actualizar'])){
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
-if(isset($_GET['eliminarProveedor'])) {
-    $eliminar1 = "DELETE FROM MaterialProveedor WHERE idProveedor = '".$_GET['eliminarProveedor']."'";
+if(isset($_POST['eliminarprov'])) {
+    $eliminar1 = "DELETE FROM MaterialProveedor WHERE idProveedor = '".$_POST['idproveedor']."'";
     $resutlt2 = mysql_query($eliminar1);
-    $eliminar2 = "DELETE FROM ProveedorInsumos WHERE idProveedor = '".$_GET['eliminarProveedor']."'";
+    $eliminar2 = "DELETE FROM ProveedorInsumos WHERE idProveedor = '".$_POST['idproveedor']."'";
     $resutlt3 = mysql_query($eliminar2);
-    $eliminar1 = "DELETE FROM ProveedorSubproceso WHERE idProveedor = '".$_GET['eliminarProveedor']."'";
+    $eliminar1 = "DELETE FROM ProveedorSubproceso WHERE idProveedor = '".$_POST['idproveedor']."'";
     $resutlt2 = mysql_query($eliminar1);
-    $eliminar = "DELETE FROM Proveedor WHERE idProveedor = '".$_GET['eliminarProveedor']."'";
-    $resutlt1 = mysql_query($eliminar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
+    $eliminarcont="UPDATE proveedor SET estado = '0' WHERE idProveedor = '".$_POST['idproveedor']."'";
+    $eliminarcont1=mysql_query($eliminarcont);
 }
 if(isset($_GET['eliminarRelacionIns'])) {
     $eliminar1 = "DELETE FROM ProveedorInsumos WHERE idProveedor = '".$_GET['eliminarRelacionIns']."'";
@@ -122,7 +118,7 @@ if(isset($_GET['eliminarRelacionIns'])) {
         echo 'Mysql error '. $error ."<br />\n";
     }
 }
-if(isset($_GET['eliminarRelacionMat'])) {
+if(isset($_POST['eliminar'])) {
     $eliminar1 = "DELETE FROM MaterialProveedor WHERE idProveedor = '".$_GET['eliminarRelacionMat']."'";
     $resutlt2 = mysql_query($eliminar1);
     if ( !empty( $error = mysql_error() ) )
@@ -141,11 +137,12 @@ if(isset($_GET['eliminarRelacionMat'])) {
             <th>Direcci&oacute;n</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
         <?php
-        $result=selectTable('Proveedor');
+        $result=selectTableWhere('Proveedor','estado','1');
         while($fila=mysql_fetch_array($result)){
             echo "
                                 <tr>
@@ -154,8 +151,24 @@ if(isset($_GET['eliminarRelacionMat'])) {
                                     <td>".$fila['Direccion']."</td>
                             ";
             echo "
-                                    <td><a href='fichaProveedor.php?idProveedor=".$fila['idProveedor']."'>Ver Ficha</a></td>
-                                    <td><a href='actualizarProveedor.php?idProveedor=".$fila['idProveedor']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idproveedor' value='".$fila['idProveedor']."'>
+                                            <input type='submit' class='btn-link' name='ver' value='Ver Ficha' formaction='fichaProveedor.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idproveedor' value='".$fila['idProveedor']."'>
+                                            <input type='submit' class='btn-link' name='modificar' value='Modificar' formaction='actualizarProveedor.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idproveedor' value='".$fila['idProveedor']."'>
+                                            <input type='submit' class='btn-link' name='eliminarprov' value='Eliminar' formaction='gestionProveedores.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                             ";
         }
