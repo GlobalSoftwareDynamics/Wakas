@@ -35,6 +35,10 @@ table.table>thead>tr>th, table.table>tbody>tr>td, table.table>thead>tr>td, table
     color: #545454;
 }
 
+table.table>tbody>tr>td>form {
+    margin-bottom: 0em;
+}
+
 .jumbotron {
     padding-top: 15px;
     padding-bottom: 0px;
