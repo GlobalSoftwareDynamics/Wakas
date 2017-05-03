@@ -102,9 +102,9 @@ mysql_query("SET NAMES 'utf8'");
     <section class="container">
         <form action="asignarRepuestos.php" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
             <?php
-            if(isset($_GET['idRepuestos'])){
+            if(isset($_POST['asig'])){
                 echo "
-                         <input type='hidden' name='idRep' value=".$_GET['idRepuestos']." readonly>
+                         <input type='hidden' name='idRep' value=".$_POST['idrepuesto']." readonly>
                     ";
             }
             if(isset($_POST['asignar'])){

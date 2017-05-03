@@ -92,13 +92,9 @@ if(isset($_SESSION['login'])){
                 </div>
                 <div class="col-sm-7">
                     <?php
-                    $aux = 0;
-                    $result = selectTable("Repuestos");
-                    while($fila = mysql_fetch_array($result)){
-                        $aux++;
-                    }
-                    $aux++;
-                    echo "<input class='textinput-3' type='text' name= 'idRep' id='idRep' value='REP".$aux."' readonly>";
+                    $clase="REP";
+                    $id=idgen($clase);
+                    echo "<input class='textinput-6' type='text' name= 'idRep' id='idRep' value='".$id."' readonly>";
                     ?>
                 </div>
             </div>

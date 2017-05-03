@@ -3,7 +3,6 @@
 session_start();
 require('funciones.php');
 conexion();
-
 if(isset($_SESSION['login'])){
 mysql_query("SET NAMES 'utf8'");
 ?>
@@ -105,18 +104,14 @@ mysql_query("SET NAMES 'utf8'");
 
 
 <?php
-if(isset($_GET['eliminarRepuesto'])) {
-    $eliminar1 = "DELETE FROM RepuestosMaquina WHERE idRepuestos = '".$_GET['eliminarRepuesto']."'";
+if(isset($_POST['eliminarRepuesto'])) {
+    $eliminar1 = "DELETE FROM RepuestosMaquina WHERE idRepuestos = '".$_POST['idrepuesto']."'";
     $resutlt2 = mysql_query($eliminar1);
-    $eliminar = "DELETE FROM repuestos WHERE idRepuestos = '".$_GET['eliminarRepuesto']."'";
-    $resutlt1 = mysql_query($eliminar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
+    $eliminarcont="UPDATE repuestos SET estado = '0' WHERE idRepuestos = '".$_POST['idrepuesto']."'";
+    $eliminarcont1=mysql_query($eliminarcont);
 }
 if(isset($_POST['guardarrep'])){
-    $agregar = "INSERT INTO repuestos(idRepuestos, descripcion, idUnidadMedida) VALUES ('".$_POST['idRep']."','".$_POST['descrep']."','".$_POST['unimed']."')";
+    $agregar = "INSERT INTO repuestos(idRepuestos, descripcion, idUnidadMedida, estado) VALUES ('".$_POST['idRep']."','".$_POST['descrep']."','".$_POST['unimed']."','1')";
     $agregar1 = mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -144,19 +139,36 @@ if(isset($_POST['buscarrep'])){
                                 <th>Unidad de Medida</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
             ";
-    $result = selectTableWhereLikeSingle('Repuestos','descripcion',"'".$_POST['filtroRepuesto']."'");
+    $result = selectTableWhereLike1('Repuestos','estado','1','descripcion',"'".$_POST['filtroRepuesto']."'");
     while($fila=mysql_fetch_array($result)){
         echo "
                                 <tr>
                                     <td>".$fila['idRepuestos']."</td>
                                     <td>".$fila['descripcion']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
-                                    <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='asig' value='Asignar Máquina' formaction='asignarRepuestos.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='modif' value='Modificar' formaction='actualizarRepuestos.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='eliminarRepuesto' value='Eliminar' formaction='gestionRepuestos.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                     ";
     }
@@ -188,19 +200,36 @@ if(isset($_POST['buscarrep'])){
                                     <th>Unidad de Medida</th>
                                     <th></th>
                                     <th></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
             ";
-    $result = mysql_query("SELECT * FROM repuestos ORDER BY LENGTH(idRepuestos)");
+    $result = mysql_query("SELECT * FROM repuestos WHERE estado ='1' ORDER BY LENGTH(idRepuestos)");
     while($fila = mysql_fetch_array($result)) {
         echo "
                                  <tr>
                                     <td>".$fila['idRepuestos']."</td>
                                     <td>".$fila['descripcion']."</td>
                                     <td>".$fila['idUnidadMedida']."</td>
-                                    <td><a href='asignarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Asignar a M&aacute;quina</a></td>
-                                    <td><a href='actualizarRepuestos.php?idRepuestos=".$fila['idRepuestos']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='asig' value='Asignar Máquina' formaction='asignarRepuestos.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='modif' value='Modificar' formaction='actualizarRepuestos.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idrepuesto' value='".$fila['idRepuestos']."'>
+                                            <input type='submit' class='btn-link' name='eliminarRepuesto' value='Eliminar' formaction='gestionRepuestos.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                     ";
     }
