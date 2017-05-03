@@ -92,8 +92,8 @@ if(isset($_SESSION['login'])){
     <!-- Insert de datos NuevaHE -->
         <?php
         if(isset($_POST['creacion'])){
-            $insertar = mysql_query("INSERT INTO producto (idProducto, idProvisional, idTipoProducto, idCliente, fechaCreacion, creador, observaciones, descripcionGeneral, idgenero, idcodificacionTalla) VALUES ('".$_POST['idProd']."', '".$_POST['idProv'].
-                "', '".$_POST['selecttipo']."', '".$_POST['selectidcliente']."', '".$_POST['date']."', '".$_POST['selectempleado']."', '".$_POST['observGen']."', '".$_POST['descrGen']."', '".$_POST['selectgenero']."','".$_POST['selectcodificaciontalla']."')",$con);
+            $insertar = mysql_query("INSERT INTO producto (idProducto, idProvisional, idTipoProducto, idCliente, fechaCreacion, creador, observaciones, descripcionGeneral, idgenero, idcodificacionTalla, estado) VALUES ('".$_POST['idProd']."', '".$_POST['idProv'].
+                "', '".$_POST['selecttipo']."', '".$_POST['selectidcliente']."', '".$_POST['date']."', '".$_POST['selectempleado']."', '".$_POST['observGen']."', '".$_POST['descrGen']."', '".$_POST['selectgenero']."','".$_POST['selectcodificaciontalla']."','1')",$con);
             if(!$insertar){
                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
             }
