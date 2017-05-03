@@ -34,12 +34,15 @@ if(!empty($_POST["lote"])) {
         while ($row = mysql_fetch_array($query)) {
             $query2=selectTableWhere('SubProceso','idProcedimiento',"'".$row['valor']."'");
             while ($row2=mysql_fetch_array($query2)){
-                $query1=selectTableWhere('Proceso','idProceso',"'".$row2['idProceso']."'");
-                while ($row1=mysql_fetch_array($query1)){
-                    $idsubprocesos[$auxidsubprocesos] = $row1['idProceso'];
-                    $auxidsubprocesos++;
-                    $filas[$auxfilas] = $row['fila'];
-                    $auxfilas++;
+                if($row2['idProcedimiento']==="PROCEDIMIENTO1" or $row2['idProcedimiento']==="PROCEDIMIENTO2" or $row2['idProcedimiento']==="PROCEDIMIENTO6"){
+                }else {
+                    $query1=selectTableWhere('Proceso','idProceso',"'".$row2['idProceso']."'");
+                    while ($row1=mysql_fetch_array($query1)){
+                        $idsubprocesos[$auxidsubprocesos] = $row1['idProceso'];
+                        $auxidsubprocesos++;
+                        $filas[$auxfilas] = $row['fila'];
+                        $auxfilas++;
+                    }
                 }
             }
         }
@@ -49,8 +52,9 @@ if(!empty($_POST["lote"])) {
         mysql_data_seek($query, 0);
         $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '" . $filas[$j] . "' AND (idSubProcesoCaracteristica = 'SUBPROCESOCARAC39' OR idSubProcesoCaracteristica = 'SUBPROCESOCARAC35' OR idSubProcesoCaracteristica = 'SUBPROCESOCARAC41')");
         while ($row = mysql_fetch_array($query)) {
-            if ($row['valor'] === 'MAQUINA9') {
+            if ($row['valor'] === 'MAQUINA8') {
                 //echo "<option value='" . $idsubprocesos[$j] . "'>" . $subprocesos[$j] . "</option>";
+            }else{
                 $idvalores[$auxidvalores] = $idsubprocesos[$j];
                 $auxidvalores++;
             }

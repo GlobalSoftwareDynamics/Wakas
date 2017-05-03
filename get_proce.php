@@ -42,7 +42,8 @@ if(!empty($_POST["producto"])) {
         mysql_data_seek($query, 0);
         $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '" . $filas[$j] . "' AND (idSubProcesoCaracteristica = 'SUBPROCESOCARAC39' OR idSubProcesoCaracteristica = 'SUBPROCESOCARAC35' OR idSubProcesoCaracteristica = 'SUBPROCESOCARAC41')");
         while ($row = mysql_fetch_array($query)) {
-            if ($row['valor'] === 'MAQUINA9') {
+            if ($row['valor'] === 'MAQUINA8') {
+            }else{
                 //echo "<option value='" . $idsubprocesos[$j] . "'>" . $subprocesos[$j] . "</option>";
                 $idvalores[$auxidvalores] = $idsubprocesos[$j];
                 $auxidvalores++;
