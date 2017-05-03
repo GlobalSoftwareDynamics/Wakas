@@ -105,7 +105,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div>
                     <?php
-                    $result=selectTableWhere('Maquina','idMaquina',"'".$_GET['idMaquina']."'");
+                    $result=selectTableWhere('Maquina','idMaquina',"'".$_POST['idmaquina']."'");
                     while ($fila=mysql_fetch_array($result)){
                         echo "
                             <h4 class='desctitulo'>MAQ ".$fila['descripcion']."</h4>
@@ -128,7 +128,7 @@ mysql_query("SET NAMES 'utf8'");
                 </thead>
                 <tbody>
                     <?php
-                        $result=selectTableWhere('RepuestosMaquina','idMaquina',"'".$_GET['idMaquina']."'");
+                        $result=selectTableWhere('RepuestosMaquina','idMaquina',"'".$_POST['idmaquina']."'");
                         while ($fila=mysql_fetch_array($result)){
                             echo "
                                  <tr>
@@ -152,7 +152,7 @@ mysql_query("SET NAMES 'utf8'");
         <hr>
         <section class="container">
             <form class="form-horizontal col-sm-12" method="post">
-                <input type="hidden" name="idmaquina" value="<?php echo $_GET['idMaquina']; ?>" readonly>
+                <input type="hidden" name="idmaquina" value="<?php echo $_POST['idmaquina']; ?>" readonly>
                 <div class="col-sm-4">
                     <input type="submit" class="btn btn-default col-sm-6 col-sm-offset-3" formaction="gestionMaquinas.php" name="regresar" value="Regresar">
                 </div>

@@ -93,13 +93,9 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <div class="col-sm-7">
                         <?php
-                            $aux = 0;
-                            $result = selectTable("Maquina");
-                            while($fila = mysql_fetch_array($result)){
-                                $aux++;
-                            }
-                            $aux++;
-                            echo "<input class='textinput-4' id='idmaquina' type='text' name= 'idMaq' value='MAQUINA".$aux."'>";
+                            $clase="MAQ";
+                            $id=idgen($clase);
+                            echo "<input class='textinput-6' id='idmaquina' type='text' name= 'idMaq' value='".$id."'>";
                         ?>
                     </div>
                 </div>

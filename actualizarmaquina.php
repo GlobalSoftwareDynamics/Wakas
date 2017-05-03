@@ -94,7 +94,7 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <div class="col-sm-7">
                         <?php
-                            $result2=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
+                            $result2=selectTableWhere("Maquina","idMaquina","'".$_POST['idmaquina']."'");
                             while ($fila2=mysql_fetch_array($result2)){
                                 echo "
                                     <input class='textinput-4' id='idmaquina' type='text' value='".$fila2['idMaquina']."' name='idMaq' readonly>
@@ -109,7 +109,7 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <div class="col-sm-7">
                         <?php
-                            $result3=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
+                            $result3=selectTableWhere("Maquina","idMaquina","'".$_POST['idmaquina']."'");
                             while ($fila3=mysql_fetch_array($result3)){
                                 echo "
                                     <input class='textinput-8' id='desmaq' type='text' value='".$fila3['descripcion']."' name='descmaq'>
@@ -124,7 +124,7 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                     <div class="col-sm-7">
                         <?php
-                            $result4=selectTableWhere("Maquina","idMaquina","'".$_GET['idMaquina']."'");
+                            $result4=selectTableWhere("Maquina","idMaquina","'".$_POST['idmaquina']."'");
                             while ($fila4=mysql_fetch_array($result4)){
                                 echo "
                                     <input class='textinput-3' id='costomaq' type='text' value='".$fila4['costoFijo']."' name='costo'>
