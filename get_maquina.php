@@ -8,28 +8,28 @@ if(!empty($_POST["idlote"])) {
             echo "<label for='maquina' class='formlabelscel col-xs-12'>Seleccione Máquina:</label>";
         echo "</div>";
         echo "<div class='col-xs-12'>";
-            echo "<select name='maquina' id='maquina'>";
+            echo "<select name='maquina' id='maquina' class='ddselect-12'>";
             $query = mysql_query("SELECT DISTINCT idMaquina FROM MaquinaSubproceso WHERE idProcedimiento = '".$_POST['procedimiento']."'");
             while($row = mysql_fetch_array($query)){
-                $query2 = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$row['idmaquina']."'");
+                $query2 = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$row['idMaquina']."'");
                 while($row2 = mysql_fetch_array($query)){
-                    echo "<option value='".$row['idmaquina']."'>".$row2['descripcion']."</option>";
+                    echo "<option value='".$row['idMaquina']."'>".$row2['descripcion']."</option>";
                 }
             }
             echo "</select>";
         echo "</div>";
     }
-}elseif(!empty($_POST['actimuerta'])&&(($_POST['actimuerta']==='ActivMuerta1')||($_POST['actimuerta']==='ActivMuerta1'))){
+}elseif(!empty($_POST['actimuerta'])&&(($_POST['actimuerta']==='ActivMuerta1')||($_POST['actimuerta']==='ActivMuerta2'))){
     echo "<div class='col-xs-12'>";
         echo "<label for='maquina' class='formlabelscel col-xs-12'>Seleccione Máquina:</label>";
     echo "</div>";
     echo "<div class='col-xs-12'>";
-        echo "<select name='maquina' id='maquina'>";
+        echo "<select name='maquina' id='maquina' class='ddselect-12''>";
         $query = mysql_query("SELECT DISTINCT idMaquina FROM MaquinaSubproceso");
         while($row = mysql_fetch_array($query)){
-            $query2 = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$row['idmaquina']."'");
-            while($row2 = mysql_fetch_array($query)){
-                echo "<option value='".$row['idmaquina']."'>".$row2['descripcion']."</option>";
+            $query2 = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$row['idMaquina']."'");
+            while($row2 = mysql_fetch_array($query2)){
+                echo "<option value='".$row['idMaquina']."'>".$row2['descripcion']."</option>";
             }
         }
         echo "</select>";

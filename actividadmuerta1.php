@@ -69,10 +69,10 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="form-group">
                 <div class="col-xs-12">
-                    <label for="actividad" class="formlabelscel col-xs-12">Seleccione Tiempo Muerto:</label>
+                    <label for="actimuerta" class="formlabelscel col-xs-12">Seleccione Tiempo Muerto:</label>
                 </div>
                 <div class="col-xs-12">
-                    <select id="actividad" name="actimuerta" class="ddselect-12" onchange="getmaquina(this.value);">
+                    <select id="actimuerta" name="actimuerta" class="ddselect-12" onchange="getmaquina(this.value);">
                         <option>Seleccionar</option>
                         <?php
                         $result=selectTable("ActividadMuerta");
