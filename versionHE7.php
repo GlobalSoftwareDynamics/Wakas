@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -123,7 +123,7 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </div>
 
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-9">
             <!-- your page content -->
             <?php
             if(isset($_GET['EliminarFila'])){
@@ -178,30 +178,39 @@ mysql_query("SET NAMES 'utf8'");
                         $auxmaquina = 0;
                         $auxtiempo = 0;
                         $auxfila = 0;
+                        $filaproceso = array();
                         $componente = array();
                         $procedimiento = array();
                         $maquina = array();
                         $tiempo = array();
-                        $filaElegida = array();
+                        $string = null;
+                        $bandera = false;
                         $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
-                        while($fila = mysql_fetch_array($result)){
-                            $result2 = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ORDER BY LENGTH (id) ASC");
-                            while($fila2 = mysql_fetch_array($result2)){
-                                if($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC32'){   //CAMBIAR AL DEJAR FIJO!!!!!
-                                    $componente[$auxcomp] = $fila2['valor'];
-                                    $auxcomp++;
-                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                    $procedimiento[$auxproced] = $fila2['valor'];
-                                    $auxproced++;
-                                    $filaElegida[$auxfila] = $fila2['fila'];
-                                    $auxfila++;
-                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                    $maquina[$auxmaquina] = $fila2['valor'];
-                                    $auxmaquina++;
-                                } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC36'){    //CAMBIAR AL DEJAR FIJO!!!!!
-                                    $tiempo[$auxtiempo] = $fila2['valor'];
-                                    $auxtiempo++;
-                                }
+                        while($fila = mysql_fetch_array($result)) {
+                            if($bandera == false){
+                                $string = $string."idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
+                                $bandera = true;
+                            }else{
+                                $string = $string."OR idComponenteEspecifico = '".$fila['idComponenteEspecifico']."' ";
+                            }
+                        }
+                        $query ="SELECT * FROM PCPSPC WHERE ".$string." ORDER BY LENGTH (id)";
+                        $result2 = mysql_query($query);
+                        while($fila2 = mysql_fetch_array($result2)){
+                            if($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC32'){   //CAMBIAR AL DEJAR FIJO!!!!!
+                                $componente[$auxcomp] = $fila2['valor'];
+                                $auxcomp++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $procedimiento[$auxproced] = $fila2['valor'];
+                                $auxproced++;
+                                $filaproceso[$auxfila] = $fila2['fila'];
+                                $auxfila++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $maquina[$auxmaquina] = $fila2['valor'];
+                                $auxmaquina++;
+                            } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC36'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                $tiempo[$auxtiempo] = $fila2['valor'];
+                                $auxtiempo++;
                             }
                         }
                         for($j = 0; $j < $auxcomp; $j++){
@@ -215,10 +224,31 @@ mysql_query("SET NAMES 'utf8'");
                             }
                             $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
                             while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila['idProcedimiento']."</td>";
-                                $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
-                                while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                if($procedimiento[$j]==='PROCEDIMIENTO26'){
+                                    $query = mysql_query("SELECT * FROM PCPSPC WHERE fila = '".$filaproceso[$j]."' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC29'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumo = $row['valor'];
+                                    }
+                                    $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$insumo."'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $insumodesc = $row['descripcion'];
+                                        $procedinsumo = $row['idProcedimiento'];
+                                    }
+                                    $query = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedinsumo."'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $procedinsumodesc = $row['descripcion'];
+                                    }
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$procedinsumodesc."-".substr($insumodesc,0,16)."-".$prenda."</td>";
+                                    }
+                                }else{
+                                    echo "<td>".$fila['idProcedimiento']."</td>";
+                                    $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
+                                    while($fila2 = mysql_fetch_array($result2)){
+                                        echo "<td>".$fila2['descripcion']."-".$fila['descripcion']."-".$prenda."</td>";
+                                    }
                                 }
                             }
                             $result = mysql_query("SELECT * FROM Maquina WHERE idMaquina = '".$maquina[$j]."'");
@@ -227,7 +257,7 @@ mysql_query("SET NAMES 'utf8'");
                             }
                             echo "<td>".$tiempo[$j]."</td>";
                             echo "<form method='post' action='#'>";
-                            echo "<td><input type='submit' value='Eliminar' class='btn-link' formaction='versionHE7.php?EliminarFila=".$filaElegida[$j]."'></td>";
+                            echo "<td><input type='submit' value='Eliminar' class='btn-link' formaction='versionHE7.php?EliminarFila=".$filaproceso[$j]."'></td>";
                             echo "<input type='hidden' value='".$_POST['idProd']."' name='idProd'>";
                             echo "</form>";
                             echo "</tr>";
@@ -240,6 +270,7 @@ mysql_query("SET NAMES 'utf8'");
         </div>
     </div>
 </div>
+
 
 <hr>
 <section class="container col-sm-9 col-sm-offset-3">

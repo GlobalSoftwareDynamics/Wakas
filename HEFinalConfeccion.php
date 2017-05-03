@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -125,7 +125,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </nav>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <!-- Page Contents -->
             <section class="container-fluid">
                 <div class="col-sm-3">
@@ -170,19 +170,11 @@ mysql_query("SET NAMES 'utf8'");
                                 $idSubProcesoCaracteristica[$i] = $fila['idSubProcesoCaracteristica'];
                                 $tipo[$i] = $fila['tipo'];
                                 $i++;
-                                $result2 = selectTableWhere('caracteristica','idCaracteristica',"'".$fila['idCaracteristica']."'");
-                                while($fila2 = mysql_fetch_array($result2)){
-                                    if($fila2['descripcion'] === 'Observaciones de Confeccion'){
-                                    } elseif ($fila2['descripcion'] === 'Componente'){
-                                        echo "<th>Parte</th>";
-                                    } elseif ($fila2['descripcion'] === 'Maquina- Hoja Tiempos'){
-                                    } elseif ($fila2['descripcion'] === 'Tiempo'){
-                                    } else {
-                                        echo "<th>".$fila2['descripcion']."</th>";
-                                    }
-                                }
                             }
                             ?>
+                            <th>Procedimiento</th>
+                            <th>Parte</th>
+                            <th>Indicación de Confección</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -211,16 +203,16 @@ mysql_query("SET NAMES 'utf8'");
                         }
                         for($j = 0; $j < $auxcomp; $j++){
                             echo "<tr>";
+                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
+                            while($fila = mysql_fetch_array($result)){
+                                echo "<td>".$fila   ['descripcion']."</td>";
+                            }
                             $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$componente[$j]."'");
                             while($fila = mysql_fetch_array($result)){
                                 $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td class='tdobservacion'>".$fila2['descripcion']."</td>";
+                                    echo "<td>".$fila2['descripcion']."</td>";
                                 }
-                            }
-                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila   ['descripcion']."</td>";
                             }
                             echo "<td>".$indicacion[$j]."</td>";
                             echo "</tr>";

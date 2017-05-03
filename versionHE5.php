@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -123,7 +123,7 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </div>
 
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-9">
             <!-- your page content -->
 
             <?php
@@ -169,6 +169,7 @@ mysql_query("SET NAMES 'utf8'");
                                 }
                             }
                             ?>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -201,16 +202,16 @@ mysql_query("SET NAMES 'utf8'");
                         }
                         for($j = 0; $j < $auxcomp; $j++){
                             echo "<tr>";
+                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
+                            while($fila = mysql_fetch_array($result)){
+                                echo "<td>".$fila   ['descripcion']."</td>";
+                            }
                             $result = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idComponenteEspecifico = '".$componente[$j]."'");
                             while($fila = mysql_fetch_array($result)){
                                 $result2 = mysql_query("SELECT * FROM ComponentesPrenda WHERE idComponente = '".$fila['idComponente']."'");
                                 while($fila2 = mysql_fetch_array($result2)){
-                                    echo "<td class='tdobservacion'>".$fila2['descripcion']."</td>";
+                                    echo "<td>".$fila2['descripcion']."</td>";
                                 }
-                            }
-                            $result = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedimiento[$j]."'");
-                            while($fila = mysql_fetch_array($result)){
-                                echo "<td>".$fila   ['descripcion']."</td>";
                             }
                             echo "<td>".$indicacion[$j]."</td>";
                             echo "<form method='post' action='#'>";

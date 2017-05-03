@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -123,7 +123,7 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </div>
 
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-9">
             <!-- your page content -->
 
             <?php
@@ -289,7 +289,7 @@ mysql_query("SET NAMES 'utf8'");
                             }
                             echo "<input type='hidden' name='selectcodificaciontalla' value='".$selectcodificaciontalla."'>";
                             ?>
-                            <input type="submit" name="add" value="Modificar Valores" class="btn btn-success col-sm-3 col-sm-offset-3" formaction="versionHE2add.php">
+                            <input type="submit" name="add" value="Modificar Valores" class="btn btn-success col-sm-3 col-sm-offset-4" formaction="versionHE2add.php">
                         </form>
                     </div>
                 </div>
@@ -345,13 +345,6 @@ mysql_query("SET NAMES 'utf8'");
                     </tbody>
                 </table>
             </section>
-
-
-            <hr>
-
-
-
-
         </div>
     </div>
 </div>

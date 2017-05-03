@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -123,7 +123,7 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </div>
 
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-9">
             <!-- your page content -->
 
             <?php

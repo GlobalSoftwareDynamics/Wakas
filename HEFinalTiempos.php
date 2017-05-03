@@ -86,7 +86,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-2">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -126,7 +126,7 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </nav>
         </div>
-        <div class="col-sm-9">
+        <div class="col-sm-10">
             <!-- Page Contents -->
             <section class="container-fluid">
                 <div class="col-sm-3">
@@ -247,12 +247,17 @@ mysql_query("SET NAMES 'utf8'");
                                     }
                                     $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$insumo."'");
                                     while($row = mysql_fetch_array($query)){
-                                        $insumo = $row['descripcion'];
+                                        $insumodesc = $row['descripcion'];
+                                        $procedinsumo = $row['idProcedimiento'];
+                                    }
+                                    $query = mysql_query("SELECT * FROM SubProceso WHERE idProcedimiento = '".$procedinsumo."'");
+                                    while($row = mysql_fetch_array($query)){
+                                        $procedinsumodesc = $row['descripcion'];
                                     }
                                     echo "<td>".$fila['idProcedimiento']."</td>";
                                     $result2 = mysql_query("SELECT * FROM Proceso WHERE idProceso = '".$fila['idProceso']."'");
                                     while($fila2 = mysql_fetch_array($result2)){
-                                        echo "<td>".$fila2['descripcion']."-".$insumo."-".$prenda."</td>";
+                                        echo "<td>".$fila2['descripcion']."-".$procedinsumodesc."-".substr($insumodesc,0,16)."-".$prenda."</td>";
                                     }
                                 }else{
                                     echo "<td>".$fila['idProcedimiento']."</td>";

@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-3 col-sm-3">
+        <div class="col-sm-3">
             <nav class="navbar navbar-default navbar-fixed-side">
                 <!-- normal collapsible navbar markup -->
                 <div class="navbar-header">
@@ -123,7 +123,7 @@ mysql_query("SET NAMES 'utf8'");
             </nav>
         </div>
 
-        <div class="col-sm-9 col-sm-9">
+        <div class="col-sm-9">
             <!-- your page content -->
             <section class="container col-sm-12">
                 <div>
@@ -285,8 +285,8 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </section>
 
-            <section class="container col-sm-12">
-                <form action="versionHE4add.php" method="post" class="form-horizontal col-sm-12">
+            <section class="container">
+                <form action="versionHE4add.php" method="post" class="form-horizontal">
                     <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
                     <input type="hidden" value="PROCESO2" name="selectproceso">
                     <input type="hidden" value="PROCEDIMIENTO2" name="selectsubproceso">
@@ -465,23 +465,19 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
             </section>
 
+            <section class="container">
+                <form action="versionHE4add.php" method="post" class="form-horizontal">
+                    <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
+                    <input type="hidden" value="PROCESO2" name="selectproceso">
+                    <input type="hidden" value="PROCEDIMIENTO6" name="selectsubproceso">
+                    <input type="submit" class="btn btn-success col-sm-4 col-sm-offset-4" name="addsecado" value="Agregar Valores">
+                </form>
+                <br>
+            </section>
+
         </div>
     </div>
 </div>
-
-
-<section class="container col-sm-9 col-sm-offset-3">
-    <form action="versionHE4add.php" method="post" class="form-horizontal col-sm-12">
-        <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
-        <input type="hidden" value="PROCESO2" name="selectproceso">
-        <input type="hidden" value="PROCEDIMIENTO6" name="selectsubproceso">
-        <input type="submit" class="btn btn-success col-sm-4 col-sm-offset-4" name="addsecado" value="Agregar Valores">
-    </form>
-    <br>
-</section>
-
-<hr>
-<br><br>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
