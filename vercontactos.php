@@ -81,20 +81,35 @@ mysql_query("SET NAMES 'utf8'");
     </header>
 
         <?php
-
-            if(isset($_POST['actualizarcon'])){
-                $actualziar="UPDATE Contacto SET nombre = '".$_POST['nombre']."' WHERE idContacto = '".$_POST['idCon']."'";
-                $actualziar1=mysql_query($actualziar);
+            if(isset($_POST['eliminar'])){
+                $aux=0;
+                $cont=selectTableWhere('contacto','estado','1');
+                while ($fila=mysql_fetch_array($cont)){
+                    $aux++;
+                }
+                if ($aux==1){
+                    echo "
+                        <div class='container'>
+                            <div class='alert alert-danger' role='alert'>
+                                <p><strong>El último Contacto no se puede eliminar.</strong></p>
+                            </div>
+                        </div>
+                    ";
+                }else{
+                    $eliminarcli="UPDATE contacto SET estado = '0' WHERE idContacto = '".$_POST['idcontacto']."'";
+                    $eliminarcli1=mysql_query($eliminarcli);
+                }
             }
-
             if(isset($_POST['guardar'])){
+                $clase="CON";
+                $idcon=idgen("CON");
                 $agregardir="INSERT INTO direccion(idDireccion, idCiudad, direccion) VALUES ('".$_POST['idDir']."','".$_POST['ciudad']."','".$_POST['direccion']."')";
                 $agregardir1=mysql_query($agregardir);
-                $agregarcont="INSERT INTO contacto(idContacto, idCliente, idDireccion, nombre, apellido) VALUES ('".$_POST['idCon']."','".$_POST['cliente']."','".$_POST['idDir']."','".$_POST['nombre']."','".$_POST['apellido']."')";
+                $agregarcont="INSERT INTO contacto(idContacto, idCliente, idDireccion, nombre, apellido,estado) VALUES ('".$idcon."','".$_POST['cliente']."','".$_POST['idDir']."','".$_POST['nombre']."','".$_POST['apellido']."','1')";
                 $agregarcont1=mysql_query($agregarcont);
                 $agregartelcon="INSERT INTO telefono(numTelefono) VALUES ('".$_POST['tel']."')";
                 $agregartelcon1=mysql_query($agregartelcon);
-                $agregartelcon2="INSERT INTO contactotelefono(idContacto, numTelefono) VALUES ('".$_POST['idCon']."','".$_POST['tel']."')";
+                $agregartelcon2="INSERT INTO contactotelefono(idContacto, numTelefono) VALUES ('".$idcon."','".$_POST['tel']."')";
                 $agregartelcon3=mysql_query($agregartelcon2);
             
                 echo "
@@ -119,11 +134,12 @@ mysql_query("SET NAMES 'utf8'");
                                     <th>Ciudad</th>
                                     <th>Pa&iacute;s</th>
                                     <th>Tel&eacute;fono</th>
-                                    </tr>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody> 
                             ";
-                $result = selectTableWhere("Contacto","idCliente","'".$_POST['cliente']."'");
+                $result = selectTableWhere2("Contacto","idCliente","'".$_POST['cliente']."'",'estado','1');
                 while($fila = mysql_fetch_array($result)) {
                     echo "
                                  <tr>
@@ -153,6 +169,13 @@ mysql_query("SET NAMES 'utf8'");
                     while ($fila7=mysql_fetch_array($result7)){
                         echo "
                             <td>".$fila7['numTelefono']."</td>
+                            <td>
+                                <form method='post'>
+                                    <input type='hidden' name='idcontacto' value='".$fila['idContacto']."'>
+                                    <input type='hidden' name='idcliente' value='".$_POST['cliente']."'>
+                                    <input type='submit' class='btn-link' name='eliminar' value='Eliminar' formaction='vercontactos.php'>
+                                </form>
+                            </td>
                         ";
                     }
                     echo "
@@ -168,10 +191,10 @@ mysql_query("SET NAMES 'utf8'");
                         <form action='agregarContacto.php' method='post' class='form-horizontal col-sm-12'>
                             <input type='hidden' name='idCli' value='".$_POST['cliente']."'>
                             <div class='col-sm-6'>
-                                <input class='btn btn-default col-sm-6 col-sm-offset-3'type='submit' name='agregarcontacto' value='Agregar Contacto'>
+                                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='gestionClientes.php'>Regresar</button>
                             </div>
                             <div class='col-sm-6'>
-                                <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='gestionClientes.php'>Regresar</button>
+                                <input class='btn btn-success col-sm-6 col-sm-offset-3'type='submit' name='agregarcontacto' value='Agregar Contacto'>
                             </div>
                         </form>
                     </div>
@@ -179,7 +202,7 @@ mysql_query("SET NAMES 'utf8'");
             }else{
                 echo "
                     <div class='container'>";
-                $result0=selectTableWhere("Cliente", "idCliente", "'".$_GET['idCliente']."'");
+                $result0=selectTableWhere("Cliente", "idCliente", "'".$_POST['idcliente']."'");
                 while($fila0=mysql_fetch_array($result0)){
                     echo "
                             <h4>Contactos para ".$fila0['nombre']."</h4>
@@ -198,11 +221,12 @@ mysql_query("SET NAMES 'utf8'");
                                     <th>Ciudad</th>
                                     <th>Pa&iacute;s</th>
                                     <th>Tel&eacute;fono</th>
-                                    </tr>
+                                    <th></th>
+                                </tr>
                             </thead>
                             <tbody> 
                             ";
-                $result = selectTableWhere("Contacto","idCliente","'".$_GET['idCliente']."'");
+                $result = selectTableWhere2("Contacto","idCliente","'".$_POST['idcliente']."'",'estado','1');
                 while($fila = mysql_fetch_array($result)) {
                     echo "
                                  <tr>
@@ -232,6 +256,13 @@ mysql_query("SET NAMES 'utf8'");
                     while ($fila7=mysql_fetch_array($result7)){
                         echo "
                             <td>".$fila7['numTelefono']."</td>
+                            <td>
+                                <form method='post'>
+                                    <input type='hidden' name='idcontacto' value='".$fila['idContacto']."'>
+                                    <input type='hidden' name='idcliente' value='".$_POST['idcliente']."'>
+                                    <input type='submit' class='btn-link' name='eliminar' value='Eliminar' formaction='vercontactos.php'>
+                                </form>
+                            </td>
                         ";
                     }
                     echo "
@@ -245,7 +276,7 @@ mysql_query("SET NAMES 'utf8'");
                     <hr>    
                     <div class='container'>
                         <form action='agregarContacto.php' method='post' class='form-horizontal col-sm-12'>
-                            <input type='hidden' name='idCli' value='".$_GET['idCliente']."'>
+                            <input type='hidden' name='idCli' value='".$_POST['idcliente']."'>
                             <div class='col-sm-6'>
                                 <button class='btn btn-default col-sm-6 col-sm-offset-3' formaction='gestionClientes.php'>Regresar</button>
                             </div>

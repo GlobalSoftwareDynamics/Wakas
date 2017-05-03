@@ -97,7 +97,7 @@ mysql_query("SET NAMES 'utf8'");
 
         <?php
             if(isset($_POST['guardarcli'])){
-                $agregar = "INSERT INTO cliente(idCliente, nombre) VALUES ('".$_POST['idCli']."','".$_POST['nombrecli']."')";
+                $agregar = "INSERT INTO cliente(idCliente, nombre, estado) VALUES ('".$_POST['idCli']."','".$_POST['nombrecli']."','1')";
                 $agregar1 = mysql_query($agregar);
             }
         ?>
@@ -168,14 +168,6 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                 </div>
                 <?php
-                    $aux = 0;
-                    $result = selectTable("Contacto");
-                    while($fila1 = mysql_fetch_array($result)){
-                        $aux++;
-                    }
-                    $aux++;
-                    echo "<input type='hidden' name= 'idCon' value='".$aux."' readonly>";
-
                     $aux2 = 0;
                     $result1 = selectTable("Direccion");
                     while($fila2 = mysql_fetch_array($result1)){
