@@ -83,17 +83,13 @@ mysql_query("SET NAMES 'utf8'");
     </header>
 
         <?php
-            if(isset($_GET['eliminarGalga'])) {
-                $eliminar = "DELETE FROM galgas WHERE idGalgas = '".$_GET['eliminarGalga']."'";
-                $resutlt1 = mysql_query($eliminar);
-                if ( !empty( $error = mysql_error() ) )
-                {
-                    echo 'Mysql error '. $error ."<br />\n";
-                }
+            if(isset($_POST['eliminar'])) {
+                $eliminarcont="UPDATE galgas SET estado = '0' WHERE idGalgas = '".$_POST['idgalgas']."'";
+                $eliminarcont1=mysql_query($eliminarcont);
             }
 
             if(isset($_POST['guardargal'])){
-                $agregar = "INSERT INTO galgas(idGalgas, descripcion, idUnidadMedida, idMaquina) VALUES ('".$_POST['idGal']."','".$_POST['descgal']."','".$_POST['unimed']."','".$_POST['idmaq']."')";
+                $agregar = "INSERT INTO galgas(idGalgas, descripcion, idUnidadMedida, idMaquina, estado) VALUES ('".$_POST['idGal']."','".$_POST['descgal']."','".$_POST['unimed']."','".$_POST['idmaq']."','1')";
                 $agregar1 = mysql_query($agregar);
                 if ( !empty( $error = mysql_error() ) )
                 {
@@ -124,11 +120,12 @@ mysql_query("SET NAMES 'utf8'");
                         <th>Unidad de Medida</th>
                         <th>M&aacute;quina</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                 <?php
-                    $result = mysql_query("SELECT * FROM galgas ORDER BY LENGTH(idGalgas)");
+                    $result = mysql_query("SELECT * FROM galgas WHERE estado = '1' ORDER BY LENGTH(idGalgas)");
                     while($fila=mysql_fetch_array($result)){
                         echo "
                                 <tr>
@@ -143,7 +140,18 @@ mysql_query("SET NAMES 'utf8'");
                             ";
                         }
                         echo "
-                                    <td><a href='actualizarGalga.php?idGalgas=".$fila['idGalgas']."'>Modificar</a></td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idgalgas' value='".$fila['idGalgas']."'>
+                                            <input type='submit' class='btn-link' name='modificar' value='Modificar' formaction='actualizarGalga.php'>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method='post'>
+                                            <input type='hidden' name='idgalgas' value='".$fila['idGalgas']."'>
+                                            <input type='submit' class='btn-link' name='eliminar' value='Eliminar' formaction='gestionGalgas.php'>
+                                        </form>
+                                    </td>
                                 </tr>
                         ";
                     }
