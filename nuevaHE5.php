@@ -718,7 +718,7 @@ if(isset($_SESSION['login'])){
                                     echo "<option>Seleccionar</option>";
                                     $result3 = selectTableWhere("maquinasubproceso","idProcedimiento","'".$_POST['selectsubproceso']."'");
                                     while($fila3 = mysql_fetch_array($result3)){
-                                        $result4 = selectTableWhere("maquina","idMaquina","'".$fila3['idMaquina']."'");
+                                        $result4 = selectTableWhere2("maquina","idMaquina","'".$fila3['idMaquina']."'",'estado','1');
                                         while($fila4 = mysql_fetch_array($result4)){
                                             echo "<option value='".$fila3['idMaquina']."'>".$fila4['descripcion']."</option>";
                                         }
@@ -733,7 +733,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='insumo') {
                                     echo "<select name='selectinsumo' id='selectinsumo'  onchange='getInsumo(this.value)' class='ddselect-12'>";
                                         echo "<option>Seleccionar</option>";
-                                        $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'embolsado'");
+                                        $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'Acondicionamiento' AND estado = '1'");
                                         while ($fila3 = mysql_fetch_array($result3)) {
                                             echo "<option value='" . $fila3['idInsumo'] . "'>" . $fila3['descripcion'] . "</option>";
                                         }
@@ -742,7 +742,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='insumo1') {
                                     echo "<select name='selectinsumo1' id='selectinsumo1' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
-                                    $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'lavado'");
+                                    $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'Lavado' AND estado = '1'");
                                     while ($fila3 = mysql_fetch_array($result3)) {
                                         echo "<option value='" . $fila3['idInsumo'] . "'>" . $fila3['descripcion'] . "</option>";
                                     }
@@ -751,7 +751,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='insumo2') {
                                     echo "<select name='selectinsumo2' id='selectinsumo2' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
-                                    $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'lavado'");
+                                    $result3 = mysql_query("SELECT * FROM Insumos WHERE tipoInsumo = 'Lavado' AND estado = '1'");
                                     while ($fila3 = mysql_fetch_array($result3)) {
                                         echo "<option value='" . $fila3['idInsumo'] . "'>" . $fila3['descripcion'] . "</option>";
                                     }
@@ -764,7 +764,7 @@ if(isset($_SESSION['login'])){
                                     echo "<select name='selectprocedimiento' id='selectprocedimiento' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
                                     mysql_data_seek($result3, 0);
-                                    $result3 = mysql_query("SELECT * FROM SubProceso WHERE idProceso = 'PROCESO4'");
+                                    $result3 = mysql_query("SELECT * FROM SubProceso WHERE idProceso = 'PROCESO4' AND estado = '1'");
                                     while ($fila3 = mysql_fetch_array($result3)) {
                                         echo "<option value='" . $fila3['idProcedimiento'] . "'>" . $fila3['descripcion'] . "</option>";
                                     }
@@ -773,7 +773,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='ProcedimientoTiempos'){
                                     echo "<select name='selectprocedimiento' id='selectprocedimiento'  onchange='getProcedimiento(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
-                                    $result3 = selectTable("SubProceso");
+                                    $result3 = selectTableWhere("SubProceso",'estado','1');
                                     while ($fila3 = mysql_fetch_array($result3)) {
                                         echo "<option value='" . $fila3['idProcedimiento'] . "'>" . $fila3['descripcion'] . "</option>";
                                     }
@@ -785,7 +785,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='maquinatiempo'){
                                     echo "<select name='selectmaquinatiempo' id='selectmaquinatiempo' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
-                                    $result3 = selectTable("Maquina");
+                                    $result3 = selectTableWhere("Maquina",'estado','1');
                                     while ($fila3 = mysql_fetch_array($result3)) {
                                         echo "<option value='" . $fila3['idMaquina'] . "'>" . $fila3['descripcion'] . "</option>";
                                     }
