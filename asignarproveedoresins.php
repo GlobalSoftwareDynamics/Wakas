@@ -107,9 +107,9 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <hr>
                 <?php
-                    if(isset($_GET['idInsumo'])){
+                    if(isset($_POST['asignarInsumo'])){
                         echo "
-                                <input type='hidden' name='idIns' value=".$_GET['idInsumo']." readonly>
+                                <input type='hidden' name='idIns' value=".$_POST['idinsumo']." readonly>
                             ";
                     }
                     if(isset($_POST['asignar'])){

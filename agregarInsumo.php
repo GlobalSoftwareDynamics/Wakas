@@ -19,7 +19,19 @@ mysql_query("SET NAMES 'utf8'");
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
-    
+        <script>
+            function getprocedimientoins(val) {
+                $.ajax({
+                    type: "POST",
+                    url: "get_selectinsumo.php",
+                    data:{'tipo':val},
+                    success: function(data){
+                        $("#select").html(data);
+                    }
+                });
+            }
+        </script>
+
     </head>
 
 	<body>
@@ -88,34 +100,30 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="idinsumo" class="formlabels col-sm-12">IdInsumo:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <?php
-                            $aux = 0;
-                            $result = selectTable("Insumos");
-                            while($fila = mysql_fetch_array($result)){
-                                $aux++;
-                            }
-                            $aux++;
-                            echo "<input class='textinput-4' id='idinsumo' type='text' name= 'idIns' value='INSUMO".$aux."'>";
+                            $clase="INS";
+                            $id=idgen($clase);
+                            echo "<input class='textinput-6' id='idinsumo' type='text' name= 'idIns' value='".$id."' readonly>";
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="desc" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <input id="desc" type="text" name="descins" class="textinput-12">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="uni" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <select id="uni" name="unimed" class="ddselect-5">
                             <option>Seleccionar</option>
                             <?php
@@ -128,6 +136,21 @@ mysql_query("SET NAMES 'utf8'");
                             ?>
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="type" class="formlabels col-sm-12">Tipo:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <select id="type" name="tipoins" class="ddselect-8" onchange="getprocedimientoins(this.value)">
+                            <option>Seleccionar</option>
+                            <option>Acondicionamiento</option>
+                            <option>Lavado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="select">
+
                 </div>
                 <hr>
                 <div class="form-group">

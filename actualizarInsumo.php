@@ -18,7 +18,18 @@ mysql_query("SET NAMES 'utf8'");
         <title>Waka-s Textiles Finos S.A.</title>
         <link href="css/bootstrap.css" rel="stylesheet">
         <link href="css/Formularios.css" rel="stylesheet">
-    
+        <script>
+            function getprocedimientoins(val) {
+                $.ajax({
+                    type: "POST",
+                    url: "get_selectinsumo.php",
+                    data:{'tipo':val},
+                    success: function(data){
+                        $("#select").html(data);
+                    }
+                });
+            }
+        </script>
     </head>
 
 	<body>
@@ -87,24 +98,24 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <hr>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="idinsumo" class="formlabels col-sm-12">IdInsumo:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <?php
                             echo "
-                                <input class='textinput-4' id='idinsumo' type='text' name='idIns' value='".$_GET['idInsumo']."' readonly>
+                                <input class='textinput-6' id='idinsumo' type='text' name='idIns' value='".$_POST['idinsumo']."' readonly>
                             ";
                         ?>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="desc" class="formlabels col-sm-12">Descripci&oacute;n:</label>
                     </div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-7">
                         <?php
-                            $valor=selectTableWhere("Insumos","idInsumo","'".$_GET['idInsumo']."'");
+                            $valor=selectTableWhere("Insumos","idInsumo","'".$_POST['idinsumo']."'");
                             while($fila=mysql_fetch_array($valor)){
                                 echo "
                                     <input class='textinput-12' id='desc' type='text' name='descins' value='".$fila['descripcion']."'>
@@ -114,11 +125,11 @@ mysql_query("SET NAMES 'utf8'");
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-3">
+                    <div class="col-sm-5">
                         <label for="uni" class="formlabels col-sm-12">Unidad de Medida:</label>
                     </div>
-                    <div class="col-sm-9">
-                        <select id="uni" name="unimed" class="ddselect-5">
+                    <div class="col-sm-7">
+                        <select id="uni" name="unimed" class="ddselect-4">
                             <option>Seleccionar</option>
                             <?php
                                 $valor=selectTable('UnidadMedida');
@@ -130,6 +141,21 @@ mysql_query("SET NAMES 'utf8'");
                             ?>
                         </select>
                     </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-5">
+                        <label for="type" class="formlabels col-sm-12">Tipo:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <select id="type" name="tipoins" class="ddselect-8" onchange="getprocedimientoins(this.value)">
+                            <option>Seleccionar</option>
+                            <option>Acondicionamiento</option>
+                            <option>Lavado</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="select">
+
                 </div>
                 <hr>
                 <div class="form-group">
