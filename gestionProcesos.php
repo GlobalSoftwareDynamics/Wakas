@@ -85,7 +85,7 @@ mysql_query("SET NAMES 'utf8'");
 <section class="container">
 <?php
 if(isset($_POST['guardarproc'])){
-    $agregar = "INSERT INTO Proceso(idProceso, descripcion) VALUES ('".$_POST['idProc']."','".$_POST['desc']."')";
+    $agregar = "INSERT INTO Proceso(idProceso, descripcion, estado) VALUES ('".$_POST['idProc']."','".$_POST['desc']."','1')";
     $agregar1 = mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -98,11 +98,11 @@ if(isset($_POST['actualizar'])) {
     if ( !empty( $error = mysql_error() ) )
     {
         echo 'Mysql error '. $error ."<br />\n";
-    }else{
-        echo "<div class=\"alert alert-success\" role=\"alert\">
-                Proceso actualizado satisfactoriamente.
-              </div>";
     }
+}
+if(isset($_POST['eliminarproc'])){
+    $eliminarcli="UPDATE proceso SET estado = '0' WHERE idProceso = '".$_POST['idProceso']."'";
+    $eliminarcli1=mysql_query($eliminarcli);
 }
 ?>
 </section>
@@ -116,22 +116,24 @@ if(isset($_POST['actualizar'])) {
                     <th>Descripción</th>
                     <th>Ver Subprocesos</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
             <?php
-            $result=mysql_query("SELECT * FROM proceso ORDER BY LENGTH(idProceso)");
+            $result=mysql_query("SELECT * FROM proceso WHERE estado ='1' ORDER BY LENGTH(idProceso)");
             while ($fila=mysql_fetch_array($result)){
                 echo "<tr>";
                     echo "<td>".$fila['idProceso']."</td>";
                     echo "<td>".$fila['descripcion']."</td>";
                     echo "  
                           <form method='post'>
+                          <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>
                           <td>
                               <input class=' btn-link' type='submit' formaction='gestionSubprocesos.php' value='Ver'>
-                              <input type='hidden' name='idProceso' value='".$fila['idProceso']."'>   
                           </td>";
                     echo "<td><input type='submit' value='Modificar' class='btn-link' formaction='actualizarProceso.php'></td>
+                          <td><input type='submit' name='eliminarproc' value='Eliminar' class='btn-link' formaction='gestionProcesos.php'></td>
                         </form>";
                 echo "</tr>";
             }

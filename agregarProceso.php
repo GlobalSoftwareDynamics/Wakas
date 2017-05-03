@@ -98,14 +98,10 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="col-sm-7">
                         <?php
-                            $aux = 0;
-                            $result = selectTable("proceso");
-                            while($fila = mysql_fetch_array($result)){
-                                $aux++;
-                            }
-                            $aux++;
+                            $clase="P";
+                            $id=idgen($clase);
                             echo "
-                                 <input class='textinput-5' type='text' id='idproceso' name='idProc' value='PROCESO".$aux."' readonly>
+                                 <input class='textinput-6' type='text' id='idproceso' name='idProc' value='".$id."' readonly>
                             ";
                         ?>
                     </div>
