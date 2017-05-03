@@ -716,7 +716,7 @@ if(isset($_SESSION['login'])){
                                 } elseif ($fila['tipo']==='maquina'){
                                     echo "<select name='selectmaquina' id='selectmaquina' onChange='getGalga(this.value)' class='ddselect-12'>";
                                     echo "<option>Seleccionar</option>";
-                                    $result3 = mysql_query("SELECT DISTINCT * FROM maquinasubproceso WHERE idProcedimiento = '".$_POST['selectsubproceso']."'");
+                                    $result3 = mysql_query("SELECT DISTINCT idmaquina FROM maquinasubproceso WHERE idProcedimiento = '".$_POST['selectsubproceso']."'");
                                     while($fila3 = mysql_fetch_array($result3)){
                                         $result4 = selectTableWhere2("maquina","idMaquina","'".$fila3['idMaquina']."'",'estado','1');
                                         while($fila4 = mysql_fetch_array($result4)){
