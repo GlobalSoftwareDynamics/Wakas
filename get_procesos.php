@@ -34,15 +34,12 @@ if(!empty($_POST["lote"])) {
         while ($row = mysql_fetch_array($query)) {
             $query2=selectTableWhere('SubProceso','idProcedimiento',"'".$row['valor']."'");
             while ($row2=mysql_fetch_array($query2)){
-                if($row2['idProcedimiento']==="PROCEDIMIENTO1" or $row2['idProcedimiento']==="PROCEDIMIENTO2" or $row2['idProcedimiento']==="PROCEDIMIENTO6"){
-                }else {
-                    $query1=selectTableWhere('Proceso','idProceso',"'".$row2['idProceso']."'");
-                    while ($row1=mysql_fetch_array($query1)){
-                        $idsubprocesos[$auxidsubprocesos] = $row1['idProceso'];
-                        $auxidsubprocesos++;
-                        $filas[$auxfilas] = $row['fila'];
-                        $auxfilas++;
-                    }
+                $query1=selectTableWhere('Proceso','idProceso',"'".$row2['idProceso']."'");
+                while ($row1=mysql_fetch_array($query1)){
+                    $idsubprocesos[$auxidsubprocesos] = $row1['idProceso'];
+                    $auxidsubprocesos++;
+                    $filas[$auxfilas] = $row['fila'];
+                    $auxfilas++;
                 }
             }
         }

@@ -30,10 +30,10 @@ if(!empty($_POST["producto"])) {
         while ($row1=mysql_fetch_array($query1)){
             $query = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '" . $componentes[$j] . "' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC34' AND valor = '".$row1['idProcedimiento']."' ORDER BY LENGTH (id)");
             while ($row = mysql_fetch_array($query)) {
-                    $idsubprocesos[$auxidsubprocesos] = $row['valor'];
-                    $auxidsubprocesos++;
-                    $filas[$auxfilas] = $row['fila'];
-                    $auxfilas++;
+                $idsubprocesos[$auxidsubprocesos] = $row['valor'];
+                $auxidsubprocesos++;
+                $filas[$auxfilas] = $row['fila'];
+                $auxfilas++;
             }
         }
     }

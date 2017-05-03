@@ -70,6 +70,19 @@ mysql_query("SET NAMES 'utf8'");
                 }
             });
         }
+        function getmaquina() {
+            var lote = document.getElementById('lot').value;
+            var producto = document.getElementById('product').value;
+            var procedimiento = document.getElementById('procedi').value;
+            $.ajax({
+                type: "POST",
+                url: "get_maquina.php",
+                data:'lote=' + lote + '&producto=' + producto + '&procedimiento=' + procedimiento,
+                success: function(data){
+                    $("#maquinas").html(data);
+                }
+            });
+        }
         function getcantidadlote() {
             var lote = document.getElementById('lot').value;
             var producto = document.getElementById('product').value;
@@ -126,7 +139,7 @@ mysql_query("SET NAMES 'utf8'");
                 <input class="textinput-12" id="lot" type="text" name="idlote" oninput="getproduct(this.value); getprocesos(this.value)">
             </div>
         </div>
-        <div id="productos">
+        <div class="form-group" id="productos">
         </div>
         <div class="form-group">
             <div class="col-xs-12">
@@ -143,10 +156,12 @@ mysql_query("SET NAMES 'utf8'");
                 <label for="procedi" class="formlabelscel col-xs-12">Seleccione Procedimiento:</label>
             </div>
             <div class="col-xs-12">
-                <select id="procedi" name="procedimiento" class="ddselect-12" onChange='getcomponentes(this.value);'>
+                <select id="procedi" name="procedimiento" class="ddselect-12" onChange='getcomponentes(this.value); getmaquina(this.value);'>
                     <option>Seleccionar</option>
                 </select>
             </div>
+        </div>
+        <div class="form-group" id="maquinas">
         </div>
         <div class="form-group">
             <div class="col-xs-12">

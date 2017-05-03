@@ -69,6 +69,20 @@ mysql_query("SET NAMES 'utf8'");
                 </div>
                 <div class="form-group">
                     <div class="col-xs-12">
+                        <label for="maquina" class="formlabelscel">Tiempo Muerto:</label>
+                    </div>
+                    <div class="col-xs-12">
+                        <input type="hidden" name="maquina" value="<?php echo $_POST['maquina'];?>" readonly>
+                        <input id="maquina" class="textinput-12" type="text" value="<?php
+                        $result=selectTableWhere('Maquina','idMaquina',"'".$_POST['maquina']."'");
+                        while ($fila=mysql_fetch_array($result)){
+                            echo $fila['descripcion'];
+                        }
+                        ?>" readonly>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
                         <label for="descripcion" class="formlabelscel">Descripci&oacute;n:</label>
                     </div>
                     <div class="col-xs-12">

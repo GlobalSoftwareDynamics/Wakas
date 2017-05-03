@@ -51,7 +51,12 @@ mysql_query("SET NAMES 'utf8'");
                 }
                 $aux++;
                 $idempactmuerta=$aux;
-                $actimuerta="INSERT INTO empleadoactividadmuerta(idEmpleadoActividadMuerta, idEmpleado, idActividadMuerta, descripcion, tiempo, fecha) VALUES ('".$idempactmuerta."','".$_POST['idempleado']."','".$_POST['actimuerta']."','".$_POST['desc']."','".$_POST['tiempo']."','".$fecha."')";
+                if($_POST['maquina']==null||$_POST['maquina']==''){
+                    $tipo = 'General';
+                }else{
+                    $tipo = 'Maquina';
+                }
+                $actimuerta="INSERT INTO empleadoactividadmuerta(idEmpleadoActividadMuerta, idEmpleado, idActividadMuerta, idMaquina, tipo, descripcion, tiempo, fecha) VALUES ('".$idempactmuerta."','".$_POST['idempleado']."','".$_POST['actimuerta']."','".$_POST['maquina']."','".$tipo."','".$_POST['desc']."','".$_POST['tiempo']."','".$fecha."')";
                 $insert=mysql_query($actimuerta);
                 if ( !empty( $error = mysql_error() ) ) {
                     echo 'Mysql error '. $error ."<br />\n";

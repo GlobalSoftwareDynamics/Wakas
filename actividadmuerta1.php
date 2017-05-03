@@ -19,6 +19,19 @@ mysql_query("SET NAMES 'utf8'");
         <title>Registar datos</title>
         <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
         <link href="css/Formularios.css" rel="stylesheet">
+        <script>
+            function getmaquina() {
+                var actimuerta = document.getElementById('actimuerta').value;
+                $.ajax({
+                    type: "POST",
+                    url: "get_maquina.php",
+                    data:'actimuerta=' + actimuerta,
+                    success: function(data){
+                        $("#maquinas").html(data);
+                    }
+                });
+            }
+        </script>
     </head>
     <body>
     <header>
@@ -59,7 +72,7 @@ mysql_query("SET NAMES 'utf8'");
                     <label for="actividad" class="formlabelscel col-xs-12">Seleccione Tiempo Muerto:</label>
                 </div>
                 <div class="col-xs-12">
-                    <select id="actividad" name="actimuerta" class="ddselect-12">
+                    <select id="actividad" name="actimuerta" class="ddselect-12" onchange="getmaquina(this.value);">
                         <option>Seleccionar</option>
                         <?php
                         $result=selectTable("ActividadMuerta");
@@ -71,6 +84,8 @@ mysql_query("SET NAMES 'utf8'");
                         ?>
                     </select>
                 </div>
+            </div>
+            <div id='maquinas' class="form-group">
             </div>
             <div class="form-group">
                 <div class="col-xs-12">

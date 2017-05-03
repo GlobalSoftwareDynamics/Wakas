@@ -58,8 +58,13 @@ mysql_query("SET NAMES 'utf8'");
                 <input class="textinput-12" id="lot" type="text" name="idlote" value="<?php echo $_POST['idlote'];?>" readonly>
             </div>
         </div>
-        <div>
-            <input type="hidden" value="<?php echo $_POST['producto'];?>" name="producto">
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label for="prod" class="formlabelscel col-xs-12">Lote:</label>
+            </div>
+            <div class="col-xs-12">
+                <input type="text" id="prod" value="<?php echo $_POST['producto'];?>" name="producto" readonly>
+            </div>
         </div>
         <div class="form-group">
             <div class="col-xs-12">
@@ -85,6 +90,20 @@ mysql_query("SET NAMES 'utf8'");
                 $result2=selectTableWhere("SubProceso","idProcedimiento","'".$_POST['procedimiento']."'");
                 while ($fila2=mysql_fetch_array($result2)){
                     echo "<input type='text' id='procedi' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                }
+                ?>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <label for="maquina" class="formlabelscel col-xs-12">Maquina:</label>
+            </div>
+            <div class="col-xs-12">
+                <input type="hidden" name="maquina" value="<?php echo $_POST['maquina'];?>" readonly>
+                <?php
+                $result2=selectTableWhere("Maquina","idMaquina","'".$_POST['maquina']."'");
+                while ($fila2=mysql_fetch_array($result2)){
+                    echo "<input type='text' id='maquina' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
                 }
                 ?>
             </div>
