@@ -25,18 +25,7 @@ mysql_query("SET NAMES 'utf8'");
     <link href="css/bootstrap.css" rel="stylesheet" type="text/css" id="bootstrap">
     <link href="css/Tablas.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
-    <script>
-        function getGalga(val) {
-            $.ajax({
-                type: "POST",
-                url: "get_galga2.php",
-                data:'idMaquina='+val,
-                success: function(data){
-                    $("#galga").html(data);
-                }
-            });
-        }
-    </script>
+
 </head>
 
 <body>
@@ -100,7 +89,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['Asignar'])){
-    if(isset($_POST['galga'])){
+    if(!empty($_POST['galga']) and $_POST['galga']!="Seleccionar"){
         $insertar = mysql_query("INSERT INTO MaquinaSubProceso (idMaquina,idGalgas,idProcedimiento) VALUES ('".$_POST['selectmaquina']."','".$_POST['galga']."','".$_POST['idProcedimiento']."')",$con);
         if(!$insertar){
             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
@@ -110,6 +99,7 @@ if(isset($_POST['Asignar'])){
             </div>';
         }
     }else{
+        echo $_POST['galga'];
         $insertar = mysql_query("INSERT INTO MaquinaSubProceso (idMaquina,idGalgas,idProcedimiento) VALUES ('".$_POST['selectmaquina']."',null,'".$_POST['idProcedimiento']."')",$con);
         if(!$insertar){
             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
@@ -180,7 +170,21 @@ if(isset($_POST['Asignar'])){
                 </div>
             </div>
             <div class="form-group">
-                <div id="galga" class="col-sm-12">
+                <div class="col-sm-12">
+                    <div class="col-sm-5">
+                        <label for='selectgalga' class='formlabels col-sm-12'>Seleccionar Galga:</label>
+                    </div>
+                    <div class="col-sm-7">
+                        <select name='galga' id='selectgalga' class='ddselect-10'>
+                            <option>Seleccionar</option>
+                            <?php
+                            $result3=selectTableWhere('Galgas','estado','1');
+                            while ($fila3=mysql_fetch_array($result3)){
+                                echo "<option value=".$fila3["idGalgas"].">".$fila3["Descripcion"]."</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
                 </div>
             </div>
             <div class="form-group">

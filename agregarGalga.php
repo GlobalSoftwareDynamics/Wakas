@@ -125,24 +125,6 @@ mysql_query("SET NAMES 'utf8'");
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-sm-5">
-                        <label for="maquina" class="formlabels col-sm-12">Máquina:</label>
-                    </div>
-                    <div class="col-sm-7">
-                        <select id="maquina" name="idmaq" class="ddselect-8">
-                            <option>Seleccionar</option>
-                            <?php
-                                $result1=selectTable('Maquina');
-                                while($fila1=mysql_fetch_array($result1)){
-                                    echo "
-                                        <option value='".$fila1['idMaquina']."'>".$fila1['descripcion']."</option>
-                                    ";
-                                }
-                            ?>
-                        </select>
-                    </div>
-                </div>
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-12">

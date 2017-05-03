@@ -4,11 +4,17 @@ require('funciones.php');
 conexion();
 if(!empty($_POST["idMaquina"])) {
     echo "<option value='-'>Seleccionar</option>";
-    $componente =mysql_query("SELECT * FROM Galgas WHERE idMaquina = '" . $_POST["idMaquina"] . "' AND estado = '1'");
+    $componente =mysql_query("SELECT * FROM maquinasubproceso WHERE idMaquina = '" . $_POST["idMaquina"] . "'");
         while($result2=mysql_fetch_array($componente)){
-            echo "
-                <option value=".$result2["idGalgas"].">".$result2["Descripcion"]."</option>
-            ";
+            if ($result2['idGalgas']===NULL){
+            }else{
+                $result1=selectTableWhere('Galgas','idGalgas',"'".$result2['idGalgas']."'");
+                while ($fila=mysql_fetch_array($result1)){
+                    echo "
+                        <option value=".$result2["idGalgas"].">".$fila["Descripcion"]."</option>
+                    ";
+                }
+            }
         }
 }
 ?>

@@ -82,7 +82,7 @@ mysql_query("SET NAMES 'utf8'");
 
 <?php
 if(isset($_POST['guardarsubproc'])){
-    $agregar = "INSERT INTO Subproceso(idProcedimiento, idProceso, descripcion) VALUES ('".$_POST['idSubProc']."','".$_POST['idProc']."','".$_POST['desc']."')";
+    $agregar = "INSERT INTO Subproceso(idProcedimiento, idProceso, descripcion, estado) VALUES ('".$_POST['idSubProc']."','".$_POST['idProc']."','".$_POST['desc']."','1')";
     $agregar1 = mysql_query($agregar);
     if ( !empty( $error = mysql_error() ) )
     {
@@ -100,6 +100,10 @@ if(isset($_POST['actualizar'])) {
                 Subproceso actualizado satisfactoriamente.
               </div>";
     }
+}
+if(isset($_POST['eliminarproce'])){
+    $eliminarcli="UPDATE subproceso SET estado = '0' WHERE idProcedimiento = '".$_POST['idProcedimiento']."'";
+    $eliminarcli1=mysql_query($eliminarcli);
 }
 ?>
 <section>
@@ -121,11 +125,12 @@ if(isset($_POST['actualizar'])) {
                 <th>Descripción</th>
                 <th>Asignar M&aacute;quina</th>
                 <th></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
             <?php
-            $result=selectTableWhere('SubProceso','idProceso',"'".$_POST['idProceso']."'");
+            $result=selectTableWhere2('SubProceso','idProceso',"'".$_POST['idProceso']."'",'estado','1');
             while ($fila=mysql_fetch_array($result)){
                 echo "<tr>";
                     //echo "<td>".$_POST['idProceso']."</td>";
@@ -148,6 +153,13 @@ if(isset($_POST['actualizar'])) {
                                     <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
                                     <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
                                     <input type='submit' value='Modificar' class='btn-link' formaction='actualizarSubproceso.php'>
+                                </form>
+                            </td>
+                            <td>
+                                <form method='post'>
+                                    <input type='hidden' name='idProcedimiento' value='".$fila['idProcedimiento']."'>
+                                    <input type='hidden' name='idProceso' value='".$_POST['idProceso']."'>
+                                    <input type='submit' value='Eliminar' name='eliminarproce' class='btn-link' formaction='gestionSubprocesos.php'>
                                 </form>
                             </td>
                     ";

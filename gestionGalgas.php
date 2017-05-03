@@ -89,7 +89,7 @@ mysql_query("SET NAMES 'utf8'");
             }
 
             if(isset($_POST['guardargal'])){
-                $agregar = "INSERT INTO galgas(idGalgas, descripcion, idUnidadMedida, idMaquina, estado) VALUES ('".$_POST['idGal']."','".$_POST['descgal']."','".$_POST['unimed']."','".$_POST['idmaq']."','1')";
+                $agregar = "INSERT INTO galgas(idGalgas, descripcion, idUnidadMedida, estado) VALUES ('".$_POST['idGal']."','".$_POST['descgal']."','".$_POST['unimed']."','1')";
                 $agregar1 = mysql_query($agregar);
                 if ( !empty( $error = mysql_error() ) )
                 {
@@ -102,8 +102,6 @@ mysql_query("SET NAMES 'utf8'");
                 $actualziar1=mysql_query($actualziar);
                 $actualziar4="UPDATE galgas SET idUnidadMedida = '".$_POST['unimed']."' WHERE idGalgas = '".$_POST['idGal']."'";
                 $actualziar5=mysql_query($actualziar4);
-                $actualziar6="UPDATE galgas SET idMaquina = '".$_POST['idmaq']."' WHERE idGalgas = '".$_POST['idGal']."'";
-                $actualziar7=mysql_query($actualziar6);
                 if ( !empty( $error = mysql_error() ) )
                 {
                     echo 'Mysql error '. $error ."<br />\n";
@@ -118,7 +116,6 @@ mysql_query("SET NAMES 'utf8'");
                         <th>idGalga</th>
                         <th>Descripci&oacute;n</th>
                         <th>Unidad de Medida</th>
-                        <th>M&aacute;quina</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -132,14 +129,6 @@ mysql_query("SET NAMES 'utf8'");
                                     <td>".$fila['idGalgas']."</td>
                                     <td>".$fila['Descripcion']."</td> 
                                     <td>".$fila['idUnidadMedida']."</td>
-                        ";
-                        $result2=selectTableWhere("Maquina","idMaquina","'".$fila['idMaquina']."'");
-                        while ($fila2=mysql_fetch_array($result2)){
-                            echo "
-                                    <td>".$fila2['descripcion']."</td>
-                            ";
-                        }
-                        echo "
                                     <td>
                                         <form method='post'>
                                             <input type='hidden' name='idgalgas' value='".$fila['idGalgas']."'>
