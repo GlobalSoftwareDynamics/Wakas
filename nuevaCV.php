@@ -226,7 +226,6 @@ if(isset($_SESSION['login'])){
                 </div>
             </form>
         </section>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
     <footer class="panel-footer navbar-fixed-bottom">
         <div class="container col-sm-6 col-sm-offset-3 text-center">

@@ -83,7 +83,7 @@ mysql_query("SET NAMES 'utf8'");
         <?php
             if(isset($_POST['eliminar'])){
                 $aux=0;
-                $cont=selectTableWhere('contacto','estado','1');
+                $cont=selectTableWhere2('contacto','estado','1','idCliente',"'".$_POST['idcliente']."'");
                 while ($fila=mysql_fetch_array($cont)){
                     $aux++;
                 }
