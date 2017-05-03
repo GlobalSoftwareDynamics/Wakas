@@ -95,7 +95,7 @@ mysql_query("SET NAMES 'utf8'");
             <div class="col-sm-7">
                 <?php
                 echo "
-                     <input class='textinput-4' type='text' name='idEmp' id='idEmp' value='".$_GET['idEmpleado']."' readonly>
+                     <input class='textinput-4' type='text' name='idEmp' id='idEmp' value='".$_POST['idempleado']."' readonly>
                 ";
                 ?>
             </div>
@@ -106,7 +106,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-sm-7">
                 <?php
-                $valor=selectTableWhere("Empleado","idEmpleado","'".$_GET['idEmpleado']."'");
+                $valor=selectTableWhere("Empleado","idEmpleado","'".$_POST['idempleado']."'");
                 while($fila=mysql_fetch_array($valor)){
                     echo "
                         <input class='textinput-6' type='text' name='nombres' id='nombres' value='".$fila['nombres']."'>
@@ -121,7 +121,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-sm-7">
                 <?php
-                $valor=selectTableWhere("Empleado","idEmpleado","'".$_GET['idEmpleado']."'");
+                $valor=selectTableWhere("Empleado","idEmpleado","'".$_POST['idempleado']."'");
                 while($fila=mysql_fetch_array($valor)){
                     echo "
                         <input class='textinput-8' type='text' name='apellidos' id='apellidos' value='".$fila['apellidos']."'>
@@ -154,7 +154,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-sm-7">
                 <?php
-                $valor=selectTableWhere("Empleado","idEmpleado","'".$_GET['idEmpleado']."'");
+                $valor=selectTableWhere("Empleado","idEmpleado","'".$_POST['idempleado']."'");
                 while($fila=mysql_fetch_array($valor)){
                     echo "
                         <input class='textinput-5' type='text' name='usuario' id='usuario' value='".$fila['usuario']."'>
@@ -169,7 +169,7 @@ mysql_query("SET NAMES 'utf8'");
             </div>
             <div class="col-sm-7">
                 <?php
-                $valor=selectTableWhere("Empleado","idEmpleado","'".$_GET['idEmpleado']."'");
+                $valor=selectTableWhere("Empleado","idEmpleado","'".$_POST['idempleado']."'");
                 while($fila=mysql_fetch_array($valor)){
                     echo "
                         <input class='textinput-5' type='text' name='pass' id='pass' value='".$fila['contrasena']."'>
