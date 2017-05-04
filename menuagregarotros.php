@@ -128,6 +128,14 @@ mysql_query("SET NAMES 'utf8'");
     </form>
 </section>
 
+<section class="container">
+    <form class="form-horizontal jumbotron col-sm-6 col-sm-offset-3" method="post" action="#">
+        <div class="col-sm-12">
+            <button class="btn btn-success col-sm-12 boton" type="submit" formaction="recovery.php">Centro de Recuperación de Datos</button>
+        </div>
+    </form>
+</section>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <footer class="panel-footer navbar-fixed-bottom">
