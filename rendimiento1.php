@@ -9,7 +9,6 @@ mysql_query("SET NAMES 'utf8'");
 ?>
 <html lang="es">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +17,20 @@ mysql_query("SET NAMES 'utf8'");
     <meta name="theme-color" content="#ef4a43">
     <title>Waka-s Textiles Finos S.A.</title>
     <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link href="css/Tablas.css" rel="stylesheet">
     <link href="css/Formularios.css" rel="stylesheet">
+
+    <script>
+        $(function() {
+            $( "#datepicker" ).datepicker();
+        });
+        $(function() {
+            $( "#datepicker1" ).datepicker();
+        });
+    </script>
 
 </head>
 
@@ -82,25 +94,71 @@ mysql_query("SET NAMES 'utf8'");
 </header>
 
 <section class="container">
-    <form class="form-horizontal jumbotron col-sm-6 col-sm-offset-3">
+    <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
         <div>
-            <h4>Opciones de Visualización de Rendimiento</h4>
+            <h3>Generación de Reportes de Rendimiento</h3>
         </div>
         <hr>
+        <div>
+            <h4>Reporte Diario Individual</h4>
+        </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <input type="submit" class="btn btn-success col-sm-12 boton" value="Rendimiento de Personal" formaction="rendimiento1.php">
+            <div class="col-sm-5">
+                <label for="datepicker1" class="formlabels col-sm-12">Indique la Fecha:</label>
+            </div>
+            <div class="col-sm-7">
+                <input type="text" name="fecha" id="datepicker1" class="textinput-8" value="mm/dd/aa">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-12">
-                <input type="submit" class="btn btn-success col-sm-12 boton" value="Rendimiento de Máquina" formaction="rendimientomaq.php">
+            <div class="col-sm-5">
+                <label for="idemp" class="formlabels col-sm-12">Indique el DNI:</label>
             </div>
+            <div class="col-sm-7">
+                <input type="text" name="dni" id="idemp" class="textinput-8">
+            </div>
+        </div>
+        <div class="form-group">
+            <input formaction="reporterendimientodia.php" class="btn btn-success col-sm-8 col-sm-offset-2 boton" type="submit" name="generarindi" value="Generar">
+        </div>
+        <hr>
+        <div>
+            <h4>Reporte Mensual Individual</h4>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="messe" class="formlabels col-sm-12">Indique el Mes:</label>
+            </div>
+            <div class="col-sm-7">
+                <select name="mes" id="messe" class="ddselect-8">
+                    <option value="01">Enero</option>
+                    <option value="02">Febrero</option>
+                    <option value="03">Marzo</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Mayo</option>
+                    <option value="06">Junio</option>
+                    <option value="07">Julio</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="idemp" class="formlabels col-sm-12">Indique el DNI:</label>
+            </div>
+            <div class="col-sm-7">
+                <input type="text" name="dni1" id="idemp" class="textinput-8">
+            </div>
+        </div>
+        <div class="form-group">
+            <input formaction="rendimientomensual.php" class="btn btn-success col-sm-8 col-sm-offset-2 boton" type="submit" name="generarindimes" value="Generar">
         </div>
     </form>
 </section>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <footer class="panel-footer navbar-fixed-bottom">
     <div class="container col-sm-6 col-sm-offset-3 text-center">
@@ -110,6 +168,7 @@ mysql_query("SET NAMES 'utf8'");
 </body>
 
 </html>
+
 <?php
 }else{
     echo "Usted no está autorizado para ingresar a esta sección. Por favor vuelva a la página de inicio de sesión e identifíquese.";
