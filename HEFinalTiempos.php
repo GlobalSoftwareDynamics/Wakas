@@ -217,10 +217,13 @@ mysql_query("SET NAMES 'utf8'");
                                 $componente[$auxcomp] = $fila2['valor'];
                                 $auxcomp++;
                             } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC34'){    //CAMBIAR AL DEJAR FIJO!!!!!
+                                if($fila2['valor']==='PROCEDIMIENTO26'){
+                                }else{
                                 $procedimiento[$auxproced] = $fila2['valor'];
                                 $auxproced++;
                                 $filaproceso[$auxfila] = $fila2['fila'];
                                 $auxfila++;
+                                }
                             } elseif ($fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC35'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC39'||$fila2['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC41'){    //CAMBIAR AL DEJAR FIJO!!!!!
                                 $maquina[$auxmaquina] = $fila2['valor'];
                                 $auxmaquina++;

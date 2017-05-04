@@ -455,6 +455,14 @@ if(isset($_SESSION['login'])){
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
+                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$_POST['selectinsumo']."'");
+                            while($row = mysql_fetch_array($query)){
+                                $procedimientoinsumo = $row['idProcedimiento'];
+                            }
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".$_POST['fila']."')",$con);
+                            if(!$insertar){
+                                echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
+                            }
                         } else{
                             $result5 = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['idProd']."'");
                             while ($fila5 = mysql_fetch_array($result5)){
@@ -463,6 +471,14 @@ if(isset($_SESSION['login'])){
                                 }
                             }
                             $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo']."','".$_POST['fila']."')",$con);
+                            if(!$insertar){
+                                echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
+                            }
+                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$_POST['selectinsumo']."'");
+                            while($row = mysql_fetch_array($query)){
+                                $procedimientoinsumo = $row['idProcedimiento'];
+                            }
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$componente."', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".$_POST['fila']."')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
