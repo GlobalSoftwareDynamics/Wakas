@@ -60,10 +60,10 @@ mysql_query("SET NAMES 'utf8'");
         </div>
         <div class="form-group">
             <div class="col-xs-12">
-                <label for="prod" class="formlabelscel col-xs-12">Lote:</label>
+                <label for="prod" class="formlabelscel col-xs-12">Producto:</label>
             </div>
             <div class="col-xs-12">
-                <input type="text" id="prod" value="<?php echo $_POST['producto'];?>" name="producto" readonly>
+                <input type="text" class="textinput-12" id="prod" value="<?php echo $_POST['producto'];?>" name="producto" readonly>
             </div>
         </div>
         <div class="form-group">
@@ -99,11 +99,15 @@ mysql_query("SET NAMES 'utf8'");
                 <label for="maquina" class="formlabelscel col-xs-12">Maquina:</label>
             </div>
             <div class="col-xs-12">
-                <input type="hidden" name="maquina" value="<?php echo $_POST['maquina'];?>" readonly>
+                <input type="hidden" name="maquina" value="<?php if(isset($_POST['maquina'])){echo $_POST['maquina'];}else{echo 'MAQUINA9';}?>" readonly>
                 <?php
-                $result2=selectTableWhere("Maquina","idMaquina","'".$_POST['maquina']."'");
-                while ($fila2=mysql_fetch_array($result2)){
-                    echo "<input type='text' id='maquina' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                if(isset($_POST['maquina'])){
+                    $result2=selectTableWhere("Maquina","idMaquina","'".$_POST['maquina']."'");
+                    while ($fila2=mysql_fetch_array($result2)){
+                        echo "<input type='text' id='maquina' class='textinput-12' value='".$fila2['descripcion']."' readonly>";
+                    }
+                }else{
+                    echo "<input type='text' id='maquina' class='textinput-12' value='Manual - Propio' readonly>";
                 }
                 ?>
             </div>
