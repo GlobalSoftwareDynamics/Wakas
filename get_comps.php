@@ -17,7 +17,12 @@ if(!empty($_POST["producto"])) {
     $valores = array();
     $auxvalores = 0;
     $flag = false;
-
+    $select=selectTableWhere('SubProceso','idProcedimiento',"'".$_POST['procedimiento']."'");
+    while ($fila=mysql_fetch_array($select)){
+        if($fila['idProceso']==="PROCESO6"){
+            $_POST['procedimiento']="PROCEDIMIENTO26";
+        }
+    }
     $query = mysql_query("SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '" . $_POST['producto'] . "'");
     while ($row = mysql_fetch_array($query)) {
         $componentes[$auxcomponentes] = $row['idComponenteEspecifico'];

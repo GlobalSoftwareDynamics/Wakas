@@ -28,12 +28,28 @@ if(!empty($_POST["producto"])) {
     for ($j = 0; $j < count($componentes); $j++) {
         $query1=selectTableWhere('SubProceso','idProceso',"'".$_POST['proceso']."'");
         while ($row1=mysql_fetch_array($query1)){
-            $query = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '" . $componentes[$j] . "' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC34' AND valor = '".$row1['idProcedimiento']."' ORDER BY LENGTH (id)");
-            while ($row = mysql_fetch_array($query)) {
-                $idsubprocesos[$auxidsubprocesos] = $row['valor'];
-                $auxidsubprocesos++;
-                $filas[$auxfilas] = $row['fila'];
-                $auxfilas++;
+            if ($row1['idProcedimiento']==="PROCEDIMIENTO26"){
+                $query = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '" . $componentes[$j] . "' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC34' AND valor = '".$row1['idProcedimiento']."' ORDER BY LENGTH (id)");
+                while ($row = mysql_fetch_array($query)) {
+                    $query2=mysql_query("SELECT * FROM PCPSPC WHERE idSubProcesoCaracteristica = 'SUBPROCESOCARAC29' AND fila ='".$row['fila']."'");
+                    while ($row2=mysql_fetch_array($query2)){
+                        $select=selectTableWhere('Insumos','idInsumo',"'".$row2['valor']."'");
+                        while ($fila=mysql_fetch_array($select)){
+                            $idsubprocesos[$auxidsubprocesos] = $fila['idProcedimiento'];
+                            $auxidsubprocesos++;
+                            $filas[$auxfilas] = $row['fila'];
+                            $auxfilas++;
+                        }
+                    }
+                }
+            }else{
+                $query = mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico = '" . $componentes[$j] . "' AND idSubProcesoCaracteristica = 'SUBPROCESOCARAC34' AND valor = '".$row1['idProcedimiento']."' ORDER BY LENGTH (id)");
+                while ($row = mysql_fetch_array($query)) {
+                    $idsubprocesos[$auxidsubprocesos] = $row['valor'];
+                    $auxidsubprocesos++;
+                    $filas[$auxfilas] = $row['fila'];
+                    $auxfilas++;
+                }
             }
         }
     }
