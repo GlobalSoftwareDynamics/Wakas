@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html lang="es">
 
 <?php
-session_start();
 require('funciones.php');
+$idProd = idgen('P');
+session_start();
 conexion();
 
 if(isset($_SESSION['login'])){
@@ -29,11 +30,11 @@ if(isset($_SESSION['login'])){
             });
         </script>
         <script>
-            function getID(val,val2) {
+            function getID(val) {
                 $.ajax({
                     type: "POST",
                     url: "get_ProdID.php",
-                    data:'tipoproducto=' + val + '&idProd=' + val2,
+                    data:'tipoproducto=' + val,
                     success: function(data){
                         $("#idProd").html(data);
                     }
@@ -118,31 +119,7 @@ if(isset($_SESSION['login'])){
                         <label for="idProd" class="formlabels col-sm-12">Id Producto:</label>
                     </div>
                     <div class="col-sm-7" id="idProd">
-                        <?php
-                        $aux = 1;
-                        $i = 0;
-                        $strings = array();
-                        $flag = false;
-                        $result = selectTable("producto");
-                        while($fila = mysql_fetch_array($result)){
-                            $strings[$i] = substr($fila['idProducto'],0,4);
-                            $i++;
-                        }
-                        asort($strings);
-                        for($j=1;$j<$i;$j++){
-                            if($strings[($j-1)]==$strings[$j]){
-                            }else{
-                                $aux++;
-                            }
-                        }
-                        if($aux == 0){
-                            $idProd = 6001;
-                        }else{
-                            $idProd = $aux + 6001;
-                        }
-                        //echo "<span id='idProd'>".$idProd."</span>";
-                        echo "<input type='text' class='form-control textinput-6' name='idProd' id='idProd' value='".$idProd."' readonly>"
-                        ?>
+                        <input type="text" name="idProd" class='textinput-6 form-control' value="<?php echo $idProd;?>" readonly>
                     </div>
                 </div>
             </div>
@@ -164,7 +141,7 @@ if(isset($_SESSION['login'])){
                     <div class="col-sm-7">
                         <?php
                         $result = selectTable("tipoproducto");
-                        echo "<select name='selecttipo' id='selecttipo' class='ddselect-8  form-control' onchange='getID(this.value,$idProd)'>";
+                        echo "<select name='selecttipo' id='selecttipo' class='ddselect-8  form-control' onchange='getID(this.value)'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idTipoProducto'].">".$fila['descripcion']."</option>";
