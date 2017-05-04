@@ -129,9 +129,9 @@ if(isset($_SESSION['login'])){
             }
 
             if(isset($_POST['guardar'])){
-                $agregar2="INSERT INTO ConfirmacionVenta(idContrato, idContacto, idIncoterm, idVia, idMetodoPago, idcodificacionTalla, fecha, shipdate, reference) VALUES (
+                $agregar2="INSERT INTO ConfirmacionVenta(idContrato, idContacto, idIncoterm, idVia, idMetodoPago, idcodificacionTalla, fecha, shipdate, reference, estado) VALUES (
                               '".$_POST['contrato']."','".$_POST['cliente']."','".$_POST['incoterm']."','".$_POST['via']."','".$_POST['payment']."','".$_POST['idcodificacionTalla']."'
-                              ,'".$_POST['date']."','".$_POST['shipdate']."','".$_POST['referencia']."')";
+                              ,'".$_POST['date']."','".$_POST['shipdate']."','".$_POST['referencia']."','1')";
                 $agregar3=mysql_query($agregar2);
             }
         ?>
