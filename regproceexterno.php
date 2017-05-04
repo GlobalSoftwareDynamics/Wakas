@@ -33,7 +33,7 @@ while ($fila=mysql_fetch_array($result1)){
         function getproduct(val) {
             $.ajax({
                 type: "POST",
-                url: "get_product.php",
+                url: "get_productext.php",
                 data:'idlote='+val,
                 success: function(data){
                     $("#product").html(data);
@@ -54,11 +54,11 @@ while ($fila=mysql_fetch_array($result1)){
         }
         function getcomponentes() {
             var lote = document.getElementById('lot').value;
-            var producto = document.getElementById('product').value;
+            var producto = document.getElementById('idproduct').value;
             var procedimiento = document.getElementById('procedi').value;
             $.ajax({
                 type: "POST",
-                url: "get_comps.php",
+                url: "get_compsext.php",
                 data:'lote=' + lote + '&producto=' + producto + '&procedimiento=' + procedimiento,
                 success: function(data){
                     $("#componentes").html(data);
@@ -67,7 +67,7 @@ while ($fila=mysql_fetch_array($result1)){
         }
         function getcantidadlote() {
             var lote = document.getElementById('lot').value;
-            var producto = document.getElementById('product').value;
+            var producto = document.getElementById('idproduct').value;
             var procedimiento = document.getElementById('procedi').value;
             var componente = document.getElementById('componentes').value;
             $.ajax({
@@ -184,18 +184,11 @@ if(isset($_POST['guardar'])){
                 <label for="lot" class="formlabels col-xs-12">Indique el idLote:</label>
             </div>
             <div class="col-sm-7">
-                <input class="textinput-5" id="lot" type="text" name="idlote" oninput="getproduct(this.value)">
+                <input class="textinput-5" id="lot" type="text" name="idlote" oninput="getproduct(this.value);getprocedimext()">
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-sm-5">
-                <label for="product" class="formlabels col-xs-12">Seleccione Producto:</label>
-            </div>
-            <div class="col-sm-7">
-                <select id="product" name="producto" class="ddselect-6" onChange='getprocedimext(this.value);'>
-                    <option>Seleccionar</option>
-                </select>
-            </div>
+        <div class="form-group" id="product">
+
         </div>
         <div class="form-group">
             <div class="col-sm-5">
