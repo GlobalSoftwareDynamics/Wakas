@@ -3,8 +3,9 @@
 <html lang="es">
 
 <?php
-session_start();
 require('funciones.php');
+$idProd = idgen('P');
+session_start();
 conexion();
 
 if(isset($_SESSION['login'])){

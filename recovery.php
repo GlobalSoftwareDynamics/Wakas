@@ -131,6 +131,8 @@ if(isset($_SESSION['login'])){
     if(isset($_POST['recuperarproceso'])){
         $recovery="UPDATE proceso SET estado = '1' WHERE idProceso = '".$_POST['idProceso']."'";
         $recovery2=mysql_query($recovery);
+        $recovery="UPDATE subproceso SET estado = '1' WHERE idProceso = '".$_POST['idProceso']."'";
+        $recovery2=mysql_query($recovery);
         if ( !empty( $error = mysql_error() ) )
         {
             echo 'Mysql error '. $error ."<br />\n";

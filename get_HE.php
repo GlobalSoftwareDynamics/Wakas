@@ -35,14 +35,6 @@ if(!empty($_POST["idProd"])) {
         $observacion = $fila['observaciones'];
         $descripcion = $fila['descripcionGeneral'];
     }
-    /*$result = selectTableWhere("TipoProducto","idTipoProducto",'"'.$tipoProducto.'"');
-    while($fila = mysql_fetch_array($result)){
-        $tipoProducto = $fila['descripcion'];
-    }
-    $result = selectTableWhere("Genero","idGenero",'"'.$genero.'"');
-    while($fila = mysql_fetch_array($result)){
-        $tipoProducto = $fila['descripcion'];
-    }*/
     echo "<div class=\"form-group\">
                 <div class=\"col-sm-12\">
                     <div class=\"col-sm-5\">
@@ -109,7 +101,7 @@ if(!empty($_POST["idProd"])) {
                         <label for=\"selectempleado\" class=\"formlabels col-sm-12\">Creado por:</label>
                     </div>
                     <div class=\"col-sm-7\">";
-                        $result = selectTable("empleado");
+                        $result = selectTableWhere("empleado",'estado','1');
                         echo "<select name='selectempleado' id='selectempleado' class='ddselect-10'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
@@ -151,8 +143,14 @@ if(!empty($_POST["idProd"])) {
     while($search = mysql_fetch_array($query)){
         $pointer++;
     }
-    $Producto = $_POST['idProd']."_V".$pointer;
-
+    $version = array();
+    $version = explode("_V",$_POST['idProd']);
+    if(isset($version[1])){
+        $versionactual = intval($version[1])+1;
+        $Producto = $version[0]."_V".$versionactual;
+    }else{
+        $Producto = $_POST['idProd']."_V".$pointer;
+    }
     echo "<input type='hidden' value='".$Producto."' name='idProd'>";
     echo "<input type='hidden' value='".$_POST['idProd']."' name='idProdOrig'>";
 

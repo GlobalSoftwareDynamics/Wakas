@@ -121,7 +121,7 @@ if(isset($_SESSION['login'])){
                         <?php
                         echo "<select name='idProd' id='idProd' class='ddselect-8' onChange='getData(this.value)'>";
                         echo "<option>Seleccionar</option>";
-                        $result = selectTable('Producto');
+                        $result = selectTableWhere('Producto','estado','1');
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idProducto'].">".$fila['idProducto']."</option>";
                         }

@@ -194,7 +194,7 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="col-sm-7">
                         <?php
-                        $result = selectTable("cliente");
+                        $result = selectTableWhere("cliente","estado",'1');
                         echo "<select name='selectidcliente' id='selectidcliente' class='ddselect-10 form-control'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){
@@ -222,7 +222,7 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="col-sm-7">
                         <?php
-                        $result = selectTable("empleado");
+                        $result = selectTableWhere("empleado","estado","1");
                         echo "<select name='selectempleado' id='selectempleado' class='ddselect-10 form-control'>";
                         echo "<option>Seleccionar</option>";
                         while($fila = mysql_fetch_array($result)){

@@ -1,6 +1,7 @@
 <?php
 session_start();
 require('funciones.php');
+$idProd = idgen('P');
 conexion();
 if(!empty($_POST["idProd"])) {
     ?>
@@ -10,11 +11,11 @@ if(!empty($_POST["idProd"])) {
         });
     </script>
     <script>
-        function getID(val,val2) {
+        function getID(val) {
             $.ajax({
                 type: "POST",
                 url: "get_ProdID.php",
-                data:'tipoproducto=' + val + '&idProd=' + val2,
+                data:'tipoproducto=' + val,
                 success: function(data){
                     $("#idProd").html(data);
                 }
@@ -34,27 +35,7 @@ if(!empty($_POST["idProd"])) {
                 <label for="idProd" class="formlabels col-sm-12">Id Producto:</label>
             </div>
             <div class="col-sm-7" id="idProd">
-                <?php
-                $aux = 1;
-                $i = 0;
-                $strings = array();
-                $flag = false;
-                $result = selectTable("producto");
-                while($fila = mysql_fetch_array($result)){
-                    $strings[$i] = substr($fila['idProducto'],0,4);
-                    $i++;
-                }
-                asort($strings);
-                for($j=1;$j<$i;$j++){
-                        if($strings[($j-1)]==$strings[$j]){
-                        }else{
-                            $aux++;
-                        }
-                }
-                $idProd = $aux + 6001;
-                //echo "<span id='idProd'>".$idProd."</span>";
-                echo "<input type='text' class='form-control textinput-6' name='idProd' id='idProd' value='".$idProd."' readonly>"
-                ?>
+                <input type="text" name="idProd" class='textinput-6 form-control' value="<?php echo $idProd;?>" readonly>
             </div>
         </div>
     </div>
@@ -96,7 +77,7 @@ if(!empty($_POST["idProd"])) {
             <div class="col-sm-7">
                 <?php
                 $result = selectTable("tipoproducto");
-                echo "<select name='tipoProducto' id='tipoProducto' class='ddselect-8  form-control' onchange='getID(this.value,$idProd)'>";
+                echo "<select name='tipoProducto' id='tipoProducto' class='ddselect-8  form-control' onchange='getID(this.value)'>";
                 echo "<option>Seleccionar</option>";
                 while($fila = mysql_fetch_array($result)){
                     echo "<option value=".$fila['idTipoProducto'].">".$fila['descripcion']."</option>";
@@ -131,7 +112,7 @@ if(!empty($_POST["idProd"])) {
             </div>
             <div class="col-sm-7">
                 <?php
-                $result = selectTable("cliente");
+                $result = selectTableWhere("cliente",'estado','1');
                 echo "<select name='idcliente' id='idcliente' class='ddselect-10 form-control'>";
                 echo "<option>Seleccionar</option>";
                 while($fila = mysql_fetch_array($result)){
@@ -177,7 +158,7 @@ if(!empty($_POST["idProd"])) {
                         <label for=\"selectempleado\" class=\"formlabels col-sm-12\">Creado por:</label>
                     </div>
                     <div class=\"col-sm-7\">";
-    $result = selectTable("empleado");
+    $result = selectTableWhere("empleado",'estado','1');
     echo "<select name='selectempleado' id='selectempleado' class='ddselect-10'>";
     echo "<option>Seleccionar</option>";
     while($fila = mysql_fetch_array($result)){

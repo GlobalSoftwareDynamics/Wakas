@@ -37,17 +37,6 @@ if(isset($_SESSION['login'])){
                     }
                 });
             }
-
-            function getmaterial(val) {
-                $.ajax({
-                    type: "POST",
-                    url: "get_materials.php",
-                    data:'producto_id='+val,
-                    success: function(data){
-                        $("#mat").html(data);
-                    }
-                });
-            }
         </script>
 
     </head>

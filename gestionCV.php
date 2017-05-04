@@ -120,7 +120,7 @@ if(isset($_POST['eliminarcv'])) {
     </form>
 </section>
 
-<section class="container">
+<section class='container'>
     <table class="table table-hover">
         <thead>
         <tr>

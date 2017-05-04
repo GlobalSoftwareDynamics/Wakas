@@ -101,22 +101,22 @@ mysql_query("SET NAMES 'utf8'");
                     <form method="post">
                         <input type="hidden" value="<?php echo $_POST['idProd']?>" name="idProd">
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE2.php" value="Sección Medidas">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE2.php" value="Sección Medidas">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE3.php" value="Sección Tejido">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE3.php" value="Sección Tejido">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE4.php" value="Sección Lavado y Secado">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE4.php" value="Sección Lavado y Secado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE5.php" value="Sección Confección">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE5.php" value="Sección Confección">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE6.php" value="Sección Etiquetado y Embolsado">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE6.php" value="Sección Etiquetado y Embolsado">
                         </div>
                         <div class="col-sm-12 sideselect">
-                            <input type="submit" class="btn-link" formaction="versionHE7.php" value="Sección Tiempos y Secuencia">
+                            <input type="submit" class="btn-link btn-links" formaction="versionHE7.php" value="Sección Tiempos y Secuencia">
                         </div>
                     </form>
                 </div>

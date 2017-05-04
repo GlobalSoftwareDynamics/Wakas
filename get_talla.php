@@ -3,12 +3,6 @@ session_start();
 require('funciones.php');
 conexion();
 if(!empty($_POST["producto"])) {
-    /*echo "
-    <tr>
-    <td>".$_POST['idcodificacionTalla']."</td>
-    <td>".$_POST['producto']."</td>
-    </tr>
-    ";*/
     echo "
     <tr>
     <td>
@@ -20,7 +14,7 @@ if(!empty($_POST["producto"])) {
             $prod = "SELECT * FROM ProductoComponentesPrenda WHERE idProducto = '".$_POST['producto']."' AND idComponente = 'COMPONENTE1'";
             $prod1=mysql_query($prod);
             while($fila5 = mysql_fetch_array($prod1)){
-                $result1=selectTableWhere('Material','idMaterial',"'".$fila5['idMaterial']."'");
+                $result1=selectTableWhere2('Material','idMaterial',"'".$fila5['idMaterial']."'",'estado','1');
                 while ($fila2=mysql_fetch_array($result1)){
                     echo "
                         <option value='".$fila2['idMaterial']."'>".$fila2['material']."</option>

@@ -246,7 +246,7 @@ if(isset($_SESSION['login'])){
                     </div>
                     <div class="col-sm-7">
                         <?php
-                        $result = selectTable("material");
+                        $result = selectTableWhere("material","estado","1");
                         echo "<select name='selectmaterial' id='selectmaterial' class='ddselect-12'>";
                         while($fila = mysql_fetch_array($result)){
                             echo "<option value=".$fila['idMaterial'].">".$fila['material']."</option>";

@@ -103,6 +103,8 @@ if(isset($_POST['actualizar'])) {
 if(isset($_POST['eliminarproc'])){
     $eliminarcli="UPDATE proceso SET estado = '0' WHERE idProceso = '".$_POST['idProceso']."'";
     $eliminarcli1=mysql_query($eliminarcli);
+    $eliminarcli="UPDATE subproceso SET estado = '0' WHERE idProceso = '".$_POST['idProceso']."'";
+    $eliminarcli1=mysql_query($eliminarcli);
 }
 ?>
 </section>

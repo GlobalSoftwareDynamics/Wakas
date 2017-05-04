@@ -83,14 +83,15 @@ mysql_query("SET NAMES 'utf8'");
 </header>
 
 <section class="container-fluid">
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <div>
             <img style="margin-top:25px" width="auto" height="70" src="image/LogoWakas.png"/>
         </div>
     </div>
     <div class="col-sm-5" id="descripcionbrand">
         <div>
-            <br><b><span style="margin-top: 20px">Waka-s Textiles Finos SAC</span></b>
+            <br>
+            <b>Wakas Textiles Finos SAC</b>
         </div>
         <div>
             <span>Urb. Francisco Mostajo G-25</span>

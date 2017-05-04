@@ -104,7 +104,7 @@ if(isset($_SESSION['login'])){
                         <select id="selcliente" name="cliente" class="ddselect-10">
                             <option>Seleccionar</option>
                             <?php
-                                $result=selectTable("Contacto");
+                                $result=selectTableWhere("Contacto","estado",'1');
                                 while($fila=mysql_fetch_array($result)){
                                     echo "
                                         <option value=".$fila['idContacto'].">".$fila['idCliente']." - ".$fila['nombre']." ".$fila['apellido']."</option>
