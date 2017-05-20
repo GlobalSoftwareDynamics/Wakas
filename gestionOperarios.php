@@ -262,11 +262,14 @@ if(isset($_POST['buscaremp'])){
             <section class='container'>
                  <form class='form-horizontal col-sm-12'>
 		              <div class='form-group col-sm-12'>
-                          <div class='col-sm-6'>
+                          <div class='col-sm-4'>
                                 <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
                             </div>
-                            <div class='col-sm-6'>
+                            <div class='col-sm-4'>
                                 <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar</button>
+                            </div>
+                            <div class='col-sm-4'>
+                                <button class='btn btn-success col-sm-8 col-sm-offset-3' formaction='seleccionMes.php'>Reporte de Ingresos y Salidas</button>
                             </div>
 			          </div>
 		         </form>
