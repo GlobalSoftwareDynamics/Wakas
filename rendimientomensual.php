@@ -192,17 +192,27 @@ mysql_query("SET NAMES 'utf8'");
     $query=mysql_query($rendmes);
     while ($filames=mysql_fetch_array($query)){
             echo "<tr>";
-                    $horaIngreso = explode(":", $filames['horaIngreso']);
-                    $horaSalida = explode(":", $filames['horaSalida']);
-                    $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
-                    $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
-                    $horastrabajo = $minutosSalida - $minutosIngreso;
-                    $tiempohoras=$horastrabajo/60;
-                    /*echo $fila1['horaIngreso'] . " ";
-                    echo $fila1['horaSalida'] . " ";
-                    echo "$minutosIngreso ";
-                    echo "$minutosSalida ";
-                    echo "$horastrabajo ";*/
+            $horaIngreso = explode(":", $filames['horaIngreso']);
+            $horaSalida = explode(":", $filames['horaSalida']);
+            $horasalidabreak=explode(":", $filames['salidaBreak']);
+            $horaingresobreak=explode(":", $filames['ingresoBreak']);
+            $minutosSalidaBreak=($horasalidabreak[0] * 60) + $horasalidabreak[1];
+            /*echo $minutosSalidaBreak." ";*/
+            $minutosIngresoBreak=($horaingresobreak[0] * 60) + $horaingresobreak[1];
+            /*echo $minutosIngresoBreak." ";*/
+            $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
+            $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
+            $horastrabajo = $minutosSalida - $minutosIngreso;
+            $tiempobreak=$minutosIngresoBreak-$minutosSalidaBreak;
+            /*echo $tiempobreak." ";*/
+            $horasenwakas=($horastrabajo/60)-($tiempobreak/60);
+            /*echo $horasenwakas." ";*/
+            $tiempohoras=round($horasenwakas,2,1);
+            /*echo $fila1['horaIngreso'] . " ";
+            echo $fila1['horaSalida'] . " ";
+            echo "$minutosIngreso ";
+            echo "$minutosSalida ";
+            echo "$horastrabajo ";*/
                     echo "
                         <td>".$filames['fecha']."</td>
                         <td>".$tiempohoras."</td>
@@ -233,8 +243,8 @@ mysql_query("SET NAMES 'utf8'");
                     /*echo $fila5['idComponenteEspecifico']. " ";*/
                     $result6=selectTableWhere2('PCPSPC','idComponenteEspecifico',"'".$fila5['idComponenteEspecifico']."'",'idSubProcesoCaracteristica',"'".$idsubprocesocaracteristica."'");
                     while ($fila6=mysql_fetch_array($result6)){
-                        $idpcpspc=$fila6['id']-1;
-                        $result10=selectTableWhere('PCPSPC','id',"'".$idpcpspc."'");
+                        $idpcpspc=$fila6['fila'];
+                        $result10=selectTableWhere('PCPSPC','fila',"'".$idpcpspc."'");
                         while ($fila10=mysql_fetch_array($result10)){
                             if ($fila10['valor']=="MAQUINA9"){
                                 /*echo $fila6['valor']." ";*/

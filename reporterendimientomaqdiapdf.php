@@ -61,13 +61,22 @@ if(isset($_SESSION['login'])){
                                 while ($fila1=mysql_fetch_array($result1)) {
                                     $horaIngreso = explode(":", $fila1['horaIngreso']);
                                     $horaSalida = explode(":", $fila1['horaSalida']);
+                                    $horasalidabreak=explode(":", $fila1['salidaBreak']);
+                                    $horaingresobreak=explode(":", $fila1['ingresoBreak']);
+                                    $minutosSalidaBreak=($horasalidabreak[0] * 60) + $horasalidabreak[1];
+                                    /*echo $minutosSalidaBreak." ";*/
+                                    $minutosIngresoBreak=($horaingresobreak[0] * 60) + $horaingresobreak[1];
+                                    /*echo $minutosIngresoBreak." ";*/
                                     $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
                                     $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
                                     $horastrabajo = $minutosSalida - $minutosIngreso;
-                                    $horasenwakas=$horastrabajo/60;
+                                    $tiempobreak=$minutosIngresoBreak-$minutosSalidaBreak;
+                                    /*echo $tiempobreak." ";*/
+                                    $horasenwakas=($horastrabajo/60)-($tiempobreak/60);
+                                    /*echo $horasenwakas." ";*/
                                     $horasenwakas1=round($horasenwakas,2,1);
-                                    /*echo $fila1[\'horaIngreso\'] . " ";
-                                    echo $fila1[\'horaSalida\'] . " ";
+                                    /*echo $fila1['horaIngreso'] . " ";
+                                    echo $fila1['horaSalida'] . " ";
                                     echo "$minutosIngreso ";
                                     echo "$minutosSalida ";
                                     echo "$horastrabajo ";*/
@@ -90,6 +99,42 @@ $html .='
                             </tbody>                    
                         </table>
                     </div>
+                    <div class="contenedor">
+                        <div>
+                            <h5>Actividades Muertas</h5>
+                        </div>
+                        <br>
+                        <table class="tabla">
+                            <thead>
+                                <tr class="trborder" style="background-color: #c5c5c5">
+                                    <th>Empleado</th>
+                                    <th>Actividad Muerta</th>
+                                    <th>Descripción</th>
+                                    <th>Tiempo</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+                            $result13=selectTableWhere2('empleadoactividadmuerta','idMaquina',"'".$_POST['idmaq']."'",'fecha',"'".$_POST['fecha']."'");
+                            while ($fila13=mysql_fetch_array($result13)){
+                                $html .='<tr>';
+                                $emp=selectTableWhere("empleado",'idempleado',"'".$fila13['idEmpleado']."'");
+                                while ($empfil=mysql_fetch_array($emp)){
+                                    $html .='<td>'.$empfil['nombres'].' '.$empfil['apellidos'].'</td>';
+                                }
+                                $act=selectTableWhere('actividadmuerta','idActividadMuerta',"'".$fila13['idActividadMuerta']."'");
+                                while ($actifil=mysql_fetch_array($act)){
+                                    $html .='<td>'.$actifil['descripcion'].'</td>';
+                                }
+                                $html .='<td>'.$fila13['descripcion'].'</td>
+                                      <td>'.$fila13['tiempo'].' min</td>
+                                ';
+                                $html .='</tr>';
+                            }
+$html .='
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
                 </section>
                 <hr>
                 <section class="contenedor">
@@ -155,14 +200,14 @@ $html .='
                                 $filapcpspc=$fila9['fila'];
                                 $result10=mysql_query("SELECT * FROM PCPSPC WHERE idComponenteEspecifico='".$fila6['idComponenteEspecifico']."' AND idSubProcesoCaracteristica='SUBPROCESOCARAC36' AND fila='".$filapcpspc."'");
                                 while ($fila10=mysql_fetch_array($result10)){
-                                    $html .='<td>'.$fila10['valor'].'</td>';
+                                    $html .='<td>'.$fila10['valor'].' min</td>';
                                     $tiempocantidad=$fila6['cantidad']*$fila10['valor'];
                                     $tiempoesperadoproduccion=$cantidadlote*$fila10['valor'];
                                     $tiempoproduccion=$tiempoproduccion+$tiempocantidad;
                                     $tiempoesperadoproducciontotal=$tiempoesperadoproducciontotal+$tiempoesperadoproduccion;
                                 }
                             }
-                            $html .='<td>'.$tiempoproduccion.'</td>';
+                            $html .='<td>'.$tiempoproduccion.' min</td>';
                             $html .='</tr>';
                         }
                         $rendimientodeproduccion=($tiempoproduccion/$tiempoesperadoproducciontotal)*100;

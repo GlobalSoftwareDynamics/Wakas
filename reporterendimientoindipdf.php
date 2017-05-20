@@ -27,18 +27,27 @@ if(isset($_SESSION['login'])){
             echo $_POST[\'fecha\']." " ;*/
             $result1=selectTableWhere2('RegistroIngresoSalida','idEmpleado',"'".$_POST['dni']."'",'fecha',"'".$_POST['fecha']."'");
             while ($fila1=mysql_fetch_array($result1)) {
-                    $horaIngreso = explode(":", $fila1['horaIngreso']);
-                    $horaSalida = explode(":", $fila1['horaSalida']);
-                    $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
-                    $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
-                    $horastrabajo = $minutosSalida - $minutosIngreso;
-                    $horasenwakas=$horastrabajo/60;
-                    $horasenwakas1=round($horasenwakas,2,1);
-                    /*echo $fila1[\'horaIngreso\'] . " ";
-                    echo $fila1[\'horaSalida\'] . " ";
-                    echo "$minutosIngreso ";
-                    echo "$minutosSalida ";
-                    echo "$horastrabajo ";*/
+                $horaIngreso = explode(":", $fila1['horaIngreso']);
+                $horaSalida = explode(":", $fila1['horaSalida']);
+                $horasalidabreak=explode(":", $fila1['salidaBreak']);
+                $horaingresobreak=explode(":", $fila1['ingresoBreak']);
+                $minutosSalidaBreak=($horasalidabreak[0] * 60) + $horasalidabreak[1];
+                /*echo $minutosSalidaBreak." ";*/
+                $minutosIngresoBreak=($horaingresobreak[0] * 60) + $horaingresobreak[1];
+                /*echo $minutosIngresoBreak." ";*/
+                $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
+                $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
+                $horastrabajo = $minutosSalida - $minutosIngreso;
+                $tiempobreak=$minutosIngresoBreak-$minutosSalidaBreak;
+                /*echo $tiempobreak." ";*/
+                $horasenwakas=($horastrabajo/60)-($tiempobreak/60);
+                /*echo $horasenwakas." ";*/
+                $horasenwakas1=round($horasenwakas,2,1);
+                /*echo $fila1['horaIngreso'] . " ";
+                echo $fila1['horaSalida'] . " ";
+                echo "$minutosIngreso ";
+                echo "$minutosSalida ";
+                echo "$horastrabajo ";*/
             }
             $result2="SELECT * FROM caracteristica WHERE descripcion = 'Tiempo'";
             $query=mysql_query($result2);

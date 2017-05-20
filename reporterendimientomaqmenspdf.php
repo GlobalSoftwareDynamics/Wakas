@@ -118,11 +118,19 @@ while ($fila=mysql_fetch_array($result)){
             $horaSalida = explode(":", $fila1['horaSalida']);
             $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
             $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
-            $horastrabajo = $minutosSalida - $minutosIngreso;
+            $horasalidabreak=explode(":", $fila1['salidaBreak']);
+            $horaingresobreak=explode(":", $fila1['ingresoBreak']);
+            $minutosSalidaBreak=($horasalidabreak[0] * 60) + $horasalidabreak[1];
+            /*echo $minutosSalidaBreak." ";*/
+            $minutosIngresoBreak=($horaingresobreak[0] * 60) + $horaingresobreak[1];
+            /*echo $minutosIngresoBreak." ";*/
+            $tiempobreak=$minutosIngresoBreak-$minutosSalidaBreak;
+            /*echo $tiempobreak." ";*/
+            $horastrabajo = ($minutosSalida - $minutosIngreso)-($minutosIngresoBreak-$minutosSalidaBreak);
             $horasenwakas=$horastrabajo/60;
             $horasenwakas1=round($horasenwakas,2,1);
-            /*echo $fila1[\'horaIngreso\'] . " ";
-            echo $fila1[\'horaSalida\'] . " ";
+            /*echo $fila1['horaIngreso'] . " ";
+            echo $fila1['horaSalida'] . " ";
             echo "$minutosIngreso ";
             echo "$minutosSalida ";
             echo "$horastrabajo ";*/
@@ -171,7 +179,7 @@ $html .='
                 <span style="font-size: 10px">© 2017 by Global Software Dynamics.Visítanos en <a target="GSD" href="http://www.gsdynamics.com/">GSDynamics.com</a></span>
           </div>
     ';
-    $nombrearchivo='ReporteRendimientoMaqDiario'.$_POST['idmaq'].'.pdf';
+    $nombrearchivo='ReporteRendimientoMaqMens'.$_POST['idmaq'].'.pdf';
     $mpdf = new mPDF('','A4',0,'','15',15,35,35,6,6);
 
 // Write some HTML code:

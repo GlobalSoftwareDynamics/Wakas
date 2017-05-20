@@ -94,17 +94,27 @@ if(isset($_SESSION['login'])){
     $query=mysql_query($rendmes);
     while ($filames=mysql_fetch_array($query)){
             $html .='<tr>';
-                    $horaIngreso = explode(":", $filames['horaIngreso']);
-                    $horaSalida = explode(":", $filames['horaSalida']);
-                    $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
-                    $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
-                    $horastrabajo = $minutosSalida - $minutosIngreso;
-                    $tiempohoras=$horastrabajo/60;
-                    /*echo $fila1[\'horaIngreso\'] . " ";
-                    echo $fila1[\'horaSalida\'] . " ";
-                    echo "$minutosIngreso ";
-                    echo "$minutosSalida ";
-                    echo "$horastrabajo ";*/
+            $horaIngreso = explode(":", $filames['horaIngreso']);
+            $horaSalida = explode(":", $filames['horaSalida']);
+            $horasalidabreak=explode(":", $filames['salidaBreak']);
+            $horaingresobreak=explode(":", $filames['ingresoBreak']);
+            $minutosSalidaBreak=($horasalidabreak[0] * 60) + $horasalidabreak[1];
+            /*echo $minutosSalidaBreak." ";*/
+            $minutosIngresoBreak=($horaingresobreak[0] * 60) + $horaingresobreak[1];
+            /*echo $minutosIngresoBreak." ";*/
+            $minutosIngreso = ($horaIngreso[0] * 60) + $horaIngreso[1];
+            $minutosSalida = ($horaSalida[0] * 60) + $horaSalida[1];
+            $horastrabajo = $minutosSalida - $minutosIngreso;
+            $tiempobreak=$minutosIngresoBreak-$minutosSalidaBreak;
+            /*echo $tiempobreak." ";*/
+            $horasenwakas=($horastrabajo/60)-($tiempobreak/60);
+            /*echo $horasenwakas." ";*/
+            $tiempohoras=round($horasenwakas,2,1);
+            /*echo $fila1['horaIngreso'] . " ";
+            echo $fila1['horaSalida'] . " ";
+            echo "$minutosIngreso ";
+            echo "$minutosSalida ";
+            echo "$horastrabajo ";*/
                     $html .='
                         <td>'.$filames['fecha'].'</td>
                         <td>'.$tiempohoras.'</td>
