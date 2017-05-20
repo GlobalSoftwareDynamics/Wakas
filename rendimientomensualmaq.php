@@ -195,7 +195,7 @@ $tiempoefectivo=0;
 $rendimientomaquinames=0;
 $horastotaleswakas=0;
 $tiempoefectivototal=0;
-$result=mysql_query("SELECT DISTINCT fecha FROM empleadolote WHERE idMaquina='".$_POST['idmaq1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$año[2]."'");
+$result=mysql_query("SELECT DISTINCT fecha FROM empleadolote WHERE idMaquina='".$_POST['idmaq1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'");
 while ($fila=mysql_fetch_array($result)){
     echo "<tr>";
     echo "<td>".$fila['fecha']."</td>";
@@ -260,6 +260,7 @@ echo "
     <form action='reporterendimientomaqmenspdf.php' method='post' class='form-horizontal col-sm-12'>
         <input type='hidden' name='idmaq1' value="<?php echo $_POST['idmaq1'];?>" readonly>
         <input type='hidden' name='mes' value="<?php echo $_POST['mes'];?>" readonly>
+        <input type='hidden' name='mes' value="<?php echo $_POST['año'];?>" readonly>
         <input type='submit' class='btn btn-primary col-sm-4 col-sm-offset-4' name='pdf' value='Descargar PDF'>
     </form>
 </section>

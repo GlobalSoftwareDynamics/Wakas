@@ -81,7 +81,7 @@ mysql_query("SET NAMES 'utf8'");
 </header>
 
 <section class="container">
-    <form action="gestionOperarios.php" method="post" class="form-horizontal jumbotron col-sm-12">
+    <form action="reporteingresossalida.php" method="post" class="form-horizontal jumbotron col-sm-12">
         <div class="form-group col-sm-6">
             <div class="col-sm-5">
                 <label for="filtroEmpleado" class="formlabels col-sm-12">Buscar por DNI:</label>
@@ -90,15 +90,17 @@ mysql_query("SET NAMES 'utf8'");
                 <input type="text" id="filtroEmpleado" name="filtroEmpleado" class="textinput-12">
             </div>
         </div>
+        <div>
+            <input type="hidden" name="mes" value="<?php echo $_POST['mes']; ?>">
+            <input type="hidden" name="año" value="<?php echo $_POST['año']; ?>">
+        </div>
         <div class="form-group col-sm-6">
-            <div class="col-sm-12">
                 <div class="col-sm-6">
                     <input class="btn btn-success col-sm-10 col-sm-offset-2 boton" type="submit" name="buscaremp" value="Buscar">
                 </div>
                 <div class="col-sm-6">
                     <input class="btn btn-default col-sm-10 col-sm-offset-2 boton" type="submit" value="Eliminar Filtro">
                 </div>
-            </div>
         </div>
     </form>
 </section>
@@ -106,80 +108,45 @@ mysql_query("SET NAMES 'utf8'");
 <hr>
 
 <?php
-if(isset($_POST['eliminarEmpleado'])) {
-    $eliminarcont="UPDATE empleado SET estado = '0' WHERE idEmpleado = '".$_POST['idempleado']."'";
-    $eliminarcont1=mysql_query($eliminarcont);
-}
-if(isset($_POST['guardaremp'])){
-    $agregar = "INSERT INTO empleado(idEmpleado, idTipoUsuario, nombres, apellidos, usuario, contrasena, estado) VALUES ('".$_POST['idEmp']."','".$_POST['tipouser']."','".$_POST['nombres']."','".$_POST['apellidos']."','".$_POST['usuario']."','".$_POST['pass']."','1')";
-    $agregar1 = mysql_query($agregar);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
-}
-if(isset($_POST['actualizaremp'])){
-    $actualziar="UPDATE empleado SET idTipoUsuario = '".$_POST['tipouser']."' WHERE idEmpleado = '".$_POST['idEmp']."'";
-    $actualziar1=mysql_query($actualziar);
-    $actualziar2="UPDATE empleado SET nombres = '".$_POST['nombres']."' WHERE idEmpleado = '".$_POST['idEmp']."'";
-    $actualziar3=mysql_query($actualziar2);
-    $actualziar4="UPDATE empleado SET apellidos = '".$_POST['apellidos']."' WHERE idEmpleado = '".$_POST['idEmp']."'";
-    $actualziar5=mysql_query($actualziar4);
-    $actualziar6="UPDATE empleado SET usuario = '".$_POST['usuario']."' WHERE idEmpleado = '".$_POST['idEmp']."'";
-    $actualziar7=mysql_query($actualziar6);
-    $actualziar8="UPDATE empleado SET contrasena = '".$_POST['pass']."' WHERE idEmpleado = '".$_POST['idEmp']."'";
-    $actualziar9=mysql_query($actualziar8);
-    if ( !empty( $error = mysql_error() ) )
-    {
-        echo 'Mysql error '. $error ."<br />\n";
-    }
-}
+
 if(isset($_POST['buscaremp'])){
     echo "
+            <section class='container'>
+                <div>
+                    <label for='colab'>Colaborador:</label>";
+    $result2=selectTableWhere('empleado','idEmpleado',"'".$_POST['filtroEmpleado']."'");
+    while ($fila2=mysql_fetch_array($result2)){
+        echo "
+                    <span id='colab'>".$fila2['nombres']." ".$fila2['apellidos']." (DNI:".$_POST['filtroEmpleado'].")</span>";
+    }
+    echo "
+                </div>
+            </section>
+            <hr>
             <section class='container'>
                 <table class='table table-hover'>
                     <thead>
                         <tr>
-                            <th>DNI</th>
-                            <th>Nombres</th>
-				            <th>Apellidos</th>
-				            <th>Tipo de Usuario</th>
-				            <th>Usuario</th>
-				            <th>Contrase&ntilde;a</th>
-				            <th></th>
-				            <th></th>
+                            <th>Fecha</th>
+                            <th>Hora de Ingreso</th>
+                            <th>Salida a Refrigerio</th>
+                            <th>Entrada de Refrigerio</th>
+                            <th>Hora de Salida</th>
 				         </tr>
 			        </thead>
 			        <tbody>
         ";
-    $result = selectTableWhereLike1('Empleado','estado','1','idEmpleado',"'".$_POST['filtroEmpleado']."'");
+    $result = mysql_query("SELECT * FROM RegistroIngresoSalida WHERE idEmpleado = ".$_POST['filtroEmpleado']." AND fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'");
     while($fila=mysql_fetch_array($result)){
         echo "
                         <tr>
-                            <td>".$fila['idEmpleado']."</td>
-                            <td>".$fila['nombres']."</td>
-                            <td>".$fila['apellidos']."</td>
+                            <td>".$fila['fecha']."</td>
+                            <td>".$fila['horaIngreso']."</td>
+                            <td>".$fila['salidaBreak']."</td>
             ";
-        $result1 = selectTableWhere("TipoUsuario","idTipoUsuario","'".$fila['idTipoUsuario']."'");
-        while($fila1=mysql_fetch_array($result1)){
-            echo "
-                            <td>".$fila1['Descripcion']."</td>
-                ";
-        }
-        echo "          <td>".$fila['usuario']."</td>
-                            <td>".$fila['contrasena']."</td>
-                            <td>
-                                <form method='post'>
-                                     <input type='hidden' name='idempleado' value='".$fila['idEmpleado']."'>
-                                     <input type='submit' class='btn-link' name='ver' value='Modificar' formaction='actualizarPersonal.php'>
-                                </form>
-                            </td>
-                            <td>
-                                <form method='post'>
-                                     <input type='hidden' name='idempleado' value='".$fila['idEmpleado']."'>
-                                     <input type='submit' class='btn-link' name='eliminarEmpleado' value='Eliminar' formaction='gestionOperarios.php'>
-                                </form>
-                            </td>
+        echo "
+                            <td>".$fila['ingresoBreak']."</td>
+                            <td>".$fila['horaSalida']."</td>
                         </tr>
             ";
     }
@@ -187,23 +154,19 @@ if(isset($_POST['buscaremp'])){
                     </tbody>
 		        </table>
 		    </section>
-            <hr>
+		    <hr>
 		    <section class='container'>
-		         <form class='form-horizontal col-sm-12'>
-		            <div class='form-group col-sm-12'>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
-                        </div>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar</button>
-                        </div>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-success col-sm-8 col-sm-offset-3' formaction='seleccionMes.php'>Reporte de Ingresos y Salidas</button>
-                        </div>
-			        </div>
-		         </form>
+		        <form method='post' action='reporteingresossalidapdf.php' class='form-horizontal col-sm-12'>
+		            <div>
+                        <input type='hidden' name='mes' value='".$_POST['mes']."'>
+                        <input type='hidden' name='año' value='".$_POST['año']."'>
+                        <input type='hidden' name='filtroEmpleado' value='".$_POST['filtroEmpleado']."'>
+                    </div>
+                    <div class='col-sm-12'>
+                        <input type='submit' class='btn btn-primary col-sm-4 col-sm-offset-4' name='pdf' value='Descargar PDF'>
+                    </div>
+                </form>
             </section>
-        		
         ";
 }else{
     unset($_POST['buscaremp']);
@@ -213,47 +176,37 @@ if(isset($_POST['buscaremp'])){
                  <table class='table table-hover table-condensed'>
                      <thead>
                             <tr>
+                                <th>Fecha</th>
                                 <th>DNI</th>
                                 <th>Nombres</th>
                                 <th>Apellidos</th>
-                                <th>Tipo de Usuario</th>
-                                <th>Usuario</th>
-                                <th>Contrase&ntilde;a</th>
-                                <th></th>
-                                <th></th>
+                                <th>Hora de Ingreso</th>
+                                <th>Salida a Refrigerio</th>
+                                <th>Entrada de Refrigerio</th>
+                                <th>Hora de Salida</th>
 				            </tr>
 			        </thead>
 			        <tbody>
         ";
-    $result = mysql_query("SELECT * FROM empleado WHERE estado ='1' ORDER BY apellidos");
+    $result = mysql_query("SELECT * FROM RegistroIngresoSalida WHERE fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'");
     while($fila = mysql_fetch_array($result)) {
         echo "
                              <tr>
+                                <td>".$fila['fecha']."</td>
                                 <td>".$fila['idEmpleado']."</td>
-                                <td>".$fila['nombres']."</td>
-                                <td>".$fila['apellidos']."</td>
                                 ";
-        $result1 = selectTableWhere("TipoUsuario","idTipoUsuario","'".$fila['idTipoUsuario']."'");
-        while($fila1=mysql_fetch_array($result1)){
+        $result2=selectTableWhere('empleado','idEmpleado',"'".$fila['idEmpleado']."'");
+        while ($fila2=mysql_fetch_array($result2)){
             echo "
-                            <td>".$fila1['Descripcion']."</td>
-                ";
+                                <td>".$fila2['nombres']."</td>
+                                <td>".$fila2['apellidos']."</td>
+                                ";
         }
         echo "
-                                <td>".$fila['usuario']."</td>
-                                <td>".$fila['contrasena']."</td>
-                                <td>
-                                <form method='post'>
-                                     <input type='hidden' name='idempleado' value='".$fila['idEmpleado']."'>
-                                     <input type='submit' class='btn-link' name='ver' value='Modificar' formaction='actualizarPersonal.php'>
-                                </form>
-                                </td>
-                                <td>
-                                    <form method='post'>
-                                         <input type='hidden' name='idempleado' value='".$fila['idEmpleado']."'>
-                                         <input type='submit' class='btn-link' name='eliminarEmpleado' value='Eliminar' formaction='gestionOperarios.php'>
-                                    </form>
-                                </td>
+                                <td>".$fila['horaIngreso']."</td>
+                                <td>".$fila['salidaBreak']."</td>
+                                <td>".$fila['ingresoBreak']."</td>
+                                <td>".$fila['horaSalida']."</td>                                
                             </tr>
                 ";
     }
@@ -261,23 +214,7 @@ if(isset($_POST['buscaremp'])){
                    </tbody>
                 </table>
             </div>
-            <hr>
-            <section class='container'>
-                 <form class='form-horizontal col-sm-12'>
-		            <div class='form-group col-sm-12'>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-primary col-sm-6 col-sm-offset-3' formaction='verActividadMuerta.php'>Ver Actividad Muerta</button>
-                        </div>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-success col-sm-6 col-sm-offset-3' formaction='agregarEmpleado.php'>Agregar</button>
-                        </div>
-                        <div class='col-sm-4'>
-                            <button class='btn btn-success col-sm-8 col-sm-offset-3' formaction='seleccionMes.php'>Reporte de Ingresos y Salidas</button>
-                        </div>
-			        </div>
-		         </form>
-            </section>
-            </center>
+            <br>
         ";
 }
 ?>

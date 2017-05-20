@@ -188,7 +188,7 @@ mysql_query("SET NAMES 'utf8'");
                             <tbody>";
     $rendimientomestotal=0;
     $aux=0;
-    $rendmes="SELECT * FROM RegistroIngresoSalida WHERE idEmpleado ='".$_POST['dni1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$año[2]."'";
+    $rendmes="SELECT * FROM RegistroIngresoSalida WHERE idEmpleado ='".$_POST['dni1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'";
     $query=mysql_query($rendmes);
     while ($filames=mysql_fetch_array($query)){
             echo "<tr>";
@@ -295,6 +295,7 @@ mysql_query("SET NAMES 'utf8'");
     <form action='reporterendimientomenspdf.php' method='post' class='form-horizontal col-sm-12'>
         <input type='hidden' name='dni1' value="<?php echo $_POST['dni1'];?>" readonly>
         <input type='hidden' name='mes' value="<?php echo $_POST['mes'];?>" readonly>
+        <input type='hidden' name='año' value="<?php echo $_POST['año'];?>" readonly>
         <input type='submit' class='btn btn-primary col-sm-4 col-sm-offset-4' name='pdf' value='Descargar PDF'>
     </form>
 </section>

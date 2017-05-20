@@ -90,7 +90,7 @@ if(isset($_SESSION['login'])){
                             <tbody>';
     $rendimientomestotal=0;
     $aux=0;
-    $rendmes="SELECT * FROM RegistroIngresoSalida WHERE idEmpleado ='".$_POST['dni1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$año[2]."'";
+    $rendmes="SELECT * FROM RegistroIngresoSalida WHERE idEmpleado ='".$_POST['dni1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'";
     $query=mysql_query($rendmes);
     while ($filames=mysql_fetch_array($query)){
             $html .='<tr>';

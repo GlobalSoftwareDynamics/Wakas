@@ -106,7 +106,7 @@ $tiempoefectivo=0;
 $rendimientomaquinames=0;
 $horastotaleswakas=0;
 $tiempoefectivototal=0;
-$result=mysql_query("SELECT DISTINCT fecha FROM empleadolote WHERE idMaquina='".$_POST['idmaq1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$año[2]."'");
+$result=mysql_query("SELECT DISTINCT fecha FROM empleadolote WHERE idMaquina='".$_POST['idmaq1']."' AND fecha LIKE '".$_POST['mes']."/%%/".$_POST['año']."'");
 while ($fila=mysql_fetch_array($result)){
     $html .='<tr>';
     $html .='<td>'.$fila['fecha'].'</td>';
