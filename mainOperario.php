@@ -65,6 +65,11 @@ mysql_query("SET NAMES 'utf8'");
                 <br>
                 <br>
                 <div class="col-xs-12">
+                    <input class="btn btn-success col-xs-10 col-xs-offset-1" type="submit" formaction="regBreak.php" name="regBreak" value="Registrar Salida/Ingreso a Refrigerio">
+                </div>
+                <br>
+                <br>
+                <div class="col-xs-12">
                     <input class="btn btn-success col-xs-10 col-xs-offset-1" type="submit" formaction="regproceso.php" name="regproceso" value="Registrar un Proceso">
                 </div>
                 <br>
