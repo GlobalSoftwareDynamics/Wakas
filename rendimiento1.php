@@ -93,6 +93,11 @@ mysql_query("SET NAMES 'utf8'");
     </nav>
 </header>
 
+<?php
+$hoy=date("m/d/Y");
+$fecha=explode("/",$hoy);
+?>
+
 <section class="container">
     <form action="#" method="post" class="form-horizontal jumbotron col-sm-8 col-sm-offset-2">
         <div>
@@ -144,6 +149,14 @@ mysql_query("SET NAMES 'utf8'");
                     <option value="11">Noviembre</option>
                     <option value="12">Diciembre</option>
                 </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-5">
+                <label for="mes" class="formlabels col-sm-12">Indique el Año:</label>
+            </div>
+            <div class="col-sm-5">
+                <input type="text" value="<?php echo $fecha[2]?>" name="año" class="textinput-3 form-control col-sm-12">
             </div>
         </div>
         <div class="form-group">
