@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="es">
 
@@ -138,7 +138,7 @@ if(isset($_SESSION['login'])){
 
     <?php
     if(isset($_POST['Agregar'])){
-        $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".$_POST['selectsubproceso']."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
+        $result = mysql_query("SELECT * FROM `SubProcesoCaracteristica` WHERE `idProcedimiento` = '".mysql_real_escape_string($_POST['selectsubproceso'])."' ORDER BY LENGTH(idSubProcesoCaracteristica), idSubProcesoCaracteristica;");
         mysql_data_seek($result, 0);
         while($fila = mysql_fetch_array($result)){
             if($_POST['selectsubproceso'] === 'PROCEDIMIENTO32'){
@@ -152,7 +152,7 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectcomponente']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectcomponente'])."','".mysql_real_escape_string($_POST['fila'])."')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -163,7 +163,7 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquina']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquina'])."','".mysql_real_escape_string($_POST['fila'])."')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -174,7 +174,7 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."','".mysql_real_escape_string($_POST['fila'])."')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -191,7 +191,7 @@ if(isset($_SESSION['login'])){
                         }
 
                         $galgas_unidas = join(",",$galgas);
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$galgas_unidas."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$galgas_unidas."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -203,7 +203,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -214,7 +214,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -227,7 +227,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo1']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo1'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -238,7 +238,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo1']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo1'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -251,7 +251,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -262,7 +262,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -275,7 +275,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -286,7 +286,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -299,7 +299,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -310,7 +310,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -323,7 +323,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquinatiempo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquinatiempo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -334,7 +334,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquinatiempo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquinatiempo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -352,42 +352,42 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectcomponente']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectcomponente'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
                         if($fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC17' || $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC1' || $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC8'|| $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC23'|| $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC27'){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC32' , '".$_POST['selectcomponente']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC32' , '".mysql_real_escape_string($_POST['selectcomponente'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
                             switch ($fila['idSubProcesoCaracteristica']){
                                 case "SUBPROCESOCARAC1":
-                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO1','".$_POST['fila']."')",$con);
+                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO1','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                     if(!$insertar){
                                         echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                     }
                                     break;
                                 case "SUBPROCESOCARAC8":
-                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO2','".$_POST['fila']."')",$con);
+                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO2','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                     if(!$insertar){
                                         echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                     }
                                     break;
                                 case "SUBPROCESOCARAC17":
-                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO6','".$_POST['fila']."')",$con);
+                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO6','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                     if(!$insertar){
                                         echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                     }
                                     break;
                                 case "SUBPROCESOCARAC23":
-                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                     if(!$insertar){
                                         echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                     }
                                     break;
                                 case "SUBPROCESOCARAC27":
-                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO26','".$_POST['fila']."')",$con);
+                                    $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , 'PROCEDIMIENTO26','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                     if(!$insertar){
                                         echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                     }
@@ -401,16 +401,16 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquina']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquina'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
                         if($fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC18' || $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC4' || $fila['idSubProcesoCaracteristica'] === 'SUBPROCESOCARAC14'){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC35' , '".$_POST['selectmaquina']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC35' , '".mysql_real_escape_string($_POST['selectmaquina'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
-                            /*$insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC36' , '0')",$con);
+                            /*$insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+2)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC36' , '0')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }*/
@@ -422,7 +422,7 @@ if(isset($_SESSION['login'])){
                             $conteo++;
                         }
                         $conteo++;
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -439,7 +439,7 @@ if(isset($_SESSION['login'])){
                         }
 
                         $galgas_unidas = join(",",$galgas);
-                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$galgas_unidas."','".$_POST['fila']."')",$con);
+                        $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$galgas_unidas."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                         if(!$insertar){
                             echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                         }
@@ -451,15 +451,15 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
-                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$_POST['selectinsumo']."'");
+                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".mysql_real_escape_string($_POST['selectinsumo'])."''");
                             while($row = mysql_fetch_array($query)){
                                 $procedimientoinsumo = $row['idProcedimiento'];
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$_POST['selectcomponente']."', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".mysql_real_escape_string($_POST['selectcomponente'])."'', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -470,15 +470,15 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
-                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".$_POST['selectinsumo']."'");
+                            $query = mysql_query("SELECT * FROM Insumos WHERE idInsumo = '".mysql_real_escape_string($_POST['selectinsumo'])."''");
                             while($row = mysql_fetch_array($query)){
                                 $procedimientoinsumo = $row['idProcedimiento'];
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$componente."', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo+1)."','".$componente."', 'SUBPROCESOCARAC34' , '".$procedimientoinsumo."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -491,7 +491,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo1']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo1'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -502,7 +502,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo1']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectinsumo1'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -515,7 +515,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -526,7 +526,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectinsumo2']."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -541,14 +541,14 @@ if(isset($_SESSION['login'])){
                         $bandera = false;
                         if(isset($_POST['selectcomponente'])){
                             if($fila['tipo']==='tiempo'){
-                                $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo)."','".$_POST['selectcomponente']."','SUBPROCESOCARAC36','".$_POST[$fila2['idCaracteristica']]."','".$_POST['fila']."')",$con);
+                                $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".($conteo)."','".mysql_real_escape_string($_POST['selectcomponente'])."'','SUBPROCESOCARAC36','".$_POST[$fila2['idCaracteristica']]."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                 if(!$insertar){
                                     echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                 }
                                 $bandera = true;
                             }
                             if($bandera === false){
-                                $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".$_POST['fila']."')",$con);
+                                $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                                 if(!$insertar){
                                     echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                                 }
@@ -560,7 +560,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST[$fila2['idCaracteristica']]."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST[$fila2['idCaracteristica']])."','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -573,7 +573,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -584,7 +584,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectprocedimiento']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectprocedimiento'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -597,7 +597,7 @@ if(isset($_SESSION['login'])){
                         }
                         $conteo++;
                         if(isset($_POST['selectcomponente'])){
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$_POST['selectcomponente']."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquinatiempo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".mysql_real_escape_string($_POST['selectcomponente'])."'', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquinatiempo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
@@ -608,7 +608,7 @@ if(isset($_SESSION['login'])){
                                     $componente = $fila5['idComponenteEspecifico'];
                                 }
                             }
-                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".$_POST['selectmaquinatiempo']."','".$_POST['fila']."')",$con);
+                            $insertar = mysql_query("INSERT INTO PCPSPC VALUES ('".$conteo."','".$componente."', '".$fila['idSubProcesoCaracteristica']. "' , '".mysql_real_escape_string($_POST['selectmaquinatiempo'])."'','".mysql_real_escape_string($_POST['fila'])."'')",$con);
                             if(!$insertar){
                                 echo mysql_errno($con) . ": " . mysql_error($con) . "\n";
                             }
